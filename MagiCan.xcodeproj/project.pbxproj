@@ -101,6 +101,9 @@
 		A6E2723C2857708C00B5CF59 /* MagiCan */ = {
 			isa = PBXGroup;
 			children = (
+				A6E272722857771F00B5CF59 /* View */,
+				A6E272712857770D00B5CF59 /* ViewModel */,
+				A6E272702857770600B5CF59 /* Model */,
 				A6E2723D2857708C00B5CF59 /* AppDelegate.swift */,
 				A6E2723F2857708C00B5CF59 /* SceneDelegate.swift */,
 				A6E272412857708C00B5CF59 /* ViewController.swift */,
@@ -128,6 +131,27 @@
 				A6E272632857708E00B5CF59 /* MagiCanUITestsLaunchTests.swift */,
 			);
 			path = MagiCanUITests;
+			sourceTree = "<group>";
+		};
+		A6E272702857770600B5CF59 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A6E272712857770D00B5CF59 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		A6E272722857771F00B5CF59 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
