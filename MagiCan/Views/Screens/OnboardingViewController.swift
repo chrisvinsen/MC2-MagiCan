@@ -7,15 +7,19 @@
 
 import UIKit
 
-class OnboardingScreenController: UIPageViewController {
+class OnboardingViewController: UIPageViewController {
 
     let logoImage = UIImageView()
     var sliderViews = [UIViewController]()
-    let registerButton = UIButton(type: .system)
+    let registerButton = PrimaryButton()
     let skipButton = UIButton(type: .system)
     
     let pageControl = UIPageControl()
     let initialPage = 0
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +30,7 @@ class OnboardingScreenController: UIPageViewController {
     }
 }
 
-extension OnboardingScreenController {
+extension OnboardingViewController {
     
     func setup() {
         dataSource = self
@@ -34,19 +38,19 @@ extension OnboardingScreenController {
         
         pageControl.addTarget(self, action: #selector(pageControlTapped(_:)), for: .valueChanged)
 
-        let sliderView1 = OnboardingViewController(
+        let sliderView1 = OnboardingView(
             image: OnboardingData.first.data.image,
             titleText: OnboardingData.first.data.title,
             subtitleText: OnboardingData.first.data.subtitle
         )
             
-        let sliderView2 = OnboardingViewController(
+        let sliderView2 = OnboardingView(
             image: OnboardingData.second.data.image,
             titleText: OnboardingData.second.data.title,
             subtitleText: OnboardingData.second.data.subtitle
         
         )
-        let sliderView3 = OnboardingViewController(
+        let sliderView3 = OnboardingView(
             image: OnboardingData.third.data.image,
             titleText: OnboardingData.third.data.title,
             subtitleText: OnboardingData.third.data.subtitle
@@ -74,17 +78,15 @@ extension OnboardingScreenController {
         logoImage.contentMode = .scaleAspectFit
         
         // Register Button
-        registerButton.backgroundColor = UIColor.Primary._30
-        registerButton.setTitle("Daftar", for: .normal)
-        registerButton.tintColor = .white
-        registerButton.layer.cornerRadius = 10
-        registerButton.clipsToBounds = true
         registerButton.translatesAutoresizingMaskIntoConstraints = false
+        registerButton.setTitle("Daftar", for: .normal)
+        registerButton.addTarget(self, action: #selector(registerButtonTapped(_ :)), for: .touchUpInside)
         
         // Skip Button
         skipButton.setTitle("Lihat lihat dulu", for: .normal)
         skipButton.tintColor = UIColor.Primary._30
         skipButton.translatesAutoresizingMaskIntoConstraints = false
+        skipButton.addTarget(self, action: #selector(skipButtonTapped(_ :)), for: .touchUpInside)
     }
     
     func setupLayout() {
@@ -124,7 +126,7 @@ extension OnboardingScreenController {
 }
 
 // MARK: - DataSource
-extension OnboardingScreenController: UIPageViewControllerDataSource {
+extension OnboardingViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
         guard let currentIndex = sliderViews.firstIndex(of: viewController) else { return nil }
@@ -151,7 +153,7 @@ extension OnboardingScreenController: UIPageViewControllerDataSource {
 }
 
 // MARK: - Delegates
-extension OnboardingScreenController: UIPageViewControllerDelegate {
+extension OnboardingViewController: UIPageViewControllerDelegate {
     
     // How we keep our pageControl in sync with viewControllers
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
@@ -164,7 +166,15 @@ extension OnboardingScreenController: UIPageViewControllerDelegate {
 }
 
 // MARK: - Actions
-extension OnboardingScreenController {
+extension OnboardingViewController {
+    
+    @objc func registerButtonTapped(_ sender: UIButton) {
+        navigationController?.pushViewController(RegisterViewController(), animated: true)
+    }
+    
+    @objc func skipButtonTapped(_ sender: UIButton) {
+        print("Skip Button Pressed")
+    }
 
     @objc func pageControlTapped(_ sender: UIPageControl) {
         setViewControllers([sliderViews[sender.currentPage]], direction: .forward, animated: true, completion: nil)
@@ -181,6 +191,8 @@ extension OnboardingScreenController {
         pageControl.currentPage += 1
         goToNextPage()
     }
+    
+    
 }
 
 // MARK: - Extensions
@@ -205,17 +217,3 @@ extension UIPageViewController {
     }
 }
 
-
-#if DEBUG
-import SwiftUI
-
-@available(iOS 13, *)
-struct OnboardingScreenController_Preview: PreviewProvider {
-    static var previews: some View {
-        // view controller using programmatic UI
-        Group {
-            OnboardingScreenController().showPreview().previewInterfaceOrientation(.portrait)
-        }
-    }
-}
-#endif

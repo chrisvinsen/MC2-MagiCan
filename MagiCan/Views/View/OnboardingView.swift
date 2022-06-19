@@ -1,5 +1,5 @@
 //
-//  OnboardingViewController.swift
+//  OnboardingView.swift
 //  MagiCan
 //
 //  Created by Christianto Vinsen on 16/06/22.
@@ -7,13 +7,13 @@
 
 import UIKit
 
-class OnboardingViewController: UIViewController {
+class OnboardingView: UIViewController {
     
     let stackView = UIStackView()
         
     let imageView = UIImageView()
-    let titleLabel = UILabel()
-    let subtitleLabel = UILabel()
+    let titleLabel = HeadingFiveLabel()
+    let subtitleLabel = RegularLabel()
     
     init(image: UIImage, titleText: String, subtitleText: String) {
         super.init(nibName: nil, bundle: nil)
@@ -35,7 +35,7 @@ class OnboardingViewController: UIViewController {
     }
 }
 
-extension OnboardingViewController {
+extension OnboardingView {
     
     func setupStyle() {
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -46,16 +46,8 @@ extension OnboardingViewController {
         imageView.contentMode = .scaleAspectFit
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.numberOfLines = 0
-        subtitleLabel.textColor = UIColor.Neutral._90
-        titleLabel.font = UIFontMetrics.default.scaledFont(for: Font.headingFive.getUIFont)
-        titleLabel.adjustsFontForContentSizeCategory = true
         
         subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        subtitleLabel.numberOfLines = 0
-        subtitleLabel.textColor = UIColor.Neutral._70
-        subtitleLabel.font = UIFontMetrics.default.scaledFont(for: Font.textRegular.getUIFont)
-        subtitleLabel.adjustsFontForContentSizeCategory = true
     }
         
     func setupLayout() {
@@ -88,11 +80,11 @@ extension OnboardingViewController {
 import SwiftUI
 
 @available(iOS 13, *)
-struct OnboardingViewController_Preview: PreviewProvider {
+struct OnboardingView_Preview: PreviewProvider {
     static var previews: some View {
         // view controller using programmatic UI
         Group {
-            OnboardingViewController(
+            OnboardingView(
                 image: OnboardingData.first.data.image,
                 titleText: OnboardingData.first.data.title,
                 subtitleText: OnboardingData.first.data.subtitle

@@ -22,6 +22,7 @@ extension UIColor {
         static var _70: UIColor { return UIColor(red: 20/255, green: 77/255, blue: 129/255, alpha: 1) }
         static var _50: UIColor { return UIColor(red: 22/255, green: 85/255, blue: 143/255, alpha: 1) }
         static var _30: UIColor { return UIColor(red: 69/255, green: 119/255, blue: 165/255, alpha: 1) }
+        static var _30_15: UIColor { return UIColor(red: 69/255, green: 119/255, blue: 165/255, alpha: 0.15) }
         static var _10: UIColor { return UIColor(red: 162/250, green: 187/255, blue: 210/255, alpha: 1) }
     }
     
