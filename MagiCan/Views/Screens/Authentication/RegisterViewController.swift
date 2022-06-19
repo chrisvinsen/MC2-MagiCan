@@ -32,7 +32,7 @@ class RegisterViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-        title = "Masuk"
+        title = "Daftar"
         
         setUpTargets()
         setUpBindings()
