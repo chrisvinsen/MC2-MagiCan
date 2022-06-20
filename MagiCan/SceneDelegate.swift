@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -16,7 +17,34 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        
+        
+        // FOR DEBUGGING --> REMOVE THIS LATER
+//        userDefaults.set("WRONG TOKEN", forKey: UserDefaultKeys.token.rawValue)
+        // FOR DEBUGGING --> REMOVE THIS LATER
+        
+        
+        // Run synchronously
+        let userService = UserService()
+        userService.revalidateStoredTokenSynchronously()
+        
+        let sessionToken = userDefaults.string(forKey: UserDefaultKeys.token.rawValue) ?? ""
+        
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+                
+        let window = UIWindow(windowScene: windowScene)
+        
+        let vc: UIViewController
+        if sessionToken == "" {
+            vc = OnboardingViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
+        } else {
+            vc = TempDashboardViewController()
+        }
+        let nav = UINavigationController(rootViewController: vc)
+        window.rootViewController = nav
+        window.makeKeyAndVisible()
+        
+        self.window = window
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

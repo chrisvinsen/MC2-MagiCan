@@ -7,10 +7,52 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A656F1EA285C59710052EFB6 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A656F1E9285C59710052EFB6 /* UIImageViewExtension.swift */; };
+		A656F212285D87290052EFB6 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A656F211285D87290052EFB6 /* PrimaryButton.swift */; };
+		A656F216285D8BE30052EFB6 /* HeadingFiveLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A656F215285D8BE30052EFB6 /* HeadingFiveLabel.swift */; };
+		A656F218285D8EFC0052EFB6 /* RegularLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A656F217285D8EFC0052EFB6 /* RegularLabel.swift */; };
+		A656F21A285D970E0052EFB6 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A656F219285D970E0052EFB6 /* LoginViewModel.swift */; };
+		A656F21C285D972B0052EFB6 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A656F21B285D972B0052EFB6 /* RegisterViewModel.swift */; };
+		A656F21F285D996D0052EFB6 /* UserApiServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = A656F21E285D996D0052EFB6 /* UserApiServices.swift */; };
+		A656F221285D9A640052EFB6 /* ApiServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = A656F220285D9A640052EFB6 /* ApiServices.swift */; };
+		A656F225285D9ADB0052EFB6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A656F224285D9ADB0052EFB6 /* User.swift */; };
+		A656F228285D9F9F0052EFB6 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A656F227285D9F9F0052EFB6 /* LoginView.swift */; };
+		A656F22A285DB50D0052EFB6 /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A656F229285DB50D0052EFB6 /* UITextFieldExtension.swift */; };
+		A656F22E285DE90A0052EFB6 /* WarningLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A656F22D285DE90A0052EFB6 /* WarningLabel.swift */; };
+		A656F230285E2B270052EFB6 /* PINView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A656F22F285E2B270052EFB6 /* PINView.swift */; };
+		A656F232285EB9640052EFB6 /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A656F231285EB9640052EFB6 /* UserSession.swift */; };
+		A656F234285EBF840052EFB6 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A656F233285EBF840052EFB6 /* StringExtension.swift */; };
+		A656F236285ED34D0052EFB6 /* TempDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A656F235285ED34D0052EFB6 /* TempDashboardViewController.swift */; };
+		A656F238285F0F220052EFB6 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = A656F237285F0F220052EFB6 /* UserDefaults.swift */; };
+		A656F23A285F2C930052EFB6 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A656F239285F2C930052EFB6 /* RegisterView.swift */; };
+		A656F23C285F4C9D0052EFB6 /* WelcomingAddMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A656F23B285F4C9D0052EFB6 /* WelcomingAddMenuView.swift */; };
+		A656F23E285F4F340052EFB6 /* RegisterPINViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A656F23D285F4F340052EFB6 /* RegisterPINViewController.swift */; };
+		A656F240285F4F440052EFB6 /* RegisterConfirmPINViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A656F23F285F4F440052EFB6 /* RegisterConfirmPINViewController.swift */; };
+		A66510EA285B362F00297031 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66510E9285B362F00297031 /* UIViewControllerExtension.swift */; };
+		A66510EC285B364900297031 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66510EB285B364900297031 /* UIViewExtension.swift */; };
+		A66510EE285B3E3900297031 /* OnboardingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66510ED285B3E3900297031 /* OnboardingData.swift */; };
+		A66510F2285B4D9400297031 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66510F1285B4D9400297031 /* OnboardingView.swift */; };
+		A665110F285B678600297031 /* Inter-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6651106285B678600297031 /* Inter-Light.ttf */; };
+		A6651110285B678600297031 /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6651107285B678600297031 /* Inter-Medium.ttf */; };
+		A6651111285B678600297031 /* Inter-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6651108285B678600297031 /* Inter-ExtraBold.ttf */; };
+		A6651112285B678600297031 /* Inter-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6651109285B678600297031 /* Inter-ExtraLight.ttf */; };
+		A6651113285B678600297031 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A665110A285B678600297031 /* Inter-Regular.ttf */; };
+		A6651114285B678600297031 /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A665110B285B678600297031 /* Inter-Bold.ttf */; };
+		A6651115285B678600297031 /* Inter-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A665110C285B678600297031 /* Inter-Thin.ttf */; };
+		A6651116285B678600297031 /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A665110D285B678600297031 /* Inter-SemiBold.ttf */; };
+		A6651117285B678600297031 /* Inter-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A665110E285B678600297031 /* Inter-Black.ttf */; };
+		A665111C285B8E1D00297031 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665111B285B8E1D00297031 /* Fonts.swift */; };
+		A6651123285B925F00297031 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6651122285B925F00297031 /* UIColorExtension.swift */; };
+		A6651127285B98AB00297031 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6651126285B98AB00297031 /* RegisterViewController.swift */; };
+		A665112B285BAC6600297031 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665112A285BAC6600297031 /* CustomButton.swift */; };
+		A665112D285BADA600297031 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665112C285BADA600297031 /* LoginViewController.swift */; };
+		A665112F285C042B00297031 /* LoginPINViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665112E285C042B00297031 /* LoginPINViewController.swift */; };
+		A6651133285C081F00297031 /* WelcomingAddMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6651132285C081F00297031 /* WelcomingAddMenuViewController.swift */; };
+		A6651135285C0D1D00297031 /* AddMenuScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6651134285C0D1D00297031 /* AddMenuScreenController.swift */; };
+		A6651137285C0D5200297031 /* ListMenuScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6651136285C0D5200297031 /* ListMenuScreenController.swift */; };
 		A6E2723E2857708C00B5CF59 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E2723D2857708C00B5CF59 /* AppDelegate.swift */; };
 		A6E272402857708C00B5CF59 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E2723F2857708C00B5CF59 /* SceneDelegate.swift */; };
-		A6E272422857708C00B5CF59 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E272412857708C00B5CF59 /* ViewController.swift */; };
-		A6E272452857708C00B5CF59 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6E272432857708C00B5CF59 /* Main.storyboard */; };
+		A6E272422857708C00B5CF59 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E272412857708C00B5CF59 /* OnboardingViewController.swift */; };
 		A6E272482857708C00B5CF59 /* MagiCan.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A6E272462857708C00B5CF59 /* MagiCan.xcdatamodeld */; };
 		A6E2724A2857708E00B5CF59 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6E272492857708E00B5CF59 /* Assets.xcassets */; };
 		A6E2724D2857708E00B5CF59 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6E2724B2857708E00B5CF59 /* LaunchScreen.storyboard */; };
@@ -37,11 +79,53 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A656F1E9285C59710052EFB6 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
+		A656F211285D87290052EFB6 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
+		A656F215285D8BE30052EFB6 /* HeadingFiveLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadingFiveLabel.swift; sourceTree = "<group>"; };
+		A656F217285D8EFC0052EFB6 /* RegularLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularLabel.swift; sourceTree = "<group>"; };
+		A656F219285D970E0052EFB6 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		A656F21B285D972B0052EFB6 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		A656F21E285D996D0052EFB6 /* UserApiServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserApiServices.swift; sourceTree = "<group>"; };
+		A656F220285D9A640052EFB6 /* ApiServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiServices.swift; sourceTree = "<group>"; };
+		A656F224285D9ADB0052EFB6 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		A656F227285D9F9F0052EFB6 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		A656F229285DB50D0052EFB6 /* UITextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
+		A656F22D285DE90A0052EFB6 /* WarningLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningLabel.swift; sourceTree = "<group>"; };
+		A656F22F285E2B270052EFB6 /* PINView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PINView.swift; sourceTree = "<group>"; };
+		A656F231285EB9640052EFB6 /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
+		A656F233285EBF840052EFB6 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		A656F235285ED34D0052EFB6 /* TempDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempDashboardViewController.swift; sourceTree = "<group>"; };
+		A656F237285F0F220052EFB6 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		A656F239285F2C930052EFB6 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		A656F23B285F4C9D0052EFB6 /* WelcomingAddMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomingAddMenuView.swift; sourceTree = "<group>"; };
+		A656F23D285F4F340052EFB6 /* RegisterPINViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPINViewController.swift; sourceTree = "<group>"; };
+		A656F23F285F4F440052EFB6 /* RegisterConfirmPINViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterConfirmPINViewController.swift; sourceTree = "<group>"; };
+		A66510E9285B362F00297031 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		A66510EB285B364900297031 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		A66510ED285B3E3900297031 /* OnboardingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingData.swift; sourceTree = "<group>"; };
+		A66510F1285B4D9400297031 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		A6651106285B678600297031 /* Inter-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Light.ttf"; sourceTree = "<group>"; };
+		A6651107285B678600297031 /* Inter-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Medium.ttf"; sourceTree = "<group>"; };
+		A6651108285B678600297031 /* Inter-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-ExtraBold.ttf"; sourceTree = "<group>"; };
+		A6651109285B678600297031 /* Inter-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-ExtraLight.ttf"; sourceTree = "<group>"; };
+		A665110A285B678600297031 /* Inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Regular.ttf"; sourceTree = "<group>"; };
+		A665110B285B678600297031 /* Inter-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Bold.ttf"; sourceTree = "<group>"; };
+		A665110C285B678600297031 /* Inter-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Thin.ttf"; sourceTree = "<group>"; };
+		A665110D285B678600297031 /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-SemiBold.ttf"; sourceTree = "<group>"; };
+		A665110E285B678600297031 /* Inter-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Black.ttf"; sourceTree = "<group>"; };
+		A665111B285B8E1D00297031 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		A6651122285B925F00297031 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		A6651126285B98AB00297031 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		A665112A285BAC6600297031 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		A665112C285BADA600297031 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		A665112E285C042B00297031 /* LoginPINViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPINViewController.swift; sourceTree = "<group>"; };
+		A6651132285C081F00297031 /* WelcomingAddMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomingAddMenuViewController.swift; sourceTree = "<group>"; };
+		A6651134285C0D1D00297031 /* AddMenuScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMenuScreenController.swift; sourceTree = "<group>"; };
+		A6651136285C0D5200297031 /* ListMenuScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListMenuScreenController.swift; sourceTree = "<group>"; };
 		A6E2723A2857708C00B5CF59 /* MagiCan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MagiCan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6E2723D2857708C00B5CF59 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A6E2723F2857708C00B5CF59 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A6E272412857708C00B5CF59 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		A6E272442857708C00B5CF59 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A6E272412857708C00B5CF59 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		A6E272472857708C00B5CF59 /* MagiCan.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MagiCan.xcdatamodel; sourceTree = "<group>"; };
 		A6E272492857708E00B5CF59 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A6E2724C2857708E00B5CF59 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -78,6 +162,128 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A656F20F285D744D0052EFB6 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				A656F219285D970E0052EFB6 /* LoginViewModel.swift */,
+				A656F21B285D972B0052EFB6 /* RegisterViewModel.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		A656F21D285D98A00052EFB6 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A656F21E285D996D0052EFB6 /* UserApiServices.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		A656F226285D9F830052EFB6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A66510F1285B4D9400297031 /* OnboardingView.swift */,
+				A656F227285D9F9F0052EFB6 /* LoginView.swift */,
+				A656F22F285E2B270052EFB6 /* PINView.swift */,
+				A656F239285F2C930052EFB6 /* RegisterView.swift */,
+				A656F23B285F4C9D0052EFB6 /* WelcomingAddMenuView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A66510E8285AFFC800297031 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				A6651121285B924000297031 /* Extensions */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		A66510EF285B4D3F00297031 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				A6651131285C080B00297031 /* Menu */,
+				A6651130285C07FE00297031 /* Authentication */,
+				A6E272412857708C00B5CF59 /* OnboardingViewController.swift */,
+				A656F235285ED34D0052EFB6 /* TempDashboardViewController.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		A66510F0285B4D4500297031 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				A665112A285BAC6600297031 /* CustomButton.swift */,
+				A656F211285D87290052EFB6 /* PrimaryButton.swift */,
+				A656F215285D8BE30052EFB6 /* HeadingFiveLabel.swift */,
+				A656F217285D8EFC0052EFB6 /* RegularLabel.swift */,
+				A656F22D285DE90A0052EFB6 /* WarningLabel.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		A66510F3285B674200297031 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				A665110E285B678600297031 /* Inter-Black.ttf */,
+				A665110B285B678600297031 /* Inter-Bold.ttf */,
+				A6651108285B678600297031 /* Inter-ExtraBold.ttf */,
+				A6651109285B678600297031 /* Inter-ExtraLight.ttf */,
+				A6651106285B678600297031 /* Inter-Light.ttf */,
+				A6651107285B678600297031 /* Inter-Medium.ttf */,
+				A665110A285B678600297031 /* Inter-Regular.ttf */,
+				A665110D285B678600297031 /* Inter-SemiBold.ttf */,
+				A665110C285B678600297031 /* Inter-Thin.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		A6651118285B88FC00297031 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				A66510ED285B3E3900297031 /* OnboardingData.swift */,
+				A665111B285B8E1D00297031 /* Fonts.swift */,
+				A656F220285D9A640052EFB6 /* ApiServices.swift */,
+				A656F237285F0F220052EFB6 /* UserDefaults.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		A6651121285B924000297031 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A66510E9285B362F00297031 /* UIViewControllerExtension.swift */,
+				A66510EB285B364900297031 /* UIViewExtension.swift */,
+				A6651122285B925F00297031 /* UIColorExtension.swift */,
+				A656F1E9285C59710052EFB6 /* UIImageViewExtension.swift */,
+				A656F229285DB50D0052EFB6 /* UITextFieldExtension.swift */,
+				A656F233285EBF840052EFB6 /* StringExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		A6651130285C07FE00297031 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				A665112C285BADA600297031 /* LoginViewController.swift */,
+				A665112E285C042B00297031 /* LoginPINViewController.swift */,
+				A6651126285B98AB00297031 /* RegisterViewController.swift */,
+				A656F23D285F4F340052EFB6 /* RegisterPINViewController.swift */,
+				A656F23F285F4F440052EFB6 /* RegisterConfirmPINViewController.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		A6651131285C080B00297031 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				A6651132285C081F00297031 /* WelcomingAddMenuViewController.swift */,
+				A6651134285C0D1D00297031 /* AddMenuScreenController.swift */,
+				A6651136285C0D5200297031 /* ListMenuScreenController.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
 		A6E272312857708C00B5CF59 = {
 			isa = PBXGroup;
 			children = (
@@ -101,13 +307,15 @@
 		A6E2723C2857708C00B5CF59 /* MagiCan */ = {
 			isa = PBXGroup;
 			children = (
-				A6E272722857771F00B5CF59 /* View */,
-				A6E272712857770D00B5CF59 /* ViewModel */,
-				A6E272702857770600B5CF59 /* Model */,
+				A66510F3285B674200297031 /* Fonts */,
+				A6651118285B88FC00297031 /* Constants */,
+				A66510E8285AFFC800297031 /* Utilities */,
+				A656F21D285D98A00052EFB6 /* Services */,
+				A6E272702857770600B5CF59 /* Models */,
+				A6E272722857771F00B5CF59 /* Views */,
+				A6E272712857770D00B5CF59 /* ViewModels */,
 				A6E2723D2857708C00B5CF59 /* AppDelegate.swift */,
 				A6E2723F2857708C00B5CF59 /* SceneDelegate.swift */,
-				A6E272412857708C00B5CF59 /* ViewController.swift */,
-				A6E272432857708C00B5CF59 /* Main.storyboard */,
 				A6E272492857708E00B5CF59 /* Assets.xcassets */,
 				A6E2724B2857708E00B5CF59 /* LaunchScreen.storyboard */,
 				A6E2724E2857708E00B5CF59 /* Info.plist */,
@@ -133,25 +341,31 @@
 			path = MagiCanUITests;
 			sourceTree = "<group>";
 		};
-		A6E272702857770600B5CF59 /* Model */ = {
+		A6E272702857770600B5CF59 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A656F224285D9ADB0052EFB6 /* User.swift */,
+				A656F231285EB9640052EFB6 /* UserSession.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
-		A6E272712857770D00B5CF59 /* ViewModel */ = {
+		A6E272712857770D00B5CF59 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				A656F20F285D744D0052EFB6 /* Authentication */,
 			);
-			path = ViewModel;
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		A6E272722857771F00B5CF59 /* View */ = {
+		A6E272722857771F00B5CF59 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A66510F0285B4D4500297031 /* Components */,
+				A656F226285D9F830052EFB6 /* View */,
+				A66510EF285B4D3F00297031 /* Screens */,
 			);
-			path = View;
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,9 +472,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6651111285B678600297031 /* Inter-ExtraBold.ttf in Resources */,
+				A6651112285B678600297031 /* Inter-ExtraLight.ttf in Resources */,
+				A6651115285B678600297031 /* Inter-Thin.ttf in Resources */,
+				A6651114285B678600297031 /* Inter-Bold.ttf in Resources */,
+				A6651110285B678600297031 /* Inter-Medium.ttf in Resources */,
 				A6E2724D2857708E00B5CF59 /* LaunchScreen.storyboard in Resources */,
+				A6651117285B678600297031 /* Inter-Black.ttf in Resources */,
+				A665110F285B678600297031 /* Inter-Light.ttf in Resources */,
 				A6E2724A2857708E00B5CF59 /* Assets.xcassets in Resources */,
-				A6E272452857708C00B5CF59 /* Main.storyboard in Resources */,
+				A6651116285B678600297031 /* Inter-SemiBold.ttf in Resources */,
+				A6651113285B678600297031 /* Inter-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,10 +507,44 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A66510EC285B364900297031 /* UIViewExtension.swift in Sources */,
 				A6E272482857708C00B5CF59 /* MagiCan.xcdatamodeld in Sources */,
-				A6E272422857708C00B5CF59 /* ViewController.swift in Sources */,
+				A656F21A285D970E0052EFB6 /* LoginViewModel.swift in Sources */,
+				A6651127285B98AB00297031 /* RegisterViewController.swift in Sources */,
+				A656F234285EBF840052EFB6 /* StringExtension.swift in Sources */,
+				A656F23E285F4F340052EFB6 /* RegisterPINViewController.swift in Sources */,
+				A665112D285BADA600297031 /* LoginViewController.swift in Sources */,
+				A66510EA285B362F00297031 /* UIViewControllerExtension.swift in Sources */,
+				A66510F2285B4D9400297031 /* OnboardingView.swift in Sources */,
+				A6E272422857708C00B5CF59 /* OnboardingViewController.swift in Sources */,
+				A656F236285ED34D0052EFB6 /* TempDashboardViewController.swift in Sources */,
+				A66510EE285B3E3900297031 /* OnboardingData.swift in Sources */,
+				A656F22A285DB50D0052EFB6 /* UITextFieldExtension.swift in Sources */,
 				A6E2723E2857708C00B5CF59 /* AppDelegate.swift in Sources */,
+				A656F221285D9A640052EFB6 /* ApiServices.swift in Sources */,
+				A656F230285E2B270052EFB6 /* PINView.swift in Sources */,
+				A665112B285BAC6600297031 /* CustomButton.swift in Sources */,
+				A6651135285C0D1D00297031 /* AddMenuScreenController.swift in Sources */,
+				A6651123285B925F00297031 /* UIColorExtension.swift in Sources */,
+				A665111C285B8E1D00297031 /* Fonts.swift in Sources */,
 				A6E272402857708C00B5CF59 /* SceneDelegate.swift in Sources */,
+				A656F1EA285C59710052EFB6 /* UIImageViewExtension.swift in Sources */,
+				A656F216285D8BE30052EFB6 /* HeadingFiveLabel.swift in Sources */,
+				A656F238285F0F220052EFB6 /* UserDefaults.swift in Sources */,
+				A656F240285F4F440052EFB6 /* RegisterConfirmPINViewController.swift in Sources */,
+				A656F232285EB9640052EFB6 /* UserSession.swift in Sources */,
+				A656F225285D9ADB0052EFB6 /* User.swift in Sources */,
+				A665112F285C042B00297031 /* LoginPINViewController.swift in Sources */,
+				A656F218285D8EFC0052EFB6 /* RegularLabel.swift in Sources */,
+				A656F228285D9F9F0052EFB6 /* LoginView.swift in Sources */,
+				A656F22E285DE90A0052EFB6 /* WarningLabel.swift in Sources */,
+				A656F212285D87290052EFB6 /* PrimaryButton.swift in Sources */,
+				A6651137285C0D5200297031 /* ListMenuScreenController.swift in Sources */,
+				A656F23C285F4C9D0052EFB6 /* WelcomingAddMenuView.swift in Sources */,
+				A656F23A285F2C930052EFB6 /* RegisterView.swift in Sources */,
+				A656F21F285D996D0052EFB6 /* UserApiServices.swift in Sources */,
+				A6651133285C081F00297031 /* WelcomingAddMenuViewController.swift in Sources */,
+				A656F21C285D972B0052EFB6 /* RegisterViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,14 +581,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		A6E272432857708C00B5CF59 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A6E272442857708C00B5CF59 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		A6E2724B2857708E00B5CF59 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -470,7 +718,7 @@
 				INFOPLIST_FILE = MagiCan/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -498,7 +746,7 @@
 				INFOPLIST_FILE = MagiCan/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
