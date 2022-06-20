@@ -8,8 +8,9 @@
 import Foundation
 import UIKit
 
-class CardDashboardSection: UIView {
+class DashboardPredictionSection: UIView {
     
+    lazy var sectionLabel = SemiBoldLabel()
 }
 
 
@@ -17,11 +18,11 @@ class CardDashboardSection: UIView {
 import SwiftUI
 
 @available(iOS 13, *)
-struct CardDashboardSection_Preview: PreviewProvider {
+struct DashboardPredictionSection_Preview: PreviewProvider {
     static var previews: some View {
         // view controller using programmatic UI
         Group {
-            CardDashboardSection().showPreview().previewInterfaceOrientation(.portrait)
+            DashboardPredictionSection().showPreview().previewInterfaceOrientation(.portrait)
         }
     }
 }

@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6086AF4D286010B60073B5BE /* CardKasUsaha.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6086AF4C286010B60073B5BE /* CardKasUsaha.swift */; };
+		6086AF4F286010C20073B5BE /* DashboardPredictionSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6086AF4E286010C20073B5BE /* DashboardPredictionSection.swift */; };
+		6086AF51286011640073B5BE /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6086AF50286011640073B5BE /* DashboardView.swift */; };
+		6086AF5328601EB80073B5BE /* SecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6086AF5228601EB80073B5BE /* SecondaryButton.swift */; };
+		6086AF572860442E0073B5BE /* SemiBoldLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6086AF562860442E0073B5BE /* SemiBoldLabel.swift */; };
 		A656F1EA285C59710052EFB6 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A656F1E9285C59710052EFB6 /* UIImageViewExtension.swift */; };
 		A656F212285D87290052EFB6 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A656F211285D87290052EFB6 /* PrimaryButton.swift */; };
 		A656F216285D8BE30052EFB6 /* HeadingFiveLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A656F215285D8BE30052EFB6 /* HeadingFiveLabel.swift */; };
@@ -79,6 +84,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6086AF4C286010B60073B5BE /* CardKasUsaha.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardKasUsaha.swift; sourceTree = "<group>"; };
+		6086AF4E286010C20073B5BE /* DashboardPredictionSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardPredictionSection.swift; sourceTree = "<group>"; };
+		6086AF50286011640073B5BE /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		6086AF5228601EB80073B5BE /* SecondaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryButton.swift; sourceTree = "<group>"; };
+		6086AF562860442E0073B5BE /* SemiBoldLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemiBoldLabel.swift; sourceTree = "<group>"; };
 		A656F1E9285C59710052EFB6 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		A656F211285D87290052EFB6 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		A656F215285D8BE30052EFB6 /* HeadingFiveLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadingFiveLabel.swift; sourceTree = "<group>"; };
@@ -187,6 +197,7 @@
 				A656F22F285E2B270052EFB6 /* PINView.swift */,
 				A656F239285F2C930052EFB6 /* RegisterView.swift */,
 				A656F23B285F4C9D0052EFB6 /* WelcomingAddMenuView.swift */,
+				6086AF50286011640073B5BE /* DashboardView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -215,9 +226,13 @@
 			children = (
 				A665112A285BAC6600297031 /* CustomButton.swift */,
 				A656F211285D87290052EFB6 /* PrimaryButton.swift */,
+				6086AF5228601EB80073B5BE /* SecondaryButton.swift */,
 				A656F215285D8BE30052EFB6 /* HeadingFiveLabel.swift */,
 				A656F217285D8EFC0052EFB6 /* RegularLabel.swift */,
 				A656F22D285DE90A0052EFB6 /* WarningLabel.swift */,
+				6086AF4C286010B60073B5BE /* CardKasUsaha.swift */,
+				6086AF4E286010C20073B5BE /* DashboardPredictionSection.swift */,
+				6086AF562860442E0073B5BE /* SemiBoldLabel.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -512,12 +527,14 @@
 				A656F21A285D970E0052EFB6 /* LoginViewModel.swift in Sources */,
 				A6651127285B98AB00297031 /* RegisterViewController.swift in Sources */,
 				A656F234285EBF840052EFB6 /* StringExtension.swift in Sources */,
+				6086AF572860442E0073B5BE /* SemiBoldLabel.swift in Sources */,
 				A656F23E285F4F340052EFB6 /* RegisterPINViewController.swift in Sources */,
 				A665112D285BADA600297031 /* LoginViewController.swift in Sources */,
 				A66510EA285B362F00297031 /* UIViewControllerExtension.swift in Sources */,
 				A66510F2285B4D9400297031 /* OnboardingView.swift in Sources */,
 				A6E272422857708C00B5CF59 /* OnboardingViewController.swift in Sources */,
 				A656F236285ED34D0052EFB6 /* TempDashboardViewController.swift in Sources */,
+				6086AF51286011640073B5BE /* DashboardView.swift in Sources */,
 				A66510EE285B3E3900297031 /* OnboardingData.swift in Sources */,
 				A656F22A285DB50D0052EFB6 /* UITextFieldExtension.swift in Sources */,
 				A6E2723E2857708C00B5CF59 /* AppDelegate.swift in Sources */,
@@ -525,16 +542,19 @@
 				A656F230285E2B270052EFB6 /* PINView.swift in Sources */,
 				A665112B285BAC6600297031 /* CustomButton.swift in Sources */,
 				A6651135285C0D1D00297031 /* AddMenuScreenController.swift in Sources */,
+				6086AF4F286010C20073B5BE /* DashboardPredictionSection.swift in Sources */,
 				A6651123285B925F00297031 /* UIColorExtension.swift in Sources */,
 				A665111C285B8E1D00297031 /* Fonts.swift in Sources */,
 				A6E272402857708C00B5CF59 /* SceneDelegate.swift in Sources */,
 				A656F1EA285C59710052EFB6 /* UIImageViewExtension.swift in Sources */,
+				6086AF5328601EB80073B5BE /* SecondaryButton.swift in Sources */,
 				A656F216285D8BE30052EFB6 /* HeadingFiveLabel.swift in Sources */,
 				A656F238285F0F220052EFB6 /* UserDefaults.swift in Sources */,
 				A656F240285F4F440052EFB6 /* RegisterConfirmPINViewController.swift in Sources */,
 				A656F232285EB9640052EFB6 /* UserSession.swift in Sources */,
 				A656F225285D9ADB0052EFB6 /* User.swift in Sources */,
 				A665112F285C042B00297031 /* LoginPINViewController.swift in Sources */,
+				6086AF4D286010B60073B5BE /* CardKasUsaha.swift in Sources */,
 				A656F218285D8EFC0052EFB6 /* RegularLabel.swift in Sources */,
 				A656F228285D9F9F0052EFB6 /* LoginView.swift in Sources */,
 				A656F22E285DE90A0052EFB6 /* WarningLabel.swift in Sources */,
