@@ -12,7 +12,7 @@ class DashboardView: UIView {
     let titleLabel = HeadingFiveLabel()
     let cardKasUsaha = CardKasUsaha()
     let sectionPrediksiPenjualan = CardEmptyStateDashboard()
-//    let sectionMenuAndalan = DashboardMenuSection()
+    let sectionMenuAndalan = CardEmptyStateDashboard()
 
     init() {
         super.init(frame: .zero)
@@ -28,7 +28,7 @@ class DashboardView: UIView {
     }
     
     private func addSubviews() {
-        [titleLabel, cardKasUsaha, sectionPrediksiPenjualan]
+        [titleLabel, cardKasUsaha, sectionPrediksiPenjualan, sectionMenuAndalan]
             .forEach {
                 addSubview($0)
                 $0.translatesAutoresizingMaskIntoConstraints = false
@@ -41,6 +41,12 @@ class DashboardView: UIView {
         sectionPrediksiPenjualan.sectionDescription1.text = "Data Kamu Masih Belum Mencukupi"
         sectionPrediksiPenjualan.sectionDescription2.text = "Hasil prediksi penjualan akan muncul disini setelah data tersedia minimal 1 bulan terakhir"
         sectionPrediksiPenjualan.sectionImage.image = UIImage(named: "Prediksi Empty.png")
+        
+        // data for section - menu andalan
+        sectionMenuAndalan.sectionLabel.text = "Menu Andalan"
+        sectionMenuAndalan.sectionDescription1.text = "Menu Andalan Belum Tersedia"
+        sectionMenuAndalan.sectionDescription2.text = "Hasil menu andalan akan muncul disini setelah data tersedia minimal 1 bulan terakhir"
+        sectionMenuAndalan.sectionImage.image = UIImage(named: "Menu Andalan Empty.png")
     }
     
     private func setUpViews() {
@@ -63,6 +69,13 @@ class DashboardView: UIView {
         sectionPrediksiPenjualan.layer.shadowOpacity = 0.2
         sectionPrediksiPenjualan.layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
         sectionPrediksiPenjualan.layer.shadowRadius = 10
+        
+        // shadow for sectionMenuAndalan
+        sectionMenuAndalan.layer.masksToBounds = false
+        sectionMenuAndalan.layer.shadowColor = UIColor.black.cgColor
+        sectionMenuAndalan.layer.shadowOpacity = 0.2
+        sectionMenuAndalan.layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
+        sectionMenuAndalan.layer.shadowRadius = 10
     }
     
     private func setUpConstraints() {
@@ -83,6 +96,10 @@ class DashboardView: UIView {
             sectionPrediksiPenjualan.topAnchor.constraint(equalTo: cardKasUsaha.bottomAnchor, constant: 30),
             sectionPrediksiPenjualan.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
             sectionPrediksiPenjualan.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
+            
+            sectionMenuAndalan.topAnchor.constraint(equalTo: sectionPrediksiPenjualan.bottomAnchor, constant: 30),
+            sectionMenuAndalan.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
+            sectionMenuAndalan.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
 
         ])
     }
