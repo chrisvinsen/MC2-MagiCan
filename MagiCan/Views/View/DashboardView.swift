@@ -9,11 +9,12 @@ import UIKit
 
 class DashboardView: UIView {
     
-    let titleLabel = HeadingFiveLabel()
+    let titleLabel = UILabel()
+    let profileIcon = UIImageView()
     let cardKasUsaha = CardKasUsaha()
     let sectionPrediksiPenjualan = CardEmptyStateDashboard()
     let sectionMenuAndalan = CardEmptyStateDashboard()
-
+    
     init() {
         super.init(frame: .zero)
         
@@ -28,7 +29,7 @@ class DashboardView: UIView {
     }
     
     private func addSubviews() {
-        [titleLabel, cardKasUsaha, sectionPrediksiPenjualan, sectionMenuAndalan]
+        [titleLabel, profileIcon, cardKasUsaha, sectionPrediksiPenjualan, sectionMenuAndalan]
             .forEach {
                 addSubview($0)
                 $0.translatesAutoresizingMaskIntoConstraints = false
@@ -54,7 +55,10 @@ class DashboardView: UIView {
         self.layer.cornerRadius = 10
         self.clipsToBounds = true
         
+        titleLabel.font = Font.headingSix.getUIFont
         titleLabel.text = "Selamat datang, XXX"
+        
+        profileIcon.image = UIImage(named: "Profile Icon.png")
         
         // shadow for cardKasUsaha
         cardKasUsaha.layer.masksToBounds = false
@@ -88,6 +92,9 @@ class DashboardView: UIView {
             titleLabel.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 20),
             titleLabel.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
             titleLabel.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
+            
+            profileIcon.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 20),
+            profileIcon.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
             
             cardKasUsaha.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 30),
             cardKasUsaha.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
