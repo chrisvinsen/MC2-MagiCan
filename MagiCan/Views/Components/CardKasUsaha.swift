@@ -44,11 +44,6 @@ class CardKasUsaha: UIView {
                     $0.translatesAutoresizingMaskIntoConstraints = false
                 }
         }
-//        [kasLabel, kasValue, button]
-//            .forEach {
-//                addSubview($0)
-//                $0.translatesAutoresizingMaskIntoConstraints = false
-//            }
     }
     
     private func setUpViews() {
