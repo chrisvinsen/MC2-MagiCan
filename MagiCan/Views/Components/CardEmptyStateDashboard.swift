@@ -60,7 +60,7 @@ class CardEmptyStateDashboard: UIView {
         let safeArea = safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
-            self.heightAnchor.constraint(equalToConstant: 220),
+//            self.heightAnchor.constraint(equalToConstant: 220),
             self.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 50),
             self.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: 50),
             
@@ -82,7 +82,8 @@ class CardEmptyStateDashboard: UIView {
             sectionDescription2.topAnchor.constraint(equalTo: sectionDescription1.bottomAnchor, constant: 10),
             sectionDescription2.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
             sectionDescription2.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 30),
-            sectionDescription2.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -30)
+            sectionDescription2.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -30),
+            sectionDescription2.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -20)
         ])
     }
 }
