@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class DashboardPredictionSection: UIView {
+class CardEmptyStateDashboard: UIView {
 
     lazy var sectionLabel = UILabel()
     lazy var dividerLine = UIView()
@@ -96,7 +96,7 @@ struct DashboardPredictionSection_Preview: PreviewProvider {
     static var previews: some View {
         // view controller using programmatic UI
         Group {
-            DashboardPredictionSection().showPreview().previewInterfaceOrientation(.portrait)
+            CardEmptyStateDashboard().showPreview().previewInterfaceOrientation(.portrait)
         }
     }
 }

@@ -11,7 +11,7 @@ class DashboardView: UIView {
     
     let titleLabel = HeadingFiveLabel()
     let cardKasUsaha = CardKasUsaha()
-    let sectionPrediksiPenjualan = DashboardPredictionSection()
+    let sectionPrediksiPenjualan = CardEmptyStateDashboard()
 //    let sectionMenuAndalan = DashboardMenuSection()
 
     init() {
