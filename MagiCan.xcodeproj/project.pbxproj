@@ -228,11 +228,11 @@
 				A656F211285D87290052EFB6 /* PrimaryButton.swift */,
 				6086AF5228601EB80073B5BE /* SecondaryButton.swift */,
 				A656F215285D8BE30052EFB6 /* HeadingFiveLabel.swift */,
+				6086AF562860442E0073B5BE /* SemiBoldLabel.swift */,
 				A656F217285D8EFC0052EFB6 /* RegularLabel.swift */,
 				A656F22D285DE90A0052EFB6 /* WarningLabel.swift */,
 				6086AF4C286010B60073B5BE /* CardKasUsaha.swift */,
 				6086AF4E286010C20073B5BE /* DashboardPredictionSection.swift */,
-				6086AF562860442E0073B5BE /* SemiBoldLabel.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";

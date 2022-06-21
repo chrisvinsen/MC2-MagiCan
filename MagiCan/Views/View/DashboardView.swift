@@ -18,6 +18,7 @@ class DashboardView: UIView {
         super.init(frame: .zero)
         
         addSubviews()
+        setUpData()
         setUpViews()
         setUpConstraints()
     }
@@ -27,11 +28,19 @@ class DashboardView: UIView {
     }
     
     private func addSubviews() {
-        [titleLabel, cardKasUsaha]
+        [titleLabel, cardKasUsaha, sectionPrediksiPenjualan]
             .forEach {
                 addSubview($0)
                 $0.translatesAutoresizingMaskIntoConstraints = false
             }
+    }
+    
+    private func setUpData() {
+        // data for section - prediction
+        sectionPrediksiPenjualan.sectionLabel.text = "Prediksi Penjualan"
+        sectionPrediksiPenjualan.sectionDescription1.text = "Data Kamu Masih Belum Mencukupi"
+        sectionPrediksiPenjualan.sectionDescription2.text = "Hasil prediksi penjualan akan muncul disini setelah data tersedia minimal 1 bulan terakhir"
+        sectionPrediksiPenjualan.sectionImage.image = UIImage(named: "Prediksi Empty.png")
     }
     
     private func setUpViews() {
@@ -41,11 +50,19 @@ class DashboardView: UIView {
         
         titleLabel.text = "Selamat datang, XXX"
         
+        // shadow for cardKasUsaha
         cardKasUsaha.layer.masksToBounds = false
         cardKasUsaha.layer.shadowColor = UIColor.black.cgColor
         cardKasUsaha.layer.shadowOpacity = 0.2
         cardKasUsaha.layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
         cardKasUsaha.layer.shadowRadius = 10
+        
+        // shadow for sectionPrediksiPenjualan
+        sectionPrediksiPenjualan.layer.masksToBounds = false
+        sectionPrediksiPenjualan.layer.shadowColor = UIColor.black.cgColor
+        sectionPrediksiPenjualan.layer.shadowOpacity = 0.2
+        sectionPrediksiPenjualan.layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
+        sectionPrediksiPenjualan.layer.shadowRadius = 10
     }
     
     private func setUpConstraints() {
@@ -62,6 +79,10 @@ class DashboardView: UIView {
             cardKasUsaha.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 30),
             cardKasUsaha.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
             cardKasUsaha.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
+            
+            sectionPrediksiPenjualan.topAnchor.constraint(equalTo: cardKasUsaha.bottomAnchor, constant: 30),
+            sectionPrediksiPenjualan.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
+            sectionPrediksiPenjualan.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
 
         ])
     }
