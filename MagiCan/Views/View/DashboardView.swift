@@ -58,21 +58,21 @@ class DashboardView: UIView {
         
         // shadow for cardKasUsaha
         cardKasUsaha.layer.masksToBounds = false
-        cardKasUsaha.layer.shadowColor = UIColor.black.cgColor
+        cardKasUsaha.layer.shadowColor = UIColor.gray.cgColor
         cardKasUsaha.layer.shadowOpacity = 0.2
         cardKasUsaha.layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
         cardKasUsaha.layer.shadowRadius = 10
         
         // shadow for sectionPrediksiPenjualan
         sectionPrediksiPenjualan.layer.masksToBounds = false
-        sectionPrediksiPenjualan.layer.shadowColor = UIColor.black.cgColor
+        sectionPrediksiPenjualan.layer.shadowColor = UIColor.gray.cgColor
         sectionPrediksiPenjualan.layer.shadowOpacity = 0.2
         sectionPrediksiPenjualan.layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
         sectionPrediksiPenjualan.layer.shadowRadius = 10
         
         // shadow for sectionMenuAndalan
         sectionMenuAndalan.layer.masksToBounds = false
-        sectionMenuAndalan.layer.shadowColor = UIColor.black.cgColor
+        sectionMenuAndalan.layer.shadowColor = UIColor.gray.cgColor
         sectionMenuAndalan.layer.shadowOpacity = 0.2
         sectionMenuAndalan.layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
         sectionMenuAndalan.layer.shadowRadius = 10
