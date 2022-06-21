@@ -15,8 +15,8 @@ enum Font {
     case textRegularSemiBold
     
     case headingFive
-    
     case small
+    case subtitleSemiBold
     
     var getUIFont: UIFont {
         switch self {
@@ -32,6 +32,8 @@ enum Font {
             return UIFont(name: "Inter-Bold", size: 24)!
         case .small:
             return UIFont(name: "Inter-Regular", size: 12)!
+        case .subtitleSemiBold:
+            return UIFont(name: "Inter-SemiBold", size: 16)!
         }
     }
 }
