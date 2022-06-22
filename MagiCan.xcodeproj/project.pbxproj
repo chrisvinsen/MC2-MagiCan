@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6012B1062863077200A89E4D /* CardPrediksiPenjualanItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6012B1052863077200A89E4D /* CardPrediksiPenjualanItem.swift */; };
+		6012B10828630E0100A89E4D /* CardMenuAndalanItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6012B10728630E0100A89E4D /* CardMenuAndalanItem.swift */; };
+		6012B10A28630E1D00A89E4D /* CardPrediksiPenjualan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6012B10928630E1D00A89E4D /* CardPrediksiPenjualan.swift */; };
+		6012B10C28630E3000A89E4D /* CardMenuAndalan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6012B10B28630E3000A89E4D /* CardMenuAndalan.swift */; };
 		60570616286220B300BE93ED /* StatistikPemasukanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60570615286220B300BE93ED /* StatistikPemasukanView.swift */; };
 		60570618286220C700BE93ED /* StatistikPengeluaranView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60570617286220C700BE93ED /* StatistikPengeluaranView.swift */; };
 		6057061A2862210700BE93ED /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605706192862210700BE93ED /* ProfileView.swift */; };
@@ -89,6 +93,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6012B1052863077200A89E4D /* CardPrediksiPenjualanItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPrediksiPenjualanItem.swift; sourceTree = "<group>"; };
+		6012B10728630E0100A89E4D /* CardMenuAndalanItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardMenuAndalanItem.swift; sourceTree = "<group>"; };
+		6012B10928630E1D00A89E4D /* CardPrediksiPenjualan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPrediksiPenjualan.swift; sourceTree = "<group>"; };
+		6012B10B28630E3000A89E4D /* CardMenuAndalan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardMenuAndalan.swift; sourceTree = "<group>"; };
 		60570615286220B300BE93ED /* StatistikPemasukanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatistikPemasukanView.swift; sourceTree = "<group>"; };
 		60570617286220C700BE93ED /* StatistikPengeluaranView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatistikPengeluaranView.swift; sourceTree = "<group>"; };
 		605706192862210700BE93ED /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -247,6 +255,10 @@
 				A656F22D285DE90A0052EFB6 /* WarningLabel.swift */,
 				6086AF4C286010B60073B5BE /* CardKasUsaha.swift */,
 				6086AF4E286010C20073B5BE /* CardEmptyStateDashboard.swift */,
+				6012B1052863077200A89E4D /* CardPrediksiPenjualanItem.swift */,
+				6012B10928630E1D00A89E4D /* CardPrediksiPenjualan.swift */,
+				6012B10728630E0100A89E4D /* CardMenuAndalanItem.swift */,
+				6012B10B28630E3000A89E4D /* CardMenuAndalan.swift */,
 				6057061B2862232D00BE93ED /* CardEmptyStateStatistik.swift */,
 			);
 			path = Components;
@@ -537,6 +549,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6012B1062863077200A89E4D /* CardPrediksiPenjualanItem.swift in Sources */,
 				A66510EC285B364900297031 /* UIViewExtension.swift in Sources */,
 				A6E272482857708C00B5CF59 /* MagiCan.xcdatamodeld in Sources */,
 				A656F21A285D970E0052EFB6 /* LoginViewModel.swift in Sources */,
@@ -549,6 +562,7 @@
 				A665112D285BADA600297031 /* LoginViewController.swift in Sources */,
 				A66510EA285B362F00297031 /* UIViewControllerExtension.swift in Sources */,
 				A66510F2285B4D9400297031 /* OnboardingView.swift in Sources */,
+				6012B10828630E0100A89E4D /* CardMenuAndalanItem.swift in Sources */,
 				A6E272422857708C00B5CF59 /* OnboardingViewController.swift in Sources */,
 				A656F236285ED34D0052EFB6 /* TempDashboardViewController.swift in Sources */,
 				6086AF51286011640073B5BE /* DashboardView.swift in Sources */,
@@ -561,7 +575,9 @@
 				A6651135285C0D1D00297031 /* AddMenuScreenController.swift in Sources */,
 				6086AF4F286010C20073B5BE /* CardEmptyStateDashboard.swift in Sources */,
 				A6651123285B925F00297031 /* UIColorExtension.swift in Sources */,
+				6012B10C28630E3000A89E4D /* CardMenuAndalan.swift in Sources */,
 				A665111C285B8E1D00297031 /* Fonts.swift in Sources */,
+				6012B10A28630E1D00A89E4D /* CardPrediksiPenjualan.swift in Sources */,
 				A6E272402857708C00B5CF59 /* SceneDelegate.swift in Sources */,
 				A656F1EA285C59710052EFB6 /* UIImageViewExtension.swift in Sources */,
 				6086AF5328601EB80073B5BE /* SecondaryButton.swift in Sources */,

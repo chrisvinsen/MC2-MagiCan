@@ -10,6 +10,7 @@ import UIKit
 class StatistikKeuntunganView: UIView {
 
     var statsExist = false
+    var isUntung = true
     
     lazy var titleLabel = UILabel()
     lazy var dividerLine = UIView()
@@ -53,6 +54,12 @@ class StatistikKeuntunganView: UIView {
         
         dividerLine.backgroundColor = UIColor.Neutral._30
         totalPemasukaValue.textColor = UIColor.Primary._30
+        
+        if !isUntung {
+            titleLabel.text = "Statistik Kerugian"
+            totalPemasukaLabel.text = "Total Kerugian"
+            totalPemasukaValue.textColor = UIColor.Error._30
+        }
         
         // edit text inside cardEmptyStats
         cardEmptyStats.sectionDescription1.text = "Belum  Ada Data Keuntungan Pada Periode Ini"
@@ -104,7 +111,7 @@ struct StatistikKeuntunganView_Preview: PreviewProvider {
     static var previews: some View {
         // view controller using programmatic UI
         Group {
-            StatistikKeuntunganView().showPreview().previewInterfaceOrientation(.portrait)
+            StatistikKeuntunganView().showPreview().previewInterfaceOrientation(.portraitUpsideDown)
         }
     }
 }

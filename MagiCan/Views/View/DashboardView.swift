@@ -9,11 +9,16 @@ import UIKit
 
 class DashboardView: UIView {
     
+    var predictionAndMenuAvaiable = true
+    
     let titleLabel = UILabel()
     let profileIcon = UIImageView()
     let cardKasUsaha = CardKasUsaha()
     let sectionPrediksiPenjualan = CardEmptyStateDashboard()
     let sectionMenuAndalan = CardEmptyStateDashboard()
+    
+    let sectionPrediksiPenjualanFilled = CardPrediksiPenjualan()
+    let sectionMenuAndalanFilled = CardMenuAndalan()
     
     init() {
         super.init(frame: .zero)
@@ -29,11 +34,25 @@ class DashboardView: UIView {
     }
     
     private func addSubviews() {
-        [titleLabel, profileIcon, cardKasUsaha, sectionPrediksiPenjualan, sectionMenuAndalan]
-            .forEach {
-                addSubview($0)
-                $0.translatesAutoresizingMaskIntoConstraints = false
-            }
+        switch predictionAndMenuAvaiable {
+        case true:
+            [titleLabel, profileIcon, cardKasUsaha, sectionPrediksiPenjualanFilled, sectionMenuAndalanFilled]
+                .forEach {
+                    addSubview($0)
+                    $0.translatesAutoresizingMaskIntoConstraints = false
+                }
+        case false:
+            [titleLabel, profileIcon, cardKasUsaha, sectionPrediksiPenjualan, sectionMenuAndalan]
+                .forEach {
+                    addSubview($0)
+                    $0.translatesAutoresizingMaskIntoConstraints = false
+                }
+        }
+//        [titleLabel, profileIcon, cardKasUsaha, sectionPrediksiPenjualan, sectionMenuAndalan]
+//            .forEach {
+//                addSubview($0)
+//                $0.translatesAutoresizingMaskIntoConstraints = false
+//            }
     }
     
     private func setUpData() {
@@ -80,6 +99,20 @@ class DashboardView: UIView {
         sectionMenuAndalan.layer.shadowOpacity = 0.2
         sectionMenuAndalan.layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
         sectionMenuAndalan.layer.shadowRadius = 10
+        
+        // shadow for sectionPrediksiPenjualanFilled
+        sectionPrediksiPenjualanFilled.layer.masksToBounds = false
+        sectionPrediksiPenjualanFilled.layer.shadowColor = UIColor.gray.cgColor
+        sectionPrediksiPenjualanFilled.layer.shadowOpacity = 0.2
+        sectionPrediksiPenjualanFilled.layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
+        sectionPrediksiPenjualanFilled.layer.shadowRadius = 10
+        
+        // shadow for sectionMenuAndalanFilled
+        sectionMenuAndalanFilled.layer.masksToBounds = false
+        sectionMenuAndalanFilled.layer.shadowColor = UIColor.gray.cgColor
+        sectionMenuAndalanFilled.layer.shadowOpacity = 0.2
+        sectionMenuAndalanFilled.layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
+        sectionMenuAndalanFilled.layer.shadowRadius = 10
     }
     
     private func setUpConstraints() {
@@ -100,15 +133,38 @@ class DashboardView: UIView {
             cardKasUsaha.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
             cardKasUsaha.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
             
-            sectionPrediksiPenjualan.topAnchor.constraint(equalTo: cardKasUsaha.bottomAnchor, constant: 30),
-            sectionPrediksiPenjualan.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
-            sectionPrediksiPenjualan.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
-            
-            sectionMenuAndalan.topAnchor.constraint(equalTo: sectionPrediksiPenjualan.bottomAnchor, constant: 30),
-            sectionMenuAndalan.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
-            sectionMenuAndalan.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
+//            sectionPrediksiPenjualan.topAnchor.constraint(equalTo: cardKasUsaha.bottomAnchor, constant: 30),
+//            sectionPrediksiPenjualan.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
+//            sectionPrediksiPenjualan.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
+//
+//            sectionMenuAndalan.topAnchor.constraint(equalTo: sectionPrediksiPenjualan.bottomAnchor, constant: 30),
+//            sectionMenuAndalan.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
+//            sectionMenuAndalan.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
 
         ])
+        
+        switch predictionAndMenuAvaiable {
+        case true:
+            NSLayoutConstraint.activate([
+                sectionPrediksiPenjualanFilled.topAnchor.constraint(equalTo: cardKasUsaha.bottomAnchor, constant: 30),
+                sectionPrediksiPenjualanFilled.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
+                sectionPrediksiPenjualanFilled.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
+                
+                sectionMenuAndalanFilled.topAnchor.constraint(equalTo: sectionPrediksiPenjualanFilled.bottomAnchor, constant: 30),
+                sectionMenuAndalanFilled.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
+                sectionMenuAndalanFilled.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
+            ])
+        case false:
+            NSLayoutConstraint.activate([
+                sectionPrediksiPenjualan.topAnchor.constraint(equalTo: cardKasUsaha.bottomAnchor, constant: 30),
+                sectionPrediksiPenjualan.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
+                sectionPrediksiPenjualan.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
+                
+                sectionMenuAndalan.topAnchor.constraint(equalTo: sectionPrediksiPenjualan.bottomAnchor, constant: 30),
+                sectionMenuAndalan.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
+                sectionMenuAndalan.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
+            ])
+        }
     }
 }
 
