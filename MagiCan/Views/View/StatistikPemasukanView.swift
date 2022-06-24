@@ -9,13 +9,15 @@ import UIKit
 
 class StatistikPemasukanView: UIView {
     
-    var statsExist = false
+    var statsExist = true
     
     lazy var titleLabel = UILabel()
     lazy var dividerLine = UIView()
     lazy var totalPemasukaLabel = UILabel()
     lazy var totalPemasukaValue = UILabel()
     
+//    lazy var riwayatTable = RiwayatTransaksiTable()
+    lazy var riwayatTransaksiLabel = UILabel()
     lazy var cardEmptyStats = CardEmptyStateStatistik()
     
     init() {
@@ -31,11 +33,20 @@ class StatistikPemasukanView: UIView {
     }
     
     private func addSubviews() {
-        [titleLabel, dividerLine, totalPemasukaLabel, totalPemasukaValue, cardEmptyStats]
-            .forEach {
-                addSubview($0)
-                $0.translatesAutoresizingMaskIntoConstraints = false
-            }
+        switch statsExist {
+        case true:
+            [titleLabel, dividerLine, totalPemasukaLabel, totalPemasukaValue, riwayatTransaksiLabel]
+                .forEach {
+                    addSubview($0)
+                    $0.translatesAutoresizingMaskIntoConstraints = false
+                }
+        case false:
+            [titleLabel, dividerLine, totalPemasukaLabel, totalPemasukaValue, cardEmptyStats]
+                .forEach {
+                    addSubview($0)
+                    $0.translatesAutoresizingMaskIntoConstraints = false
+                }
+        }
     }
     
     private func setUpViews() {
@@ -46,10 +57,12 @@ class StatistikPemasukanView: UIView {
         titleLabel.text = "Statistik Pemasukan"
         totalPemasukaLabel.text = "Total Pemasukan"
         totalPemasukaValue.text = "Rp 0"
+        riwayatTransaksiLabel.text = "Riwayat Transaksi"
         
         titleLabel.font = Font.largeTitle.getUIFont
         totalPemasukaLabel.font = Font.textSemiBold.getUIFont
         totalPemasukaValue.font = Font.headingFive.getUIFont
+        riwayatTransaksiLabel.font = Font.headingSix.getUIFont
         
         dividerLine.backgroundColor = UIColor.Neutral._30
         totalPemasukaValue.textColor = UIColor.Primary._30
@@ -84,10 +97,22 @@ class StatistikPemasukanView: UIView {
             totalPemasukaValue.topAnchor.constraint(equalTo: totalPemasukaLabel.bottomAnchor, constant: 10),
             totalPemasukaValue.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
             
-            cardEmptyStats.topAnchor.constraint(equalTo: totalPemasukaValue.bottomAnchor, constant: 30),
-            cardEmptyStats.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
-            cardEmptyStats.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
         ])
+        
+        switch statsExist {
+        case true:
+            NSLayoutConstraint.activate([
+                riwayatTransaksiLabel.topAnchor.constraint(equalTo: totalPemasukaValue.bottomAnchor, constant: 30),
+                riwayatTransaksiLabel.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
+                riwayatTransaksiLabel.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20)
+            ])
+        case false:
+            NSLayoutConstraint.activate([
+                cardEmptyStats.topAnchor.constraint(equalTo: totalPemasukaValue.bottomAnchor, constant: 30),
+                cardEmptyStats.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
+                cardEmptyStats.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20)
+            ])
+        }
     }
 
 }
