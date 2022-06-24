@@ -9,7 +9,7 @@ import UIKit
 
 class StatistikPemasukanView: UIView {
     
-    var statsExist = true
+    var statsExist = false
     
     lazy var titleLabel = UILabel()
     lazy var dividerLine = UIView()

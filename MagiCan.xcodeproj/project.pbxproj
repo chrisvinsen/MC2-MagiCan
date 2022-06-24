@@ -19,6 +19,8 @@
 		605C2E582864DAB500A019F7 /* LineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605C2E572864DAB500A019F7 /* LineChart.swift */; };
 		607353622865DE7200B0BC2C /* PrediksiJumlahMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607353612865DE7200B0BC2C /* PrediksiJumlahMenuTableViewCell.swift */; };
 		607353662865DF0F00B0BC2C /* PrediksiJumlahMenuTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607353652865DF0F00B0BC2C /* PrediksiJumlahMenuTable.swift */; };
+		6073536A28661F5600B0BC2C /* CarouselCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6073536928661F5600B0BC2C /* CarouselCell.swift */; };
+		6073536C28662CCA00B0BC2C /* Carousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6073536B28662CCA00B0BC2C /* Carousel.swift */; };
 		6086AF4D286010B60073B5BE /* CardKasUsaha.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6086AF4C286010B60073B5BE /* CardKasUsaha.swift */; };
 		6086AF4F286010C20073B5BE /* CardEmptyStateDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6086AF4E286010C20073B5BE /* CardEmptyStateDashboard.swift */; };
 		6086AF51286011640073B5BE /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6086AF50286011640073B5BE /* DashboardView.swift */; };
@@ -110,6 +112,8 @@
 		605C2E572864DAB500A019F7 /* LineChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChart.swift; sourceTree = "<group>"; };
 		607353612865DE7200B0BC2C /* PrediksiJumlahMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrediksiJumlahMenuTableViewCell.swift; sourceTree = "<group>"; };
 		607353652865DF0F00B0BC2C /* PrediksiJumlahMenuTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrediksiJumlahMenuTable.swift; sourceTree = "<group>"; };
+		6073536928661F5600B0BC2C /* CarouselCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCell.swift; sourceTree = "<group>"; };
+		6073536B28662CCA00B0BC2C /* Carousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Carousel.swift; sourceTree = "<group>"; };
 		6086AF4C286010B60073B5BE /* CardKasUsaha.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardKasUsaha.swift; sourceTree = "<group>"; };
 		6086AF4E286010C20073B5BE /* CardEmptyStateDashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardEmptyStateDashboard.swift; sourceTree = "<group>"; };
 		6086AF50286011640073B5BE /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
@@ -275,6 +279,8 @@
 				609E1E332865617B0018E325 /* RiwayatTransaksiTableViewCell.swift */,
 				607353652865DF0F00B0BC2C /* PrediksiJumlahMenuTable.swift */,
 				607353612865DE7200B0BC2C /* PrediksiJumlahMenuTableViewCell.swift */,
+				6073536928661F5600B0BC2C /* CarouselCell.swift */,
+				6073536B28662CCA00B0BC2C /* Carousel.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -587,6 +593,7 @@
 				A656F22A285DB50D0052EFB6 /* UITextFieldExtension.swift in Sources */,
 				A6E2723E2857708C00B5CF59 /* AppDelegate.swift in Sources */,
 				A656F221285D9A640052EFB6 /* ApiServices.swift in Sources */,
+				6073536C28662CCA00B0BC2C /* Carousel.swift in Sources */,
 				A656F230285E2B270052EFB6 /* PINView.swift in Sources */,
 				609E1E342865617B0018E325 /* RiwayatTransaksiTableViewCell.swift in Sources */,
 				A665112B285BAC6600297031 /* CustomButton.swift in Sources */,
@@ -605,6 +612,7 @@
 				A656F240285F4F440052EFB6 /* RegisterConfirmPINViewController.swift in Sources */,
 				A656F232285EB9640052EFB6 /* UserSession.swift in Sources */,
 				A656F225285D9ADB0052EFB6 /* User.swift in Sources */,
+				6073536A28661F5600B0BC2C /* CarouselCell.swift in Sources */,
 				A665112F285C042B00297031 /* LoginPINViewController.swift in Sources */,
 				6086AF4D286010B60073B5BE /* CardKasUsaha.swift in Sources */,
 				A656F218285D8EFC0052EFB6 /* RegularLabel.swift in Sources */,

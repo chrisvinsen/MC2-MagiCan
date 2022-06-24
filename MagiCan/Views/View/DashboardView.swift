@@ -14,6 +14,8 @@ class DashboardView: UIView {
     let titleLabel = UILabel()
     let profileIcon = UIImageView()
     let cardKasUsaha = CardKasUsaha()
+    let carouselStatistik = Carousel()
+    
     let sectionPrediksiPenjualan = CardEmptyStateDashboard()
     let sectionMenuAndalan = CardEmptyStateDashboard()
     
@@ -36,13 +38,13 @@ class DashboardView: UIView {
     private func addSubviews() {
         switch predictionAndMenuAvaiable {
         case true:
-            [titleLabel, profileIcon, cardKasUsaha, sectionPrediksiPenjualanFilled, sectionMenuAndalanFilled]
+            [titleLabel, profileIcon, cardKasUsaha, carouselStatistik, sectionPrediksiPenjualanFilled, sectionMenuAndalanFilled]
                 .forEach {
                     addSubview($0)
                     $0.translatesAutoresizingMaskIntoConstraints = false
                 }
         case false:
-            [titleLabel, profileIcon, cardKasUsaha, sectionPrediksiPenjualan, sectionMenuAndalan]
+            [titleLabel, profileIcon, cardKasUsaha, carouselStatistik, sectionPrediksiPenjualan, sectionMenuAndalan]
                 .forEach {
                     addSubview($0)
                     $0.translatesAutoresizingMaskIntoConstraints = false
@@ -67,6 +69,13 @@ class DashboardView: UIView {
         sectionMenuAndalan.sectionDescription1.text = "Menu Andalan Belum Tersedia"
         sectionMenuAndalan.sectionDescription2.text = "Hasil menu andalan akan muncul disini setelah data tersedia minimal 1 bulan terakhir"
         sectionMenuAndalan.sectionImage.image = UIImage(named: "Menu Andalan Empty.png")
+        
+        var carouselData = [CarouselData]()
+        carouselData.append(.init(cardLabel: "Total Keuntungan", cardAmount: "Rp 0", cardTime: "Minggu Ini", cardIcon:"CarouselIcon.png"))
+        carouselData.append(.init(cardLabel: "Total Pemasukan", cardAmount: "Rp 0", cardTime: "Minggu Ini", cardIcon:"CarouselIcon.png"))
+        carouselData.append(.init(cardLabel: "Total Pengeluaran", cardAmount: "Rp 0", cardTime: "Minggu Ini", cardIcon:"CarouselIcon.png"))
+
+        carouselStatistik.configureView(with: carouselData)
     }
     
     private func setUpViews() {
@@ -133,6 +142,9 @@ class DashboardView: UIView {
             cardKasUsaha.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
             cardKasUsaha.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
             
+            carouselStatistik.topAnchor.constraint(equalTo: cardKasUsaha.bottomAnchor, constant: 30),
+            carouselStatistik.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
+            
 //            sectionPrediksiPenjualan.topAnchor.constraint(equalTo: cardKasUsaha.bottomAnchor, constant: 30),
 //            sectionPrediksiPenjualan.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
 //            sectionPrediksiPenjualan.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
@@ -146,7 +158,7 @@ class DashboardView: UIView {
         switch predictionAndMenuAvaiable {
         case true:
             NSLayoutConstraint.activate([
-                sectionPrediksiPenjualanFilled.topAnchor.constraint(equalTo: cardKasUsaha.bottomAnchor, constant: 30),
+                sectionPrediksiPenjualanFilled.topAnchor.constraint(equalTo: carouselStatistik.bottomAnchor, constant: 30),
                 sectionPrediksiPenjualanFilled.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
                 sectionPrediksiPenjualanFilled.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
                 
@@ -156,7 +168,7 @@ class DashboardView: UIView {
             ])
         case false:
             NSLayoutConstraint.activate([
-                sectionPrediksiPenjualan.topAnchor.constraint(equalTo: cardKasUsaha.bottomAnchor, constant: 30),
+                sectionPrediksiPenjualan.topAnchor.constraint(equalTo: carouselStatistik.bottomAnchor, constant: 30),
                 sectionPrediksiPenjualan.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
                 sectionPrediksiPenjualan.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
                 
