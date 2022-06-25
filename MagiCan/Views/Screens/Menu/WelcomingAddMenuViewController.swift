@@ -36,7 +36,7 @@ class WelcomingAddMenuViewController: UIViewController {
 //MARK: - Actions
 extension WelcomingAddMenuViewController {
     @objc func addButtonTapped(_ sender: UIButton) {
-        navigationController?.pushViewController(ListMenuScreenController(), animated: true)
+        navigationController?.pushViewController(GuestListMenuViewController(), animated: true)
     }
     
     @objc func skipButtonTapped(_ sender: UIButton) {

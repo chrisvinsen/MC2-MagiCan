@@ -1,5 +1,5 @@
 //
-//  ListMenuScreenController.swift
+//  GuestListMenuViewController.swift
 //  MagiCan
 //
 //  Created by Christianto Vinsen on 17/06/22.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ListMenuScreenController: UIViewController {
+class GuestListMenuViewController: UIViewController {
     
     let tableView = UITableView()
     let continueButton = PrimaryButton()
@@ -20,13 +20,13 @@ class ListMenuScreenController: UIViewController {
         setupStyle()
         setupLayout()
         
-        let VC = AddMenuScreenController()
+        let VC = GuestAddMenuViewController()
         let navController = UINavigationController(rootViewController: VC)
         self.present(navController, animated: true, completion: nil)
     }
 }
 
-extension ListMenuScreenController {
+extension GuestListMenuViewController {
     
     func setupStyle() {
         // Table View
@@ -63,7 +63,7 @@ extension ListMenuScreenController {
 }
 
 // MARK: - Actions
-extension ListMenuScreenController {
+extension GuestListMenuViewController {
     @objc func continueButtonTapped(_ sender: UIButton) {
         navigationController?.pushViewController(LoginPINViewController(), animated: true)
     }
@@ -74,11 +74,11 @@ extension ListMenuScreenController {
 import SwiftUI
 
 @available(iOS 13, *)
-struct ListMenuScreenController_Preview: PreviewProvider {
+struct GuestListMenuViewController_Preview: PreviewProvider {
     static var previews: some View {
         // view controller using programmatic UI
         Group {
-            ListMenuScreenController().showPreview().previewInterfaceOrientation(.portrait)
+            GuestListMenuViewController().showPreview().previewInterfaceOrientation(.portrait)
         }
     }
 }

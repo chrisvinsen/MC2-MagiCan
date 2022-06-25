@@ -16,10 +16,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoMagicanText" translatesAutoresizingMaskIntoConstraints="NO" id="4Xs-3o-XVK">
-                                <rect key="frame" x="107" y="404" width="200" height="88"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoMagican" translatesAutoresizingMaskIntoConstraints="NO" id="4Xs-3o-XVK">
+                                <rect key="frame" x="119.5" y="217" width="175" height="462"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="bbN-OE-WTU"/>
+                                    <constraint firstAttribute="width" constant="175" id="bbN-OE-WTU"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -37,7 +37,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="LogoMagicanText" width="345" height="88"/>
+        <image name="LogoMagican" width="492" height="462"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

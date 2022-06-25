@@ -1,91 +1,94 @@
 //
-//  AddMenuScreenController.swift
+//  AddMenuView.swift
 //  MagiCan
 //
-//  Created by Christianto Vinsen on 17/06/22.
+//  Created by Christianto Vinsen on 25/06/22.
 //
 
+import Foundation
 import UIKit
 
-class AddMenuScreenController: UIViewController {
+class AddMenuView: UIView {
     
-    let nameField = UITextField()
-    let priceField = UITextField()
-    let descriptionField = UITextField()
-    let addButton = UIButton(type: .system)
-    let previewImage = UIImageView()
-    let saveButton = PrimaryButton()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        title = "Menu"
-        
-        let leftBarButtonItem = UIBarButtonItem(title: "Batal", style: .plain, target: self, action: #selector(cancelButtonTapped))
-        leftBarButtonItem.tintColor = UIColor.Primary._30
-        navigationItem.leftBarButtonItem = leftBarButtonItem
-        
-        setupStyle()
-        setupLayout()
+    lazy var nameField = UITextField()
+    lazy var priceField = UITextField()
+    lazy var descriptionField = UITextField()
+    lazy var addButton = UIButton(type: .system)
+    lazy var previewImage = UIImageView()
+    lazy var saveButton = PrimaryButton()
+    
+    var base64Image: String = "" {
+        didSet {
+            if base64Image != "" {
+                addButton.setTitle(" Ubah Foto (Opsional)", for: .normal)
+                previewImage.image = base64Image.imageFromBase64
+            } else {
+                addButton.setTitle(" Tambah Foto (Opsional)", for: .normal)
+                previewImage.image = nil
+            }
+        }
     }
-}
-
-extension AddMenuScreenController {
     
-    func setupStyle() {
+    var isUsernameExists: Bool = false
+    
+    init() {
+        super.init(frame: .zero)
         
+        addSubviews()
+        setUpViews()
+        setUpConstraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func addSubviews() {
+        
+        [nameField, priceField, descriptionField, addButton, previewImage, saveButton]
+            .forEach {
+                addSubview($0)
+                $0.translatesAutoresizingMaskIntoConstraints = false
+            }
+    }
+    
+    private func setUpViews() {
         // Name Field
-        nameField.translatesAutoresizingMaskIntoConstraints = false
         nameField.attributedPlaceholder = NSAttributedString(
             string: "Nama Menu",
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.Neutral._70]
         )
         
         // Price Field
-        priceField.translatesAutoresizingMaskIntoConstraints = false
         priceField.attributedPlaceholder = NSAttributedString(
             string: "Harga Satuan",
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.Neutral._70]
         )
+        priceField.keyboardType = .numberPad
         
         // Description Field
-        descriptionField.translatesAutoresizingMaskIntoConstraints = false
         descriptionField.attributedPlaceholder = NSAttributedString(
             string: "Deskripsi (Opsional)",
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.Neutral._70]
         )
         
         // Add Button
-        addButton.translatesAutoresizingMaskIntoConstraints = false
         addButton.setTitle(" Tambah Foto (Opsional)", for: .normal)
         addButton.tintColor = UIColor.Primary._30
         addButton.titleLabel?.font = Font.textSemiBold.getUIFont
         addButton.setImage(UIImage(systemName: "camera.fill"), for: .normal)
-        addButton.addTarget(self, action: #selector(addButtonTapped(_ :)), for: .touchUpInside)
         
         // Preview Image
-        previewImage.translatesAutoresizingMaskIntoConstraints = false
         previewImage.layer.cornerRadius = 8
         previewImage.clipsToBounds = true
-        previewImage.image = UIImage(named: "SampleBakso.jpeg") //TEMP
         previewImage.contentMode = .scaleAspectFit
         
         // Save Button
-        saveButton.translatesAutoresizingMaskIntoConstraints = false
         saveButton.setTitle("Simpan", for: .normal)
-        saveButton.addTarget(self, action: #selector(saveButtonTapped(_ :)), for: .touchUpInside)
     }
     
-    func setupLayout() {
-        view.backgroundColor = .white
-        view.addSubview(nameField)
-        view.addSubview(priceField)
-        view.addSubview(descriptionField)
-        view.addSubview(addButton)
-        view.addSubview(previewImage)
-        view.addSubview(saveButton)
-        
-        let safeArea = view.safeAreaLayoutGuide
+    private func setUpConstraints() {
+        let safeArea = safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
             // Name Field
@@ -126,32 +129,16 @@ extension AddMenuScreenController {
     }
 }
 
-// MARK: - Actions
-extension AddMenuScreenController {
-    
-    @objc func addButtonTapped(_ sender: UIButton) {
-        print("Add Button Tapped")
-    }
-    
-    @objc func saveButtonTapped(_ sender: UIButton) {
-        self.dismiss(animated: true)
-    }
-    
-    @objc func cancelButtonTapped() {
-        self.dismiss(animated: true)
-    }
-}
-
 
 #if DEBUG
 import SwiftUI
 
 @available(iOS 13, *)
-struct AddMenuScreenController_Preview: PreviewProvider {
+struct AddMenuView_Preview: PreviewProvider {
     static var previews: some View {
         // view controller using programmatic UI
         Group {
-            AddMenuScreenController().showPreview().previewInterfaceOrientation(.portrait)
+            AddMenuView().showPreview().previewInterfaceOrientation(.portrait)
         }
     }
 }

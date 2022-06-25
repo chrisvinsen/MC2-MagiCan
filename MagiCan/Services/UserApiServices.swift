@@ -283,9 +283,9 @@ final class UserService: UserServiceProtocol {
         var dataTask: URLSessionDataTask?
         let semaphore: DispatchSemaphore = DispatchSemaphore(value: 0)
         
-        let sessionToken = userDefaults.string(forKey: UserDefaultKeys.token.rawValue)
+        let sessionToken = getUserTokenFromUserDefaults()
         
-        guard let urlRequest = getUrlForValidateToken(token: sessionToken ?? "") else {
+        guard let urlRequest = getUrlForValidateToken(token: sessionToken) else {
             return
         }
         
@@ -300,8 +300,8 @@ final class UserService: UserServiceProtocol {
             do {
                 let tokenStatus = try JSONDecoder().decode(Bool.self, from: data)
                 if !tokenStatus {
-                    userDefaults.set("", forKey: UserDefaultKeys.username.rawValue)
-                    userDefaults.set("", forKey: UserDefaultKeys.token.rawValue)
+                    setUsernameFromUserDefaults(newUsername: "")
+                    setUserTokenFromUserDefaults(newToken: "")
                 }
             } catch {
                 print(error.localizedDescription)

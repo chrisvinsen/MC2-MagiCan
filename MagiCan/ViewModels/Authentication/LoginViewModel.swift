@@ -78,8 +78,8 @@ final class LoginViewModel {
         }
         
         let valueHandler: (UserSession) -> Void = { [weak self] userSession in
-            userDefaults.set(userSession.username, forKey: UserDefaultKeys.username.rawValue)
-            userDefaults.set(userSession.token, forKey: UserDefaultKeys.token.rawValue)
+            setUsernameFromUserDefaults(newUsername: userSession.username)
+            setUserTokenFromUserDefaults(newToken: userSession.token)
             
             self?.isLoginSuccess = true
         }
