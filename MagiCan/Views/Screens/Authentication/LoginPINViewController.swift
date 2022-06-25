@@ -96,11 +96,9 @@ class LoginPINViewController: UIViewController {
                 .sink { completion in
                     switch completion {
                     case .failure:
-                        print("ERR")
                         // Error can be handled here (e.g. alert)
                         return
                     case .finished:
-                        print("SUCCS")
                         return
                     }
                 } receiveValue: { [weak self] res in

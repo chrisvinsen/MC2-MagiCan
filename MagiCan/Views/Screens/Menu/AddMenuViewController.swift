@@ -77,23 +77,26 @@ class AddMenuViewController: UIViewController {
                 .sink { completion in
                     switch completion {
                     case .failure:
-                        print("ERROR")
                         // Error can be handled here (e.g. alert)
                         return
                     case .finished:
                         self.dismiss(animated: true)
-                        self.delegate.reloadDataTable()
                         
                         return
                     }
                 } receiveValue: { [weak self] newMenu in
-                    print("AFTER ADD MENU")
-                    print(newMenu)
-//                    print(self?.viewModel.base64Image)
+
+                    self?.delegate.addNewMenuData(newMenu: Menu(
+                        _id: "",
+                        name: newMenu.name,
+                        description: newMenu.description,
+                        imageUrl: self?.viewModel.base64Image ?? "",
+                        price: newMenu.price,
+                        isLoadingImage: true
+                    ))
+                    
                     if self?.viewModel.base64Image != "" {
-                        print("REQUST ADD MENU IMAGES")
                         DispatchQueue.main.async {
-                            sleep(1)
                             self?.viewModel.addMenuImage(menuId: newMenu._id)
                         }
                     }
@@ -104,13 +107,9 @@ class AddMenuViewController: UIViewController {
                 .sink { completion in
                     switch completion {
                     case .failure:
-                        print("ERRORRRRR")
                         // Error can be handled here (e.g. alert)
                         return
                     case .finished:
-                        print("FINISHEEEEE")
-//                        self.dismiss(animated: true)
-//                        self.delegate.reloadDataTable()
                         
                         return
                     }
@@ -163,9 +162,7 @@ extension AddMenuViewController {
 extension AddMenuViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func openCamera() {
-        print("A")
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            print("B")
             let image = UIImagePickerController()
             image.delegate = self
             image.allowsEditing = true
@@ -176,9 +173,7 @@ extension AddMenuViewController: UIImagePickerControllerDelegate, UINavigationCo
     }
     
     func openGallery() {
-        print("A")
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            print("B")
             let image = UIImagePickerController()
             image.allowsEditing = true
             image.sourceType = .photoLibrary

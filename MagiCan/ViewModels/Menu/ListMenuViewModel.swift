@@ -59,7 +59,6 @@ final class ListMenuViewModel {
         }
         
         let valueHandler: (Bool) -> Void = { [weak self] status in
-            print("DELETE STATUE \(status)")
             self?.deleteResult.send(.finish)
         }
         

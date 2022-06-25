@@ -10,6 +10,8 @@ import Combine
 
 protocol ListMenuDelegate {
     func reloadDataTable()
+    func addNewMenuData(newMenu: Menu)
+    func updateMenuData(newMenu: Menu)
 }
 
 class ListMenuViewController: UIViewController {
@@ -19,9 +21,10 @@ class ListMenuViewController: UIViewController {
     private let viewModel: ListMenuViewModel
     private var bindings = Set<AnyCancellable>()
     
+    var cellViewModel = MenuCellViewModel()
+    
     var menuLists = [Menu]() {
         didSet {
-            print("DID SET")
             self.filteredMenuLists = self.menuLists
             DispatchQueue.main.async{
                 self.contentView.tableView.reloadData()
@@ -132,6 +135,28 @@ class ListMenuViewController: UIViewController {
                     }
                 }
                 .store(in: &bindings)
+            
+            cellViewModel.cellResult
+                .sink { completion in
+                    switch completion {
+                    case .failure:
+                        // Error can be handled here (e.g. alert)
+                        return
+                    case .finished:
+                        return
+                    }
+                } receiveValue: { [weak self] menuImage in
+                    
+                    if menuImage.imageUrl == "" {
+                        return
+                    }
+                    
+                    if let idx = self?.viewModel.menuLists.firstIndex(where: { $0._id == menuImage.menu_id }) {
+                        
+                        self?.viewModel.menuLists[idx].imageUrl = menuImage.imageUrl
+                    }
+                }
+                .store(in: &bindings)
         }
         
 //        bindViewToViewModel()
@@ -153,7 +178,7 @@ extension ListMenuViewController {
 
 //MARK: - Table
 extension ListMenuViewController: UITableViewDelegate, UITableViewDataSource {
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         filteredMenuLists.count
     }
@@ -161,13 +186,24 @@ extension ListMenuViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MenuCell", for: indexPath) as? MenuCell else {fatalError("Unable to create menu cell")}
         
-        var image = filteredMenuLists[indexPath.row].imageUrl?.imageFromBase64
-        if image == nil {
-            image = UIImage(named: "SampleBakso.jpeg") //DEFAULT
+        let thisMenu = filteredMenuLists[indexPath.row]
+        var image = thisMenu.imageUrl?.imageFromBase64
+        
+        if image == nil && !thisMenu.isLoadingImage {
+            self.viewModel.menuLists[indexPath.row].isLoadingImage = true
+            
+            DispatchQueue(label: "menuCell\(indexPath.row)").async {
+                self.cellViewModel.getMenuImage(menu_id: self.filteredMenuLists[indexPath.row]._id)
+            }
+        } else if image == nil {
+            image = ImageMenuDefault
         }
+        
         cell.menuImage.image = image
         cell.nameLabel.text = filteredMenuLists[indexPath.row].name
         cell.descriptionLabel.text = "@ Rp \(filteredMenuLists[indexPath.row].price)"
+        
+            
 
         return cell
     }
@@ -176,8 +212,6 @@ extension ListMenuViewController: UITableViewDelegate, UITableViewDataSource {
         
         let editAction = UIContextualAction(style: .normal, title: "Ubah") {
             (action, sourceView, completionHandler) in
-            
-            print("UBAH")
 
             completionHandler(true)
         }
@@ -211,8 +245,19 @@ extension ListMenuViewController: UITableViewDelegate, UITableViewDataSource {
 //MARK: - List Menu Delegate
 extension ListMenuViewController: ListMenuDelegate {
     func reloadDataTable() {
-        print("RELOAD PROTOCOL CALLED")
         viewModel.getMenuList()
+    }
+    
+    func addNewMenuData(newMenu: Menu) {
+        viewModel.menuLists.insert(newMenu, at: 0)
+    }
+    
+    func updateMenuData(newMenu: Menu) {
+        
+        if let idx = viewModel.menuLists.firstIndex(where: { $0._id == newMenu._id }) {
+            
+            viewModel.menuLists[idx] = newMenu
+        }
     }
 }
 

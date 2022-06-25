@@ -16,7 +16,7 @@ final class EditMenuViewModel {
     @Published var description: String = ""
     @Published var base64Image: String = ""
     
-    let result = PassthroughSubject<Void, Error>()
+    let result = PassthroughSubject<Menu, Error>()
     
     private let menuService: MenuServiceProtocol
     private var bindings = Set<AnyCancellable>()
@@ -33,22 +33,19 @@ final class EditMenuViewModel {
             case let .failure(error):
                 self?.result.send(completion: .failure(error))
             case .finished:
+                print("SEND FINISHED")
                 self?.result.send(completion: .finished)
             }
         }
         
         let valueHandler: (Menu) -> Void = { [weak self] newMenu in
-            print(newMenu)
+            self?.result.send(newMenu)
         }
-        
-        print(self.priceString)
-        print(Int64(self.priceString) ?? 0)
         
         let menuRequest = MenuCRUDRequest(
             _id: self._id,
             name: self.name,
             description: self.description,
-//            image_url: self.base64Image,
             price: Int64(self.priceString) ?? 0
         )
         

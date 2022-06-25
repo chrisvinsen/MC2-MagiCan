@@ -37,9 +37,7 @@ final class AddMenuViewModel {
         }
         
         let valueHandler: (Menu) -> Void = { [weak self] newMenu in
-//            print(newMenu)
             self?.result.send(newMenu)
-//            self?.newMenu = newMenu
         }
         
         let menuRequest = MenuCRUDRequest(
@@ -58,7 +56,6 @@ final class AddMenuViewModel {
     
     //MARK: - Add Menu Image
     func addMenuImage(menuId: String) {
-        print("START ADD MENU IMAGE")
         let completionHandler: (Subscribers.Completion<Error>) -> Void = { [weak self] completion in
             switch completion {
             case let .failure(error):

@@ -95,9 +95,6 @@ final class MenuService: MenuServiceProtocol {
                     return
                 }
                 
-//                let jsonString = String(data: data, encoding: .utf8)!
-//                print("RESP: \(jsonString)")
-                
                 do {
                     let menuCreated = try JSONDecoder().decode(Menu.self, from: data)
                     promise(.success(menuCreated))
@@ -121,8 +118,6 @@ final class MenuService: MenuServiceProtocol {
         
         guard let url = components.url else { return nil }
         let jsonData = try? JSONEncoder().encode(menuReq)
-//        let jsonString = String(data: jsonData!, encoding: .utf8)!
-//        print("REQ: \(jsonString)")
         
         var urlRequest = URLRequest(url: url)
         urlRequest.timeoutInterval = APIDefaultTimeOut
@@ -155,8 +150,6 @@ final class MenuService: MenuServiceProtocol {
                     }
                     return
                 }
-                let jsonString = String(data: data, encoding: .utf8)!
-                print("JSON: \(jsonString)")
                 
                 do {
                     let menuUpdated = try JSONDecoder().decode(Menu.self, from: data)
@@ -211,8 +204,8 @@ final class MenuService: MenuServiceProtocol {
                     }
                     return
                 }
-                let jsonString = String(data: data, encoding: .utf8)!
-                print("RESP: \(jsonString)")
+//                let jsonString = String(data: data, encoding: .utf8)!
+//                print("RESP: \(jsonString)")
                 
                 do {
                     promise(.success(true))
@@ -234,8 +227,6 @@ final class MenuService: MenuServiceProtocol {
         
         guard let url = components.url else { return nil }
         let jsonData = try? JSONEncoder().encode(menuReq)
-        let jsonString = String(data: jsonData!, encoding: .utf8)!
-        print("REQ: \(jsonString)")
         
         var urlRequest = URLRequest(url: url)
         urlRequest.timeoutInterval = APIDefaultTimeOut
@@ -254,31 +245,35 @@ final class MenuService: MenuServiceProtocol {
         var dataTask: URLSessionDataTask?
         
         let onSubscription: (Subscription) -> Void = { _ in dataTask?.resume() }
-        let onCancel: () -> Void = { dataTask?.cancel() }
+        let onCancel: () -> Void = {
+//            dataTask?.cancel()
+        }
+        
+        let emptyMenuImage = MenuImage(_id: "", menu_id: menuImageReq.menu_id, imageUrl: "")
+        
         
         // promise type is Result<[Menu], Error>
         return Future<MenuImage, Error> { [weak self] promise in
             guard let urlRequest = self?.getUrlForGetMenuImage(menuImageReq: menuImageReq) else {
-                promise(.failure(ServiceError.urlRequest))
+                promise(.success(emptyMenuImage))
                 return
             }
             
             dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, _, error) in
                 guard let data = data else {
                     if let error = error {
-                        promise(.failure(error))
+                        print(error)
+                        print(error.localizedDescription)
+                        promise(.success(emptyMenuImage))
                     }
                     return
                 }
-                
-                let jsonString = String(data: data, encoding: .utf8)!
-                print("RESP: \(jsonString)")
                 
                 do {
                     let menuImage = try JSONDecoder().decode(MenuImage.self, from: data)
                     promise(.success(menuImage))
                 } catch {
-                    promise(.failure(ServiceError.decode))
+                    promise(.success(emptyMenuImage))
                 }
             }
         }
@@ -333,9 +328,6 @@ final class MenuService: MenuServiceProtocol {
                     return
                 }
                 
-                let jsonString = String(data: data, encoding: .utf8)!
-                print("RESP: \(jsonString)")
-                
                 do {
                     let menuImageCreated = try JSONDecoder().decode(MenuImage.self, from: data)
                     promise(.success(menuImageCreated))
@@ -358,11 +350,7 @@ final class MenuService: MenuServiceProtocol {
         components.path = Endpoint.Menu.Image.Add.rawValue
         
         guard let url = components.url else { return nil }
-        let dummyMenuImageReq = MenuImagesCRUDRequestResponse(_id: "", menu_id: "27b5d6d2-6c4c-4d82-9290-d393d11d6d5c", image_url: menuImageReq.image_url)
-        let jsonData = try? JSONEncoder().encode(dummyMenuImageReq)
-//        let jsonData = try? JSONEncoder().encode(menuImageReq)
-//        let jsonString = String(data: jsonData!, encoding: .utf8)!
-//        print("REQ: \(jsonString)")
+        let jsonData = try? JSONEncoder().encode(menuImageReq)
         
         var urlRequest = URLRequest(url: url)
         urlRequest.timeoutInterval = APIDefaultTimeOut

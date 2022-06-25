@@ -14,6 +14,8 @@ struct Menu: Equatable, Hashable, Encodable, Decodable {
     var imageUrl: String?
     var price: Int64
     
+    var isLoadingImage: Bool = false
+    
     enum CodingKeys: String, CodingKey {
         case _id
         case name

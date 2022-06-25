@@ -62,6 +62,8 @@
 		A6C8AAEC2866AB5A00C507A3 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C8AAEB2866AB5A00C507A3 /* UIImageExtension.swift */; };
 		A6C8AAEE2866B2AC00C507A3 /* EditMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C8AAED2866B2AC00C507A3 /* EditMenuViewController.swift */; };
 		A6C8AAF02866B2B700C507A3 /* EditMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C8AAEF2866B2B700C507A3 /* EditMenuViewModel.swift */; };
+		A6C8AAF22866F87100C507A3 /* MenuCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C8AAF12866F87100C507A3 /* MenuCellViewModel.swift */; };
+		A6C8AAF4286747FB00C507A3 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C8AAF3286747FB00C507A3 /* General.swift */; };
 		A6E2723E2857708C00B5CF59 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E2723D2857708C00B5CF59 /* AppDelegate.swift */; };
 		A6E272402857708C00B5CF59 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E2723F2857708C00B5CF59 /* SceneDelegate.swift */; };
 		A6E272422857708C00B5CF59 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E272412857708C00B5CF59 /* OnboardingViewController.swift */; };
@@ -146,6 +148,8 @@
 		A6C8AAEB2866AB5A00C507A3 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		A6C8AAED2866B2AC00C507A3 /* EditMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMenuViewController.swift; sourceTree = "<group>"; };
 		A6C8AAEF2866B2B700C507A3 /* EditMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMenuViewModel.swift; sourceTree = "<group>"; };
+		A6C8AAF12866F87100C507A3 /* MenuCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCellViewModel.swift; sourceTree = "<group>"; };
+		A6C8AAF3286747FB00C507A3 /* General.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = General.swift; sourceTree = "<group>"; };
 		A6E2723A2857708C00B5CF59 /* MagiCan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MagiCan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6E2723D2857708C00B5CF59 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A6E2723F2857708C00B5CF59 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -274,6 +278,7 @@
 				A665111B285B8E1D00297031 /* Fonts.swift */,
 				A656F220285D9A640052EFB6 /* ApiServices.swift */,
 				A656F237285F0F220052EFB6 /* UserDefaults.swift */,
+				A6C8AAF3286747FB00C507A3 /* General.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -323,6 +328,7 @@
 				A6C8AADF2865F96900C507A3 /* ListMenuViewModel.swift */,
 				A6C8AAE528667F9F00C507A3 /* AddMenuViewModel.swift */,
 				A6C8AAEF2866B2B700C507A3 /* EditMenuViewModel.swift */,
+				A6C8AAF12866F87100C507A3 /* MenuCellViewModel.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -573,6 +579,7 @@
 				A656F248286521420052EFB6 /* Menu.swift in Sources */,
 				A656F230285E2B270052EFB6 /* PINView.swift in Sources */,
 				A656F242286520890052EFB6 /* ListMenuViewController.swift in Sources */,
+				A6C8AAF4286747FB00C507A3 /* General.swift in Sources */,
 				A665112B285BAC6600297031 /* CustomButton.swift in Sources */,
 				A6651135285C0D1D00297031 /* GuestAddMenuViewController.swift in Sources */,
 				A6651123285B925F00297031 /* UIColorExtension.swift in Sources */,
@@ -587,6 +594,7 @@
 				A6C8AAE42865FCC300C507A3 /* Helper.swift in Sources */,
 				A656F225285D9ADB0052EFB6 /* User.swift in Sources */,
 				A665112F285C042B00297031 /* LoginPINViewController.swift in Sources */,
+				A6C8AAF22866F87100C507A3 /* MenuCellViewModel.swift in Sources */,
 				A6C8AAEA286681F000C507A3 /* AddMenuView.swift in Sources */,
 				A656F218285D8EFC0052EFB6 /* RegularLabel.swift in Sources */,
 				A6C8AAEE2866B2AC00C507A3 /* EditMenuViewController.swift in Sources */,

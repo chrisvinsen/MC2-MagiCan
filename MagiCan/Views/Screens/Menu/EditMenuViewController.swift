@@ -87,18 +87,21 @@ class EditMenuViewController: UIViewController {
                 .sink { completion in
                     switch completion {
                     case .failure:
-                        print("ERROR")
                         // Error can be handled here (e.g. alert)
                         return
                     case .finished:
-                        print("FINISHED")
                         self.dismiss(animated: true)
-                        self.delegate.reloadDataTable()
                         
                         return
                     }
-                } receiveValue: { [weak self] res in
-                    print(res)
+                } receiveValue: { [weak self] newMenu in
+                    print("UPDATE \(newMenu)")
+                    var updateMenu = newMenu
+                    updateMenu.imageUrl = self?.viewModel.base64Image ?? ""
+                    updateMenu.isLoadingImage = true
+                    print("UPDATE NEW \(updateMenu)")
+                    self?.delegate.updateMenuData(newMenu: updateMenu)
+                    
                 }
                 .store(in: &bindings)
             
@@ -150,9 +153,7 @@ extension EditMenuViewController {
 extension EditMenuViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func openCamera() {
-        print("A")
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            print("B")
             let image = UIImagePickerController()
             image.delegate = self
             image.allowsEditing = true
@@ -163,9 +164,7 @@ extension EditMenuViewController: UIImagePickerControllerDelegate, UINavigationC
     }
     
     func openGallery() {
-        print("A")
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            print("B")
             let image = UIImagePickerController()
             image.allowsEditing = true
             image.sourceType = .photoLibrary
