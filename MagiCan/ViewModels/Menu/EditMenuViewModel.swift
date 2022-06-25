@@ -17,6 +17,7 @@ final class EditMenuViewModel {
     @Published var base64Image: String = ""
     
     let result = PassthroughSubject<Menu, Error>()
+    let resultImage = PassthroughSubject<Void, Error>()
     
     private let menuService: MenuServiceProtocol
     private var bindings = Set<AnyCancellable>()
@@ -51,6 +52,33 @@ final class EditMenuViewModel {
         
         menuService
             .updateMenu(menuReq: menuRequest)
+            .sink(receiveCompletion: completionHandler, receiveValue: valueHandler)
+            .store(in: &bindings)
+    }
+    
+    //MARK: - Add Update Menu Image
+    func addUpdateMenuImage(menuId: String) {
+        let completionHandler: (Subscribers.Completion<Error>) -> Void = { [weak self] completion in
+            switch completion {
+            case let .failure(error):
+                self?.resultImage.send(completion: .failure(error))
+            case .finished:
+                self?.resultImage.send(completion: .finished)
+            }
+        }
+        
+        let valueHandler: (MenuImage) -> Void = { [weak self] newMenu in
+            print(newMenu)
+        }
+        
+        let menuImageReq = MenuImagesCRUDRequestResponse(
+            _id: "",
+            menu_id: menuId,
+            image_url: self.base64Image
+        )
+        
+        menuService
+            .addUpdateMenuImage(menuImageReq: menuImageReq)
             .sink(receiveCompletion: completionHandler, receiveValue: valueHandler)
             .store(in: &bindings)
     }

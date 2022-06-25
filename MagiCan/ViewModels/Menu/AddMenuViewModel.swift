@@ -54,8 +54,8 @@ final class AddMenuViewModel {
             .store(in: &bindings)
     }
     
-    //MARK: - Add Menu Image
-    func addMenuImage(menuId: String) {
+    //MARK: - Add Update Menu Image
+    func addUpdateMenuImage(menuId: String) {
         let completionHandler: (Subscribers.Completion<Error>) -> Void = { [weak self] completion in
             switch completion {
             case let .failure(error):
@@ -76,7 +76,7 @@ final class AddMenuViewModel {
         )
         
         menuService
-            .addMenuImage(menuImageReq: menuImageReq)
+            .addUpdateMenuImage(menuImageReq: menuImageReq)
             .sink(receiveCompletion: completionHandler, receiveValue: valueHandler)
             .store(in: &bindings)
     }

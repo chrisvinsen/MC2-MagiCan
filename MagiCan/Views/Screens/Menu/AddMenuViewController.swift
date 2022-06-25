@@ -97,7 +97,7 @@ class AddMenuViewController: UIViewController {
                     
                     if self?.viewModel.base64Image != "" {
                         DispatchQueue.main.async {
-                            self?.viewModel.addMenuImage(menuId: newMenu._id)
+                            self?.viewModel.addUpdateMenuImage(menuId: newMenu._id)
                         }
                     }
                 }

@@ -102,6 +102,10 @@ class EditMenuViewController: UIViewController {
                     print("UPDATE NEW \(updateMenu)")
                     self?.delegate.updateMenuData(newMenu: updateMenu)
                     
+                    DispatchQueue.main.async {
+                        self?.viewModel.addUpdateMenuImage(menuId: newMenu._id)
+                    }
+                    
                 }
                 .store(in: &bindings)
             
