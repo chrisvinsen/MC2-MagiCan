@@ -64,10 +64,10 @@ class Carousel: UIView {
         let safeArea = safeAreaLayoutGuide
 
         NSLayoutConstraint.activate([
-//            self.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 50),
-//            self.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: 50),
-            carouselCollectionView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
-            carouselCollectionView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10),
+            self.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 50),
+            self.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: 50),
+            carouselCollectionView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 10),
+            carouselCollectionView.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 10),
             
             pageControl.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
             pageControl.leftAnchor.constraint(equalTo: self.leftAnchor, constant: -10)
