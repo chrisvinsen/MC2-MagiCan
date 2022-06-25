@@ -15,7 +15,7 @@ protocol MenuServiceProtocol {
     func deleteMenu(menuReq: MenuCRUDRequest) -> AnyPublisher<Bool, Error>
     
     func getMenuImage(menuImageReq: MenuImagesCRUDRequestResponse) -> AnyPublisher<MenuImage, Error>
-    func addMenuImage(menuImageReq: MenuImagesCRUDRequestResponse) -> AnyPublisher<MenuImage, Error>
+    func addUpdateMenuImage(menuImageReq: MenuImagesCRUDRequestResponse) -> AnyPublisher<MenuImage, Error>
 }
 
 final class MenuService: MenuServiceProtocol {
@@ -204,8 +204,6 @@ final class MenuService: MenuServiceProtocol {
                     }
                     return
                 }
-//                let jsonString = String(data: data, encoding: .utf8)!
-//                print("RESP: \(jsonString)")
                 
                 do {
                     promise(.success(true))
@@ -301,8 +299,8 @@ final class MenuService: MenuServiceProtocol {
         return urlRequest
     }
     
-    //MARK: - Add Menu Image --> /menus/images/add
-    func addMenuImage(menuImageReq: MenuImagesCRUDRequestResponse) -> AnyPublisher<MenuImage, Error> {
+    //MARK: - Add and Update Menu Image --> /menus/images/add
+    func addUpdateMenuImage(menuImageReq: MenuImagesCRUDRequestResponse) -> AnyPublisher<MenuImage, Error> {
         var dataTask: URLSessionDataTask?
         
         let onSubscription: (Subscription) -> Void = { _ in dataTask?.resume() }
@@ -313,7 +311,7 @@ final class MenuService: MenuServiceProtocol {
         
         // promise type is Result<Menu, Error>
         return Future<MenuImage, Error> { [weak self] promise in
-            guard let urlRequest = self?.getUrlForAddMenuImage(menuImageReq: menuImageReq) else {
+            guard let urlRequest = self?.getUrlForAddUpdateMenuImage(menuImageReq: menuImageReq) else {
                 promise(.failure(ServiceError.urlRequest))
                 return
             }
@@ -343,11 +341,11 @@ final class MenuService: MenuServiceProtocol {
         .eraseToAnyPublisher()
     }
     
-    private func getUrlForAddMenuImage(menuImageReq: MenuImagesCRUDRequestResponse) -> URLRequest? {
+    private func getUrlForAddUpdateMenuImage(menuImageReq: MenuImagesCRUDRequestResponse) -> URLRequest? {
         var components = URLComponents()
         components.scheme = APIComponentScheme
         components.host = APIComponentHost
-        components.path = Endpoint.Menu.Image.Add.rawValue
+        components.path = Endpoint.Menu.Image.AddUpdate.rawValue
         
         guard let url = components.url else { return nil }
         let jsonData = try? JSONEncoder().encode(menuImageReq)

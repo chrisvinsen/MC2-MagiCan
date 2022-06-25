@@ -123,16 +123,6 @@ class ListMenuViewController: UIViewController {
                     }
                 } receiveValue: { [weak self] message in
                     
-                    switch message {
-                    case .empty:
-                        return
-                    case .starting:
-                        return
-                    case .procesing:
-                        return
-                    case .finish:
-                        self?.reloadDataTable()
-                    }
                 }
                 .store(in: &bindings)
             
@@ -210,23 +200,27 @@ extension ListMenuViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        let editAction = UIContextualAction(style: .normal, title: "Ubah") {
-            (action, sourceView, completionHandler) in
-
-            completionHandler(true)
-        }
-        editAction.backgroundColor = UIColor.Secondary._50
+//        let editAction = UIContextualAction(style: .normal, title: "Ubah") {
+//            (action, sourceView, completionHandler) in
+//
+//            completionHandler(true)
+//        }
+//        editAction.backgroundColor = UIColor.Secondary._50
         
         let deleteAction = UIContextualAction(style: .normal, title: "Hapus") {
             (action, sourceView, completionHandler) in
             
             self.viewModel.deleteMenu(idToDelete: self.filteredMenuLists[indexPath.row]._id)
+            
+            if let idx = self.viewModel.menuLists.firstIndex(where: { $0._id == self.filteredMenuLists[indexPath.row]._id }) {
+                self.viewModel.menuLists.remove(at: idx)
+            }
 
             completionHandler(true)
         }
         deleteAction.backgroundColor = UIColor.Error._50
         
-        let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction, editAction])
+        let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction])
         // Delete should not delete automatically
         swipeConfiguration.performsFirstActionWithFullSwipe = false
         

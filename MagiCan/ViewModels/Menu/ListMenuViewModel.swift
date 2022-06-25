@@ -8,16 +8,12 @@
 import Foundation
 import Combine
 
-enum StateRequest {
-    case empty, starting, procesing, finish
-}
-    
 
 final class ListMenuViewModel {
     @Published var menuLists: [Menu] = []
     
     var result = PassthroughSubject<Void, Error>()
-    var deleteResult = CurrentValueSubject<StateRequest, Error>(.empty)
+    var deleteResult = PassthroughSubject<Void, Error>()
     private let menuService: MenuServiceProtocol
     private var bindings = Set<AnyCancellable>()
     
@@ -59,14 +55,13 @@ final class ListMenuViewModel {
         }
         
         let valueHandler: (Bool) -> Void = { [weak self] status in
-            self?.deleteResult.send(.finish)
+//            self?.deleteResult.send(.finish)
         }
         
         let menuRequest = MenuCRUDRequest(
             _id: idToDelete,
             name: "",
             description: "",
-//            image_url: "",
             price: 0
         )
         

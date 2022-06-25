@@ -28,9 +28,7 @@ enum Endpoint {
         
         enum Image: String {
             case Get = "/menus/images"
-            case Add = "/menus/images/add"
-            case Update = "/menus/images/update"
-            case Delete = "/menus/images/delete"
+            case AddUpdate = "/menus/images/add-update"
         }
     }
 }
