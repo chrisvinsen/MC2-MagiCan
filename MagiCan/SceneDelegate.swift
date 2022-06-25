@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         
         // FOR DEBUGGING --> REMOVE THIS LATER
-//        userDefaults.set("WRONG TOKEN", forKey: UserDefaultKeys.token.rawValue)
+//        setUserTokenFromUserDefaults(newToken: "WRONG TOKEN")
         // FOR DEBUGGING --> REMOVE THIS LATER
         
         
@@ -28,20 +28,48 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let userService = UserService()
         userService.revalidateStoredTokenSynchronously()
         
-        let sessionToken = userDefaults.string(forKey: UserDefaultKeys.token.rawValue) ?? ""
+        let sessionToken = getUserTokenFromUserDefaults()
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
                 
         let window = UIWindow(windowScene: windowScene)
         
-        let vc: UIViewController
+        
         if sessionToken == "" {
-            vc = OnboardingViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
+            let vc = OnboardingViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
+            let nav = UINavigationController(rootViewController: vc)
+            window.rootViewController = nav
         } else {
-            vc = TempDashboardViewController()
+            
+            let dashboardVC = UINavigationController(rootViewController: TempDashboardViewController())
+            let transaksiVC = UINavigationController(rootViewController: TempDashboardViewController())
+            let listMenuVC = UINavigationController(rootViewController: ListMenuViewController())
+
+            dashboardVC.tabBarItem = UITabBarItem(
+                title: "Dashboard",
+                image: UIImage(named: "icDashboard"),
+                selectedImage: UIImage(named: "icDashboardActive")
+            )
+            transaksiVC.tabBarItem = UITabBarItem(
+                title: "Transaksi",
+                image: UIImage(named: "icTransaksi"),
+                selectedImage: UIImage(named: "icTransaksiActive")
+            )
+            listMenuVC.tabBarItem = UITabBarItem(
+                title: "Menu",
+                image: UIImage(named: "icMenu"),
+                selectedImage: UIImage(named: "icMenuActive")
+            )
+            
+            let tabBarController = UITabBarController()
+            tabBarController.viewControllers = [dashboardVC, transaksiVC, listMenuVC]
+            
+//            UITabBar.appearance().tintColor = UIColor.Primary._30
+            
+            window.rootViewController = tabBarController
         }
-        let nav = UINavigationController(rootViewController: vc)
-        window.rootViewController = nav
+        
+        
         window.makeKeyAndVisible()
         
         self.window = window

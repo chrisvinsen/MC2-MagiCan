@@ -22,9 +22,20 @@ class LoginPINViewController: UIViewController {
             if isLoginSuccess {
                 self.contentView.warningLabel.text = ""
                 
-                let vc = TempDashboardViewController()
-                vc.modalPresentationStyle = .fullScreen
-                self.present(vc, animated: true)
+                let dashboardVC = UINavigationController(rootViewController: TempDashboardViewController())
+                let transaksiVC = UINavigationController(rootViewController: TempDashboardViewController())
+                let listMenuVC = UINavigationController(rootViewController: ListMenuViewController())
+
+                dashboardVC.tabBarItem = UITabBarItem(title: "Home", image: UIImage(named: "icDashboard"), tag: 0)
+                transaksiVC.tabBarItem = UITabBarItem(title: "Home", image:  UIImage(named: "icTransaksi"), tag: 1)
+                listMenuVC.tabBarItem = UITabBarItem(title: "Menu", image:  UIImage(named: "icMenu"), tag: 2)
+                
+                let tabBarController = UITabBarController()
+                tabBarController.viewControllers = [dashboardVC, transaksiVC, listMenuVC]
+                tabBarController.modalPresentationStyle = .fullScreen
+                UITabBar.appearance().tintColor = UIColor.Primary._30
+                
+                self.present(tabBarController, animated: true)
             }
             
             if !isLoginSuccess && viewModel.pin.count == 6 {

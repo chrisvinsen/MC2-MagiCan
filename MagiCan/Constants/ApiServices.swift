@@ -20,6 +20,19 @@ enum Endpoint {
         case Login = "/auth/login"
         case Register = "/auth/signup"
     }
+    enum Menu: String {
+        case Lists = "/menus"
+        case Add = "/menus/add"
+        case Update = "/menus/update"
+        case Delete = "/menus/delete"
+        
+        enum Image: String {
+            case Get = "/menus/images"
+            case Add = "/menus/images/add"
+            case Update = "/menus/images/update"
+            case Delete = "/menus/images/delete"
+        }
+    }
 }
 
 
