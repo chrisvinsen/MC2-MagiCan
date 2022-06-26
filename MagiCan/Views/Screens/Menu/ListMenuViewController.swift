@@ -25,13 +25,21 @@ class ListMenuViewController: UIViewController {
     
     var menuLists = [Menu]() {
         didSet {
-            self.filteredMenuLists = self.menuLists
+            
+            if searchText != "" {
+                self.filteredMenuLists = self.menuLists.filter { $0.name.lowercased().contains(searchText) }
+            } else {
+                self.filteredMenuLists = self.menuLists
+            }
+            
+            print("DID SET")
             DispatchQueue.main.async{
                 self.contentView.tableView.reloadData()
             }
         }
     }
     var filteredMenuLists = [Menu]()
+    var searchText: String = ""
     
     let searchController = UISearchController()
     
@@ -170,7 +178,7 @@ extension ListMenuViewController {
 extension ListMenuViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        filteredMenuLists.count
+        return filteredMenuLists.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -192,8 +200,6 @@ extension ListMenuViewController: UITableViewDelegate, UITableViewDataSource {
         cell.menuImage.image = image
         cell.nameLabel.text = filteredMenuLists[indexPath.row].name
         cell.descriptionLabel.text = "@ Rp \(filteredMenuLists[indexPath.row].price)"
-        
-            
 
         return cell
     }
@@ -258,12 +264,13 @@ extension ListMenuViewController: ListMenuDelegate {
 //MARK: - Search Bar
 extension ListMenuViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        let searchText = searchController.searchBar.text ?? ""
+        
+        searchText =  (searchController.searchBar.text ?? "").lowercased()
         
         if searchText == "" {
             filteredMenuLists = menuLists
         } else {
-            filteredMenuLists = menuLists.filter { $0.name.contains(searchText) }
+            filteredMenuLists = menuLists.filter { $0.name.lowercased().contains(searchText) }
         }
         
         DispatchQueue.main.async{
