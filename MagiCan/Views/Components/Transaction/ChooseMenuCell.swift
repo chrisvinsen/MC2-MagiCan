@@ -11,9 +11,8 @@ import UIKit
 class ChooseMenuCell: UITableViewCell {
     
     lazy var titleLabel = UILabel()
-    lazy var dateLabel = UILabel()
-    lazy var typeLabel = UILabel()
-    lazy var amountLabel = UILabel()
+    lazy var iconImage = UIImageView()
+    lazy var divider = UIView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -29,7 +28,7 @@ class ChooseMenuCell: UITableViewCell {
     
     private func addSubviews() {
         
-        [titleLabel, dateLabel, typeLabel, amountLabel]
+        [titleLabel, iconImage, divider]
             .forEach {
                 addSubview($0)
                 $0.translatesAutoresizingMaskIntoConstraints = false
@@ -38,49 +37,34 @@ class ChooseMenuCell: UITableViewCell {
     
     private func setUpViews() {
         
-        titleLabel.text = "Pemasukan #0001"
-        titleLabel.font = Font.textRegular.getUIFont
+        titleLabel.text = "Pilih Menu"
+        titleLabel.font = Font.textBold.getUIFont
         titleLabel.textColor = UIColor.Neutral._90
         
-        dateLabel.text = "08 Juni 2022"
-        dateLabel.font = Font.small.getUIFont
-        dateLabel.textColor = UIColor.Neutral._70
+        let image = UIImage(systemName: "plus.circle.fill")
+        iconImage.image = image
+        iconImage.contentMode = .scaleAspectFill
         
-        amountLabel.text = "+ 100.000"
-        amountLabel.font = Font.textRegularSemiBold.getUIFont
-        amountLabel.textColor = UIColor.Primary._30
-        
-        typeLabel.text = "Online"
-        typeLabel.font = Font.small.getUIFont
-        typeLabel.textColor = UIColor.Success._90
-//        typeLabel.backgroundColor = .red
-//        typeLabel.textColor = UIColor.Secondary._30
-        typeLabel.backgroundColor = UIColor(red: 250/255, green: 243/255, blue: 201/255, alpha: 0.5)
-        typeLabel.textAlignment = .center
-        typeLabel.layer.masksToBounds = true
-        typeLabel.layer.cornerRadius = 10
-        
+        divider.backgroundColor = UIColor.Neutral._50
     }
     
     private func setUpConstraints() {
         
         NSLayoutConstraint.activate([
+            
             titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 15),
-            titleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20),
+            titleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 15),
+            titleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -15),
             
-            typeLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
-            typeLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20),
+            iconImage.heightAnchor.constraint(equalToConstant: 25),
+            iconImage.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
+            iconImage.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -15),
             
-            dateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
-            dateLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20),
-            
-            amountLabel.topAnchor.constraint(equalTo: typeLabel.bottomAnchor, constant: 15),
-            amountLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20),
+            divider.heightAnchor.constraint(equalToConstant: 1),
+            divider.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            divider.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 15),
+            divider.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -15),
         ])
-        
-//        let imgBottomConstraint = menuImage.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10)
-//        imgBottomConstraint.priority = .defaultLow
-//        imgBottomConstraint.isActive = true
     }
 }
 

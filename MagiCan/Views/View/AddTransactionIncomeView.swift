@@ -20,6 +20,16 @@ class AddTransactionIncomeView: UIView {
     init() {
         super.init(frame: .zero)
         
+        tableView.register(ChooseMenuCell.self, forCellReuseIdentifier: "ChooseMenuCell")
+        tableView.register(ChosenMenuCell.self, forCellReuseIdentifier: "ChosenMenuCell")
+        tableView.register(TextFieldWithCardCell.self, forCellReuseIdentifier: "TextFieldWithCardCell")
+        tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
+        tableView.showsHorizontalScrollIndicator = false
+        tableView.layer.cornerRadius = 10
+        tableView.layer.borderWidth = 1
+        tableView.layer.borderColor = UIColor.Neutral._50.cgColor
+        
         addSubviews()
         setUpViews()
         setUpConstraints()
@@ -67,6 +77,7 @@ class AddTransactionIncomeView: UIView {
             tableView.topAnchor.constraint(equalTo: trxTypeButton.bottomAnchor, constant: 15),
             tableView.leftAnchor.constraint(equalTo: self.leftAnchor),
             tableView.rightAnchor.constraint(equalTo: self.rightAnchor),
+            tableView.heightAnchor.constraint(equalToConstant: 400),
             
             // Date Field
             dateField.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 15),

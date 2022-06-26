@@ -84,6 +84,7 @@
 		A6C8AB1E2868333E00C507A3 /* ChooseMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C8AB1D2868333E00C507A3 /* ChooseMenuCell.swift */; };
 		A6C8AB202868337900C507A3 /* TextFieldWithCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C8AB1F2868337900C507A3 /* TextFieldWithCardCell.swift */; };
 		A6C8AB222868339600C507A3 /* ChosenMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C8AB212868339600C507A3 /* ChosenMenuCell.swift */; };
+		A6C8AB2428683A7200C507A3 /* StepperField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C8AB2328683A7200C507A3 /* StepperField.swift */; };
 		A6E2723E2857708C00B5CF59 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E2723D2857708C00B5CF59 /* AppDelegate.swift */; };
 		A6E272402857708C00B5CF59 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E2723F2857708C00B5CF59 /* SceneDelegate.swift */; };
 		A6E272422857708C00B5CF59 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E272412857708C00B5CF59 /* OnboardingViewController.swift */; };
@@ -190,6 +191,7 @@
 		A6C8AB1D2868333E00C507A3 /* ChooseMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseMenuCell.swift; sourceTree = "<group>"; };
 		A6C8AB1F2868337900C507A3 /* TextFieldWithCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithCardCell.swift; sourceTree = "<group>"; };
 		A6C8AB212868339600C507A3 /* ChosenMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChosenMenuCell.swift; sourceTree = "<group>"; };
+		A6C8AB2328683A7200C507A3 /* StepperField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepperField.swift; sourceTree = "<group>"; };
 		A6E2723A2857708C00B5CF59 /* MagiCan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MagiCan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6E2723D2857708C00B5CF59 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A6E2723F2857708C00B5CF59 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -299,6 +301,7 @@
 				A656F22D285DE90A0052EFB6 /* WarningLabel.swift */,
 				A656F249286523E10052EFB6 /* MenuCell.swift */,
 				A6C8AB1328680CF200C507A3 /* RowButton.swift */,
+				A6C8AB2328683A7200C507A3 /* StepperField.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -664,6 +667,7 @@
 				A656F221285D9A640052EFB6 /* ApiServices.swift in Sources */,
 				A656F248286521420052EFB6 /* Menu.swift in Sources */,
 				A656F230285E2B270052EFB6 /* PINView.swift in Sources */,
+				A6C8AB2428683A7200C507A3 /* StepperField.swift in Sources */,
 				A6C8AB0B28677AA200C507A3 /* TransactionCell.swift in Sources */,
 				A6C8AAF62867597D00C507A3 /* GuestListMenuViewModel.swift in Sources */,
 				A6C8AB1E2868333E00C507A3 /* ChooseMenuCell.swift in Sources */,

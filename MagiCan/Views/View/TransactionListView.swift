@@ -66,7 +66,6 @@ class TransactionListView: UIView {
         
         // Table View
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView
     }
     
     private func setUpConstraints() {
