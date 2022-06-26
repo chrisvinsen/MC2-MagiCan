@@ -36,13 +36,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         
         if sessionToken == "" {
+//            let vc = GuestListMenuViewController()
             let vc = OnboardingViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
             let nav = UINavigationController(rootViewController: vc)
             window.rootViewController = nav
         } else {
             
             let dashboardVC = UINavigationController(rootViewController: TempDashboardViewController())
-            let transaksiVC = UINavigationController(rootViewController: TempDashboardViewController())
+            let transaksiVC = UINavigationController(rootViewController: TransactionListViewController())
             let listMenuVC = UINavigationController(rootViewController: ListMenuViewController())
 
             dashboardVC.tabBarItem = UITabBarItem(

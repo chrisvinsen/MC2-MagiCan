@@ -64,6 +64,20 @@
 		A6C8AAF02866B2B700C507A3 /* EditMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C8AAEF2866B2B700C507A3 /* EditMenuViewModel.swift */; };
 		A6C8AAF22866F87100C507A3 /* MenuCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C8AAF12866F87100C507A3 /* MenuCellViewModel.swift */; };
 		A6C8AAF4286747FB00C507A3 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C8AAF3286747FB00C507A3 /* General.swift */; };
+		A6C8AAF62867597D00C507A3 /* GuestListMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C8AAF52867597D00C507A3 /* GuestListMenuViewModel.swift */; };
+		A6C8AAF828675D1800C507A3 /* GuestListMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C8AAF728675D1800C507A3 /* GuestListMenuView.swift */; };
+		A6C8AAFA2867624F00C507A3 /* GuestAddMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C8AAF92867624F00C507A3 /* GuestAddMenuViewModel.swift */; };
+		A6C8AAFC2867653400C507A3 /* TransactionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C8AAFB2867653400C507A3 /* TransactionListView.swift */; };
+		A6C8AAFE286765BB00C507A3 /* TransactionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C8AAFD286765BB00C507A3 /* TransactionListViewController.swift */; };
+		A6C8AB032867680500C507A3 /* TotalPemasukanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C8AB022867680500C507A3 /* TotalPemasukanView.swift */; };
+		A6C8AB0528676C1E00C507A3 /* DateFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C8AB0428676C1E00C507A3 /* DateFieldView.swift */; };
+		A6C8AB0728676F2800C507A3 /* LongTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C8AB0628676F2800C507A3 /* LongTextFieldView.swift */; };
+		A6C8AB092867748400C507A3 /* CardTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C8AB082867748400C507A3 /* CardTransactionView.swift */; };
+		A6C8AB0B28677AA200C507A3 /* TransactionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C8AB0A28677AA200C507A3 /* TransactionCell.swift */; };
+		A6C8AB0E2867ECB300C507A3 /* AddTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C8AB0D2867ECB300C507A3 /* AddTransactionView.swift */; };
+		A6C8AB10286808B200C507A3 /* AddTransactionIncomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C8AB0F286808B200C507A3 /* AddTransactionIncomeView.swift */; };
+		A6C8AB12286808BB00C507A3 /* AddTransactionExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C8AB11286808BB00C507A3 /* AddTransactionExpenseView.swift */; };
+		A6C8AB1428680CF200C507A3 /* RowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C8AB1328680CF200C507A3 /* RowButton.swift */; };
 		A6E2723E2857708C00B5CF59 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E2723D2857708C00B5CF59 /* AppDelegate.swift */; };
 		A6E272402857708C00B5CF59 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E2723F2857708C00B5CF59 /* SceneDelegate.swift */; };
 		A6E272422857708C00B5CF59 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E272412857708C00B5CF59 /* OnboardingViewController.swift */; };
@@ -150,6 +164,20 @@
 		A6C8AAEF2866B2B700C507A3 /* EditMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMenuViewModel.swift; sourceTree = "<group>"; };
 		A6C8AAF12866F87100C507A3 /* MenuCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCellViewModel.swift; sourceTree = "<group>"; };
 		A6C8AAF3286747FB00C507A3 /* General.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = General.swift; sourceTree = "<group>"; };
+		A6C8AAF52867597D00C507A3 /* GuestListMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestListMenuViewModel.swift; sourceTree = "<group>"; };
+		A6C8AAF728675D1800C507A3 /* GuestListMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestListMenuView.swift; sourceTree = "<group>"; };
+		A6C8AAF92867624F00C507A3 /* GuestAddMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestAddMenuViewModel.swift; sourceTree = "<group>"; };
+		A6C8AAFB2867653400C507A3 /* TransactionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionListView.swift; sourceTree = "<group>"; };
+		A6C8AAFD286765BB00C507A3 /* TransactionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionListViewController.swift; sourceTree = "<group>"; };
+		A6C8AB022867680500C507A3 /* TotalPemasukanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalPemasukanView.swift; sourceTree = "<group>"; };
+		A6C8AB0428676C1E00C507A3 /* DateFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFieldView.swift; sourceTree = "<group>"; };
+		A6C8AB0628676F2800C507A3 /* LongTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongTextFieldView.swift; sourceTree = "<group>"; };
+		A6C8AB082867748400C507A3 /* CardTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTransactionView.swift; sourceTree = "<group>"; };
+		A6C8AB0A28677AA200C507A3 /* TransactionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCell.swift; sourceTree = "<group>"; };
+		A6C8AB0D2867ECB300C507A3 /* AddTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionView.swift; sourceTree = "<group>"; };
+		A6C8AB0F286808B200C507A3 /* AddTransactionIncomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionIncomeView.swift; sourceTree = "<group>"; };
+		A6C8AB11286808BB00C507A3 /* AddTransactionExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionExpenseView.swift; sourceTree = "<group>"; };
+		A6C8AB1328680CF200C507A3 /* RowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowButton.swift; sourceTree = "<group>"; };
 		A6E2723A2857708C00B5CF59 /* MagiCan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MagiCan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6E2723D2857708C00B5CF59 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A6E2723F2857708C00B5CF59 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -218,6 +246,11 @@
 				A656F23B285F4C9D0052EFB6 /* WelcomingAddMenuView.swift */,
 				A656F245286520EE0052EFB6 /* ListMenuView.swift */,
 				A6C8AAE9286681F000C507A3 /* AddMenuView.swift */,
+				A6C8AAF728675D1800C507A3 /* GuestListMenuView.swift */,
+				A6C8AAFB2867653400C507A3 /* TransactionListView.swift */,
+				A6C8AB0D2867ECB300C507A3 /* AddTransactionView.swift */,
+				A6C8AB0F286808B200C507A3 /* AddTransactionIncomeView.swift */,
+				A6C8AB11286808BB00C507A3 /* AddTransactionExpenseView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -234,6 +267,7 @@
 		A66510EF285B4D3F00297031 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				A6C8AB0C2867850300C507A3 /* Transaction */,
 				A6651131285C080B00297031 /* Menu */,
 				A6651130285C07FE00297031 /* Authentication */,
 				A6E272412857708C00B5CF59 /* OnboardingViewController.swift */,
@@ -245,12 +279,14 @@
 		A66510F0285B4D4500297031 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				A6C8AB01286767DC00C507A3 /* Transaksi */,
 				A665112A285BAC6600297031 /* CustomButton.swift */,
 				A656F211285D87290052EFB6 /* PrimaryButton.swift */,
 				A656F215285D8BE30052EFB6 /* HeadingFiveLabel.swift */,
 				A656F217285D8EFC0052EFB6 /* RegularLabel.swift */,
 				A656F22D285DE90A0052EFB6 /* WarningLabel.swift */,
 				A656F249286523E10052EFB6 /* MenuCell.swift */,
+				A6C8AB1328680CF200C507A3 /* RowButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -329,8 +365,30 @@
 				A6C8AAE528667F9F00C507A3 /* AddMenuViewModel.swift */,
 				A6C8AAEF2866B2B700C507A3 /* EditMenuViewModel.swift */,
 				A6C8AAF12866F87100C507A3 /* MenuCellViewModel.swift */,
+				A6C8AAF52867597D00C507A3 /* GuestListMenuViewModel.swift */,
+				A6C8AAF92867624F00C507A3 /* GuestAddMenuViewModel.swift */,
 			);
 			path = Menu;
+			sourceTree = "<group>";
+		};
+		A6C8AB01286767DC00C507A3 /* Transaksi */ = {
+			isa = PBXGroup;
+			children = (
+				A6C8AB022867680500C507A3 /* TotalPemasukanView.swift */,
+				A6C8AB0428676C1E00C507A3 /* DateFieldView.swift */,
+				A6C8AB0628676F2800C507A3 /* LongTextFieldView.swift */,
+				A6C8AB082867748400C507A3 /* CardTransactionView.swift */,
+				A6C8AB0A28677AA200C507A3 /* TransactionCell.swift */,
+			);
+			path = Transaksi;
+			sourceTree = "<group>";
+		};
+		A6C8AB0C2867850300C507A3 /* Transaction */ = {
+			isa = PBXGroup;
+			children = (
+				A6C8AAFD286765BB00C507A3 /* TransactionListViewController.swift */,
+			);
+			path = Transaction;
 			sourceTree = "<group>";
 		};
 		A6E272312857708C00B5CF59 = {
@@ -557,8 +615,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6C8AB0E2867ECB300C507A3 /* AddTransactionView.swift in Sources */,
 				A66510EC285B364900297031 /* UIViewExtension.swift in Sources */,
 				A656F246286520EE0052EFB6 /* ListMenuView.swift in Sources */,
+				A6C8AAF828675D1800C507A3 /* GuestListMenuView.swift in Sources */,
 				A6E272482857708C00B5CF59 /* MagiCan.xcdatamodeld in Sources */,
 				A656F21A285D970E0052EFB6 /* LoginViewModel.swift in Sources */,
 				A6651127285B98AB00297031 /* RegisterViewController.swift in Sources */,
@@ -566,10 +626,13 @@
 				A656F23E285F4F340052EFB6 /* RegisterPINViewController.swift in Sources */,
 				A6C8AAF02866B2B700C507A3 /* EditMenuViewModel.swift in Sources */,
 				A6C8AAE82866801700C507A3 /* AddMenuViewController.swift in Sources */,
+				A6C8AB12286808BB00C507A3 /* AddTransactionExpenseView.swift in Sources */,
 				A665112D285BADA600297031 /* LoginViewController.swift in Sources */,
 				A66510EA285B362F00297031 /* UIViewControllerExtension.swift in Sources */,
+				A6C8AB092867748400C507A3 /* CardTransactionView.swift in Sources */,
 				A66510F2285B4D9400297031 /* OnboardingView.swift in Sources */,
 				A6E272422857708C00B5CF59 /* OnboardingViewController.swift in Sources */,
+				A6C8AB0728676F2800C507A3 /* LongTextFieldView.swift in Sources */,
 				A656F236285ED34D0052EFB6 /* TempDashboardViewController.swift in Sources */,
 				A66510EE285B3E3900297031 /* OnboardingData.swift in Sources */,
 				A656F22A285DB50D0052EFB6 /* UITextFieldExtension.swift in Sources */,
@@ -578,6 +641,8 @@
 				A656F221285D9A640052EFB6 /* ApiServices.swift in Sources */,
 				A656F248286521420052EFB6 /* Menu.swift in Sources */,
 				A656F230285E2B270052EFB6 /* PINView.swift in Sources */,
+				A6C8AB0B28677AA200C507A3 /* TransactionCell.swift in Sources */,
+				A6C8AAF62867597D00C507A3 /* GuestListMenuViewModel.swift in Sources */,
 				A656F242286520890052EFB6 /* ListMenuViewController.swift in Sources */,
 				A6C8AAF4286747FB00C507A3 /* General.swift in Sources */,
 				A665112B285BAC6600297031 /* CustomButton.swift in Sources */,
@@ -596,18 +661,25 @@
 				A665112F285C042B00297031 /* LoginPINViewController.swift in Sources */,
 				A6C8AAF22866F87100C507A3 /* MenuCellViewModel.swift in Sources */,
 				A6C8AAEA286681F000C507A3 /* AddMenuView.swift in Sources */,
+				A6C8AAFA2867624F00C507A3 /* GuestAddMenuViewModel.swift in Sources */,
 				A656F218285D8EFC0052EFB6 /* RegularLabel.swift in Sources */,
 				A6C8AAEE2866B2AC00C507A3 /* EditMenuViewController.swift in Sources */,
 				A656F228285D9F9F0052EFB6 /* LoginView.swift in Sources */,
+				A6C8AAFE286765BB00C507A3 /* TransactionListViewController.swift in Sources */,
 				A656F22E285DE90A0052EFB6 /* WarningLabel.swift in Sources */,
 				A656F212285D87290052EFB6 /* PrimaryButton.swift in Sources */,
+				A6C8AB0528676C1E00C507A3 /* DateFieldView.swift in Sources */,
 				A6651137285C0D5200297031 /* GuestListMenuViewController.swift in Sources */,
 				A656F23C285F4C9D0052EFB6 /* WelcomingAddMenuView.swift in Sources */,
+				A6C8AB032867680500C507A3 /* TotalPemasukanView.swift in Sources */,
+				A6C8AAFC2867653400C507A3 /* TransactionListView.swift in Sources */,
 				A656F23A285F2C930052EFB6 /* RegisterView.swift in Sources */,
 				A656F21F285D996D0052EFB6 /* UserApiServices.swift in Sources */,
 				A6651133285C081F00297031 /* WelcomingAddMenuViewController.swift in Sources */,
 				A656F21C285D972B0052EFB6 /* RegisterViewModel.swift in Sources */,
+				A6C8AB1428680CF200C507A3 /* RowButton.swift in Sources */,
 				A6C8AAE628667F9F00C507A3 /* AddMenuViewModel.swift in Sources */,
+				A6C8AB10286808B200C507A3 /* AddTransactionIncomeView.swift in Sources */,
 				A6C8AAEC2866AB5A00C507A3 /* UIImageExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
