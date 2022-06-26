@@ -63,6 +63,9 @@ class RiwayatTransaksiTableViewCell: UITableViewCell {
         transaksiCategory.textAlignment = .center
         transaksiCategory.layer.masksToBounds = true
         transaksiCategory.layer.cornerRadius = 10
+        
+        transaksiDate.font = UIFont(name: "Inter-Regular", size: 10)
+        transaksiDate.textColor = UIColor.Neutral._70
     }
     
     private func setUpConstraints() {

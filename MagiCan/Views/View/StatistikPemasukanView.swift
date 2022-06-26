@@ -9,19 +9,25 @@ import UIKit
 
 class StatistikPemasukanView: UIView {
     
-    var statsExist = false
+    var statsExist: Bool
     
     lazy var titleLabel = UILabel()
     lazy var dividerLine = UIView()
-    lazy var totalPemasukaLabel = UILabel()
-    lazy var totalPemasukaValue = UILabel()
+    lazy var totalPemasukanLabel = UILabel()
+    lazy var totalPemasukanValue = UILabel()
     
 //    lazy var riwayatTable = RiwayatTransaksiTable()
     lazy var riwayatTransaksiLabel = UILabel()
     lazy var cardEmptyStats = CardEmptyStateStatistik()
+    lazy var riwayatTable = UITableView()
     
-    init() {
+    init(status: Bool = true) {
+        statsExist = status
         super.init(frame: .zero)
+        
+        riwayatTable.register(RiwayatTransaksiTableViewCell.self, forCellReuseIdentifier: RiwayatTransaksiTableViewCell.identifier)
+        riwayatTable.showsVerticalScrollIndicator = false
+        riwayatTable.showsHorizontalScrollIndicator = false
         
         addSubviews()
         setUpViews()
@@ -35,13 +41,13 @@ class StatistikPemasukanView: UIView {
     private func addSubviews() {
         switch statsExist {
         case true:
-            [titleLabel, dividerLine, totalPemasukaLabel, totalPemasukaValue, riwayatTransaksiLabel]
+            [titleLabel, dividerLine, totalPemasukanLabel, totalPemasukanValue, riwayatTransaksiLabel, riwayatTable]
                 .forEach {
                     addSubview($0)
                     $0.translatesAutoresizingMaskIntoConstraints = false
                 }
         case false:
-            [titleLabel, dividerLine, totalPemasukaLabel, totalPemasukaValue, cardEmptyStats]
+            [titleLabel, dividerLine, totalPemasukanLabel, totalPemasukanValue, cardEmptyStats]
                 .forEach {
                     addSubview($0)
                     $0.translatesAutoresizingMaskIntoConstraints = false
@@ -55,17 +61,17 @@ class StatistikPemasukanView: UIView {
         self.clipsToBounds = true
         
         titleLabel.text = "Statistik Pemasukan"
-        totalPemasukaLabel.text = "Total Pemasukan"
-        totalPemasukaValue.text = "Rp 0"
+        totalPemasukanLabel.text = "Total Pemasukan"
+        totalPemasukanValue.text = "Rp 0"
         riwayatTransaksiLabel.text = "Riwayat Transaksi"
         
         titleLabel.font = Font.largeTitle.getUIFont
-        totalPemasukaLabel.font = Font.textSemiBold.getUIFont
-        totalPemasukaValue.font = Font.headingFive.getUIFont
+        totalPemasukanLabel.font = Font.textSemiBold.getUIFont
+        totalPemasukanValue.font = Font.headingFive.getUIFont
         riwayatTransaksiLabel.font = Font.headingSix.getUIFont
         
         dividerLine.backgroundColor = UIColor.Neutral._30
-        totalPemasukaValue.textColor = UIColor.Primary._30
+        totalPemasukanValue.textColor = UIColor.Primary._30
         
         // shadow for cardEmptyStats
         cardEmptyStats.layer.masksToBounds = false
@@ -91,24 +97,27 @@ class StatistikPemasukanView: UIView {
             dividerLine.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 0),
             dividerLine.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: 0),
             
-            totalPemasukaLabel.topAnchor.constraint(equalTo: dividerLine.bottomAnchor, constant: 20),
-            totalPemasukaLabel.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
+            totalPemasukanLabel.topAnchor.constraint(equalTo: dividerLine.bottomAnchor, constant: 20),
+            totalPemasukanLabel.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
             
-            totalPemasukaValue.topAnchor.constraint(equalTo: totalPemasukaLabel.bottomAnchor, constant: 10),
-            totalPemasukaValue.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
+            totalPemasukanValue.topAnchor.constraint(equalTo: totalPemasukanLabel.bottomAnchor, constant: 10),
+            totalPemasukanValue.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
             
         ])
         
         switch statsExist {
         case true:
             NSLayoutConstraint.activate([
-                riwayatTransaksiLabel.topAnchor.constraint(equalTo: totalPemasukaValue.bottomAnchor, constant: 30),
+                riwayatTransaksiLabel.topAnchor.constraint(equalTo: totalPemasukanValue.bottomAnchor, constant: 30),
                 riwayatTransaksiLabel.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
-                riwayatTransaksiLabel.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20)
+                riwayatTransaksiLabel.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
+                
+                riwayatTable.topAnchor.constraint(equalTo: riwayatTransaksiLabel.bottomAnchor, constant: 30),
+                riwayatTable.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20)
             ])
         case false:
             NSLayoutConstraint.activate([
-                cardEmptyStats.topAnchor.constraint(equalTo: totalPemasukaValue.bottomAnchor, constant: 30),
+                cardEmptyStats.topAnchor.constraint(equalTo: totalPemasukanValue.bottomAnchor, constant: 30),
                 cardEmptyStats.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
                 cardEmptyStats.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20)
             ])

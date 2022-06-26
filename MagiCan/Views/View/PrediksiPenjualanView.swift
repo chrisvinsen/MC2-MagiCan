@@ -1,30 +1,32 @@
 //
-//  StatistikKeuntunganView.swift
+//  PrediksiPenjualanView.swift
 //  MagiCan
 //
-//  Created by Nurul Srianda Putri on 21/06/22.
+//  Created by Nurul Srianda Putri on 26/06/22.
 //
 
 import UIKit
 
-class StatistikKeuntunganView: UIView {
+class PrediksiPenjualanView: UIView {
 
-    var statsExist: Bool
-    var isUntung: Bool
+    var predExist: Bool
     
     lazy var titleLabel = UILabel()
     lazy var dividerLine = UIView()
-    lazy var totalKeuntunganLabel = UILabel()
-    lazy var totalKeuntunganValue = UILabel()
+    lazy var totalPemasukanLabel = UILabel()
+    lazy var totalPemasukanValue = UILabel()
     
-    lazy var riwayatTransaksiLabel = UILabel()
+    lazy var prediksiTableLabel = UILabel()
     lazy var cardEmptyStats = CardEmptyStateStatistik()
-    lazy var riwayatTable = UITableView()
+    lazy var prediksiTable = UITableView()
     
-    init(stats: Bool = true, untung: Bool = false) {
-        statsExist = stats
-        isUntung = untung
+    init(status: Bool = true) {
+        predExist = status
         super.init(frame: .zero)
+        
+        prediksiTable.register(PrediksiJumlahMenuTableViewCell.self, forCellReuseIdentifier: PrediksiJumlahMenuTableViewCell.identifier)
+        prediksiTable.showsVerticalScrollIndicator = false
+        prediksiTable.showsHorizontalScrollIndicator = false
         
         addSubviews()
         setUpViews()
@@ -36,15 +38,15 @@ class StatistikKeuntunganView: UIView {
     }
     
     private func addSubviews() {
-        switch statsExist {
+        switch predExist {
         case true:
-            [titleLabel, dividerLine, totalKeuntunganLabel, totalKeuntunganValue, riwayatTransaksiLabel, riwayatTable]
+            [titleLabel, dividerLine, totalPemasukanLabel, totalPemasukanValue, prediksiTableLabel, prediksiTable]
                 .forEach {
                     addSubview($0)
                     $0.translatesAutoresizingMaskIntoConstraints = false
                 }
         case false:
-            [titleLabel, dividerLine, totalKeuntunganLabel, totalKeuntunganValue, cardEmptyStats]
+            [titleLabel, dividerLine, totalPemasukanLabel, totalPemasukanValue, cardEmptyStats]
                 .forEach {
                     addSubview($0)
                     $0.translatesAutoresizingMaskIntoConstraints = false
@@ -57,28 +59,18 @@ class StatistikKeuntunganView: UIView {
         self.layer.cornerRadius = 10
         self.clipsToBounds = true
         
-        titleLabel.text = "Statistik Keuntungan"
-        totalKeuntunganLabel.text = "Total Keuntungan"
-        totalKeuntunganValue.text = "Rp 0"
-        riwayatTransaksiLabel.text = "Riwayat Transaksi"
+        titleLabel.text = "Prediksi Penjualan"
+        totalPemasukanLabel.text = "Total Pemasukan"
+        totalPemasukanValue.text = "Rp 0"
+        prediksiTableLabel.text = "Prediksi Jumlah Menu"
         
         titleLabel.font = Font.largeTitle.getUIFont
-        totalKeuntunganLabel.font = Font.textSemiBold.getUIFont
-        totalKeuntunganValue.font = Font.headingFive.getUIFont
-        riwayatTransaksiLabel.font = Font.headingSix.getUIFont
+        totalPemasukanLabel.font = Font.textSemiBold.getUIFont
+        totalPemasukanValue.font = Font.headingFive.getUIFont
+        prediksiTableLabel.font = Font.headingSix.getUIFont
         
         dividerLine.backgroundColor = UIColor.Neutral._30
-        totalKeuntunganValue.textColor = UIColor.Primary._30
-        
-        if !isUntung {
-            titleLabel.text = "Statistik Kerugian"
-            totalKeuntunganLabel.text = "Total Kerugian"
-            totalKeuntunganValue.textColor = UIColor.Error._30
-        }
-        
-        // edit text inside cardEmptyStats
-        cardEmptyStats.sectionDescription1.text = "Belum  Ada Data Keuntungan Pada Periode Ini"
-        cardEmptyStats.sectionDescription2.text = "Kamu bisa melihat grafik setelah ada transaksi yang tercatat pada periode ini minimal 1 minggu terakhir"
+        totalPemasukanValue.textColor = UIColor.Primary._30
         
         // shadow for cardEmptyStats
         cardEmptyStats.layer.masksToBounds = false
@@ -104,26 +96,27 @@ class StatistikKeuntunganView: UIView {
             dividerLine.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 0),
             dividerLine.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: 0),
             
-            totalKeuntunganLabel.topAnchor.constraint(equalTo: dividerLine.bottomAnchor, constant: 20),
-            totalKeuntunganLabel.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
+            totalPemasukanLabel.topAnchor.constraint(equalTo: dividerLine.bottomAnchor, constant: 20),
+            totalPemasukanLabel.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
             
-            totalKeuntunganValue.topAnchor.constraint(equalTo: totalKeuntunganLabel.bottomAnchor, constant: 10),
-            totalKeuntunganValue.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
+            totalPemasukanValue.topAnchor.constraint(equalTo: totalPemasukanLabel.bottomAnchor, constant: 10),
+            totalPemasukanValue.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
+            
         ])
         
-        switch statsExist {
+        switch predExist {
         case true:
             NSLayoutConstraint.activate([
-                riwayatTransaksiLabel.topAnchor.constraint(equalTo: totalKeuntunganValue.bottomAnchor, constant: 30),
-                riwayatTransaksiLabel.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
-                riwayatTransaksiLabel.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
+                prediksiTableLabel.topAnchor.constraint(equalTo: totalPemasukanValue.bottomAnchor, constant: 30),
+                prediksiTableLabel.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
+                prediksiTableLabel.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
                 
-                riwayatTable.topAnchor.constraint(equalTo: riwayatTransaksiLabel.bottomAnchor, constant: 30),
-                riwayatTable.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20)
+                prediksiTable.topAnchor.constraint(equalTo: prediksiTableLabel.bottomAnchor, constant: 30),
+                prediksiTable.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20)
             ])
         case false:
             NSLayoutConstraint.activate([
-                cardEmptyStats.topAnchor.constraint(equalTo: totalKeuntunganValue.bottomAnchor, constant: 30),
+                cardEmptyStats.topAnchor.constraint(equalTo: totalPemasukanValue.bottomAnchor, constant: 30),
                 cardEmptyStats.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
                 cardEmptyStats.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20)
             ])
@@ -132,15 +125,16 @@ class StatistikKeuntunganView: UIView {
 
 }
 
+
 #if DEBUG
 import SwiftUI
 
 @available(iOS 13, *)
-struct StatistikKeuntunganView_Preview: PreviewProvider {
+struct PrediksiPenjualanView_Preview: PreviewProvider {
     static var previews: some View {
         // view controller using programmatic UI
         Group {
-            StatistikKeuntunganView().showPreview().previewInterfaceOrientation(.portraitUpsideDown)
+            PrediksiPenjualanView().showPreview().previewInterfaceOrientation(.portrait)
         }
     }
 }

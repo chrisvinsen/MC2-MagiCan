@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		600991612867793F00B30C63 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600991602867793F00B30C63 /* MenuCell.swift */; };
+		6009916328677B0F00B30C63 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6009916228677B0F00B30C63 /* DashboardViewController.swift */; };
+		600991652867912600B30C63 /* StatistikPemasukanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600991642867912600B30C63 /* StatistikPemasukanViewController.swift */; };
 		6012B1062863077200A89E4D /* CardPrediksiPenjualanItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6012B1052863077200A89E4D /* CardPrediksiPenjualanItem.swift */; };
 		6012B10828630E0100A89E4D /* CardMenuAndalanItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6012B10728630E0100A89E4D /* CardMenuAndalanItem.swift */; };
 		6012B10A28630E1D00A89E4D /* CardPrediksiPenjualan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6012B10928630E1D00A89E4D /* CardPrediksiPenjualan.swift */; };
@@ -17,6 +20,10 @@
 		6057061C2862232D00BE93ED /* CardEmptyStateStatistik.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6057061B2862232D00BE93ED /* CardEmptyStateStatistik.swift */; };
 		6057061E28622EE900BE93ED /* StatistikKeuntunganView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6057061D28622EE900BE93ED /* StatistikKeuntunganView.swift */; };
 		605C2E582864DAB500A019F7 /* LineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605C2E572864DAB500A019F7 /* LineChart.swift */; };
+		60682FA22868B8F80011716A /* StatistikPengeluaranViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60682FA12868B8F80011716A /* StatistikPengeluaranViewController.swift */; };
+		60682FA42868B91C0011716A /* StatistikKeuntunganViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60682FA32868B91C0011716A /* StatistikKeuntunganViewController.swift */; };
+		60682FA62868BEEB0011716A /* PrediksiPenjualanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60682FA52868BEEB0011716A /* PrediksiPenjualanView.swift */; };
+		60682FA82868C0960011716A /* PrediksiPenjualanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60682FA72868C0960011716A /* PrediksiPenjualanViewController.swift */; };
 		607353622865DE7200B0BC2C /* PrediksiJumlahMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607353612865DE7200B0BC2C /* PrediksiJumlahMenuTableViewCell.swift */; };
 		607353662865DF0F00B0BC2C /* PrediksiJumlahMenuTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607353652865DF0F00B0BC2C /* PrediksiJumlahMenuTable.swift */; };
 		6073536A28661F5600B0BC2C /* CarouselCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6073536928661F5600B0BC2C /* CarouselCell.swift */; };
@@ -100,6 +107,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		600991602867793F00B30C63 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
+		6009916228677B0F00B30C63 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
+		600991642867912600B30C63 /* StatistikPemasukanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatistikPemasukanViewController.swift; sourceTree = "<group>"; };
 		6012B1052863077200A89E4D /* CardPrediksiPenjualanItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPrediksiPenjualanItem.swift; sourceTree = "<group>"; };
 		6012B10728630E0100A89E4D /* CardMenuAndalanItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardMenuAndalanItem.swift; sourceTree = "<group>"; };
 		6012B10928630E1D00A89E4D /* CardPrediksiPenjualan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPrediksiPenjualan.swift; sourceTree = "<group>"; };
@@ -110,6 +120,10 @@
 		6057061B2862232D00BE93ED /* CardEmptyStateStatistik.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardEmptyStateStatistik.swift; sourceTree = "<group>"; };
 		6057061D28622EE900BE93ED /* StatistikKeuntunganView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatistikKeuntunganView.swift; sourceTree = "<group>"; };
 		605C2E572864DAB500A019F7 /* LineChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChart.swift; sourceTree = "<group>"; };
+		60682FA12868B8F80011716A /* StatistikPengeluaranViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatistikPengeluaranViewController.swift; sourceTree = "<group>"; };
+		60682FA32868B91C0011716A /* StatistikKeuntunganViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatistikKeuntunganViewController.swift; sourceTree = "<group>"; };
+		60682FA52868BEEB0011716A /* PrediksiPenjualanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrediksiPenjualanView.swift; sourceTree = "<group>"; };
+		60682FA72868C0960011716A /* PrediksiPenjualanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrediksiPenjualanViewController.swift; sourceTree = "<group>"; };
 		607353612865DE7200B0BC2C /* PrediksiJumlahMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrediksiJumlahMenuTableViewCell.swift; sourceTree = "<group>"; };
 		607353652865DF0F00B0BC2C /* PrediksiJumlahMenuTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrediksiJumlahMenuTable.swift; sourceTree = "<group>"; };
 		6073536928661F5600B0BC2C /* CarouselCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCell.swift; sourceTree = "<group>"; };
@@ -234,6 +248,7 @@
 				60570617286220C700BE93ED /* StatistikPengeluaranView.swift */,
 				6057061D28622EE900BE93ED /* StatistikKeuntunganView.swift */,
 				605706192862210700BE93ED /* ProfileView.swift */,
+				60682FA52868BEEB0011716A /* PrediksiPenjualanView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -253,6 +268,11 @@
 				A6651130285C07FE00297031 /* Authentication */,
 				A6E272412857708C00B5CF59 /* OnboardingViewController.swift */,
 				A656F235285ED34D0052EFB6 /* TempDashboardViewController.swift */,
+				6009916228677B0F00B30C63 /* DashboardViewController.swift */,
+				600991642867912600B30C63 /* StatistikPemasukanViewController.swift */,
+				60682FA12868B8F80011716A /* StatistikPengeluaranViewController.swift */,
+				60682FA32868B91C0011716A /* StatistikKeuntunganViewController.swift */,
+				60682FA72868C0960011716A /* PrediksiPenjualanViewController.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -281,6 +301,7 @@
 				607353612865DE7200B0BC2C /* PrediksiJumlahMenuTableViewCell.swift */,
 				6073536928661F5600B0BC2C /* CarouselCell.swift */,
 				6073536B28662CCA00B0BC2C /* Carousel.swift */,
+				600991602867793F00B30C63 /* MenuCell.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -570,9 +591,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60682FA62868BEEB0011716A /* PrediksiPenjualanView.swift in Sources */,
 				6012B1062863077200A89E4D /* CardPrediksiPenjualanItem.swift in Sources */,
 				A66510EC285B364900297031 /* UIViewExtension.swift in Sources */,
 				A6E272482857708C00B5CF59 /* MagiCan.xcdatamodeld in Sources */,
+				6009916328677B0F00B30C63 /* DashboardViewController.swift in Sources */,
 				A656F21A285D970E0052EFB6 /* LoginViewModel.swift in Sources */,
 				6057061E28622EE900BE93ED /* StatistikKeuntunganView.swift in Sources */,
 				609E1E32286561390018E325 /* RiwayatTransaksiTable.swift in Sources */,
@@ -596,10 +619,13 @@
 				6073536C28662CCA00B0BC2C /* Carousel.swift in Sources */,
 				A656F230285E2B270052EFB6 /* PINView.swift in Sources */,
 				609E1E342865617B0018E325 /* RiwayatTransaksiTableViewCell.swift in Sources */,
+				600991612867793F00B30C63 /* MenuCell.swift in Sources */,
 				A665112B285BAC6600297031 /* CustomButton.swift in Sources */,
 				A6651135285C0D1D00297031 /* AddMenuScreenController.swift in Sources */,
+				60682FA22868B8F80011716A /* StatistikPengeluaranViewController.swift in Sources */,
 				6086AF4F286010C20073B5BE /* CardEmptyStateDashboard.swift in Sources */,
 				607353622865DE7200B0BC2C /* PrediksiJumlahMenuTableViewCell.swift in Sources */,
+				60682FA42868B91C0011716A /* StatistikKeuntunganViewController.swift in Sources */,
 				A6651123285B925F00297031 /* UIColorExtension.swift in Sources */,
 				6012B10C28630E3000A89E4D /* CardMenuAndalan.swift in Sources */,
 				A665111C285B8E1D00297031 /* Fonts.swift in Sources */,
@@ -613,9 +639,11 @@
 				A656F232285EB9640052EFB6 /* UserSession.swift in Sources */,
 				A656F225285D9ADB0052EFB6 /* User.swift in Sources */,
 				6073536A28661F5600B0BC2C /* CarouselCell.swift in Sources */,
+				600991652867912600B30C63 /* StatistikPemasukanViewController.swift in Sources */,
 				A665112F285C042B00297031 /* LoginPINViewController.swift in Sources */,
 				6086AF4D286010B60073B5BE /* CardKasUsaha.swift in Sources */,
 				A656F218285D8EFC0052EFB6 /* RegularLabel.swift in Sources */,
+				60682FA82868C0960011716A /* PrediksiPenjualanViewController.swift in Sources */,
 				A656F228285D9F9F0052EFB6 /* LoginView.swift in Sources */,
 				A656F22E285DE90A0052EFB6 /* WarningLabel.swift in Sources */,
 				607353662865DF0F00B0BC2C /* PrediksiJumlahMenuTable.swift in Sources */,

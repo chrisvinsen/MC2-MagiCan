@@ -9,7 +9,7 @@ import UIKit
 
 class DashboardView: UIView {
     
-    var predictionAndMenuAvaiable = true
+    var predictionAndMenuAvaiable: Bool
     
     let titleLabel = UILabel()
     let profileIcon = UIImageView()
@@ -22,7 +22,8 @@ class DashboardView: UIView {
     let sectionPrediksiPenjualanFilled = CardPrediksiPenjualan()
     let sectionMenuAndalanFilled = CardMenuAndalan()
     
-    init() {
+    init(status: Bool = false) {
+        predictionAndMenuAvaiable = status
         super.init(frame: .zero)
         
         addSubviews()
@@ -70,12 +71,12 @@ class DashboardView: UIView {
         sectionMenuAndalan.sectionDescription2.text = "Hasil menu andalan akan muncul disini setelah data tersedia minimal 1 bulan terakhir"
         sectionMenuAndalan.sectionImage.image = UIImage(named: "Menu Andalan Empty.png")
         
-        var carouselData = [CarouselData]()
-        carouselData.append(.init(cardLabel: "Total Keuntungan", cardAmount: "Rp 0", cardTime: "Minggu Ini", cardIcon:"CarouselIcon.png"))
-        carouselData.append(.init(cardLabel: "Total Pemasukan", cardAmount: "Rp 0", cardTime: "Minggu Ini", cardIcon:"CarouselIcon.png"))
-        carouselData.append(.init(cardLabel: "Total Pengeluaran", cardAmount: "Rp 0", cardTime: "Minggu Ini", cardIcon:"CarouselIcon.png"))
-
-        carouselStatistik.configureView(with: carouselData)
+//        var carouselData = [CarouselData]()
+//        carouselData.append(.init(cardLabel: "Total Keuntungan", cardAmount: "Rp 0", cardTime: "Minggu Ini", cardIcon:"CarouselIcon.png"))
+//        carouselData.append(.init(cardLabel: "Total Pemasukan", cardAmount: "Rp 0", cardTime: "Minggu Ini", cardIcon:"CarouselIcon.png"))
+//        carouselData.append(.init(cardLabel: "Total Pengeluaran", cardAmount: "Rp 0", cardTime: "Minggu Ini", cardIcon:"CarouselIcon.png"))
+//
+//        carouselStatistik.configureView(with: carouselData)
     }
     
     private func setUpViews() {
@@ -144,6 +145,7 @@ class DashboardView: UIView {
             
             carouselStatistik.topAnchor.constraint(equalTo: cardKasUsaha.bottomAnchor, constant: 30),
             carouselStatistik.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
+            carouselStatistik.heightAnchor.constraint(equalToConstant: 100),
             
 //            sectionPrediksiPenjualan.topAnchor.constraint(equalTo: cardKasUsaha.bottomAnchor, constant: 30),
 //            sectionPrediksiPenjualan.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),

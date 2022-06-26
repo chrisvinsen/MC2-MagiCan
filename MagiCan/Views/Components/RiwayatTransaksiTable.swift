@@ -55,9 +55,6 @@ extension RiwayatTransaksiTable: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return "Riwayat Transaksi"
-//    }
 }
 
 #if DEBUG

@@ -7,13 +7,6 @@
 
 import UIKit
 
-struct CarouselData {
-    let cardLabel: String
-    let cardAmount: String
-    let cardTime: String
-    let cardIcon: String
-}
-
 class Carousel: UIView {
 
     lazy var carouselCollectionView: UICollectionView = {
@@ -21,6 +14,7 @@ class Carousel: UIView {
         collection.showsHorizontalScrollIndicator = false
         collection.dataSource = self
         collection.delegate = self
+        collection.register(CarouselCell.self, forCellWithReuseIdentifier: CarouselCell.identifier)
         collection.backgroundColor = .clear
         return collection
     } ()
@@ -56,7 +50,7 @@ class Carousel: UIView {
     }
 
     private func setUpViews() {
-        self.backgroundColor = .green
+        self.backgroundColor = .clear
         carouselCollectionView.backgroundColor = .black
     }
 
@@ -64,10 +58,9 @@ class Carousel: UIView {
         let safeArea = safeAreaLayoutGuide
 
         NSLayoutConstraint.activate([
-            self.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 50),
-            self.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: 50),
-            carouselCollectionView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 10),
-            carouselCollectionView.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 10),
+            carouselCollectionView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
+            carouselCollectionView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10),
+            carouselCollectionView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -10),
             
             pageControl.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
             pageControl.leftAnchor.constraint(equalTo: self.leftAnchor, constant: -10)
