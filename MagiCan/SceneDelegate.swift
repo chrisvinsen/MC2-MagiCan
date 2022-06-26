@@ -65,8 +65,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let tabBarController = UITabBarController()
             tabBarController.viewControllers = [dashboardVC, transaksiVC, listMenuVC]
             
-//            UITabBar.appearance().tintColor = UIColor.Primary._30
-            
             window.rootViewController = tabBarController
         }
         

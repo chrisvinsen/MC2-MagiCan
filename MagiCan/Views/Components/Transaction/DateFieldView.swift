@@ -64,6 +64,8 @@ class DateFieldView: UIView {
         
         NSLayoutConstraint.activate([
             
+            self.heightAnchor.constraint(equalToConstant: 48),
+            
             dividerTop.topAnchor.constraint(equalTo: self.topAnchor),
             dividerTop.leftAnchor.constraint(equalTo: self.leftAnchor),
             dividerTop.rightAnchor.constraint(equalTo: self.rightAnchor),

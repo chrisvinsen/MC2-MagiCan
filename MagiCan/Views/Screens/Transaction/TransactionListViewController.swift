@@ -40,7 +40,8 @@ class TransactionListViewController: UIViewController {
 //MARK: - Action
 extension TransactionListViewController {
     @objc func addButtonTapped() {
-        let VC = GuestAddMenuViewController()
+        let VC = AddTransactionViewController()
+        VC.title = "Transaksi Baru"
 //        VC.delegate = self
         let navController = UINavigationController(rootViewController: VC)
         
