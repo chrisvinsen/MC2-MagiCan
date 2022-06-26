@@ -38,17 +38,27 @@ class RegisterConfirmPINViewController: UIViewController {
         didSet {
             if isRegisterSuccess {
                 let dashboardVC = UINavigationController(rootViewController: TempDashboardViewController())
-                let transaksiVC = UINavigationController(rootViewController: TempDashboardViewController())
+                let transaksiVC = UINavigationController(rootViewController: TransactionListViewController())
                 let listMenuVC = UINavigationController(rootViewController: ListMenuViewController())
 
-                dashboardVC.tabBarItem = UITabBarItem(title: "Home", image: UIImage(named: "icDashboard"), tag: 0)
-                transaksiVC.tabBarItem = UITabBarItem(title: "Home", image:  UIImage(named: "icTransaksi"), tag: 1)
-                listMenuVC.tabBarItem = UITabBarItem(title: "Menu", image:  UIImage(named: "icMenu"), tag: 2)
+                dashboardVC.tabBarItem = UITabBarItem(
+                    title: "Dashboard",
+                    image: UIImage(named: "icDashboard"),
+                    selectedImage: UIImage(named: "icDashboardActive")
+                )
+                transaksiVC.tabBarItem = UITabBarItem(
+                    title: "Transaksi",
+                    image: UIImage(named: "icTransaksi"),
+                    selectedImage: UIImage(named: "icTransaksiActive")
+                )
+                listMenuVC.tabBarItem = UITabBarItem(
+                    title: "Menu",
+                    image: UIImage(named: "icMenu"),
+                    selectedImage: UIImage(named: "icMenuActive")
+                )
                 
                 let tabBarController = UITabBarController()
                 tabBarController.viewControllers = [dashboardVC, transaksiVC, listMenuVC]
-                tabBarController.modalPresentationStyle = .fullScreen
-                UITabBar.appearance().tintColor = UIColor.Primary._30
                 
                 self.present(tabBarController, animated: true)
             }

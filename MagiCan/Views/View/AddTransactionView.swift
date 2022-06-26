@@ -10,10 +10,13 @@ import UIKit
 
 class AddTransactionView: UIView {
     
+    var defaultSegmentedIndex: Int
+    
     var segmentedControls = UISegmentedControl(items: ["Pemasukan", "Pengeluaran"])
     var viewContainer = UIView()
     
-    init() {
+    init(defaultSegmentedIndex: Int = 0) {
+        self.defaultSegmentedIndex = defaultSegmentedIndex
         super.init(frame: .zero)
         
         addSubviews()
@@ -35,7 +38,10 @@ class AddTransactionView: UIView {
     }
     
     func setUpViews() {
-        segmentedControls.selectedSegmentIndex = 0
+        
+        self.backgroundColor = .white
+        
+        segmentedControls.selectedSegmentIndex = defaultSegmentedIndex
     }
     
     func setUpConstraints() {

@@ -1,5 +1,5 @@
 //
-//  LongTextFieldView.swift
+//  DescriptionTextView.swift
 //  MagiCan
 //
 //  Created by Christianto Vinsen on 25/06/22.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LongTextFieldView: UIView {
+class DescriptionTextView: UIView {
     
     lazy var descriptionLabel = UILabel()
     lazy var wordsCounterLabel = UILabel()
@@ -60,6 +60,8 @@ class LongTextFieldView: UIView {
     private func setUpConstraints() {
         
         NSLayoutConstraint.activate([
+            
+            self.heightAnchor.constraint(equalToConstant: 150),
         
             descriptionLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
             descriptionLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
@@ -71,9 +73,9 @@ class LongTextFieldView: UIView {
             wordsCounterLabel.rightAnchor.constraint(equalTo: wordsMaxLabel.leftAnchor),
             
             textBox.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 10),
+            textBox.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             textBox.leftAnchor.constraint(equalTo: self.leftAnchor),
             textBox.rightAnchor.constraint(equalTo: self.rightAnchor),
-            textBox.heightAnchor.constraint(equalToConstant: 100),
         ])
     }
     
@@ -83,11 +85,11 @@ class LongTextFieldView: UIView {
 import SwiftUI
 
 @available(iOS 13, *)
-struct LongTextFieldView_Preview: PreviewProvider {
+struct DescriptionTextView_Preview: PreviewProvider {
     static var previews: some View {
         // view controller using programmatic UI
         Group {
-            LongTextFieldView().showPreview().previewInterfaceOrientation(.portrait)
+            DescriptionTextView().showPreview().previewInterfaceOrientation(.portrait)
         }
     }
 }
