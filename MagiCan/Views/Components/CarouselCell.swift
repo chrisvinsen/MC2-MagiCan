@@ -79,11 +79,12 @@ class CarouselCell: UICollectionViewCell {
 }
 
 extension CarouselCell {
-    public func configure(cardlabel: String, cardamount: String, cardtime: String, cardicon: String) {
+    public func configure(cardlabel: String, cardamount: String, cardtime: String, cardicon: String, cardcolor: UIColor) {
         cardLabel.text = cardlabel
         cardAmount.text = cardamount
         cardTime.text = cardtime
         cardIcon.image = UIImage(named: cardicon)
+        self.backgroundColor = cardcolor
     }
 }
 

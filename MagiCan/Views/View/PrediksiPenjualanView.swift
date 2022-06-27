@@ -112,7 +112,9 @@ class PrediksiPenjualanView: UIView {
                 prediksiTableLabel.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
                 
                 prediksiTable.topAnchor.constraint(equalTo: prediksiTableLabel.bottomAnchor, constant: 30),
-                prediksiTable.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20)
+                prediksiTable.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
+                prediksiTable.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
+                prediksiTable.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
             ])
         case false:
             NSLayoutConstraint.activate([

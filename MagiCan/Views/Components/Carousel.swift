@@ -22,7 +22,7 @@ class Carousel: UIView {
     lazy var pageControl: UIPageControl = {
         let pageControl = UIPageControl()
         pageControl.pageIndicatorTintColor = .gray
-        pageControl.currentPageIndicatorTintColor = .white
+        pageControl.currentPageIndicatorTintColor = .red
         return pageControl
     } ()
     
@@ -42,7 +42,7 @@ class Carousel: UIView {
     }
 
     private func addSubviews() {
-        [carouselCollectionView, pageControl]
+        [carouselCollectionView]
             .forEach {
                 addSubview($0)
                 $0.translatesAutoresizingMaskIntoConstraints = false
@@ -51,7 +51,6 @@ class Carousel: UIView {
 
     private func setUpViews() {
         self.backgroundColor = .clear
-        carouselCollectionView.backgroundColor = .black
     }
 
     private func setUpConstraints() {
@@ -61,45 +60,16 @@ class Carousel: UIView {
             carouselCollectionView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
             carouselCollectionView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10),
             carouselCollectionView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -10),
+            carouselCollectionView.heightAnchor.constraint(equalToConstant: 150),
             
-            pageControl.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
-            pageControl.leftAnchor.constraint(equalTo: self.leftAnchor, constant: -10)
+//            pageControl.topAnchor.constraint(equalTo: carouselCollectionView.bottomAnchor, constant: 5),
+//            pageControl.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
+//            pageControl.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10),
+//            pageControl.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -10)
         ])
     }
 }
 
-//extension Carousel: UICollectionViewDataSource {
-//    func numberOfSections(in collectionView: UICollectionView) -> Int {
-//          return 1
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-////        return carouselData.count
-//        return 3
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CarouselCell.identifier, for: indexPath) as! CarouselCell
-//        
-////        let cardlabel = carouselData[indexPath.row].cardLabel
-////        let cardamount = carouselData[indexPath.row].cardAmount
-////        let cardtime = carouselData[indexPath.row].cardTime
-////        let cardicon = carouselData[indexPath.row].cardIcon
-//        
-//        let cardlabel = "aa"
-//        let cardamount = "bb"
-//        let cardtime = "cc"
-//        let cardicon = "CarouselIcon.png"
-//        
-//        cell.configure(cardlabel: cardlabel, cardamount: cardamount, cardtime: cardtime, cardicon: cardicon)
-//        
-//        return cell
-//    }
-//}
-//
-//extension Carousel: UICollectionViewDelegate {
-//    
-//}
 
 extension Carousel {
     public func configureView(with data: [CarouselData]) {

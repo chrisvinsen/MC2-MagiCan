@@ -40,7 +40,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         } else {
 //            vc = TempDashboardViewController()
 //            vc = DashboardViewController()
-            vc = StatistikPemasukanViewController()
+            vc = PrediksiPenjualanViewController()
         }
         let nav = UINavigationController(rootViewController: vc)
         window.rootViewController = nav

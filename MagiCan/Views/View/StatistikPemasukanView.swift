@@ -113,7 +113,9 @@ class StatistikPemasukanView: UIView {
                 riwayatTransaksiLabel.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
                 
                 riwayatTable.topAnchor.constraint(equalTo: riwayatTransaksiLabel.bottomAnchor, constant: 30),
-                riwayatTable.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20)
+                riwayatTable.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
+                riwayatTable.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
+                riwayatTable.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
             ])
         case false:
             NSLayoutConstraint.activate([
@@ -123,7 +125,6 @@ class StatistikPemasukanView: UIView {
             ])
         }
     }
-
 }
 
 #if DEBUG

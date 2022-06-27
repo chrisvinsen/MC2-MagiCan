@@ -142,9 +142,10 @@ class DashboardView: UIScrollView {
             cardKasUsaha.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
             cardKasUsaha.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
             
-            carouselStatistik.topAnchor.constraint(equalTo: cardKasUsaha.bottomAnchor, constant: 30),
+            carouselStatistik.topAnchor.constraint(equalTo: cardKasUsaha.bottomAnchor, constant: 10),
             carouselStatistik.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
-            carouselStatistik.heightAnchor.constraint(equalToConstant: 100),
+            carouselStatistik.heightAnchor.constraint(equalToConstant: 150),
+            carouselStatistik.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: 20),
             
 //            sectionPrediksiPenjualan.topAnchor.constraint(equalTo: cardKasUsaha.bottomAnchor, constant: 30),
 //            sectionPrediksiPenjualan.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
