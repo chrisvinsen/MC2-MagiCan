@@ -36,6 +36,12 @@ class DashboardView: UIScrollView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func viewDidLoad() {
+        self.isScrollEnabled = true
+        self.contentSize = CGSize(width:400, height: 2300)
+        self.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
     private func addSubviews() {
         switch predictionAndMenuAvaiable {
         case true:
@@ -65,13 +71,6 @@ class DashboardView: UIScrollView {
         sectionMenuAndalan.sectionDescription1.text = "Menu Andalan Belum Tersedia"
         sectionMenuAndalan.sectionDescription2.text = "Hasil menu andalan akan muncul disini setelah data tersedia minimal 1 bulan terakhir"
         sectionMenuAndalan.sectionImage.image = UIImage(named: "Menu Andalan Empty.png")
-        
-//        var carouselData = [CarouselData]()
-//        carouselData.append(.init(cardLabel: "Total Keuntungan", cardAmount: "Rp 0", cardTime: "Minggu Ini", cardIcon:"CarouselIcon.png"))
-//        carouselData.append(.init(cardLabel: "Total Pemasukan", cardAmount: "Rp 0", cardTime: "Minggu Ini", cardIcon:"CarouselIcon.png"))
-//        carouselData.append(.init(cardLabel: "Total Pengeluaran", cardAmount: "Rp 0", cardTime: "Minggu Ini", cardIcon:"CarouselIcon.png"))
-//
-//        carouselStatistik.configureView(with: carouselData)
     }
     
     private func setUpViews() {
@@ -79,9 +78,6 @@ class DashboardView: UIScrollView {
         self.layer.cornerRadius = 10
         self.clipsToBounds = true
         self.backgroundColor = .white
-        self.isScrollEnabled = true
-//        self.contentSize = CGSize(width:2000, height: 5678)
-//        self.translatesAutoresizingMaskIntoConstraints = false
         
         titleLabel.font = Font.headingSix.getUIFont
         titleLabel.text = "Selamat datang, XXX"
@@ -145,16 +141,7 @@ class DashboardView: UIScrollView {
             carouselStatistik.topAnchor.constraint(equalTo: cardKasUsaha.bottomAnchor, constant: 10),
             carouselStatistik.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
             carouselStatistik.heightAnchor.constraint(equalToConstant: 150),
-            carouselStatistik.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: 20),
-            
-//            sectionPrediksiPenjualan.topAnchor.constraint(equalTo: cardKasUsaha.bottomAnchor, constant: 30),
-//            sectionPrediksiPenjualan.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
-//            sectionPrediksiPenjualan.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
-//
-//            sectionMenuAndalan.topAnchor.constraint(equalTo: sectionPrediksiPenjualan.bottomAnchor, constant: 30),
-//            sectionMenuAndalan.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
-//            sectionMenuAndalan.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
-
+            carouselStatistik.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20)
         ])
         
         switch predictionAndMenuAvaiable {
@@ -166,7 +153,7 @@ class DashboardView: UIScrollView {
                 
                 sectionMenuAndalanFilled.topAnchor.constraint(equalTo: sectionPrediksiPenjualanFilled.bottomAnchor, constant: 30),
                 sectionMenuAndalanFilled.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
-                sectionMenuAndalanFilled.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
+                sectionMenuAndalanFilled.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20)
             ])
         case false:
             NSLayoutConstraint.activate([
@@ -176,7 +163,7 @@ class DashboardView: UIScrollView {
                 
                 sectionMenuAndalan.topAnchor.constraint(equalTo: sectionPrediksiPenjualan.bottomAnchor, constant: 30),
                 sectionMenuAndalan.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
-                sectionMenuAndalan.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
+                sectionMenuAndalan.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20)
             ])
         }
     }

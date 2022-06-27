@@ -17,7 +17,7 @@ struct CarouselData {
 
 class DashboardViewController: UIViewController {
 
-    let dashboardView = DashboardView(status: false)
+    let dashboardView = DashboardView(status: true)
     
     var carouselData = [CarouselData]()
     
@@ -79,11 +79,6 @@ extension DashboardViewController: UICollectionViewDataSource {
         let cardtime = carouselData[indexPath.row].cardTime
         let cardicon = carouselData[indexPath.row].cardIcon
         let cardcolor = carouselData[indexPath.row].cardColor
-        
-//        let cardlabel = "aa"
-//        let cardamount = "bb"
-//        let cardtime = "cc"
-//        let cardicon = "CarouselIcon.png"
         
         cell.configure(cardlabel: cardlabel, cardamount: cardamount, cardtime: cardtime, cardicon: cardicon, cardcolor:cardcolor)
         
