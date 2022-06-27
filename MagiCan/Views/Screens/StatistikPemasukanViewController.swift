@@ -27,6 +27,7 @@ class StatistikPemasukanViewController: UIViewController {
 
 extension StatistikPemasukanViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("abc")
         return 3
     }
     

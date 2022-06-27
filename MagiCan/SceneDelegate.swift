@@ -38,7 +38,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if sessionToken == "" {
             vc = OnboardingViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
         } else {
-            vc = TempDashboardViewController()
+//            vc = TempDashboardViewController()
+//            vc = DashboardViewController()
+            vc = StatistikPemasukanViewController()
         }
         let nav = UINavigationController(rootViewController: vc)
         window.rootViewController = nav

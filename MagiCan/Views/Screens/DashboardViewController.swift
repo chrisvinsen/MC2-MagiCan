@@ -23,6 +23,9 @@ class DashboardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        dashboardView.carouselStatistik.carouselCollectionView.dataSource = self
+        dashboardView.carouselStatistik.carouselCollectionView.delegate = self
+        
         setup()
         setupStyle()
         setupLayout()
@@ -56,6 +59,38 @@ extension DashboardViewController {
     }
 }
 
+extension DashboardViewController: UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+          return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return carouselData.count
+        return 3
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = dashboardView.carouselStatistik.carouselCollectionView.dequeueReusableCell(withReuseIdentifier: CarouselCell.identifier, for: indexPath) as! CarouselCell
+        
+//        let cardlabel = carouselData[indexPath.row].cardLabel
+//        let cardamount = carouselData[indexPath.row].cardAmount
+//        let cardtime = carouselData[indexPath.row].cardTime
+//        let cardicon = carouselData[indexPath.row].cardIcon
+        
+        let cardlabel = "aa"
+        let cardamount = "bb"
+        let cardtime = "cc"
+        let cardicon = "CarouselIcon.png"
+        
+        cell.configure(cardlabel: cardlabel, cardamount: cardamount, cardtime: cardtime, cardicon: cardicon)
+        
+        return cell
+    }
+}
+
+extension DashboardViewController: UICollectionViewDelegate {
+    
+}
 
 #if DEBUG
 import SwiftUI

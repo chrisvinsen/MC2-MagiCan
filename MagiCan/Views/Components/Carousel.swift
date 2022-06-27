@@ -12,8 +12,8 @@ class Carousel: UIView {
     lazy var carouselCollectionView: UICollectionView = {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         collection.showsHorizontalScrollIndicator = false
-        collection.dataSource = self
-        collection.delegate = self
+//        collection.dataSource = self
+//        collection.delegate = self
         collection.register(CarouselCell.self, forCellWithReuseIdentifier: CarouselCell.identifier)
         collection.backgroundColor = .clear
         return collection
@@ -68,38 +68,38 @@ class Carousel: UIView {
     }
 }
 
-extension Carousel: UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-          return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return carouselData.count
-        return 3
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CarouselCell.identifier, for: indexPath) as! CarouselCell
-        
-//        let cardlabel = carouselData[indexPath.row].cardLabel
-//        let cardamount = carouselData[indexPath.row].cardAmount
-//        let cardtime = carouselData[indexPath.row].cardTime
-//        let cardicon = carouselData[indexPath.row].cardIcon
-        
-        let cardlabel = "aa"
-        let cardamount = "bb"
-        let cardtime = "cc"
-        let cardicon = "CarouselIcon.png"
-        
-        cell.configure(cardlabel: cardlabel, cardamount: cardamount, cardtime: cardtime, cardicon: cardicon)
-        
-        return cell
-    }
-}
-
-extension Carousel: UICollectionViewDelegate {
-    
-}
+//extension Carousel: UICollectionViewDataSource {
+//    func numberOfSections(in collectionView: UICollectionView) -> Int {
+//          return 1
+//    }
+//    
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+////        return carouselData.count
+//        return 3
+//    }
+//    
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CarouselCell.identifier, for: indexPath) as! CarouselCell
+//        
+////        let cardlabel = carouselData[indexPath.row].cardLabel
+////        let cardamount = carouselData[indexPath.row].cardAmount
+////        let cardtime = carouselData[indexPath.row].cardTime
+////        let cardicon = carouselData[indexPath.row].cardIcon
+//        
+//        let cardlabel = "aa"
+//        let cardamount = "bb"
+//        let cardtime = "cc"
+//        let cardicon = "CarouselIcon.png"
+//        
+//        cell.configure(cardlabel: cardlabel, cardamount: cardamount, cardtime: cardtime, cardicon: cardicon)
+//        
+//        return cell
+//    }
+//}
+//
+//extension Carousel: UICollectionViewDelegate {
+//    
+//}
 
 extension Carousel {
     public func configureView(with data: [CarouselData]) {

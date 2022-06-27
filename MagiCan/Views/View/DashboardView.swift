@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DashboardView: UIView {
+class DashboardView: UIScrollView {
     
     var predictionAndMenuAvaiable: Bool
     
@@ -51,11 +51,6 @@ class DashboardView: UIView {
                     $0.translatesAutoresizingMaskIntoConstraints = false
                 }
         }
-//        [titleLabel, profileIcon, cardKasUsaha, sectionPrediksiPenjualan, sectionMenuAndalan]
-//            .forEach {
-//                addSubview($0)
-//                $0.translatesAutoresizingMaskIntoConstraints = false
-//            }
     }
     
     private func setUpData() {
@@ -83,6 +78,10 @@ class DashboardView: UIView {
         self.tintColor = .white
         self.layer.cornerRadius = 10
         self.clipsToBounds = true
+        self.backgroundColor = .white
+        self.isScrollEnabled = true
+//        self.contentSize = CGSize(width:2000, height: 5678)
+//        self.translatesAutoresizingMaskIntoConstraints = false
         
         titleLabel.font = Font.headingSix.getUIFont
         titleLabel.text = "Selamat datang, XXX"
