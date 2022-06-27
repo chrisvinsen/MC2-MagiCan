@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import UIKit
+import Combine
 
 extension String {
     subscript(_ range: CountableRange<Int>) -> String {
@@ -18,5 +20,12 @@ extension String {
     subscript(_ range: CountablePartialRangeFrom<Int>) -> String {
         let start = index(startIndex, offsetBy: max(0, range.lowerBound))
          return String(self[start...])
+    }
+    
+    var imageFromBase64: UIImage? {
+        guard let imageData = Data(base64Encoded: self, options: .ignoreUnknownCharacters) else {
+            return nil
+        }
+        return UIImage(data: imageData)
     }
 }

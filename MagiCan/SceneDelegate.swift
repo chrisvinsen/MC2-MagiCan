@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         
         // FOR DEBUGGING --> REMOVE THIS LATER
-        //        userDefaults.set("WRONG TOKEN", forKey: UserDefaultKeys.token.rawValue)
+//        setUserTokenFromUserDefaults(newToken: "WRONG TOKEN")
         // FOR DEBUGGING --> REMOVE THIS LATER
         
         
@@ -28,24 +28,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let userService = UserService()
         userService.revalidateStoredTokenSynchronously()
         
-        let sessionToken = userDefaults.string(forKey: UserDefaultKeys.token.rawValue) ?? ""
+        let sessionToken = getUserTokenFromUserDefaults()
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: windowScene)
         
-        let vc: UIViewController
+        
         if sessionToken == "" {
-            //            let vc = GuestListMenuViewController()
+//            let vc = GuestListMenuViewController()
             let vc = OnboardingViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
             let nav = UINavigationController(rootViewController: vc)
             window.rootViewController = nav
         } else {
             
-            let dashboardVC = UINavigationController(rootViewController: DashboardViewController())
-            let transaksiVC = UINavigationController(rootViewController: DashboardViewController())
-            let listMenuVC = UINavigationController(rootViewController: DashboardViewController())
-            
+            let dashboardVC = UINavigationController(rootViewController: TempDashboardViewController())
+            let transaksiVC = UINavigationController(rootViewController: TransactionListViewController())
+            let listMenuVC = UINavigationController(rootViewController: ListMenuViewController())
+
             dashboardVC.tabBarItem = UITabBarItem(
                 title: "Dashboard",
                 image: UIImage(named: "icDashboard"),
@@ -67,6 +67,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
             window.rootViewController = tabBarController
         }
+        
         
         window.makeKeyAndVisible()
         

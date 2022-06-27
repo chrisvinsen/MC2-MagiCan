@@ -14,6 +14,8 @@ class TempDashboardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = "Temporary"
+        
         text.translatesAutoresizingMaskIntoConstraints = false
         text.text = "TEMPORARY DASHBOARD"
         text.textColor = .black
@@ -25,6 +27,6 @@ class TempDashboardViewController: UIViewController {
             text.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
 
-        view.backgroundColor = .green
+        view.backgroundColor = .white
     }
 }

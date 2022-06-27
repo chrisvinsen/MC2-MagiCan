@@ -29,12 +29,19 @@ extension User {
     }
 }
 
-//MARK: - User Login Request
+//MARK: - User Session
+struct UserSession: Equatable, Hashable, Decodable {
+//    let expiration: Date
+    let token, username: String
+}
+
+
+//MARK: - Request for API User Login
 struct UserLoginRequest: Equatable, Hashable, Encodable, Decodable {
     var username, pin: String
 }
 
-//MARK: - User Register Request
+//MARK: - Request for API User Register
 struct UserRegisterRequest: Equatable, Hashable, Encodable, Decodable {
     var name, username, pin: String
 }
