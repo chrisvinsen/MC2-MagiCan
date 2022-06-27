@@ -42,7 +42,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window.rootViewController = nav
         } else {
             
-            let dashboardVC = UINavigationController(rootViewController: TempDashboardViewController())
+//            let dashboardVC = UINavigationController(rootViewController: DashboardViewController())
+            let dashboardVC = UINavigationController(rootViewController: DashboardViewController())
             let transaksiVC = UINavigationController(rootViewController: TransactionListViewController())
             let listMenuVC = UINavigationController(rootViewController: ListMenuViewController())
 
