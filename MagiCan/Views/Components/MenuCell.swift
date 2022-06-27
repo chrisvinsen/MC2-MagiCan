@@ -37,7 +37,7 @@ class MenuCell: UITableViewCell {
     private func setUpViews() {
         
         // Image View
-        menuImage.image = UIImage(named: "SampleBakso.png") // Default
+        menuImage.image = ImageMenuDefault // Default
         menuImage.contentMode = .scaleAspectFill
         menuImage.layer.cornerRadius = 10
         menuImage.clipsToBounds = true

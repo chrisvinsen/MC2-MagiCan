@@ -35,7 +35,7 @@ class DescriptionTextView: UIView {
     }
     
     private func setUpViews() {
-        descriptionLabel.text = "Description"
+        descriptionLabel.text = "Deskripsi"
         wordsCounterLabel.text =  "0"
         wordsMaxLabel.text = "/200"
         

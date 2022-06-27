@@ -54,18 +54,18 @@ class CardTransactionView: UIView {
         pengeluaranLabel.font = Font.textRegularSemiBold.getUIFont
         pengeluaranLabel.textColor = UIColor.Neutral._90
         
-        jumlahPemasukanLabel.text = "Rp 500.000"
+        jumlahPemasukanLabel.text = "Rp 0"
         jumlahPemasukanLabel.font = Font.textRegularSemiBold.getUIFont
         jumlahPemasukanLabel.textColor = UIColor.Primary._30
         
-        jumlahPengeluaranLabel.text = "Rp 500.000"
+        jumlahPengeluaranLabel.text = "Rp 0"
         jumlahPengeluaranLabel.font = Font.textRegularSemiBold.getUIFont
         jumlahPengeluaranLabel.textColor = UIColor.Error._30
         
         keuntunganBox.backgroundColor = UIColor.Primary._50
         
         keuntunganLabel.translatesAutoresizingMaskIntoConstraints = false
-        keuntunganLabel.text = "Rp 500.000"
+        keuntunganLabel.text = "Rp 0"
         keuntunganLabel.font = Font.textBold.getUIFont
         keuntunganLabel.textColor = .white
     }
