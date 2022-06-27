@@ -24,6 +24,7 @@
 		60682FA62868BEEB0011716A /* PrediksiPenjualanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60682FA52868BEEB0011716A /* PrediksiPenjualanView.swift */; };
 		60682FA82868C0960011716A /* PrediksiPenjualanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60682FA72868C0960011716A /* PrediksiPenjualanViewController.swift */; };
 		606E81892869F0030081701F /* ListRiwayatTransaksiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606E81882869F0030081701F /* ListRiwayatTransaksiViewModel.swift */; };
+		606E818B286A00C20081701F /* StatisticsApiServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606E818A286A00C20081701F /* StatisticsApiServices.swift */; };
 		607353622865DE7200B0BC2C /* PrediksiJumlahMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607353612865DE7200B0BC2C /* PrediksiJumlahMenuTableViewCell.swift */; };
 		607353662865DF0F00B0BC2C /* PrediksiJumlahMenuTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607353652865DF0F00B0BC2C /* PrediksiJumlahMenuTable.swift */; };
 		6073536A28661F5600B0BC2C /* CarouselCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6073536928661F5600B0BC2C /* CarouselCell.swift */; };
@@ -168,6 +169,7 @@
 		60682FA52868BEEB0011716A /* PrediksiPenjualanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrediksiPenjualanView.swift; sourceTree = "<group>"; };
 		60682FA72868C0960011716A /* PrediksiPenjualanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrediksiPenjualanViewController.swift; sourceTree = "<group>"; };
 		606E81882869F0030081701F /* ListRiwayatTransaksiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRiwayatTransaksiViewModel.swift; sourceTree = "<group>"; };
+		606E818A286A00C20081701F /* StatisticsApiServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsApiServices.swift; sourceTree = "<group>"; };
 		607353612865DE7200B0BC2C /* PrediksiJumlahMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrediksiJumlahMenuTableViewCell.swift; sourceTree = "<group>"; };
 		607353652865DF0F00B0BC2C /* PrediksiJumlahMenuTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrediksiJumlahMenuTable.swift; sourceTree = "<group>"; };
 		6073536928661F5600B0BC2C /* CarouselCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCell.swift; sourceTree = "<group>"; };
@@ -329,6 +331,7 @@
 				A656F21E285D996D0052EFB6 /* UserApiServices.swift */,
 				A6C8AAE12865F97D00C507A3 /* MenuApiServices.swift */,
 				A6C8AB3228692CA300C507A3 /* TransactionApiServices.swift */,
+				606E818A286A00C20081701F /* StatisticsApiServices.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -855,6 +858,7 @@
 				A656F228285D9F9F0052EFB6 /* LoginView.swift in Sources */,
 				A6C8AAFE286765BB00C507A3 /* TransactionListViewController.swift in Sources */,
 				A656F22E285DE90A0052EFB6 /* WarningLabel.swift in Sources */,
+				606E818B286A00C20081701F /* StatisticsApiServices.swift in Sources */,
 				607353662865DF0F00B0BC2C /* PrediksiJumlahMenuTable.swift in Sources */,
 				A656F212285D87290052EFB6 /* PrimaryButton.swift in Sources */,
 				A6C8AB0528676C1E00C507A3 /* DateFieldView.swift in Sources */,

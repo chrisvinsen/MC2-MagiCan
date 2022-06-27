@@ -43,7 +43,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         } else {
             
 //            let dashboardVC = UINavigationController(rootViewController: DashboardViewController())
-            let dashboardVC = UINavigationController(rootViewController: StatistikPemasukanViewController())
+            let dashboardVC = UINavigationController(rootViewController: StatistikKeuntunganViewController())
             let transaksiVC = UINavigationController(rootViewController: TransactionListViewController())
             let listMenuVC = UINavigationController(rootViewController: ListMenuViewController())
 
