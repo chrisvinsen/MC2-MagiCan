@@ -13,6 +13,7 @@ class PrediksiPenjualanViewController: UIViewController {
     
     override func loadView() {
         view = prediksiPenjualanView
+        view.backgroundColor = .white
     }
     
     override func viewDidLoad() {

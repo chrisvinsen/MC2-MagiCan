@@ -13,6 +13,7 @@ class StatistikKeuntunganViewController: UIViewController {
     
     override func loadView() {
         view = statistikKeuntunganView
+        view.backgroundColor = .white
     }
     
     override func viewDidLoad() {

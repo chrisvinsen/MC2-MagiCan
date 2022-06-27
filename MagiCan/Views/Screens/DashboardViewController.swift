@@ -43,6 +43,7 @@ extension DashboardViewController {
     }
     
     func setupStyle() {
+        view.backgroundColor = .white
         dashboardView.translatesAutoresizingMaskIntoConstraints = false
     }
     
