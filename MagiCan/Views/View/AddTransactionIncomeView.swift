@@ -77,7 +77,7 @@ class AddTransactionIncomeView: UIView {
             tableView.topAnchor.constraint(equalTo: trxTypeButton.bottomAnchor, constant: 15),
             tableView.leftAnchor.constraint(equalTo: self.leftAnchor),
             tableView.rightAnchor.constraint(equalTo: self.rightAnchor),
-            tableView.heightAnchor.constraint(equalToConstant: 400),
+            tableView.heightAnchor.constraint(equalToConstant: 300),
             
             // Date Field
             dateField.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 15),
