@@ -31,6 +31,12 @@ enum Endpoint {
             case AddUpdate = "/menus/images/add-update"
         }
     }
+    enum Transaction: String {
+        case Lists = "/transactions"
+        case Add = "/transactions/add"
+        case Update = "/transactions/update"
+        case Delete = "/transactions/delete"
+    }
 }
 
 

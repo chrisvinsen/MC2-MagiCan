@@ -54,8 +54,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             )
             transaksiVC.tabBarItem = UITabBarItem(
                 title: "Transaksi",
-                image: UIImage(named: "icTransaksi"),
-                selectedImage: UIImage(named: "icTransaksiActive")
+                image: UIImage(named: "icTransaction"),
+                selectedImage: UIImage(named: "icTransactionActive")
             )
             listMenuVC.tabBarItem = UITabBarItem(
                 title: "Menu",
