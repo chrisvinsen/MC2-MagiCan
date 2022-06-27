@@ -8,6 +8,11 @@
 import UIKit
 import Combine
 
+protocol AddTransactionProtocol {
+//    func updateTransactionTypeIncome(data: KeyValue)
+//    func updateTransactionTypeExpense(data: KeyValue)
+}
+
 class AddTransactionViewController: UIViewController {
     
     let defaultSegmentedIndex = 0
@@ -95,4 +100,16 @@ extension AddTransactionViewController {
         viewController.removeFromParent()
     }
 
+}
+
+//MARK: - Add Transaction Protocol
+extension AddTransactionViewController: AddTransactionProtocol {
+    
+//    func updateTransactionTypeIncome(data: KeyValue) {
+//        print("UPDATE INCOME TYPE")
+//    }
+//
+//    func updateTransactionTypeExpense(data: KeyValue) {
+//        print("UPDATE EXPENSE TYPE")
+//    }
 }

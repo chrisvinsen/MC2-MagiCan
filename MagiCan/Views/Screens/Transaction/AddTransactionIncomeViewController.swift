@@ -8,6 +8,10 @@
 import UIKit
 import Combine
 
+protocol AddTransactionIncomeProtocol {
+    func updateTransactionType(data: KeyValue)
+}
+
 class AddTransactionIncomeViewController: UIViewController {
 
     private lazy var contentView = AddTransactionIncomeView()
@@ -19,16 +23,34 @@ class AddTransactionIncomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("A")
-        
         contentView.tableView.delegate = self
         contentView.tableView.dataSource = self
         contentView.tableView.isScrollEnabled = false
-        contentView.tableView.bounces = false
         
-//        contentView.tableView.reloadData()
+        setUpTargets()
+    }
+    
+    func setUpTargets() {
+        self.contentView.trxTypeButton.addTarget(self, action: #selector(chooseTypeTapped(_ :)), for: .touchUpInside)
+        self.contentView.saveButton.addTarget(self, action: #selector(saveButtonTapped(_ :)), for: .touchUpInside)
+    }
+}
 
-        // Do any additional setup after loading the view.
+// MARK: - Actions
+extension AddTransactionIncomeViewController {
+    
+    @objc func saveButtonTapped(_ sender: UIButton) {
+        print("SAVE TAPPED")
+    }
+    
+    @objc func chooseTypeTapped(_ sender: UIButton) {
+        
+        let VC = ChooseMenuViewController(type: ChooseMenuType.income, tableDatas: TransactionIncomeTypeData)
+        VC.title = "Tipe Pemasukan"
+        VC.delegateIncome = self
+        let navController = UINavigationController(rootViewController: VC)
+        
+        self.present(navController, animated: true, completion: nil)
     }
 }
 
@@ -65,6 +87,10 @@ extension AddTransactionIncomeViewController: UITableViewDelegate, UITableViewDa
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        if indexPath.section
+    }
+    
 //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 //        100
 //    }
@@ -78,3 +104,12 @@ extension AddTransactionIncomeViewController {
     }
 }
 
+//MARK: - Custom Protocols
+extension AddTransactionIncomeViewController: AddTransactionIncomeProtocol {
+    
+    func updateTransactionType(data: KeyValue) {
+        print(data)
+        print("UPDATE INCOME TYPE")
+        self.contentView.trxTypeButton.labelValue.text = data.shortValue as! String
+    }
+}

@@ -11,9 +11,51 @@ import Combine
 class TransactionListViewController: UIViewController {
     
     private lazy var contentView = TransactionListView()
+    
+    var transactionLists = [Transaction]() {
+        didSet {
+            DispatchQueue.main.async{
+                self.contentView.tableView.reloadData()
+            }
+        }
+    }
+    var totalIncome: Int64 = 0 {
+        didSet {
+            DispatchQueue.main.async {
+                print("SET SUMMARY")
+                self.contentView.summaryCard.jumlahPemasukanLabel.text = self.totalIncome.formattedToRupiah
+                self.contentView.summaryCard.jumlahPengeluaranLabel.text = self.totalExpense.formattedToRupiah
+                
+                self.contentView.summaryCard.keuntunganLabel.text = (self.totalIncome - self.totalExpense).formattedToRupiah
+            }
+        }
+    }
+    var totalExpense: Int64 = 0 {
+        didSet {
+            
+        }
+    }
+    
+    private let viewModel: TransactionListViewModel
+    private var bindings = Set<AnyCancellable>()
+    
+    init(viewModel: TransactionListViewModel = TransactionListViewModel()) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func loadView() {
         view = contentView
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        viewModel.getTransactionList()
     }
     
     override func viewDidLoad() {
@@ -34,6 +76,55 @@ class TransactionListViewController: UIViewController {
         iconButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
 
         navigationItem.rightBarButtonItem = barButton
+        
+        setUpTargets()
+        setUpBindings()
+        
+        viewModel.getTransactionList()
+    }
+    
+    private func setUpTargets() {
+        
+    }
+    
+    private func setUpBindings() {
+
+        func bindViewModelToController() {
+            viewModel.$transactionLists
+                .assign(to: \.transactionLists, on: self)
+                .store(in: &bindings)
+            
+            viewModel.$totalIncome
+                .assign(to: \.totalIncome, on: self)
+                .store(in: &bindings)
+            
+            viewModel.$totalExpense
+                .assign(to: \.totalExpense, on: self)
+                .store(in: &bindings)
+        }
+        
+        func bindViewModelToView() {
+            // Completion after load data
+            viewModel.result
+                .sink { completion in
+                    switch completion {
+                    case .failure:
+                        // Error can be handled here (e.g. alert)
+                        print("FAILURE")
+                        return
+                    case .finished:
+                        print("FINISHED")
+                        return
+                    }
+                } receiveValue: { [weak self] res in
+                    print(res)
+                }
+                .store(in: &bindings)
+        }
+        
+//        bindViewToViewModel()
+        bindViewModelToView()
+        bindViewModelToController()
     }
 }
 
@@ -52,13 +143,48 @@ extension TransactionListViewController {
 //MARK: - Table
 extension TransactionListViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+        self.transactionLists.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = contentView.tableView.dequeueReusableCell(withIdentifier: "TransactionCell", for: indexPath) as? TransactionCell else {fatalError("Unable to create menu cell")}
-//        cell.textLabel?.text = "Cell \(indexPath.row)"
+        
+        let transaction = self.transactionLists[indexPath.row]
+        
+        switch transaction.category {
+        case TransactionCategory.Income.rawValue:
+            cell.titleLabel.text = "Pemasukan #\(String(format: "%04d", transaction.iterator))"
+            
+            switch transaction.type {
+            case TransactionIncomeType.UpdateBalance.rawValue:
+                cell.typeLabel.text = String(describing: TransactionIncomeType.UpdateBalance)
+            case TransactionIncomeType.Offline.rawValue:
+                cell.typeLabel.text = String(describing: TransactionIncomeType.Offline)
+            case TransactionIncomeType.Online.rawValue:
+                cell.typeLabel.text = String(describing: TransactionIncomeType.Online)
+            default: break
+            }
+            
+        case TransactionCategory.Expense.rawValue:
+            cell.titleLabel.text = "Pengeluaran #\(String(format: "%04d", transaction.iterator))"
+            
+            switch transaction.type {
+            case TransactionExpenseType.UpdateBalance.rawValue:
+                cell.typeLabel.text = String(describing: TransactionExpenseType.UpdateBalance)
+            case TransactionExpenseType.Pribadi.rawValue:
+                cell.typeLabel.text = String(describing: TransactionExpenseType.Pribadi)
+            case TransactionExpenseType.Usaha.rawValue:
+                cell.typeLabel.text = String(describing: TransactionExpenseType.Usaha)
+            default: break
+            }
+            
+        default: break
+        }
+        
+        cell.dateLabel.text = transaction.dateString
+        cell.amountLabel.text = transaction.amount.formattedToRupiah
+        
         return cell
     }
     
@@ -66,8 +192,5 @@ extension TransactionListViewController: UITableViewDataSource, UITableViewDeleg
         85
     }
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        riwayatTable.deselectRow(at: indexPath, animated: false)
-//    }
 }
 
