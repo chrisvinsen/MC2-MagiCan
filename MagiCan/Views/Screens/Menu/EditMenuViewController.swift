@@ -95,11 +95,11 @@ class EditMenuViewController: UIViewController {
                         return
                     }
                 } receiveValue: { [weak self] newMenu in
-                    print("UPDATE \(newMenu)")
+                    
                     var updateMenu = newMenu
                     updateMenu.imageUrl = self?.viewModel.base64Image ?? ""
                     updateMenu.isLoadingImage = true
-                    print("UPDATE NEW \(updateMenu)")
+                    
                     self?.delegate.updateMenuData(newMenu: updateMenu)
                     
                     DispatchQueue.main.async {

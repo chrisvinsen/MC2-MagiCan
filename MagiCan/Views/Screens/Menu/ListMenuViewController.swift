@@ -55,6 +55,12 @@ class ListMenuViewController: UIViewController {
     override func loadView() {
         view = contentView
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        viewModel.getMenuList()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -199,7 +205,7 @@ extension ListMenuViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.menuImage.image = image
         cell.nameLabel.text = filteredMenuLists[indexPath.row].name
-        cell.descriptionLabel.text = "@ Rp \(filteredMenuLists[indexPath.row].price)"
+        cell.descriptionLabel.text = "@ \(filteredMenuLists[indexPath.row].price.formattedToRupiah)"
 
         return cell
     }

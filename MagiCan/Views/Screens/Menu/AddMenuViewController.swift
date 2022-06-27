@@ -133,11 +133,11 @@ extension AddMenuViewController {
         
         let alert = UIAlertController(title: "Pilih Foto", message: nil, preferredStyle: .actionSheet)
         
-        alert.addAction(UIAlertAction(title: "Open Camera", style: .default, handler: { handler in
+        alert.addAction(UIAlertAction(title: "Buka Kamera", style: .default, handler: { handler in
             self.openCamera()
         }))
         
-        alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { handler in
+        alert.addAction(UIAlertAction(title: "Buka Galeri", style: .default, handler: { handler in
             self.openGallery()
         }))
         
