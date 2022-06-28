@@ -39,6 +39,7 @@ enum Endpoint {
     }
     enum User: String {
         case Get = "/user"
+        case UpdateBalance = "/user/update-balance"
     }
 }
 

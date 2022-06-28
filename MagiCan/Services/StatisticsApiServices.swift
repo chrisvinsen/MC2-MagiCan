@@ -10,10 +10,12 @@ import Combine
 
 protocol StaticticsServiceProtocol {
     func getKasAmount() -> AnyPublisher<User, Error>
+    func editKasAmount(userReq: UserUpdateBalanceRequest) -> AnyPublisher<User, Error>
     func getTransactionList(category: String) -> AnyPublisher<[Transaction], Error>
 }
 
 final class StatisticsService: StaticticsServiceProtocol {
+    
     func getKasAmount() -> AnyPublisher<User, Error> {
         var dataTask: URLSessionDataTask?
         
@@ -23,14 +25,12 @@ final class StatisticsService: StaticticsServiceProtocol {
         // promise type is Result<[Transaction], Error>
         return Future<User, Error> { [weak self] promise in
             guard let urlRequest = self?.getUrlForGetKasAmount() else {
-                print("failure1")
                 promise(.failure(ServiceError.urlRequest))
                 return
             }
             
             dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, _, error) in
                 guard let data = data else {
-                    print("failure2")
                     if let error = error {
                         promise(.failure(error))
                     }
@@ -43,10 +43,8 @@ final class StatisticsService: StaticticsServiceProtocol {
                 do {
                     let user = try JSONDecoder().decode(User.self, from: data)
                     promise(.success(user))
-                    print("ini user di service", user)
                 } catch {
                     promise(.failure(ServiceError.decode))
-                    print("catch user")
                 }
             }
         }
@@ -66,6 +64,62 @@ final class StatisticsService: StaticticsServiceProtocol {
         var urlRequest = URLRequest(url: url)
         urlRequest.timeoutInterval = APIDefaultTimeOut
         urlRequest.httpMethod = "GET"
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.addValue(getUserTokenFromUserDefaults(), forHTTPHeaderField: "token")
+        
+        return urlRequest
+    }
+    
+    func editKasAmount(userReq: UserUpdateBalanceRequest) -> AnyPublisher<User, Error> {
+        var dataTask: URLSessionDataTask?
+        
+        let onSubscription: (Subscription) -> Void = { _ in dataTask?.resume() }
+        let onCancel: () -> Void = { dataTask?.cancel() }
+        
+        // promise type is Result<[Transaction], Error>
+        return Future<User, Error> { [weak self] promise in
+            guard let urlRequest = self?.getUrlForEditKasAmount(userReq: userReq) else {
+                promise(.failure(ServiceError.urlRequest))
+                return
+            }
+            
+            dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, _, error) in
+                guard let data = data else {
+                    if let error = error {
+                        promise(.failure(error))
+                    }
+                    return
+                }
+                
+                let jsonString = String(data: data, encoding: .utf8)!
+                print("DATA : \(jsonString)")
+                
+                do {
+                    let userUpdated = try JSONDecoder().decode(User.self, from: data)
+                    promise(.success(userUpdated))
+                } catch {
+                    promise(.failure(ServiceError.decode))
+                }
+            }
+        }
+        .handleEvents(receiveSubscription: onSubscription, receiveCancel: onCancel)
+        .receive(on: DispatchQueue.main)
+        .eraseToAnyPublisher()
+    }
+    
+    private func getUrlForEditKasAmount(userReq: UserUpdateBalanceRequest) -> URLRequest? {
+        var components = URLComponents()
+        components.scheme = APIComponentScheme
+        components.host = APIComponentHost
+        components.path = Endpoint.User.UpdateBalance.rawValue
+        
+        guard let url = components.url else { return nil }
+        let jsonData = try? JSONEncoder().encode(userReq)
+        
+        var urlRequest = URLRequest(url: url)
+        urlRequest.timeoutInterval = APIDefaultTimeOut
+        urlRequest.httpMethod = "POST"
+        urlRequest.httpBody = jsonData
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
         urlRequest.addValue(getUserTokenFromUserDefaults(), forHTTPHeaderField: "token")
         

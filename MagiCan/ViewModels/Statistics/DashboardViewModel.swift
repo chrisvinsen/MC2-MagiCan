@@ -10,11 +10,14 @@ import Combine
 
 final class DashboardViewModel {
 //    @Published var userDetail: User?
-    @Published var kasAmount: Int64 = 2000000
+    @Published var kasAmount: Int64 = 1
+    @Published var kasAmountEdit: String = "2"
     
     @Published var transactionLists: [Transaction] = []
     @Published var totalIncome: Int64 = 0
     @Published var totalExpense: Int64 = 0
+    
+    let result = PassthroughSubject<User, Error>()
     
     var resultUserDetail = PassthroughSubject<Void, Error>()
     var resultTransactions = PassthroughSubject<Void, Error>()
@@ -52,6 +55,29 @@ final class DashboardViewModel {
         
         statisticsService
             .getKasAmount()
+            .sink(receiveCompletion: completionHandler, receiveValue: valueHandler)
+            .store(in: &bindingsUserDetails)
+    }
+    
+    func saveKasAmount() {
+        let completionHandler: (Subscribers.Completion<Error>) -> Void = { [weak self] completion in
+            switch completion {
+            case let .failure(error):
+                self?.resultUserDetail.send(completion: .failure(error))
+                print(error)
+            case .finished:
+                self?.resultUserDetail.send(())
+            }
+        }
+        
+        let valueHandler: (User) -> Void = { [weak self] userDetail in
+            self?.result.send(userDetail)
+        }
+        
+        let userReq = UserUpdateBalanceRequest(updated_balance: Int64(kasAmountEdit)!)
+        
+        statisticsService
+            .editKasAmount(userReq: userReq)
             .sink(receiveCompletion: completionHandler, receiveValue: valueHandler)
             .store(in: &bindingsUserDetails)
     }

@@ -108,7 +108,7 @@ class DashboardViewController: UIViewController {
     }
     
     private func setUpTargets() {
-        
+        dashboardView.cardKasUsaha.button.addTarget(self, action: #selector(cardKasUsahaButtonTapped(_ :)), for: .touchUpInside)
     }
     
     private func setUpBindings() {
@@ -129,10 +129,6 @@ class DashboardViewController: UIViewController {
             viewModel.$kasAmount
                 .assign(to: \.kasAmount, on: self)
                 .store(in: &bindings)
-            
-//            viewModelStats.userDetail
-//                .assign(to: \.userDetail, on: self)
-//                .store(in: &bindings)
         }
         
         func bindViewModelToView() {
@@ -226,6 +222,15 @@ extension DashboardViewController: UICollectionViewDataSource {
 
 extension DashboardViewController: UICollectionViewDelegate {
     
+}
+
+extension DashboardViewController {
+    @objc func cardKasUsahaButtonTapped(_ sender: UIButton) {
+        let VC = KasUsahaModalViewController()
+        let navController = UINavigationController(rootViewController: VC)
+        
+        self.present(navController, animated: true, completion: nil)
+    }
 }
 
 #if DEBUG

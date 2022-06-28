@@ -45,3 +45,8 @@ struct UserLoginRequest: Equatable, Hashable, Encodable, Decodable {
 struct UserRegisterRequest: Equatable, Hashable, Encodable, Decodable {
     var name, username, pin: String
 }
+
+//MARK: - Request for API User Register
+struct UserUpdateBalanceRequest: Equatable, Hashable, Encodable, Decodable {
+    var updated_balance: Int64
+}
