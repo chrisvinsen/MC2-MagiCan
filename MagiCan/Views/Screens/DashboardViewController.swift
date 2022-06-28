@@ -82,6 +82,8 @@ class DashboardViewController: UIViewController {
         viewModel.getTransactionList()
         viewModel.getUserDetail()
         
+        carouselData = [CarouselData]()
+        
         carouselData.append(.init(cardLabel: "Total Keuntungan", cardAmount: "Rp 0", cardTime: "Minggu Ini", cardIcon:"CarouselIcon.png", cardColor: UIColor(red: 0/250, green: 196/255, blue: 154/255, alpha: 1)))
         carouselData.append(.init(cardLabel: "Total Pemasukan", cardAmount: "Rp 0", cardTime: "Minggu Ini", cardIcon:"CarouselIcon.png", cardColor: UIColor(red: 22/250, green: 85/255, blue: 143/255, alpha: 1)))
         carouselData.append(.init(cardLabel: "Total Pengeluaran", cardAmount: "Rp 0", cardTime: "Minggu Ini", cardIcon:"CarouselIcon.png", cardColor: UIColor(red: 235/250, green: 81/255, blue: 96/255, alpha: 1)))
