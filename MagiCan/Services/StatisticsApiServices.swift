@@ -37,9 +37,6 @@ final class StatisticsService: StaticticsServiceProtocol {
                     return
                 }
                 
-                let jsonString = String(data: data, encoding: .utf8)!
-                print("DATA : \(jsonString)")
-                
                 do {
                     let user = try JSONDecoder().decode(User.self, from: data)
                     promise(.success(user))
@@ -146,9 +143,6 @@ final class StatisticsService: StaticticsServiceProtocol {
                     }
                     return
                 }
-                
-                let jsonString = String(data: data, encoding: .utf8)!
-//                print("DATA : \(jsonString)")
                 
                 do {
                     let lists = try JSONDecoder().decode([Transaction].self, from: data)

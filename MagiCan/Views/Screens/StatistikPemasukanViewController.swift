@@ -23,7 +23,6 @@ class StatistikPemasukanViewController: UIViewController {
     var totalIncome: Int64 = 0 {
         didSet {
             DispatchQueue.main.async {
-                print("SET SUMMARY")
                 self.statistikPemasukanView.totalPemasukanValue.text = self.totalIncome.formattedToRupiah
             }
         }
@@ -89,10 +88,8 @@ class StatistikPemasukanViewController: UIViewController {
                     switch completion {
                     case .failure:
                         // Error can be handled here (e.g. alert)
-                        print("FAILURE")
                         return
                     case .finished:
-                        print("FINISHED")
                         return
                     }
                 } receiveValue: { [weak self] res in

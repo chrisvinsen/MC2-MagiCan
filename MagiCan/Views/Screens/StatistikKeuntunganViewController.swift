@@ -16,7 +16,6 @@ class StatistikKeuntunganViewController: UIViewController {
         didSet {
             DispatchQueue.main.async{
                 self.statistikKeuntunganView.riwayatTable.reloadData()
-                print(self.transactionLists.count)
             }
         }
     }
@@ -24,16 +23,17 @@ class StatistikKeuntunganViewController: UIViewController {
     var totalIncome: Int64 = 0 {
         didSet {
             DispatchQueue.main.async {
-                print("SET SUMMARY")
                 var keuntungan = self.totalIncome - self.totalExpense
                 self.statistikKeuntunganView.totalKeuntunganValue.text = keuntungan.formattedToRupiah
                 
                 if keuntungan > 0 {
                     self.statistikKeuntunganView.titleLabel.text = "Statistik Keuntungan"
                     self.statistikKeuntunganView.totalKeuntunganLabel.text = "Total Keuntungan"
+                    self.statistikKeuntunganView.totalKeuntunganValue.textColor = UIColor.Primary._30
                 } else {
                     self.statistikKeuntunganView.titleLabel.text = "Statistik Kerugian"
                     self.statistikKeuntunganView.totalKeuntunganLabel.text = "Total Kerugian"
+                    self.statistikKeuntunganView.totalKeuntunganValue.textColor = UIColor.Error._30
                 }
             }
         }
@@ -108,10 +108,8 @@ class StatistikKeuntunganViewController: UIViewController {
                     switch completion {
                     case .failure:
                         // Error can be handled here (e.g. alert)
-                        print("FAILURE")
                         return
                     case .finished:
-                        print("FINISHED")
                         return
                     }
                 } receiveValue: { [weak self] res in

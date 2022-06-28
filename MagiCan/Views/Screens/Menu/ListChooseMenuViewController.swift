@@ -32,7 +32,6 @@ class ListChooseMenuViewController: UIViewController {
                 self.filteredMenuLists = self.menuLists
             }
             
-            print("DID SET")
             DispatchQueue.main.async{
                 self.contentView.tableView.reloadData()
             }

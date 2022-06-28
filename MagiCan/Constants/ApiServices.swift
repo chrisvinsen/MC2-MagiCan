@@ -23,6 +23,7 @@ enum Endpoint {
     enum Menu: String {
         case Lists = "/menus"
         case Add = "/menus/add"
+        case AddWithImage = "/menus/add-with-image"
         case Update = "/menus/update"
         case Delete = "/menus/delete"
         

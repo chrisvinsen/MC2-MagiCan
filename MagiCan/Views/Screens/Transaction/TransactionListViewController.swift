@@ -164,36 +164,41 @@ extension TransactionListViewController: UITableViewDataSource, UITableViewDeleg
         
         switch transaction.category {
         case TransactionCategory.Income.rawValue:
+            
+            cell.isIncome = true
             cell.titleLabel.text = "Pemasukan #\(String(format: "%04d", transaction.iterator))"
+            cell.amountLabel.text = "+ \(transaction.amount.formattedToRupiah)"
             
             switch transaction.type {
-            case TransactionIncomeType.UpdateBalance.rawValue:
-                cell.typeLabel.text = String(describing: TransactionIncomeType.UpdateBalance)
             case TransactionIncomeType.Offline.rawValue:
                 cell.typeLabel.text = String(describing: TransactionIncomeType.Offline)
             case TransactionIncomeType.Online.rawValue:
                 cell.typeLabel.text = String(describing: TransactionIncomeType.Online)
-            default: break
+            default:
+                cell.typeLabel.text = ""
+                cell.typeLabel.backgroundColor = .white
             }
             
         case TransactionCategory.Expense.rawValue:
+            
+            cell.isIncome = false
             cell.titleLabel.text = "Pengeluaran #\(String(format: "%04d", transaction.iterator))"
+            cell.amountLabel.text = "- \(transaction.amount.formattedToRupiah)"
             
             switch transaction.type {
-            case TransactionExpenseType.UpdateBalance.rawValue:
-                cell.typeLabel.text = String(describing: TransactionExpenseType.UpdateBalance)
             case TransactionExpenseType.Pribadi.rawValue:
                 cell.typeLabel.text = String(describing: TransactionExpenseType.Pribadi)
             case TransactionExpenseType.Usaha.rawValue:
                 cell.typeLabel.text = String(describing: TransactionExpenseType.Usaha)
-            default: break
+            default:
+                cell.typeLabel.text = ""
+                cell.typeLabel.backgroundColor = .white
             }
             
         default: break
         }
         
         cell.dateLabel.text = transaction.dateString
-        cell.amountLabel.text = transaction.amount.formattedToRupiah
         
         return cell
     }

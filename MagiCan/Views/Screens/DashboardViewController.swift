@@ -18,13 +18,28 @@ struct CarouselData {
 
 class DashboardViewController: UIViewController {
     
+    var name: String = "" {
+        didSet {
+            var tempName = "Tamu"
+            if name != "" {
+                tempName = name;
+            }
+            
+            let label = UILabel()
+            label.font = Font.headingSix.getUIFont
+            label.textColor = UIColor.Neutral._90
+            label.text = "Selamat Datang, \(tempName)"
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
+        }
+    }
+    
     let dashboardView = DashboardView(status: false)
     
     var carouselData = [CarouselData]()
     
     var userDetail: User?
     
-    var kasAmount: Int64 = 3000 {
+    var kasAmount: Int64 = 0 {
         didSet {
             self.dashboardView.cardKasUsaha.kasValue.text = self.kasAmount.formattedToRupiah
         }
@@ -34,7 +49,6 @@ class DashboardViewController: UIViewController {
         didSet {
             DispatchQueue.main.async{
                 self.dashboardView.carouselStatistik.carouselCollectionView.reloadData()
-//                print(self.transactionLists.count)
             }
         }
     }
@@ -42,7 +56,6 @@ class DashboardViewController: UIViewController {
     var totalIncome: Int64 = 0 {
         didSet {
             DispatchQueue.main.async {
-//                print("SET SUMMARY")
                 
                 var keuntungan = self.totalIncome - self.totalExpense
                 
@@ -105,6 +118,15 @@ class DashboardViewController: UIViewController {
         
         setupStyle()
         setupLayout()
+        
+        let icon = UIImage(systemName: "person.circle.fill")
+        let iconSize = CGRect(origin: CGPoint.zero, size: CGSize(width: 35, height: 35))
+        let iconButton = UIButton(frame: iconSize)
+        iconButton.setBackgroundImage(icon, for: .normal)
+        let barButton = UIBarButtonItem(customView: iconButton)
+        iconButton.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
+
+        self.navigationItem.rightBarButtonItem = barButton
     }
     
     private func setUpTargets() {
@@ -138,14 +160,12 @@ class DashboardViewController: UIViewController {
                     switch completion {
                     case .failure:
                         // Error can be handled here (e.g. alert)
-                        print("FAILURE user detail")
                         return
                     case .finished:
-                        print("FINISHED")
                         return
                     }
                 } receiveValue: { [weak self] res in
-//                    print(res)
+                    self?.name = res.name
                 }
                 .store(in: &bindings)
             
@@ -154,10 +174,8 @@ class DashboardViewController: UIViewController {
                     switch completion {
                     case .failure:
                         // Error can be handled here (e.g. alert)
-                        print("FAILURE trasanction")
                         return
                     case .finished:
-                        print("FINISHED")
                         return
                     }
                 } receiveValue: { [weak self] res in
@@ -240,6 +258,10 @@ extension DashboardViewController {
         let navController = UINavigationController(rootViewController: VC)
         
         self.present(navController, animated: true, completion: nil)
+    }
+    
+    @objc func profileButtonTapped() {
+        print("PROFILE TAPPED")
     }
 }
 

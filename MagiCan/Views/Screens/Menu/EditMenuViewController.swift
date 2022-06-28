@@ -120,7 +120,6 @@ class EditMenuViewController: UIViewController {
 extension EditMenuViewController {
     
     @objc func addButtonTapped(_ sender: UIButton) {
-        print("Add Button Tapped")
         
         let alert = UIAlertController(title: "Pilih Foto", message: nil, preferredStyle: .actionSheet)
         

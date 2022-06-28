@@ -41,6 +41,7 @@ class CarouselCell: UICollectionViewCell {
         
         cardLabel.text = "Total Keuntungan"
         cardAmount.text = "Rp 0"
+        cardAmount.numberOfLines = 1
         cardTime.text = "Minggu Ini"
         cardIcon.image = UIImage(named: "CarouselIcon.png")
         
@@ -67,6 +68,7 @@ class CarouselCell: UICollectionViewCell {
             
             cardAmount.topAnchor.constraint(equalTo: cardLabel.bottomAnchor, constant: 10),
             cardAmount.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 10),
+            cardAmount.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -5),
             
             cardTime.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -10),
             cardTime.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 10),

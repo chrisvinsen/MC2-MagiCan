@@ -44,7 +44,7 @@ final class AddMenuViewModel {
             _id: "",
             name: self.name,
             description: self.description,
-//            image_url: self.base64Image,
+            image_url: "",
             price: Int64(self.priceString) ?? 0
         )
         

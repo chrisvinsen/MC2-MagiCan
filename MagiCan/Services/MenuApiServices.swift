@@ -11,6 +11,7 @@ import Combine
 protocol MenuServiceProtocol {
     func getMenuList() -> AnyPublisher<[Menu], Error>
     func addMenu(menuReq: MenuCRUDRequest) -> AnyPublisher<Menu, Error>
+    func addMenuWithImage(menuReq: MenuCRUDRequest) -> AnyPublisher<Menu, Error>
     func updateMenu(menuReq: MenuCRUDRequest) -> AnyPublisher<Menu, Error>
     func deleteMenu(menuReq: MenuCRUDRequest) -> AnyPublisher<Bool, Error>
     
@@ -118,6 +119,68 @@ final class MenuService: MenuServiceProtocol {
         
         guard let url = components.url else { return nil }
         let jsonData = try? JSONEncoder().encode(menuReq)
+        
+        var urlRequest = URLRequest(url: url)
+        urlRequest.timeoutInterval = APIDefaultTimeOut
+        urlRequest.httpMethod = "POST"
+        urlRequest.httpBody = jsonData
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.addValue(getUserTokenFromUserDefaults(), forHTTPHeaderField: "token")
+        
+        return urlRequest
+    }
+    
+    //MARK: - Add Menu With Images --> /menus/add-with-image
+    func addMenuWithImage(menuReq: MenuCRUDRequest) -> AnyPublisher<Menu, Error> {
+        var dataTask: URLSessionDataTask?
+        
+        let onSubscription: (Subscription) -> Void = { _ in dataTask?.resume() }
+        let onCancel: () -> Void = {
+            dataTask?.cancel()
+            
+        }
+        
+        // promise type is Result<Menu, Error>
+        return Future<Menu, Error> { [weak self] promise in
+            guard let urlRequest = self?.getUrlForAddMenuWithImage(menuReq: menuReq) else {
+                promise(.failure(ServiceError.urlRequest))
+                return
+            }
+            
+            dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, _, error) in
+                guard let data = data else {
+                    if let error = error {
+                        promise(.failure(error))
+                    }
+                    return
+                }
+
+                
+                do {
+                    let menuCreated = try JSONDecoder().decode(Menu.self, from: data)
+                    promise(.success(menuCreated))
+                } catch {
+                    print(error)
+                    print(error.localizedDescription)
+                    promise(.failure(ServiceError.decode))
+                }
+            }
+        }
+        .handleEvents(receiveSubscription: onSubscription, receiveCancel: onCancel)
+        .receive(on: DispatchQueue.main)
+        .eraseToAnyPublisher()
+    }
+    
+    private func getUrlForAddMenuWithImage(menuReq: MenuCRUDRequest) -> URLRequest? {
+        var components = URLComponents()
+        components.scheme = APIComponentScheme
+        components.host = APIComponentHost
+        components.path = Endpoint.Menu.AddWithImage.rawValue
+        
+        guard let url = components.url else { return nil }
+        let jsonData = try? JSONEncoder().encode(menuReq)
+        let jsonString = String(data: jsonData!, encoding: .utf8)!
+        print("REQUEST \(jsonString)")
         
         var urlRequest = URLRequest(url: url)
         urlRequest.timeoutInterval = APIDefaultTimeOut
