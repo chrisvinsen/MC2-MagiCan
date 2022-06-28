@@ -22,7 +22,7 @@ class LoginPINViewController: UIViewController {
             if isLoginSuccess {
                 self.contentView.warningLabel.text = ""
                 
-                let dashboardVC = UINavigationController(rootViewController: TempDashboardViewController())
+                let dashboardVC = UINavigationController(rootViewController: DashboardViewController())
                 let transaksiVC = UINavigationController(rootViewController: TransactionListViewController())
                 let listMenuVC = UINavigationController(rootViewController: ListMenuViewController())
 

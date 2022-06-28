@@ -8,19 +8,26 @@
 import UIKit
 
 class RiwayatTransaksiTableViewCell: UITableViewCell {
-
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//        // Initialization code
-//    }
-//
-//    override func setSelected(_ selected: Bool, animated: Bool) {
-//        super.setSelected(selected, animated: false)
-//
-//        // Configure the view for the selected state
-//    }
     
     static let identifier = "RiwayatTransaksiCell"
+    
+    var categoryTransaksi: String? {
+        didSet {
+            switch categoryTransaksi {
+            case "Income":
+                transaksiAmount.textColor = UIColor.Primary._30
+                transaksiCategory.textColor = UIColor.Success._90
+                transaksiCategory.backgroundColor = UIColor(red: 133/255, green: 218/255, blue: 195/255, alpha: 0.3)
+            case "Expense":
+                transaksiAmount.textColor = UIColor.Error._30
+                transaksiCategory.textColor = UIColor.Secondary._50
+                transaksiCategory.backgroundColor = UIColor(red: 250/255, green: 243/255, blue: 201/255, alpha: 0.5)
+            default:
+                transaksiAmount.textColor = UIColor.Primary._30
+                transaksiCategory.backgroundColor = UIColor.Neutral._30
+            }
+        }
+    }
     
     lazy var transaksiId = UILabel()
     lazy var transaksiDate = UILabel()
@@ -55,17 +62,30 @@ class RiwayatTransaksiTableViewCell: UITableViewCell {
         transaksiAmount.text = "+ Rp 100.000"
         
         transaksiAmount.font = Font.textRegularSemiBold.getUIFont
-        transaksiAmount.textColor = UIColor.Primary._30
         
         transaksiCategory.font = UIFont(name: "Inter-Regular", size: 12)
-        transaksiCategory.textColor = UIColor.Success._90
-        transaksiCategory.backgroundColor = UIColor(red: 133/255, green: 218/255, blue: 195/255, alpha: 0.3)
         transaksiCategory.textAlignment = .center
         transaksiCategory.layer.masksToBounds = true
         transaksiCategory.layer.cornerRadius = 10
         
         transaksiDate.font = UIFont(name: "Inter-Regular", size: 10)
         transaksiDate.textColor = UIColor.Neutral._70
+        
+        categoryTransaksi = "Income"
+        
+//        switch categoryTransaksi {
+//        case "Income":
+//            transaksiAmount.textColor = UIColor.Primary._30
+//            transaksiCategory.textColor = UIColor.Success._90
+//            transaksiCategory.backgroundColor = UIColor(red: 133/255, green: 218/255, blue: 195/255, alpha: 0.3)
+//        case "Expense":
+//            transaksiAmount.textColor = UIColor.Error._30
+//            transaksiCategory.textColor = UIColor.Secondary._50
+//            transaksiCategory.backgroundColor = UIColor(red: 250/255, green: 243/255, blue: 201/255, alpha: 0.5)
+//        default:
+//            transaksiAmount.textColor = UIColor.Primary._30
+//            transaksiCategory.backgroundColor = UIColor.Neutral._30
+//        }
     }
     
     private func setUpConstraints() {
