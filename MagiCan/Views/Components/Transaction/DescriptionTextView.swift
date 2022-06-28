@@ -9,6 +9,17 @@ import UIKit
 
 class DescriptionTextView: UIView {
     
+    var currentCharacter = 0 {
+        didSet {
+            wordsCounterLabel.text =  "\(currentCharacter)"
+        }
+    }
+    var maxCharacter = 200 {
+        didSet {
+            wordsMaxLabel.text = "/\(maxCharacter)"
+        }
+    }
+    
     lazy var descriptionLabel = UILabel()
     lazy var wordsCounterLabel = UILabel()
     lazy var wordsMaxLabel = UILabel()
@@ -16,6 +27,8 @@ class DescriptionTextView: UIView {
     
     init() {
         super.init(frame: .zero)
+        
+        textBox.delegate = self
         
         addSubviews()
         setUpViews()
@@ -36,25 +49,16 @@ class DescriptionTextView: UIView {
     
     private func setUpViews() {
         descriptionLabel.text = "Deskripsi"
-        wordsCounterLabel.text =  "0"
-        wordsMaxLabel.text = "/200"
+        wordsCounterLabel.text =  "\(currentCharacter)"
+        wordsMaxLabel.text = "/\(maxCharacter)"
         
         textBox.autocorrectionType = .no
-        textBox.text = "Opsional (maks. 200 karakter)"
+        textBox.text = "Opsional (maks. \(maxCharacter) karakter)"
         textBox.backgroundColor = UIColor.Neutral._30
         textBox.textColor = .secondaryLabel
         textBox.font = UIFont.preferredFont(forTextStyle: .body)
         textBox.layer.cornerRadius = 8
         textBox.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-//        textView.placeholder = "Opsional (maks. 200 karakter)"
-        
-//        textField.updateStateDefault(){
-//            descriptionBOx.layer.masksToBounds = false
-//            descriptionBox.layer.shadowColor = UIColor.gray.cgColor
-//            descriptionBox.layer.shadowOpacity = 0.2
-//            descriptionBox.layer.shadowOffSet = CGSize(width: 0.5, height: 0.5)
-//            descriptionBox.layer.shadowRadius = 10
-//        }
     }
     
     private func setUpConstraints() {
@@ -79,6 +83,25 @@ class DescriptionTextView: UIView {
         ])
     }
     
+}
+
+extension DescriptionTextView: UITextViewDelegate {
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        // Remove the placeholder
+        textView.text = ""
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        
+        currentCharacter = textView.text.count
+        
+        if currentCharacter >= maxCharacter {
+            currentCharacter = maxCharacter
+            
+            textView.text = "\(textView.text.prefix(maxCharacter))"
+        }
+    }
 }
 
 #if DEBUG

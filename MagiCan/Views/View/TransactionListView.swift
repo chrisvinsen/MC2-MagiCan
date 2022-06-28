@@ -45,6 +45,9 @@ class TransactionListView: UIView {
     }
     
     private func setUpViews() {
+        
+        self.backgroundColor = .white
+        
         // Summary Card
         summaryCard.translatesAutoresizingMaskIntoConstraints = false
         summaryCard.layer.cornerRadius = 12

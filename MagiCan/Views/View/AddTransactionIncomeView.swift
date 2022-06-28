@@ -10,15 +10,19 @@ import UIKit
 
 class AddTransactionIncomeView: UIView {
     
+    lazy var scrollView = UIScrollView()
+    lazy var contentView = UIView()
+    lazy var stackView = UIStackView()
+    
     lazy var titleLabel = UILabel()
     lazy var trxTypeButton = RowButton(label: "Jenis Pemasukan", value: "Pilih Jenis")
-    lazy var tableView = UITableView()
+    lazy var tableView = TableViewAdjustedHeight()
     lazy var dateField = DateFieldView()
     lazy var descriptionField = DescriptionTextView()
     lazy var saveButton = PrimaryButton()
     
     init() {
-        super.init(frame: .zero)
+        super.init(frame: UIScreen.main.bounds)
         
         tableView.register(ChooseMenuCell.self, forCellReuseIdentifier: "ChooseMenuCell")
         tableView.register(ChosenMenuCell.self, forCellReuseIdentifier: "ChosenMenuCell")
@@ -41,19 +45,42 @@ class AddTransactionIncomeView: UIView {
     
     func addSubviews() {
         
+        self.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(stackView)
+        
         [titleLabel, trxTypeButton, tableView, dateField, descriptionField, saveButton]
             .forEach {
-                addSubview($0)
+                stackView.addArrangedSubview($0)
                 $0.translatesAutoresizingMaskIntoConstraints = false
             }
     }
     
     func setUpViews() {
         
+        self.backgroundColor = .white
+        
+        // Scroll View
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsHorizontalScrollIndicator = false
+        
+        // Container
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Stack View
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.spacing = 15
+        stackView.setCustomSpacing(30, after: descriptionField)
+        
         // Title Label
         titleLabel.text = "Pemasukan #0001"
         titleLabel.font = Font.textRegular.getUIFont
         titleLabel.textColor = UIColor.Neutral._70
+        
+        // Table View
+        tableView.isScrollEnabled = false
         
         // Save Button
         saveButton.setTitle("Simpan", for: .normal)
@@ -61,42 +88,41 @@ class AddTransactionIncomeView: UIView {
     
     func setUpConstraints() {
         
+        let safeArea = self.safeAreaLayoutGuide
+        
         NSLayoutConstraint.activate([
+            // Scroll View
+            scrollView.topAnchor.constraint(equalTo: self.topAnchor),
+            scrollView.rightAnchor.constraint(equalTo: self.rightAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            scrollView.leftAnchor.constraint(equalTo: self.leftAnchor),
             
-            // Title Label
-            titleLabel.topAnchor.constraint(equalTo: self.topAnchor),
-            titleLabel.leftAnchor.constraint(equalTo: self.leftAnchor),
-            titleLabel.rightAnchor.constraint(equalTo: self.rightAnchor),
+            // Content View
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.rightAnchor.constraint(equalTo: scrollView.rightAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.leftAnchor.constraint(equalTo: scrollView.leftAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
-            // Transaction Type Button
-            trxTypeButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15),
-            trxTypeButton.leftAnchor.constraint(equalTo: self.leftAnchor),
-            trxTypeButton.rightAnchor.constraint(equalTo: self.rightAnchor),
+            // Stack View
+            stackView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            stackView.rightAnchor.constraint(equalTo: contentView.rightAnchor),
+            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            stackView.leftAnchor.constraint(equalTo: contentView.leftAnchor),
             
             // Table View
-            tableView.topAnchor.constraint(equalTo: trxTypeButton.bottomAnchor, constant: 15),
-            tableView.leftAnchor.constraint(equalTo: self.leftAnchor),
-            tableView.rightAnchor.constraint(equalTo: self.rightAnchor),
-            tableView.heightAnchor.constraint(equalToConstant: 300),
-            
-            // Date Field
-            dateField.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 15),
-            dateField.leftAnchor.constraint(equalTo: self.leftAnchor),
-            dateField.rightAnchor.constraint(equalTo: self.rightAnchor),
-            
-            // Description Field
-            descriptionField.topAnchor.constraint(equalTo: dateField.bottomAnchor, constant: 15),
-            descriptionField.leftAnchor.constraint(equalTo: self.leftAnchor),
-            descriptionField.rightAnchor.constraint(equalTo: self.rightAnchor),
+//            tableView.heightAnchor.constraint(equalToConstant: 500),
+            tableView.topAnchor.constraint(equalTo: trxTypeButton.bottomAnchor, constant: 20),
+            tableView.bottomAnchor.constraint(equalTo: dateField.topAnchor, constant: -20),
             
             // Save Button
             saveButton.heightAnchor.constraint(equalToConstant: 48),
-            saveButton.topAnchor.constraint(equalTo: descriptionField.bottomAnchor, constant: 30),
-            saveButton.leftAnchor.constraint(equalTo: self.leftAnchor),
-            saveButton.rightAnchor.constraint(equalTo: self.rightAnchor),
         ])
+        
+//        let tableHeightConstraint = tableView.heightAnchor.constraint(equalToConstant: tableView.contentSize.height)
+//        tableHeightConstraint.priority = .defaultHigh
+//        tableHeightConstraint.isActive = true
     }
-    
 }
 
 #if DEBUG

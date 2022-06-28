@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         
         // FOR DEBUGGING --> REMOVE THIS LATER
-//        setUserTokenFromUserDefaults(newToken: "WRONG TOKEN")
+        setUserTokenFromUserDefaults(newToken: "WRONG TOKEN")
         // FOR DEBUGGING --> REMOVE THIS LATER
         
         
@@ -36,8 +36,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         
         if sessionToken == "" {
-//            let vc = GuestListMenuViewController()
+//            let vc = AddTransactionIncomeViewController()
+//            let vc = TempScrollViewController()
             let vc = OnboardingViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
+            
             let nav = UINavigationController(rootViewController: vc)
             window.rootViewController = nav
         } else {

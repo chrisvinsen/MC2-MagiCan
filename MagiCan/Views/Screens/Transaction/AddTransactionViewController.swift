@@ -8,17 +8,14 @@
 import UIKit
 import Combine
 
-protocol AddTransactionProtocol {
-//    func updateTransactionTypeIncome(data: KeyValue)
-//    func updateTransactionTypeExpense(data: KeyValue)
-}
-
 class AddTransactionViewController: UIViewController {
     
     let defaultSegmentedIndex = 0
     private lazy var contentView = AddTransactionView(defaultSegmentedIndex: defaultSegmentedIndex)
     private lazy var expenseViewController = AddTransactionExpenseViewController()
     private lazy var incomeViewController = AddTransactionIncomeViewController()
+    
+    var delegate: TransactionListViewDelegate!
     
     override func loadView() {
         view = contentView
@@ -39,6 +36,13 @@ class AddTransactionViewController: UIViewController {
         }
         
         setUpTargets()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        print("WILL DISAPPEAR")
+        delegate.reloadDataTable()
     }
     
     func setUpTargets() {
@@ -102,14 +106,3 @@ extension AddTransactionViewController {
 
 }
 
-//MARK: - Add Transaction Protocol
-extension AddTransactionViewController: AddTransactionProtocol {
-    
-//    func updateTransactionTypeIncome(data: KeyValue) {
-//        print("UPDATE INCOME TYPE")
-//    }
-//
-//    func updateTransactionTypeExpense(data: KeyValue) {
-//        print("UPDATE EXPENSE TYPE")
-//    }
-}

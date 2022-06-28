@@ -14,7 +14,8 @@ struct Menu: Equatable, Hashable, Encodable, Decodable {
     var imageUrl: String?
     var price: Int64
     
-    var isLoadingImage: Bool = false
+    var isLoadingImage: Bool = false // Used to loading image async
+    var isMenuChosen: Bool = false // Used to differentiate chosen menu
     
     enum CodingKeys: String, CodingKey {
         case _id
@@ -29,6 +30,23 @@ struct Menu: Equatable, Hashable, Encodable, Decodable {
 struct MenuCRUDRequest: Equatable, Hashable, Encodable, Decodable {
     var _id, name, description: String
     var price: Int64
+}
+
+//MARK: - Menu Chosen
+struct MenuChosen: Equatable, Hashable, Encodable, Decodable {
+    var trxId, name, description, imageUrl, menuId: String
+    var price: Int64
+    var qty: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case trxId = "trx_id"
+        case name
+        case description
+        case imageUrl = "image_url"
+        case menuId = "menu_id"
+        case price
+        case qty
+    }
 }
 
 //MARK: - Menu Image

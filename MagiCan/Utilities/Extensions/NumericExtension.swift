@@ -9,4 +9,6 @@ import Foundation
 
 extension Numeric {
      var formattedToRupiah: String { "Rp \(Formatter.withSeparator.string(for: self) ?? "0")" }
+    
+     var formattedToString: String { "\(Formatter.withSeparator.string(for: self) ?? "0")" }
 }
