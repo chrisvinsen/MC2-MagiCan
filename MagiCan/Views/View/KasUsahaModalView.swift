@@ -83,11 +83,11 @@ class KasUsahaModalView: UIView {
             cancelButton.topAnchor.constraint(equalTo: kasEditField.bottomAnchor, constant: 10),
             saveButton.topAnchor.constraint(equalTo: kasEditField.bottomAnchor, constant: 10),
             
-            cancelButton.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
-            saveButton.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
+            cancelButton.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: 10),
+            saveButton.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -10),
             
-            cancelButton.leftAnchor.constraint(equalTo: safeArea.leftAnchor),
-            saveButton.rightAnchor.constraint(equalTo: safeArea.rightAnchor)
+            cancelButton.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 10),
+            saveButton.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -10)
         ])
     }
 }
