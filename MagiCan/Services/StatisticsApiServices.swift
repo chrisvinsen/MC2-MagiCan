@@ -23,12 +23,14 @@ final class StatisticsService: StaticticsServiceProtocol {
         // promise type is Result<[Transaction], Error>
         return Future<User, Error> { [weak self] promise in
             guard let urlRequest = self?.getUrlForGetKasAmount() else {
+                print("failure1")
                 promise(.failure(ServiceError.urlRequest))
                 return
             }
             
             dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, _, error) in
                 guard let data = data else {
+                    print("failure2")
                     if let error = error {
                         promise(.failure(error))
                     }
@@ -41,8 +43,10 @@ final class StatisticsService: StaticticsServiceProtocol {
                 do {
                     let user = try JSONDecoder().decode(User.self, from: data)
                     promise(.success(user))
+                    print("ini user di service", user)
                 } catch {
                     promise(.failure(ServiceError.decode))
+                    print("catch user")
                 }
             }
         }
@@ -63,6 +67,7 @@ final class StatisticsService: StaticticsServiceProtocol {
         urlRequest.timeoutInterval = APIDefaultTimeOut
         urlRequest.httpMethod = "GET"
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.addValue(getUserTokenFromUserDefaults(), forHTTPHeaderField: "token")
         
         return urlRequest
     }
@@ -89,7 +94,7 @@ final class StatisticsService: StaticticsServiceProtocol {
                 }
                 
                 let jsonString = String(data: data, encoding: .utf8)!
-                print("DATA : \(jsonString)")
+//                print("DATA : \(jsonString)")
                 
                 do {
                     let lists = try JSONDecoder().decode([Transaction].self, from: data)

@@ -64,13 +64,11 @@ class DashboardViewController: UIViewController {
         }
     }
     
-    private let viewModel: TransactionListViewModel
-    private let viewModelStats: KasAmountViewModel
+    private let viewModel: DashboardViewModel
     private var bindings = Set<AnyCancellable>()
     
-    init(viewModel: TransactionListViewModel = TransactionListViewModel(), viewModelStats: KasAmountViewModel = KasAmountViewModel()) {
+    init(viewModel: DashboardViewModel = DashboardViewModel()) {
         self.viewModel = viewModel
-        self.viewModelStats = viewModelStats
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -82,6 +80,7 @@ class DashboardViewController: UIViewController {
         super.viewWillAppear(animated)
         
         viewModel.getTransactionList()
+        viewModel.getUserDetail()
         
         carouselData.append(.init(cardLabel: "Total Keuntungan", cardAmount: "Rp 0", cardTime: "Minggu Ini", cardIcon:"CarouselIcon.png", cardColor: UIColor(red: 0/250, green: 196/255, blue: 154/255, alpha: 1)))
         carouselData.append(.init(cardLabel: "Total Pemasukan", cardAmount: "Rp 0", cardTime: "Minggu Ini", cardIcon:"CarouselIcon.png", cardColor: UIColor(red: 22/250, green: 85/255, blue: 143/255, alpha: 1)))
@@ -100,6 +99,7 @@ class DashboardViewController: UIViewController {
         setUpBindings()
         
         viewModel.getTransactionList()
+        viewModel.getUserDetail()
         
         setupStyle()
         setupLayout()
@@ -124,7 +124,7 @@ class DashboardViewController: UIViewController {
                 .assign(to: \.totalExpense, on: self)
                 .store(in: &bindings)
             
-            viewModelStats.$kasAmount
+            viewModel.$kasAmount
                 .assign(to: \.kasAmount, on: self)
                 .store(in: &bindings)
             
@@ -135,12 +135,28 @@ class DashboardViewController: UIViewController {
         
         func bindViewModelToView() {
             // Completion after load data
-            viewModel.result
+            viewModel.resultUserDetail
                 .sink { completion in
                     switch completion {
                     case .failure:
                         // Error can be handled here (e.g. alert)
-                        print("FAILURE")
+                        print("FAILURE user detail")
+                        return
+                    case .finished:
+                        print("FINISHED")
+                        return
+                    }
+                } receiveValue: { [weak self] res in
+//                    print(res)
+                }
+                .store(in: &bindings)
+            
+            viewModel.resultTransactions
+                .sink { completion in
+                    switch completion {
+                    case .failure:
+                        // Error can be handled here (e.g. alert)
+                        print("FAILURE trasanction")
                         return
                     case .finished:
                         print("FINISHED")

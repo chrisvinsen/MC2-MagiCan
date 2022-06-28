@@ -18,7 +18,7 @@ extension User {
     enum CodingKeys: String, CodingKey {
         case name
         case username
-        case currentBalance
+        case currentBalance = "current_balance"
     }
     
     init(from decoder: Decoder) throws {
