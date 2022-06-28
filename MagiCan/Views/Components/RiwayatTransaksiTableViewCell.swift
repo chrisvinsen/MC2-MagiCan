@@ -11,7 +11,23 @@ class RiwayatTransaksiTableViewCell: UITableViewCell {
     
     static let identifier = "RiwayatTransaksiCell"
     
-    var categoryTransaksi: String?
+    var categoryTransaksi: String? {
+        didSet {
+            switch categoryTransaksi {
+            case "Income":
+                transaksiAmount.textColor = UIColor.Primary._30
+                transaksiCategory.textColor = UIColor.Success._90
+                transaksiCategory.backgroundColor = UIColor(red: 133/255, green: 218/255, blue: 195/255, alpha: 0.3)
+            case "Expense":
+                transaksiAmount.textColor = UIColor.Error._30
+                transaksiCategory.textColor = UIColor.Secondary._50
+                transaksiCategory.backgroundColor = UIColor(red: 250/255, green: 243/255, blue: 201/255, alpha: 0.5)
+            default:
+                transaksiAmount.textColor = UIColor.Primary._30
+                transaksiCategory.backgroundColor = UIColor.Neutral._30
+            }
+        }
+    }
     
     lazy var transaksiId = UILabel()
     lazy var transaksiDate = UILabel()
@@ -57,19 +73,19 @@ class RiwayatTransaksiTableViewCell: UITableViewCell {
         
         categoryTransaksi = "Income"
         
-        switch categoryTransaksi {
-        case "Income":
-            transaksiAmount.textColor = UIColor.Primary._30
-            transaksiCategory.textColor = UIColor.Success._90
-            transaksiCategory.backgroundColor = UIColor(red: 133/255, green: 218/255, blue: 195/255, alpha: 0.3)
-        case "Expense":
-            transaksiAmount.textColor = UIColor.Error._30
-            transaksiCategory.textColor = UIColor.Secondary._50
-            transaksiCategory.backgroundColor = UIColor(red: 250/255, green: 243/255, blue: 201/255, alpha: 0.5)
-        default:
-            transaksiAmount.textColor = UIColor.Primary._30
-            transaksiCategory.backgroundColor = UIColor.Neutral._30
-        }
+//        switch categoryTransaksi {
+//        case "Income":
+//            transaksiAmount.textColor = UIColor.Primary._30
+//            transaksiCategory.textColor = UIColor.Success._90
+//            transaksiCategory.backgroundColor = UIColor(red: 133/255, green: 218/255, blue: 195/255, alpha: 0.3)
+//        case "Expense":
+//            transaksiAmount.textColor = UIColor.Error._30
+//            transaksiCategory.textColor = UIColor.Secondary._50
+//            transaksiCategory.backgroundColor = UIColor(red: 250/255, green: 243/255, blue: 201/255, alpha: 0.5)
+//        default:
+//            transaksiAmount.textColor = UIColor.Primary._30
+//            transaksiCategory.backgroundColor = UIColor.Neutral._30
+//        }
     }
     
     private func setUpConstraints() {

@@ -51,8 +51,8 @@ class KasUsahaModalView: UIView {
         saveButton.setTitle("Batal", for: .normal)
         cancelButton.setTitle("Simpan", for: .normal)
         
-        saveButton.titleLabel?.textAlignment = .center
-        cancelButton.titleLabel?.textAlignment = .center
+//        saveButton.titleLabel?.textAlignment = .center
+//        cancelButton.titleLabel?.textAlignment = .center
         
         kasEditField.backgroundColor = .white
         
@@ -64,31 +64,31 @@ class KasUsahaModalView: UIView {
     }
     
     private func setUpConstraints() {
-        let safeArea = safeAreaLayoutGuide
+//        let safeArea = safeAreaLayoutGuide
         
-        NSLayoutConstraint.activate([
-//            self.widthAnchor.constraint(equalToConstant: 270),
-//            self.heightAnchor.constraint(equalToConstant: 114),
-            
-            modalTitle.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 10),
-            modalDescription.topAnchor.constraint(equalTo: modalTitle.bottomAnchor, constant: 5),
-            
-            modalTitle.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
-            modalDescription.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
-            
-            kasEditField.topAnchor.constraint(equalTo: modalDescription.bottomAnchor, constant: 5),
-            kasEditField.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 10),
-            kasEditField.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -10),
-            
-            cancelButton.topAnchor.constraint(equalTo: kasEditField.bottomAnchor, constant: 10),
-            saveButton.topAnchor.constraint(equalTo: kasEditField.bottomAnchor, constant: 10),
-            
-            cancelButton.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: 10),
-            saveButton.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -10),
-            
-            cancelButton.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 10),
-            saveButton.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -10)
-        ])
+//        NSLayoutConstraint.activate([
+////            self.widthAnchor.constraint(equalToConstant: 270),
+////            self.heightAnchor.constraint(equalToConstant: 114),
+//
+//            modalTitle.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 10),
+//            modalDescription.topAnchor.constraint(equalTo: modalTitle.bottomAnchor, constant: 5),
+//
+//            modalTitle.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
+//            modalDescription.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
+//
+//            kasEditField.topAnchor.constraint(equalTo: modalDescription.bottomAnchor, constant: 5),
+//            kasEditField.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 10),
+//            kasEditField.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -10),
+//
+////            cancelButton.topAnchor.constraint(equalTo: kasEditField.bottomAnchor, constant: 10),
+////            saveButton.topAnchor.constraint(equalTo: kasEditField.bottomAnchor, constant: 10),
+//
+//            cancelButton.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: 10),
+//            saveButton.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -10),
+//
+//            cancelButton.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 10),
+//            saveButton.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -10)
+//        ])
     }
 }
 

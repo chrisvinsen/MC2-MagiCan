@@ -218,6 +218,16 @@ extension DashboardViewController: UICollectionViewDataSource {
         
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            self.navigationController?.pushViewController(StatistikKeuntunganViewController(), animated: true)
+        } else if indexPath.row == 1 {
+            self.navigationController?.pushViewController(StatistikPemasukanViewController(), animated: true)
+        } else {
+            self.navigationController?.pushViewController(StatistikPengeluaranViewController(), animated: true)
+        }
+    }
 }
 
 extension DashboardViewController: UICollectionViewDelegate {
