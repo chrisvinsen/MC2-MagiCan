@@ -37,6 +37,9 @@ enum Endpoint {
         case Update = "/transactions/update"
         case Delete = "/transactions/delete"
     }
+    enum User: String {
+        case Get = "/user"
+    }
 }
 
 
