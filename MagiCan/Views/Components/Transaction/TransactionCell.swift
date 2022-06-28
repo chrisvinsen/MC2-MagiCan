@@ -70,6 +70,8 @@ class TransactionCell: UITableViewCell {
             
             typeLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
             typeLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20),
+            typeLabel.widthAnchor.constraint(equalToConstant: 80),
+            typeLabel.heightAnchor.constraint(equalToConstant: 20),
             
             dateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
             dateLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20),

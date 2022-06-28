@@ -9,7 +9,17 @@ import UIKit
 
 class TextFieldWithCard: UIView {
     
-    var isEnabled: Bool
+    var isEnabled: Bool {
+        didSet {
+            if isEnabled {
+                self.backgroundColor = .white
+                textField.isUserInteractionEnabled = true
+            } else {
+                self.backgroundColor = UIColor.Neutral._50
+                textField.isUserInteractionEnabled = false
+            }
+        }
+    }
     var title, prefixValue, valuePlaceholder: String
     
     lazy var titleLabel = RegularLabel()

@@ -9,9 +9,20 @@ import UIKit
 
 class MenuCell: UITableViewCell {
     
+    var isChecked: Bool = false {
+        didSet {
+            if isChecked {
+                iconChecked.image = UIImage(systemName: "checkmark")
+            } else {
+                iconChecked.image = nil
+            }
+        }
+    }
+    
     lazy var menuImage = UIImageView()
     lazy var nameLabel = UILabel()
     lazy var descriptionLabel = UILabel()
+    lazy var iconChecked = UIImageView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -27,7 +38,7 @@ class MenuCell: UITableViewCell {
     
     private func addSubviews() {
         
-        [menuImage, nameLabel, descriptionLabel]
+        [menuImage, nameLabel, descriptionLabel, iconChecked]
             .forEach {
                 addSubview($0)
                 $0.translatesAutoresizingMaskIntoConstraints = false
@@ -44,7 +55,7 @@ class MenuCell: UITableViewCell {
         
         // Name Label
 //        nameLabel.text = "Name of Menu Name of Menu Name of Menu Name of Menu"
-//        nameLabel.text = "Menu Name"
+        nameLabel.text = "Menu Name"
         nameLabel.numberOfLines = 1
         nameLabel.textColor = UIColor.Neutral._90
         nameLabel.font = UIFontMetrics.default.scaledFont(for: Font.textRegularSemiBold.getUIFont)
@@ -52,11 +63,13 @@ class MenuCell: UITableViewCell {
         
         // Description Label
 //        descriptionLabel.text = "Long Description Written Here Long Description Written Here Long Description Written Here Long Description Written Here"
-//        descriptionLabel.text = "Long Description Written Here"
+        descriptionLabel.text = "Long Description Written Here"
         descriptionLabel.numberOfLines = 1
         descriptionLabel.textColor = UIColor.Neutral._70
         descriptionLabel.font = UIFontMetrics.default.scaledFont(for: Font.text.getUIFont)
         descriptionLabel.adjustsFontForContentSizeCategory = true
+        
+        iconChecked.contentMode = .scaleAspectFit
     }
     
     private func setUpConstraints() {
@@ -70,13 +83,18 @@ class MenuCell: UITableViewCell {
             
 //            Name Label
             nameLabel.leadingAnchor.constraint(equalTo: menuImage.trailingAnchor, constant: 10),
-            nameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
+            nameLabel.trailingAnchor.constraint(equalTo: iconChecked.leadingAnchor, constant: -10),
             nameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
             
 //            Description Label
             descriptionLabel.leadingAnchor.constraint(equalTo: menuImage.trailingAnchor, constant: 10),
-            descriptionLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
+            descriptionLabel.trailingAnchor.constraint(equalTo: iconChecked.leadingAnchor, constant: -10),
             descriptionLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor),
+            
+//            Icon Checked
+            iconChecked.widthAnchor.constraint(equalToConstant: 30),
+            iconChecked.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            iconChecked.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20)
         ])
         
         let imgBottomConstraint = menuImage.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10)

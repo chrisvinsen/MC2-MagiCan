@@ -8,31 +8,41 @@
 import UIKit
 import Combine
 
+protocol TransactionListViewDelegate {
+    func reloadDataTable()
+}
+
 class TransactionListViewController: UIViewController {
     
     private lazy var contentView = TransactionListView()
+    private lazy var emptyContentView = EmptyStateView(image: UIImage(named: "EmptyTransaction.png")!, title: "Tidak Ada Transaksi", desc: "Transaksi kamu masih kosong nih. Klik tombol + diatas untuk menambah transaksi baru")
     
     var transactionLists = [Transaction]() {
         didSet {
+            
             DispatchQueue.main.async{
-                self.contentView.tableView.reloadData()
+                if self.transactionLists.count > 0 {
+                    self.view = self.contentView
+                    self.contentView.tableView.reloadData()
+                } else {
+                    self.view = self.emptyContentView
+                }
             }
         }
     }
     var totalIncome: Int64 = 0 {
         didSet {
             DispatchQueue.main.async {
-                print("SET SUMMARY")
                 self.contentView.summaryCard.jumlahPemasukanLabel.text = self.totalIncome.formattedToRupiah
-                self.contentView.summaryCard.jumlahPengeluaranLabel.text = self.totalExpense.formattedToRupiah
-                
                 self.contentView.summaryCard.keuntunganLabel.text = (self.totalIncome - self.totalExpense).formattedToRupiah
             }
         }
     }
     var totalExpense: Int64 = 0 {
         didSet {
-            
+            DispatchQueue.main.async {
+                self.contentView.summaryCard.jumlahPengeluaranLabel.text = self.totalExpense.formattedToRupiah
+            }
         }
     }
     
@@ -48,9 +58,9 @@ class TransactionListViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func loadView() {
-        view = contentView
-    }
+//    override func loadView() {
+//        view = contentView
+//    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -64,7 +74,6 @@ class TransactionListViewController: UIViewController {
         contentView.tableView.delegate = self
         contentView.tableView.dataSource = self
         
-        view.backgroundColor = .white
         title = "Transaksi"
         navigationController?.navigationBar.prefersLargeTitles = true
         
@@ -132,6 +141,7 @@ class TransactionListViewController: UIViewController {
 extension TransactionListViewController {
     @objc func addButtonTapped() {
         let VC = AddTransactionViewController()
+        VC.delegate = self
         VC.title = "Transaksi Baru"
 //        VC.delegate = self
         let navController = UINavigationController(rootViewController: VC)
@@ -194,3 +204,9 @@ extension TransactionListViewController: UITableViewDataSource, UITableViewDeleg
     
 }
 
+extension TransactionListViewController: TransactionListViewDelegate {
+    
+    func reloadDataTable() {
+        viewModel.getTransactionList()
+    }
+}

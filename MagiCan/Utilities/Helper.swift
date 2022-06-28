@@ -39,3 +39,20 @@ func getTransactionSummaryFromList(transactionLists: [Transaction]) -> (totalInc
     
     return (totalIncome, totalExpense)
 }
+
+
+func dateTimeToString(_ dateTime: Date, _ dateFormat: String = "M/d/yyyy") -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = dateFormat
+     
+    let result = dateFormatter.string(from: dateTime)
+    
+    return result
+}
+
+func stringToDateTime(_ dateTimeStr: String, _ dateFormat: String = "M/d/yyyy HH:mm:ss") -> Date {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = dateFormat
+     
+    return dateFormatter.date(from: dateTimeStr)!
+}

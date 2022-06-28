@@ -33,8 +33,9 @@ struct Transaction: Equatable, Hashable, Encodable, Decodable {
 }
 
 //MARK: - Request for API Transaction CRUD
-struct TranasctionCRUDRequest: Equatable, Hashable, Encodable, Decodable {
-    var _id, description, dateString: String
+struct TransactionCRUDRequest: Equatable, Hashable, Encodable, Decodable {
+    var _id, description, date: String
     var category, type: Int
     var amount, discount: Int64
 }
+

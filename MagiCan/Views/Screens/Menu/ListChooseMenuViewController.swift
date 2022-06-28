@@ -1,22 +1,19 @@
 //
-//  ListMenuViewController.swift
+//  ListChooseMenuViewController.swift
 //  MagiCan
 //
-//  Created by Christianto Vinsen on 24/06/22.
+//  Created by Christianto Vinsen on 29/06/22.
 //
 
 import UIKit
 import Combine
 
-protocol ListMenuDelegate {
-    func reloadDataTable()
-    func addNewMenuData(newMenu: Menu)
-    func updateMenuData(newMenu: Menu)
-}
-
-class ListMenuViewController: UIViewController {
-    
+class ListChooseMenuViewController: UIViewController {
+        
     var isLargeTitle: Bool = true
+//    var listMenuIdChosenBefore = [String]()
+
+    var delegate: AddTransactionIncomeProtocol!
 
     private lazy var contentView = ListMenuView()
     private lazy var emptyContentView = EmptyStateView(image: UIImage(named: "EmptyMenu.png")!, title: "Daftar Menu Belum Tersedia", desc: "Daftar menu kamu masih kosong. Klik tombol + diatas untuk menambah menu baru")
@@ -71,6 +68,12 @@ class ListMenuViewController: UIViewController {
         
         viewModel.getMenuList()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        delegate.updateMenuChosen(menus: self.menuLists.filter { $0.isMenuChosen })
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,6 +93,12 @@ class ListMenuViewController: UIViewController {
         iconButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
 
         navigationItem.rightBarButtonItem = barButton
+        
+        
+        let leftBarButtonItem = UIBarButtonItem(title: "Kembali", style: .plain, target: self, action: #selector(backButtonTapped))
+        leftBarButtonItem.tintColor = UIColor.Primary._30
+        navigationItem.leftBarButtonItem = leftBarButtonItem
+        
         
         searchController.searchResultsUpdater = self
         navigationItem.searchController = searchController
@@ -179,7 +188,7 @@ class ListMenuViewController: UIViewController {
 }
 
 //MARK: - Action
-extension ListMenuViewController {
+extension ListChooseMenuViewController {
     @objc func addButtonTapped() {
         let VC = AddMenuViewController()
         VC.delegate = self
@@ -187,10 +196,14 @@ extension ListMenuViewController {
         
         self.present(navController, animated: true, completion: nil)
     }
+    
+    @objc func backButtonTapped() {
+        self.dismiss(animated: true)
+    }
 }
 
 //MARK: - Table
-extension ListMenuViewController: UITableViewDelegate, UITableViewDataSource {
+extension ListChooseMenuViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredMenuLists.count
@@ -212,6 +225,7 @@ extension ListMenuViewController: UITableViewDelegate, UITableViewDataSource {
             image = ImageMenuDefault
         }
         
+        cell.isChecked = thisMenu.isMenuChosen
         cell.menuImage.image = image
         cell.nameLabel.text = filteredMenuLists[indexPath.row].name
         cell.descriptionLabel.text = "@ \(filteredMenuLists[indexPath.row].price.formattedToRupiah)"
@@ -219,46 +233,14 @@ extension ListMenuViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
 
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
-//        let editAction = UIContextualAction(style: .normal, title: "Ubah") {
-//            (action, sourceView, completionHandler) in
-//
-//            completionHandler(true)
-//        }
-//        editAction.backgroundColor = UIColor.Secondary._50
-        
-        let deleteAction = UIContextualAction(style: .normal, title: "Hapus") {
-            (action, sourceView, completionHandler) in
-            
-            self.viewModel.deleteMenu(idToDelete: self.filteredMenuLists[indexPath.row]._id)
-            
-            if let idx = self.viewModel.menuLists.firstIndex(where: { $0._id == self.filteredMenuLists[indexPath.row]._id }) {
-                self.viewModel.menuLists.remove(at: idx)
-            }
-
-            completionHandler(true)
-        }
-        deleteAction.backgroundColor = UIColor.Error._50
-        
-        let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction])
-        // Delete should not delete automatically
-        swipeConfiguration.performsFirstActionWithFullSwipe = false
-        
-        return swipeConfiguration
-    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let VC = EditMenuViewController(menu: filteredMenuLists[indexPath.row])
-        VC.delegate = self
-        let navController = UINavigationController(rootViewController: VC)
         
-        self.present(navController, animated: true, completion: nil)
+        self.viewModel.menuLists[indexPath.row].isMenuChosen = !self.viewModel.menuLists[indexPath.row].isMenuChosen
     }
 }
 
 //MARK: - List Menu Delegate
-extension ListMenuViewController: ListMenuDelegate {
+extension ListChooseMenuViewController: ListMenuDelegate {
     func reloadDataTable() {
         viewModel.getMenuList()
     }
@@ -277,7 +259,7 @@ extension ListMenuViewController: ListMenuDelegate {
 }
 
 //MARK: - Search Bar
-extension ListMenuViewController: UISearchResultsUpdating {
+extension ListChooseMenuViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         
         searchText =  (searchController.searchBar.text ?? "").lowercased()

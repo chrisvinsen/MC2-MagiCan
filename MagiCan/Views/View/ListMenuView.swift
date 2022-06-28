@@ -33,6 +33,9 @@ class ListMenuView: UIView {
     }
     
     private func setUpViews() {
+        
+        self.backgroundColor = .white
+        
         // Table View
         tableView.translatesAutoresizingMaskIntoConstraints = false
     }

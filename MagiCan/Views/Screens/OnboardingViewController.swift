@@ -12,10 +12,12 @@ class OnboardingViewController: UIPageViewController {
     let logoImage = UIImageView()
     var sliderViews = [UIViewController]()
     let registerButton = PrimaryButton()
-    let skipButton = UIButton(type: .system)
+//    let skipButton = UIButton(type: .system)
     
     let pageControl = UIPageControl()
     let initialPage = 0
+    
+    var timer: Timer?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -27,6 +29,14 @@ class OnboardingViewController: UIPageViewController {
         setup()
         setupStyle()
         setupLayout()
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { _ in
+            DispatchQueue.main.async {
+                
+                self.pageControl.currentPage += 1 
+                self.goToNextPage()
+            }
+        }
     }
 }
 
@@ -83,10 +93,10 @@ extension OnboardingViewController {
         registerButton.addTarget(self, action: #selector(registerButtonTapped(_ :)), for: .touchUpInside)
         
         // Skip Button
-        skipButton.setTitle("Lihat lihat dulu", for: .normal)
-        skipButton.tintColor = UIColor.Primary._30
-        skipButton.translatesAutoresizingMaskIntoConstraints = false
-        skipButton.addTarget(self, action: #selector(skipButtonTapped(_ :)), for: .touchUpInside)
+//        skipButton.setTitle("Lihat lihat dulu", for: .normal)
+//        skipButton.tintColor = UIColor.Primary._30
+//        skipButton.translatesAutoresizingMaskIntoConstraints = false
+//        skipButton.addTarget(self, action: #selector(skipButtonTapped(_ :)), for: .touchUpInside)
     }
     
     func setupLayout() {
@@ -94,7 +104,7 @@ extension OnboardingViewController {
         view.addSubview(logoImage)
         view.addSubview(pageControl)
         view.addSubview(registerButton)
-        view.addSubview(skipButton)
+//        view.addSubview(skipButton)
         
         let safeArea = view.safeAreaLayoutGuide
         
@@ -112,15 +122,15 @@ extension OnboardingViewController {
             
             // Register Button
             registerButton.heightAnchor.constraint(equalToConstant: 48),
-            registerButton.bottomAnchor.constraint(equalTo: skipButton.topAnchor),
+            registerButton.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
             registerButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
             registerButton.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20),
             
             // Skip Button
-            skipButton.heightAnchor.constraint(equalToConstant: 48),
-            skipButton.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
-            skipButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
-            skipButton.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20),
+//            skipButton.heightAnchor.constraint(equalToConstant: 48),
+//            skipButton.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
+//            skipButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
+//            skipButton.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20),
         ])
     }
 }

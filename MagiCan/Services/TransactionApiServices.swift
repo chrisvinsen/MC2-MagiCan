@@ -10,7 +10,8 @@ import Combine
 
 protocol TransactionServiceProtocol {
     func getTransactionList() -> AnyPublisher<[Transaction], Error>
-    func addTransaction(transactionReq: TranasctionCRUDRequest) -> AnyPublisher<Transaction, Error>
+    func addTransaction(transactionReq: TransactionCRUDRequest) -> AnyPublisher<Transaction, Error>
+    func deleteTransaction(transactionReq: TransactionCRUDRequest) -> AnyPublisher<Bool, Error>
 }
 
 final class TransactionService: TransactionServiceProtocol {
@@ -70,7 +71,7 @@ final class TransactionService: TransactionServiceProtocol {
     }
     
     //MARK: - Add Transaction --> /transactions/add
-    func addTransaction(transactionReq: TranasctionCRUDRequest) -> AnyPublisher<Transaction, Error> {
+    func addTransaction(transactionReq: TransactionCRUDRequest) -> AnyPublisher<Transaction, Error> {
         var dataTask: URLSessionDataTask?
         
         let onSubscription: (Subscription) -> Void = { _ in dataTask?.resume() }
@@ -109,11 +110,65 @@ final class TransactionService: TransactionServiceProtocol {
         .eraseToAnyPublisher()
     }
     
-    private func getUrlForAddTransaction(transactionReq: TranasctionCRUDRequest) -> URLRequest? {
+    private func getUrlForAddTransaction(transactionReq: TransactionCRUDRequest) -> URLRequest? {
         var components = URLComponents()
         components.scheme = APIComponentScheme
         components.host = APIComponentHost
         components.path = Endpoint.Transaction.Add.rawValue
+        
+        guard let url = components.url else { return nil }
+        let jsonData = try? JSONEncoder().encode(transactionReq)
+        
+        var urlRequest = URLRequest(url: url)
+        urlRequest.timeoutInterval = APIDefaultTimeOut
+        urlRequest.httpMethod = "POST"
+        urlRequest.httpBody = jsonData
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.addValue(getUserTokenFromUserDefaults(), forHTTPHeaderField: "token")
+        
+        return urlRequest
+    }
+    
+    
+    //MARK: - Delete Transaction --> /transactions/delete
+    func deleteTransaction(transactionReq: TransactionCRUDRequest) -> AnyPublisher<Bool, Error> {
+        var dataTask: URLSessionDataTask?
+        
+        let onSubscription: (Subscription) -> Void = { _ in dataTask?.resume() }
+        let onCancel: () -> Void = { dataTask?.cancel() }
+        
+        // promise type is Result<Bool, Error>
+        return Future<Bool, Error> { [weak self] promise in
+            guard let urlRequest = self?.getUrlForDeleteTransaction(transactionReq: transactionReq) else {
+                promise(.failure(ServiceError.urlRequest))
+                return
+            }
+            
+            dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, _, error) in
+                guard let data = data else {
+                    if let error = error {
+                        promise(.failure(error))
+                    }
+                    return
+                }
+                
+                do {
+                    promise(.success(true))
+                } catch {
+                    promise(.failure(ServiceError.decode))
+                }
+            }
+        }
+        .handleEvents(receiveSubscription: onSubscription, receiveCancel: onCancel)
+        .receive(on: DispatchQueue.main)
+        .eraseToAnyPublisher()
+    }
+    
+    private func getUrlForDeleteTransaction(transactionReq: TransactionCRUDRequest) -> URLRequest? {
+        var components = URLComponents()
+        components.scheme = APIComponentScheme
+        components.host = APIComponentHost
+        components.path = Endpoint.Transaction.Delete.rawValue
         
         guard let url = components.url else { return nil }
         let jsonData = try? JSONEncoder().encode(transactionReq)

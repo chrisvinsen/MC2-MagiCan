@@ -42,6 +42,7 @@ class LoginPINViewController: UIViewController {
                     selectedImage: UIImage(named: "icMenuActive")
                 )
                 
+                
                 let tabBarController = UITabBarController()
                 tabBarController.viewControllers = [dashboardVC, transaksiVC, listMenuVC]
                 tabBarController.modalPresentationStyle = .fullScreen
