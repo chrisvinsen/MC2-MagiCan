@@ -18,7 +18,7 @@ extension User {
     enum CodingKeys: String, CodingKey {
         case name
         case username
-        case currentBalance
+        case currentBalance = "current_balance"
     }
     
     init(from decoder: Decoder) throws {
@@ -44,4 +44,9 @@ struct UserLoginRequest: Equatable, Hashable, Encodable, Decodable {
 //MARK: - Request for API User Register
 struct UserRegisterRequest: Equatable, Hashable, Encodable, Decodable {
     var name, username, pin: String
+}
+
+//MARK: - Request for API User Register
+struct UserUpdateBalanceRequest: Equatable, Hashable, Encodable, Decodable {
+    var updated_balance: Int64
 }

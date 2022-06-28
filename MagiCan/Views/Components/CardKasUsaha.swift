@@ -54,7 +54,7 @@ class CardKasUsaha: UIView {
         kasValue.font = Font.headingSix.getUIFont
         
         kasLabel.text = "Kas Usaha"
-        kasValue.text = "Rp 0"
+        kasValue.text = "Rp 2.000.000"
         button.setTitle("Set Kas Usaha", for: .normal)
         button.contentEdgeInsets =  UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         

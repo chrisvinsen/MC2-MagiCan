@@ -39,11 +39,11 @@ final class TransactionListViewModel {
             self?.transactionLists = transactionLists
             
             DispatchQueue.main.async {
-                print("CALCULATE SUMMARY")
+//                print("CALCULATE SUMMARY")
                 let summary = getTransactionSummaryFromList(transactionLists: transactionLists)
                 self?.totalIncome = summary.totalIncome
                 self?.totalExpense = summary.totalExpense
-                print(summary)
+//                print(summary)
             }
         }
         
