@@ -19,6 +19,7 @@ enum Endpoint {
         case ValidateToken = "/auth/validate-token"
         case Login = "/auth/login"
         case Register = "/auth/signup"
+        case Logout = "/auth/logout"
     }
     enum Menu: String {
         case Lists = "/menus"
@@ -41,6 +42,9 @@ enum Endpoint {
     enum User: String {
         case Get = "/user"
         case UpdateBalance = "/user/update-balance"
+        case UpdateData = "/user/update-data"
+        case ValidatePIN = "/user/validate-pin"
+        case ChangePIN = "/user/change-pin"
     }
 }
 

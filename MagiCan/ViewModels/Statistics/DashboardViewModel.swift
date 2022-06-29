@@ -68,10 +68,11 @@ final class DashboardViewModel {
         }
         
         let valueHandler: (User) -> Void = { [weak self] userDetail in
-            self?.result.send(userDetail)
+//            self?.result.send(userDetail)
+            self?.kasAmount = userDetail.currentBalance
         }
         
-        let userReq = UserUpdateBalanceRequest(updated_balance: Int64(kasAmountEdit)!)
+        let userReq = UserUpdateBalanceRequest(updated_balance: Int64(kasAmountEdit) ?? 0)
         
         statisticsService
             .editKasAmount(userReq: userReq)

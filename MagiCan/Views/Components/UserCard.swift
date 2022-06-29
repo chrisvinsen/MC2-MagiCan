@@ -10,9 +10,10 @@ import UIKit
 
 class UserCard: UIView {
     
-    //lazy var profileIcon = UIImageView()
-    lazy var namaUsahaLabel = UILabel()
-    lazy var userNameLabel = RegularLabel()
+    lazy var profileIcon = UIImageView()
+    lazy var nameLabel = UILabel()
+    lazy var usernameLabel = RegularLabel()
+    lazy var buttonEdit = UIButton(type: .system)
     
     init() {
         super.init(frame: .zero)
@@ -27,7 +28,7 @@ class UserCard: UIView {
     }
     
     func addSubviews() {
-        [namaUsahaLabel, userNameLabel]
+        [profileIcon, nameLabel, usernameLabel, buttonEdit]
             .forEach {
                 addSubview($0)
                 $0
@@ -37,26 +38,48 @@ class UserCard: UIView {
     
     func setUpViews() {
         
-        //profileIcon.image = UIImage(named: "Profile Icon.png")
+        self.backgroundColor = .white
         
-        namaUsahaLabel.font = UIFont(name: "Inter-Bold", size: 22)
-        namaUsahaLabel.text = "Warung Bude"
-        userNameLabel.text = "@budesiti"
+        profileIcon.image = UIImage(systemName: "person.circle.fill")
+        profileIcon.tintColor = UIColor.Neutral._50
+        profileIcon.contentMode = .scaleAspectFit
         
+        nameLabel.font = Font.textRegularSemiBold.getUIFont
+        nameLabel.textColor = UIColor.Neutral._90
+        nameLabel.text = "Nama Usaha"
+        nameLabel.numberOfLines = 0
+        
+        usernameLabel.text = "@username"
+        usernameLabel.font = Font.text.getUIFont
+        usernameLabel.textColor = UIColor.Neutral._70
+        usernameLabel.numberOfLines = 0
+        
+        buttonEdit.setImage(UIImage(systemName: "square.and.pencil"), for: .normal)
+        buttonEdit.tintColor = UIColor.Neutral._90
     }
     
     func setUpConstraints() {
-        let safeArea = safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
-            self.heightAnchor.constraint(equalToConstant: 90),
-            self.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 50),
-            self.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: 50),
             
-            namaUsahaLabel.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 15),
-            namaUsahaLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 15),
-            userNameLabel.topAnchor.constraint(equalTo: namaUsahaLabel.bottomAnchor, constant: 10),
-            userNameLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 15),
+            profileIcon.widthAnchor.constraint(equalToConstant: 60),
+            profileIcon.topAnchor.constraint(equalTo: self.topAnchor, constant: 15),
+            profileIcon.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10),
+            profileIcon.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -15),
+            
+            buttonEdit.widthAnchor.constraint(equalToConstant: 25),
+            buttonEdit.heightAnchor.constraint(equalToConstant: 25),
+            buttonEdit.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -15),
+            buttonEdit.topAnchor.constraint(equalTo: self.topAnchor, constant: 15),
+            
+            nameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 15),
+            nameLabel.leftAnchor.constraint(equalTo: profileIcon.rightAnchor, constant: 10),
+            nameLabel.rightAnchor.constraint(equalTo: buttonEdit.leftAnchor, constant: -10),
+            
+            usernameLabel.leftAnchor.constraint(equalTo: profileIcon.rightAnchor, constant: 10),
+            usernameLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 5),
+            usernameLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -15),
+            usernameLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 20),
             
         ])
     }
@@ -76,12 +99,3 @@ struct UserCard_Preview: PreviewProvider {
 }
 #endif
 
-
-
-/*
- // Only override draw() if you perform custom drawing.
- // An empty implementation adversely affects performance during animation.
- override func draw(_ rect: CGRect) {
- // Drawing code
- }
- */

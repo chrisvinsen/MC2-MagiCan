@@ -64,7 +64,7 @@ class DashboardViewController: UIViewController {
                 self.carouselData[2].cardAmount = self.totalExpense.formattedToRupiah
                 
                 if keuntungan < 0 {
-                    self.carouselData[0].cardColor = UIColor(red: 224, green: 172, blue: 81, alpha: 1)
+                    self.carouselData[0].cardColor = #colorLiteral(red: 0.9164255261, green: 0.6640771031, blue: 0.2302021682, alpha: 1)
                 }
                 
                 self.dashboardView.carouselStatistik.carouselCollectionView.reloadData()
@@ -254,14 +254,32 @@ extension DashboardViewController: UICollectionViewDelegate {
 
 extension DashboardViewController {
     @objc func cardKasUsahaButtonTapped(_ sender: UIButton) {
-        let VC = KasUsahaModalViewController()
-        let navController = UINavigationController(rootViewController: VC)
         
-        self.present(navController, animated: true, completion: nil)
+        let alert = UIAlertController(title: "Atur Kas", message: "Masukkan nilai nominal kas awal", preferredStyle: .alert)
+
+        alert.addTextField { (textField) in
+            textField.text = ""
+        }
+
+        alert.addAction(UIAlertAction(title: "Batal", style: .cancel, handler: { [weak alert] (_) in
+            
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Simpan", style: .default, handler: { [weak alert] (_) in
+            let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
+            
+            self.viewModel.kasAmountEdit = textField?.text ?? "0"
+            self.viewModel.saveKasAmount()
+        }))
+
+        self.present(alert, animated: true, completion: nil)
     }
     
     @objc func profileButtonTapped() {
-        print("PROFILE TAPPED")
+        
+        let VC = ProfileViewController()
+        
+        navigationController?.pushViewController(VC, animated: true)
     }
 }
 

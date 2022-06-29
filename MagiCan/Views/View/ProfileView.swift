@@ -8,41 +8,13 @@
 import UIKit
 
 class ProfileView: UIView {
-
-    var headingText: String
     
-    lazy var imageView = UIImageView()
-    lazy var headingLabel = HeadingFiveLabel()
-    lazy var PINField = UITextField()
-    lazy var viewPINContainer = UIView()
-    lazy var viewPIN1 = UIView()
-    lazy var viewPIN2 = UIView()
-    lazy var viewPIN3 = UIView()
-    lazy var viewPIN4 = UIView()
-    lazy var viewPIN5 = UIView()
-    lazy var viewPIN6 = UIView()
-    lazy var warningLabel = WarningLabel()
+    lazy var containerUserCard = UIView()
+    lazy var userCard = UserCard()
+    lazy var changePINButton = UIButton(type: .system)
+    lazy var logoutButton = UIButton(type: .system)
     
-    var groupOfviewPIN = [UIView()]
-    
-    var pin: String = "" {
-        didSet {
-            for pinIndex in 0...5 {
-                if pinIndex < pin.count {
-                    groupOfviewPIN[pinIndex].backgroundColor = UIColor.Secondary._50
-                } else {
-                    groupOfviewPIN[pinIndex].backgroundColor = UIColor.Neutral._50
-                }
-            }
-            
-            if pin.count < 6 {
-                warningLabel.text = ""
-            }
-        }
-    }
-    
-    init(headingText: String = "Masukkan PIN") {
-        self.headingText = headingText
+    init() {
         super.init(frame: .zero)
         
         addSubviews()
@@ -55,18 +27,10 @@ class ProfileView: UIView {
     }
     
     private func addSubviews() {
-        groupOfviewPIN = [viewPIN1, viewPIN2, viewPIN3, viewPIN4, viewPIN5, viewPIN6]
         
-        groupOfviewPIN
-            .forEach {
-                viewPINContainer.addSubview($0)
-                $0.backgroundColor = UIColor.Neutral._50
-                $0.layer.cornerRadius = 10
-                $0.clipsToBounds = true
-                $0.translatesAutoresizingMaskIntoConstraints = false
-            }
+        containerUserCard.addSubview(userCard)
         
-        [imageView, headingLabel, viewPINContainer, PINField, warningLabel]
+        [containerUserCard, changePINButton, logoutButton]
             .forEach {
                 addSubview($0)
                 $0.translatesAutoresizingMaskIntoConstraints = false
@@ -74,77 +38,66 @@ class ProfileView: UIView {
     }
     
     private func setUpViews() {
-        // Image View
-        imageView.image = UIImage(named: "PIN.png")
-        imageView.contentMode = .scaleAspectFit
+        
+        self.backgroundColor = .white
+        
+        // User Card
+        userCard.translatesAutoresizingMaskIntoConstraints = false
+        userCard.layer.cornerRadius = 12
+        userCard.layer.masksToBounds = true
+        
+        // Container Card Card
+        containerUserCard.translatesAutoresizingMaskIntoConstraints = false
+        containerUserCard.layer.masksToBounds = false
+        containerUserCard.layer.shadowColor = UIColor.gray.cgColor
+        containerUserCard.layer.shadowOpacity = 0.2
+        containerUserCard.layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
+        containerUserCard.layer.shadowRadius = 10
         
         // Heading Label
-        headingLabel.text = headingText
-        headingLabel.textAlignment = .center
+        changePINButton.setImage(UIImage(systemName: "lock.fill"), for: .normal)
+        changePINButton.setTitle(" Ganti PIN", for: .normal)
+        changePINButton.backgroundColor = UIColor.Primary._30_15
+        changePINButton.tintColor = UIColor.Primary._30
+        changePINButton.titleLabel?.font = Font.textRegularSemiBold.getUIFont
+        changePINButton.layer.cornerRadius = 10
         
         // PIN Text Field
-        PINField.keyboardType = .numberPad
-        PINField.becomeFirstResponder()
-        PINField.tintColor = .white
-        PINField.textColor = .white
-        
-        // Warning Label
-        warningLabel.textAlignment = .center
+        logoutButton.setTitle("Logout", for: .normal)
+        logoutButton.backgroundColor = .white
+        logoutButton.tintColor = UIColor.Error._90
+        logoutButton.layer.borderColor = UIColor.Error._90.cgColor
+        logoutButton.layer.borderWidth = 1
+        logoutButton.titleLabel?.font = Font.textRegularSemiBold.getUIFont
+        logoutButton.layer.cornerRadius = 10
     }
     
     private func setUpConstraints() {
         let safeArea = safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
-//            Image View
-            imageView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 60),
-            imageView.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
+//             User Card
+            userCard.topAnchor.constraint(equalTo: containerUserCard.topAnchor),
+            userCard.bottomAnchor.constraint(equalTo: containerUserCard.bottomAnchor),
+            userCard.leftAnchor.constraint(equalTo: containerUserCard.leftAnchor),
+            userCard.rightAnchor.constraint(equalTo: containerUserCard.rightAnchor),
             
-//            Heading Label
-            headingLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 16),
-            headingLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
-            headingLabel.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20),
+//             Container User Card
+            containerUserCard.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 30),
+            containerUserCard.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
+            containerUserCard.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
             
-//            View PIN
-            viewPINContainer.topAnchor.constraint(equalTo: headingLabel.bottomAnchor, constant: 50),
-            viewPINContainer.heightAnchor.constraint(equalToConstant: 20),
-            viewPINContainer.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
-            
-            viewPIN1.widthAnchor.constraint(equalToConstant: 20),
-            viewPIN1.heightAnchor.constraint(equalToConstant: 20),
-            viewPIN1.leadingAnchor.constraint(equalTo: viewPINContainer.leadingAnchor),
-            
-            viewPIN2.widthAnchor.constraint(equalToConstant: 20),
-            viewPIN2.heightAnchor.constraint(equalToConstant: 20),
-            viewPIN2.leadingAnchor.constraint(equalTo: viewPIN1.trailingAnchor, constant: 10),
-            
-            viewPIN3.widthAnchor.constraint(equalToConstant: 20),
-            viewPIN3.heightAnchor.constraint(equalToConstant: 20),
-            viewPIN3.leadingAnchor.constraint(equalTo: viewPIN2.trailingAnchor, constant: 10),
-            
-            viewPIN4.widthAnchor.constraint(equalToConstant: 20),
-            viewPIN4.heightAnchor.constraint(equalToConstant: 20),
-            viewPIN4.leadingAnchor.constraint(equalTo: viewPIN3.trailingAnchor, constant: 10),
-            
-            viewPIN5.widthAnchor.constraint(equalToConstant: 20),
-            viewPIN5.heightAnchor.constraint(equalToConstant: 20),
-            viewPIN5.leadingAnchor.constraint(equalTo: viewPIN4.trailingAnchor, constant: 10),
-            
-            viewPIN6.widthAnchor.constraint(equalToConstant: 20),
-            viewPIN6.heightAnchor.constraint(equalToConstant: 20),
-            viewPIN6.leadingAnchor.constraint(equalTo: viewPIN5.trailingAnchor, constant: 10),
-            viewPIN6.trailingAnchor.constraint(equalTo: viewPINContainer.trailingAnchor),
-            
-//            PIN Field
-            PINField.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
-            PINField.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
-            PINField.topAnchor.constraint(equalTo: safeArea.topAnchor),
-            PINField.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
-            
-            // Warning Label
-            warningLabel.topAnchor.constraint(equalTo: viewPINContainer.bottomAnchor, constant: 20),
-            warningLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
-            warningLabel.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20),
+//            Change PIN Button
+            changePINButton.topAnchor.constraint(equalTo: userCard.bottomAnchor, constant: 25),
+            changePINButton.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
+            changePINButton.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
+            changePINButton.heightAnchor.constraint(equalToConstant: 48),
+
+//            Logout Button
+            logoutButton.topAnchor.constraint(equalTo: changePINButton.bottomAnchor, constant: 10),
+            logoutButton.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
+            logoutButton.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
+            logoutButton.heightAnchor.constraint(equalToConstant: 48),
         ])
     }
 }
