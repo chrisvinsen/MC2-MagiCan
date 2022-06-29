@@ -10,6 +10,22 @@ import UIKit
 
 class TransactionCell: UITableViewCell {
     
+    var isIncome: Bool = true {
+        didSet {
+            if isIncome {
+                typeLabel.textColor = UIColor.Success._90
+                typeLabel.backgroundColor = #colorLiteral(red: 0.3960784314, green: 0.8666666667, blue: 0.7607843137, alpha: 0.5)
+                
+                amountLabel.textColor = UIColor.Primary._30
+            } else {
+                typeLabel.textColor = UIColor.Secondary._50
+                typeLabel.backgroundColor = #colorLiteral(red: 0.9803921569, green: 0.9529411765, blue: 0.7882352941, alpha: 0.5)
+                
+                amountLabel.textColor = #colorLiteral(red: 1, green: 0.4177737832, blue: 0.4916537404, alpha: 1)
+            }
+        }
+    }
+    
     lazy var titleLabel = UILabel()
     lazy var dateLabel = UILabel()
     lazy var typeLabel = UILabel()
@@ -40,7 +56,6 @@ class TransactionCell: UITableViewCell {
         
         titleLabel.text = "Pemasukan #0001"
         titleLabel.font = Font.textRegular.getUIFont
-        titleLabel.textColor = UIColor.Neutral._90
         
         dateLabel.text = "08 Juni 2022"
         dateLabel.font = Font.small.getUIFont
@@ -48,14 +63,9 @@ class TransactionCell: UITableViewCell {
         
         amountLabel.text = "+ 100.000"
         amountLabel.font = Font.textRegularSemiBold.getUIFont
-        amountLabel.textColor = UIColor.Primary._30
         
         typeLabel.text = "Online"
         typeLabel.font = Font.small.getUIFont
-        typeLabel.textColor = UIColor.Success._90
-//        typeLabel.backgroundColor = .red
-//        typeLabel.textColor = UIColor.Secondary._30
-        typeLabel.backgroundColor = UIColor(red: 250/255, green: 243/255, blue: 201/255, alpha: 0.5)
         typeLabel.textAlignment = .center
         typeLabel.layer.masksToBounds = true
         typeLabel.layer.cornerRadius = 10
@@ -70,7 +80,7 @@ class TransactionCell: UITableViewCell {
             
             typeLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
             typeLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20),
-            typeLabel.widthAnchor.constraint(equalToConstant: 80),
+            typeLabel.widthAnchor.constraint(equalToConstant: 75),
             typeLabel.heightAnchor.constraint(equalToConstant: 20),
             
             dateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
@@ -79,10 +89,6 @@ class TransactionCell: UITableViewCell {
             amountLabel.topAnchor.constraint(equalTo: typeLabel.bottomAnchor, constant: 15),
             amountLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20),
         ])
-        
-//        let imgBottomConstraint = menuImage.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10)
-//        imgBottomConstraint.priority = .defaultLow
-//        imgBottomConstraint.isActive = true
     }
 }
 

@@ -10,25 +10,19 @@ import Combine
 
 protocol GuestListMenuDelegate {
     func addNewMenuData(newMenu: Menu)
-    func updateMenuData(newMenu: Menu)
 }
 
 class GuestListMenuViewController: UIViewController {
     
+    var name, username: String
+    
     private lazy var contentView = GuestListMenuView()
-    private let viewModel: GuestListMenuViewModel
-    private var bindings = Set<AnyCancellable>()
+    private lazy var emptyContentView = EmptyStateView(image: UIImage(named: "EmptyMenu.png")!, title: "Daftar Menu Belum Tersedia", desc: "Daftar menu kamu masih kosong. Klik tombol + diatas untuk menambah menu baru")
     
-    var menuLists = [Menu]() {
-        didSet {
-            DispatchQueue.main.async{
-                self.contentView.listMenuView.tableView.reloadData()
-            }
-        }
-    }
-    
-    init(viewModel: GuestListMenuViewModel = GuestListMenuViewModel()) {
-        self.viewModel = viewModel
+    init(name: String, username: String) {
+        self.name = name
+        self.username = username
+        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -36,15 +30,27 @@ class GuestListMenuViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func loadView() {
-        view = contentView
+    var menuLists = [Menu]() {
+        didSet {
+            if menuLists.count > 0 {
+                view = contentView
+                
+                DispatchQueue.main.async{
+                    self.contentView.listMenuView.tableView.reloadData()
+                }
+            } else {
+                view = emptyContentView
+            }
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-        title = "Masuk"
+        title = "Daftar Menu"
+        
+        menuLists = []
         
         self.contentView.listMenuView.tableView.delegate = self
         self.contentView.listMenuView.tableView.dataSource = self
@@ -53,57 +59,27 @@ class GuestListMenuViewController: UIViewController {
         let iconSize = CGRect(origin: CGPoint.zero, size: CGSize(width: 35, height: 35))
         let iconButton = UIButton(frame: iconSize)
         iconButton.setBackgroundImage(icon, for: .normal)
-        let barButton = UIBarButtonItem(customView: iconButton)
         iconButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
+
+        
+        let barButton = UIBarButtonItem(customView: iconButton)
+        
 
         navigationItem.rightBarButtonItem = barButton
         
-        setUpBindings()
         
         let VC = GuestAddMenuViewController()
+        VC.delegate = self
         let navController = UINavigationController(rootViewController: VC)
         self.present(navController, animated: true, completion: nil)
+        
+        addTargets()
     }
     
-    private func setUpBindings() {
-//        func bindViewToViewModel() {
-//            contentView.usernameField.textPublisher
-//                .receive(on: DispatchQueue.main)
-//                .assign(to: \.username, on: viewModel)
-//                .store(in: &bindings)
-//        }
-//
-//        func bindViewModelToView() {
-//            viewModel.$isUsernameExists
-//                .assign(to: \.isUsernameExists, on: contentView)
-//                .store(in: &bindings)
-//
-//            viewModel.validationResult
-//                .sink { completion in
-//                    switch completion {
-//                    case .failure:
-//                        // Error can be handled here (e.g. alert)
-//                        return
-//                    case .finished:
-//                        return
-//                    }
-//                } receiveValue: { [weak self] res in
-//                    print(res)
-//                }
-//                .store(in: &bindings)
-//
-//        }
-        
-        func bindViewModelToController() {
-            viewModel.$menuLists
-                .assign(to: \.menuLists, on: self)
-                .store(in: &bindings)
-        }
-        
-//        bindViewToViewModel()
-//        bindViewModelToView()
-        bindViewModelToController()
+    func addTargets() {
+        contentView.nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
     }
+    
 }
 
 extension GuestListMenuViewController: UITableViewDataSource, UITableViewDelegate {
@@ -113,25 +89,37 @@ extension GuestListMenuViewController: UITableViewDataSource, UITableViewDelegat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MenuCell", for: indexPath) as? MenuCell else {fatalError("Unable to create menu cell")}
-//
-//        let thisMenu = menuLists[indexPath.row]
-//        var image = thisMenu.imageUrl?.imageFromBase64
-//
-//        if image == nil && !thisMenu.isLoadingImage {
-//            self.viewModel.menuLists[indexPath.row].isLoadingImage = true
-//
-//            DispatchQueue(label: "menuCell\(indexPath.row)").async {
-//                self.cellViewModel.getMenuImage(menu_id: menuLists[indexPath.row]._id)
-//            }
-//        } else if image == nil {
-//            image = ImageMenuDefault
-//        }
         
-//        cell.menuImage.image = image
-        cell.nameLabel.text = menuLists[indexPath.row].name
-        cell.descriptionLabel.text = "@ Rp \(menuLists[indexPath.row].price)"
+        let thisMenu = menuLists[indexPath.row]
+        var image = thisMenu.imageUrl?.imageFromBase64
+
+        if image == nil {
+            image = ImageMenuDefault
+        }
+        
+        cell.menuImage.image = image
+        cell.nameLabel.text = thisMenu.name
+        cell.descriptionLabel.text = "@ \(thisMenu.price.formattedToRupiah)"
 
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let deleteAction = UIContextualAction(style: .normal, title: "Hapus") {
+            (action, sourceView, completionHandler) in
+            
+            self.menuLists.remove(at: indexPath.row)
+
+            completionHandler(true)
+        }
+        deleteAction.backgroundColor = UIColor.Error._50
+        
+        let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction])
+        // Delete should not delete automatically
+        swipeConfiguration.performsFirstActionWithFullSwipe = false
+        
+        return swipeConfiguration
     }
 }
 
@@ -139,9 +127,23 @@ extension GuestListMenuViewController: UITableViewDataSource, UITableViewDelegat
 extension GuestListMenuViewController {
     @objc func addButtonTapped() {
         let VC = GuestAddMenuViewController()
-//        VC.delegate = self
+        VC.delegate = self
         let navController = UINavigationController(rootViewController: VC)
         
         self.present(navController, animated: true, completion: nil)
+    }
+    
+    @objc func nextButtonTapped() {
+        
+        let VC = RegisterPINViewController(name: self.name, username: self.username)
+        VC.guestMenu = menuLists
+        
+        navigationController?.pushViewController(VC, animated: true)
+    }
+}
+
+extension GuestListMenuViewController: GuestListMenuDelegate {
+    func addNewMenuData(newMenu: Menu) {
+        self.menuLists.insert(newMenu, at: 0)
     }
 }

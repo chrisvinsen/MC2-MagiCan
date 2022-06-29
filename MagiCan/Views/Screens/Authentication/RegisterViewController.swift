@@ -112,9 +112,7 @@ extension RegisterViewController {
             timer?.invalidate()
             timer = nil
             
-            let vc = WelcomingAddMenuViewController()
-            vc.name = viewModel.name
-            vc.username = viewModel.username
+            let vc = WelcomingAddMenuViewController(name: viewModel.name, username: viewModel.username)
             
             navigationController?.pushViewController(vc, animated: true)
         } else {

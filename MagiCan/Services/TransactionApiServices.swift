@@ -38,9 +38,6 @@ final class TransactionService: TransactionServiceProtocol {
                     return
                 }
                 
-                let jsonString = String(data: data, encoding: .utf8)!
-                print("DATA : \(jsonString)")
-                
                 do {
                     let lists = try JSONDecoder().decode([Transaction].self, from: data)
                     promise(.success(lists))

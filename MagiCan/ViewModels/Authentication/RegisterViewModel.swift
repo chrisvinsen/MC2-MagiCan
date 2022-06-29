@@ -33,6 +33,7 @@ final class RegisterViewModel {
             }
         }
     }
+    @Published var guestMenu = [Menu]()
 
     @Published var isUsernameValid = false
     @Published var isPinMatch = false
@@ -41,12 +42,15 @@ final class RegisterViewModel {
     
     let validationResult = PassthroughSubject<Void, Error>()
     let registerResult = PassthroughSubject<Void, Error>()
+    let menuResult = PassthroughSubject<Void, Error>()
     
     private let userService: UserServiceProtocol
+    private let menuService: MenuServiceProtocol
     private var bindings = Set<AnyCancellable>()
     
-    init(userService: UserServiceProtocol = UserService()) {
+    init(userService: UserServiceProtocol = UserService(), menuService: MenuServiceProtocol = MenuService()) {
         self.userService = userService
+        self.menuService = menuService
     }
     
     //MARK: - Check Username Validity
@@ -102,5 +106,38 @@ final class RegisterViewModel {
             .register(userRegisterRequest: userRegisterRequest)
             .sink(receiveCompletion: completionHandler, receiveValue: valueHandler)
             .store(in: &bindings)
+    }
+    
+    //MARK: - Post Menu for Guest
+    func addMenu() {
+        
+        for menu in guestMenu.reversed() {
+            
+            let completionHandler: (Subscribers.Completion<Error>) -> Void = { [weak self] completion in
+                switch completion {
+                case let .failure(error):
+                    self?.menuResult.send(completion: .failure(error))
+                case .finished:
+                    self?.menuResult.send(completion: .finished)
+                }
+            }
+            
+            let valueHandler: (Menu) -> Void = { [weak self] newMenu in
+                print(newMenu)
+            }
+            
+            let menuRequest = MenuCRUDRequest(
+                _id: "",
+                name: menu.name,
+                description: menu.description,
+                image_url: menu.imageUrl ?? "",
+                price: menu.price
+            )
+            
+            menuService
+                .addMenuWithImage(menuReq: menuRequest)
+                .sink(receiveCompletion: completionHandler, receiveValue: valueHandler)
+                .store(in: &bindings)
+        }
     }
 }

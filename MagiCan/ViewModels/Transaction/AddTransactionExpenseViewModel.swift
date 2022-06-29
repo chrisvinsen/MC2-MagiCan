@@ -50,8 +50,6 @@ final class AddTransactionExpenseViewModel {
             discount: 0
         )
         
-        print(trxRequest)
-        
         transactionService
             .addTransaction(transactionReq: trxRequest)
             .sink(receiveCompletion: completionHandler, receiveValue: valueHandler)

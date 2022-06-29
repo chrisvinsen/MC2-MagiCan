@@ -11,8 +11,19 @@ class WelcomingAddMenuViewController: UIViewController {
     
     private lazy var contentView = WelcomingAddMenuView()
     
-    var name: String = ""
-    var username: String = ""
+    var name: String
+    var username: String
+    
+    init(name: String, username: String) {
+        self.name = name
+        self.username = username
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         view = contentView
@@ -36,13 +47,13 @@ class WelcomingAddMenuViewController: UIViewController {
 //MARK: - Actions
 extension WelcomingAddMenuViewController {
     @objc func addButtonTapped(_ sender: UIButton) {
-        navigationController?.pushViewController(GuestListMenuViewController(), animated: true)
+        let VC = GuestListMenuViewController(name: self.name, username: self.username)
+        
+        navigationController?.pushViewController(VC, animated: true)
     }
     
     @objc func skipButtonTapped(_ sender: UIButton) {
-        let vc = RegisterPINViewController()
-        vc.name = name
-        vc.username = username
+        let vc = RegisterPINViewController(name: name, username: username)
         navigationController?.pushViewController(vc, animated: true)
     }
 }

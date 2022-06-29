@@ -31,6 +31,9 @@ class GuestListMenuView: UIView {
     }
     
     private func setUpViews() {
+        
+        self.backgroundColor = .white
+        
         listMenuView.translatesAutoresizingMaskIntoConstraints = false
         
         nextButton.translatesAutoresizingMaskIntoConstraints = false

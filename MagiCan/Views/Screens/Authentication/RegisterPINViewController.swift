@@ -12,8 +12,19 @@ class RegisterPINViewController: UIViewController {
 
     private lazy var contentView = PINView(headingText: "Masukkan PIN Baru")
     
-    var name: String = ""
-    var username: String = ""
+    var name, username: String
+    var guestMenu = [Menu]()
+    
+    init(name: String, username: String) {
+        self.name = name
+        self.username = username
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         view = contentView
@@ -41,10 +52,8 @@ extension RegisterPINViewController {
         contentView.pin = sender.text!
         
         if sender.text!.count == 6 {
-            let vc = RegisterConfirmPINViewController()
-            vc.name = name
-            vc.username = username
-            vc.pin = sender.text!
+            let vc = RegisterConfirmPINViewController(name: name, username: username, pin: sender.text!)
+            vc.guestMenu = self.guestMenu
             
             navigationController?.pushViewController(vc, animated: true)
         }

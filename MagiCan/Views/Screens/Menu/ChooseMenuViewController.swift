@@ -87,7 +87,6 @@ extension ChooseMenuViewController: UITableViewDelegate, UITableViewDataSource {
 extension ChooseMenuViewController {
     
     @objc func backButtonTapped() {
-        print("SAVE HERE")
         self.dismiss(animated: true)
     }
 }

@@ -11,12 +11,23 @@ import Combine
 class RegisterConfirmPINViewController: UIViewController {
 
     private lazy var contentView = PINView(headingText: "Konfirmasi PIN Baru")
-    private let viewModel: RegisterViewModel
+    private let viewModel: RegisterViewModel = RegisterViewModel()
     private var bindings = Set<AnyCancellable>()
     
-    var name: String = ""
-    var username: String = ""
-    var pin: String = ""
+    var name, username, pin: String
+    var guestMenu = [Menu]()
+    
+    init(name: String, username: String, pin: String) {
+        self.name = name
+        self.username = username
+        self.pin = pin
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     var isPinMatch: Bool = false {
         didSet {
@@ -37,6 +48,11 @@ class RegisterConfirmPINViewController: UIViewController {
     var isRegisterSuccess: Bool = false {
         didSet {
             if isRegisterSuccess {
+                if guestMenu.count > 0 {
+                    viewModel.guestMenu = self.guestMenu
+                    viewModel.addMenu()
+                }
+                
                 let dashboardVC = UINavigationController(rootViewController: DashboardViewController())
                 let transaksiVC = UINavigationController(rootViewController: TransactionListViewController())
                 let listMenuVC = UINavigationController(rootViewController: ListMenuViewController())
@@ -70,16 +86,6 @@ class RegisterConfirmPINViewController: UIViewController {
                 self.contentView.warningLabel.text = "Terjadi kesalahan, silahkan coba lagi nanti"
             }
         }
-    }
-    
-    init(viewModel: RegisterViewModel = RegisterViewModel()) {
-        self.viewModel = viewModel
-        
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     override func loadView() {

@@ -34,7 +34,6 @@ final class EditMenuViewModel {
             case let .failure(error):
                 self?.result.send(completion: .failure(error))
             case .finished:
-                print("SEND FINISHED")
                 self?.result.send(completion: .finished)
             }
         }
@@ -47,6 +46,7 @@ final class EditMenuViewModel {
             _id: self._id,
             name: self.name,
             description: self.description,
+            image_url: "",
             price: Int64(self.priceString) ?? 0
         )
         

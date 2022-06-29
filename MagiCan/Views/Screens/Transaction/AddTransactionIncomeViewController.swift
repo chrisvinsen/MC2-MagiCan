@@ -30,7 +30,7 @@ class AddTransactionIncomeViewController: UIViewController {
     var transactionType: Int = -1 {
         didSet {
             var transactionTypeName: String
-            let transactionTypeDetails = TransactionExpenseTypeData.filter { $0.key as! Int == transactionType }
+            let transactionTypeDetails = TransactionIncomeTypeData.filter { $0.key as! Int == transactionType }
                 
             if transactionTypeDetails.count > 0 {
                 transactionTypeName = transactionTypeDetails[0].shortValue as! String
@@ -116,8 +116,6 @@ extension AddTransactionIncomeViewController {
     @objc func saveButtonTapped(_ sender: UIButton) {
         if viewModel.transactionType == -1 || viewModel.amountString == "" {
             // ALERT
-            print(viewModel.transactionType)
-            print(viewModel.amountString)
             let alert = UIAlertController(title: "Mohon lengkapi semua data", message: "Tipe transaksi dan total pemasukan tidak boleh kosong", preferredStyle: .alert)
 
             alert.addAction(UIAlertAction(title: "Baik", style: .default, handler: nil))
@@ -291,8 +289,6 @@ extension AddTransactionIncomeViewController: AddTransactionIncomeProtocol {
     }
     
     func updateMenuChosen(menus: [Menu]) {
-        print("MENU CHECKED")
-        print(menus)
         
         menusChosen.removeAll()
         for menu in menus {

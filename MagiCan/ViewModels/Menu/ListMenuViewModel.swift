@@ -62,6 +62,7 @@ final class ListMenuViewModel {
             _id: idToDelete,
             name: "",
             description: "",
+            image_url: "",
             price: 0
         )
         

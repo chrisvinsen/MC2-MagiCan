@@ -28,7 +28,7 @@ struct Menu: Equatable, Hashable, Encodable, Decodable {
 
 //MARK: - Request for API Menu CRUD
 struct MenuCRUDRequest: Equatable, Hashable, Encodable, Decodable {
-    var _id, name, description: String
+    var _id, name, description, image_url: String
     var price: Int64
 }
 

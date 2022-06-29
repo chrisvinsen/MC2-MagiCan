@@ -50,3 +50,15 @@ struct UserRegisterRequest: Equatable, Hashable, Encodable, Decodable {
 struct UserUpdateBalanceRequest: Equatable, Hashable, Encodable, Decodable {
     var updated_balance: Int64
 }
+
+struct UserUpdateDataRequest: Equatable, Hashable, Encodable, Decodable {
+    var name: String
+}
+
+struct UserValidatePINRequest: Equatable, Hashable, Encodable, Decodable {
+    var pin: String
+}
+
+struct UserChangePINRequest: Equatable, Hashable, Encodable, Decodable {
+    var old_pin, new_pin: String
+}

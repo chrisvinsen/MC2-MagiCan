@@ -34,7 +34,6 @@ class TransactionListViewController: UIViewController {
         didSet {
             DispatchQueue.main.async {
                 self.contentView.summaryCard.jumlahPemasukanLabel.text = self.totalIncome.formattedToRupiah
-                self.contentView.summaryCard.keuntunganLabel.text = (self.totalIncome - self.totalExpense).formattedToRupiah
             }
         }
     }
@@ -42,6 +41,13 @@ class TransactionListViewController: UIViewController {
         didSet {
             DispatchQueue.main.async {
                 self.contentView.summaryCard.jumlahPengeluaranLabel.text = self.totalExpense.formattedToRupiah
+            }
+        }
+    }
+    var totalProfit: Int64 = 0 {
+        didSet {
+            DispatchQueue.main.async {
+                self.contentView.summaryCard.keuntunganLabel.text = self.totalProfit.formattedToRupiah
             }
         }
     }
@@ -110,6 +116,10 @@ class TransactionListViewController: UIViewController {
             viewModel.$totalExpense
                 .assign(to: \.totalExpense, on: self)
                 .store(in: &bindings)
+            
+            viewModel.$totalProfit
+                .assign(to: \.totalProfit, on: self)
+                .store(in: &bindings)
         }
         
         func bindViewModelToView() {
@@ -127,6 +137,21 @@ class TransactionListViewController: UIViewController {
                     }
                 } receiveValue: { [weak self] res in
                     print(res)
+                }
+                .store(in: &bindings)
+            
+            // Completion after delete data
+            viewModel.deleteResult
+                .sink { completion in
+                    switch completion {
+                    case .failure:
+                        // Error can be handled here (e.g. alert)
+                        return
+                    case .finished:
+                        return
+                    }
+                } receiveValue: { [weak self] message in
+                    
                 }
                 .store(in: &bindings)
         }
@@ -164,38 +189,75 @@ extension TransactionListViewController: UITableViewDataSource, UITableViewDeleg
         
         switch transaction.category {
         case TransactionCategory.Income.rawValue:
+            
+            cell.isIncome = true
             cell.titleLabel.text = "Pemasukan #\(String(format: "%04d", transaction.iterator))"
+            cell.amountLabel.text = "+ \(transaction.amount.formattedToRupiah)"
             
             switch transaction.type {
-            case TransactionIncomeType.UpdateBalance.rawValue:
-                cell.typeLabel.text = String(describing: TransactionIncomeType.UpdateBalance)
             case TransactionIncomeType.Offline.rawValue:
                 cell.typeLabel.text = String(describing: TransactionIncomeType.Offline)
             case TransactionIncomeType.Online.rawValue:
                 cell.typeLabel.text = String(describing: TransactionIncomeType.Online)
-            default: break
+            default:
+                cell.typeLabel.text = "Kas Usaha"
             }
             
         case TransactionCategory.Expense.rawValue:
+            
+            cell.isIncome = false
             cell.titleLabel.text = "Pengeluaran #\(String(format: "%04d", transaction.iterator))"
+            cell.amountLabel.text = "- \(transaction.amount.formattedToRupiah)"
             
             switch transaction.type {
-            case TransactionExpenseType.UpdateBalance.rawValue:
-                cell.typeLabel.text = String(describing: TransactionExpenseType.UpdateBalance)
             case TransactionExpenseType.Pribadi.rawValue:
                 cell.typeLabel.text = String(describing: TransactionExpenseType.Pribadi)
             case TransactionExpenseType.Usaha.rawValue:
                 cell.typeLabel.text = String(describing: TransactionExpenseType.Usaha)
-            default: break
+            default:
+                cell.typeLabel.text = "Kas Usaha"
             }
             
         default: break
         }
         
         cell.dateLabel.text = transaction.dateString
-        cell.amountLabel.text = transaction.amount.formattedToRupiah
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let deleteAction = UIContextualAction(style: .normal, title: "Hapus") {
+            (action, sourceView, completionHandler) in
+            
+            let thisTrx = self.transactionLists[indexPath.row]
+            
+            self.viewModel.deleteTransaction(idToDelete: thisTrx._id)
+            
+//            if let idx = self.viewModel.transactionLists.firstIndex(where: { $0._id == self.transactionLists[indexPath.row]._id }) {
+            self.viewModel.transactionLists.remove(at: indexPath.row)
+            
+            switch thisTrx.category {
+            case TransactionCategory.Income.rawValue:
+                self.viewModel.totalIncome -= thisTrx.amount
+                self.viewModel.totalProfit -= thisTrx.amount
+            case TransactionCategory.Expense.rawValue:
+                self.viewModel.totalExpense -= thisTrx.amount
+                self.viewModel.totalProfit += thisTrx.amount
+            default: break
+            }
+//            }
+
+            completionHandler(true)
+        }
+        deleteAction.backgroundColor = UIColor.Error._50
+        
+        let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction])
+        // Delete should not delete automatically
+        swipeConfiguration.performsFirstActionWithFullSwipe = false
+        
+        return swipeConfiguration
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

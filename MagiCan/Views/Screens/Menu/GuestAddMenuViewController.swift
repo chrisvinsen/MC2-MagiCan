@@ -12,20 +12,16 @@ import UniformTypeIdentifiers
 class GuestAddMenuViewController: UIViewController {
     
     private lazy var contentView = AddMenuView()
-    private let viewModel: GuestAddMenuViewModel
-    private var bindings = Set<AnyCancellable>()
     
     var delegate: GuestListMenuDelegate!
     
     
-    init(viewModel: GuestAddMenuViewModel = GuestAddMenuViewModel()) {
-        self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
+    var base64Image: String = "" {
+        didSet {
+            self.contentView.base64Image = self.base64Image
+        }
     }
     
-    required init(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     override func loadView() {
         view = contentView
@@ -42,86 +38,11 @@ class GuestAddMenuViewController: UIViewController {
         navigationItem.leftBarButtonItem = leftBarButtonItem
         
         setUpTargets()
-        setUpBindings()
     }
     
     private func setUpTargets() {
         contentView.addButton.addTarget(self, action: #selector(addButtonTapped(_ :)), for: .touchUpInside)
         contentView.saveButton.addTarget(self, action: #selector(saveButtonTapped(_ :)), for: .touchUpInside)
-    }
-    
-    private func setUpBindings() {
-        func bindViewToViewModel() {
-            contentView.nameField.textPublisher
-                .receive(on: DispatchQueue.main)
-                .assign(to: \.name, on: viewModel)
-                .store(in: &bindings)
-            
-            contentView.priceField.textPublisher
-                .receive(on: DispatchQueue.main)
-                .assign(to: \.priceString, on: viewModel)
-                .store(in: &bindings)
-            
-            contentView.descriptionField.textPublisher
-                .receive(on: DispatchQueue.main)
-                .assign(to: \.description, on: viewModel)
-                .store(in: &bindings)
-        }
-        
-        func bindViewModelToView() {
-            viewModel.$base64Image
-                .assign(to: \.base64Image, on: contentView)
-                .store(in: &bindings)
-            
-//            viewModel.result
-//                .sink { completion in
-//                    switch completion {
-//                    case .failure:
-//                        // Error can be handled here (e.g. alert)
-//                        return
-//                    case .finished:
-//                        self.dismiss(animated: true)
-//                        
-//                        return
-//                    }
-//                } receiveValue: { [weak self] newMenu in
-//
-//                    self?.delegate.addNewMenuData(newMenu: Menu(
-//                        _id: "",
-//                        name: newMenu.name,
-//                        description: newMenu.description,
-//                        imageUrl: self?.viewModel.base64Image ?? "",
-//                        price: newMenu.price,
-//                        isLoadingImage: true
-//                    ))
-//                    
-//                    if self?.viewModel.base64Image != "" {
-//                        DispatchQueue.main.async {
-//                            self?.viewModel.addUpdateMenuImage(menuId: newMenu._id)
-//                        }
-//                    }
-//                }
-//                .store(in: &bindings)
-//            
-//            viewModel.resultImage
-//                .sink { completion in
-//                    switch completion {
-//                    case .failure:
-//                        // Error can be handled here (e.g. alert)
-//                        return
-//                    case .finished:
-//                        
-//                        return
-//                    }
-//                } receiveValue: { [weak self] newMenu in
-//                    print(newMenu)
-//                }
-//                .store(in: &bindings)
-            
-        }
-        
-        bindViewToViewModel()
-        bindViewModelToView()
     }
 }
 
@@ -129,7 +50,6 @@ class GuestAddMenuViewController: UIViewController {
 extension GuestAddMenuViewController {
     
     @objc func addButtonTapped(_ sender: UIButton) {
-        print("Add Button Tapped")
         
         let alert = UIAlertController(title: "Pilih Foto", message: nil, preferredStyle: .actionSheet)
         
@@ -149,7 +69,32 @@ extension GuestAddMenuViewController {
     }
     
     @objc func saveButtonTapped(_ sender: UIButton) {
-        viewModel.addMenu()
+        
+        let nameVal = self.contentView.nameField.text
+        let descVal = self.contentView.descriptionField.text
+        let priceVal = Int64(self.contentView.priceField.text!) ?? 0
+        
+        if nameVal == "" {
+            let alert = UIAlertController(title: "Mohon lengkapi semua data", message: "Nama menu tidak boleh kosong", preferredStyle: .alert)
+
+            alert.addAction(UIAlertAction(title: "Baik", style: .default, handler: nil))
+
+            self.present(alert, animated: true)
+            
+            return
+        }
+        
+        delegate.addNewMenuData(newMenu: Menu(
+            _id: "",
+            name: nameVal!,
+            description: descVal ?? "",
+            imageUrl: self.base64Image,
+            price: priceVal,
+            isLoadingImage: false,
+            isMenuChosen: false)
+        )
+        
+        self.dismiss(animated: true)
     }
     
     @objc func cancelButtonTapped() {
@@ -192,6 +137,6 @@ extension GuestAddMenuViewController: UIImagePickerControllerDelegate, UINavigat
         }
 
         // print out the image size as a test
-        self.viewModel.base64Image = image.base64 ?? ""
+        self.base64Image = image.base64 ?? ""
     }
 }

@@ -7,12 +7,16 @@
 
 import UIKit
 
-class DashboardView: UIScrollView {
+class DashboardView: UIView {
     
     var predictionAndMenuAvaiable: Bool
     
-    let titleLabel = UILabel()
-    let profileIcon = UIImageView()
+    lazy var scrollView = UIScrollView()
+    lazy var contentView = UIView()
+    lazy var stackView = UIStackView()
+    
+//    let titleLabel = UILabel()
+//    let profileIcon = UIImageView()
     let cardKasUsaha = CardKasUsaha()
     let carouselStatistik = Carousel()
     
@@ -36,24 +40,31 @@ class DashboardView: UIScrollView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func viewDidLoad() {
-        self.isScrollEnabled = true
-        self.contentSize = CGSize(width:400, height: 2300)
-        self.translatesAutoresizingMaskIntoConstraints = false
-    }
+//    func viewDidLoad() {
+//        self.isScrollEnabled = true
+//        self.contentSize = CGSize(width:400, height: 2300)
+//        self.translatesAutoresizingMaskIntoConstraints = false
+//    }
     
     private func addSubviews() {
+        
+        self.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(stackView)
+        
         switch predictionAndMenuAvaiable {
         case true:
-            [titleLabel, profileIcon, cardKasUsaha, carouselStatistik, sectionPrediksiPenjualanFilled, sectionMenuAndalanFilled]
+            // titleLabel, profileIcon,
+            [cardKasUsaha, carouselStatistik, sectionPrediksiPenjualanFilled, sectionMenuAndalanFilled]
                 .forEach {
-                    addSubview($0)
+                    stackView.addArrangedSubview($0)
                     $0.translatesAutoresizingMaskIntoConstraints = false
                 }
         case false:
-            [titleLabel, profileIcon, cardKasUsaha, carouselStatistik, sectionPrediksiPenjualan, sectionMenuAndalan]
+            // titleLabel, profileIcon
+            [cardKasUsaha, carouselStatistik, sectionPrediksiPenjualan, sectionMenuAndalan]
                 .forEach {
-                    addSubview($0)
+                    stackView.addArrangedSubview($0)
                     $0.translatesAutoresizingMaskIntoConstraints = false
                 }
         }
@@ -79,10 +90,24 @@ class DashboardView: UIScrollView {
         self.clipsToBounds = true
         self.backgroundColor = .white
         
-        titleLabel.font = Font.headingSix.getUIFont
-        titleLabel.text = "Selamat datang, XXX"
+        // Scroll View
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsHorizontalScrollIndicator = false
         
-        profileIcon.image = UIImage(named: "Profile Icon.png")
+        // Container
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Stack View
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.spacing = 15
+        
+//        titleLabel.font = Font.headingSix.getUIFont
+//        titleLabel.text = "Selamat datang, XXX"
+//
+//        profileIcon.image = UIImage(named: "Profile Icon.png")
+//        profileIcon.contentMode = .scaleAspectFit
         
         // shadow for cardKasUsaha
         cardKasUsaha.layer.masksToBounds = false
@@ -124,24 +149,45 @@ class DashboardView: UIScrollView {
         let safeArea = safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
-            self.leftAnchor.constraint(equalTo: safeArea.leftAnchor),
-            self.rightAnchor.constraint(equalTo: safeArea.rightAnchor),
+            // Scroll View
+            scrollView.topAnchor.constraint(equalTo: self.topAnchor),
+            scrollView.rightAnchor.constraint(equalTo: self.rightAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            scrollView.leftAnchor.constraint(equalTo: self.leftAnchor),
             
-            titleLabel.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 20),
-            titleLabel.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
-            titleLabel.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
+            // Content View
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.rightAnchor.constraint(equalTo: scrollView.rightAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.leftAnchor.constraint(equalTo: scrollView.leftAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
-            profileIcon.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 20),
-            profileIcon.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
+            // Stack View
+            stackView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            stackView.rightAnchor.constraint(equalTo: contentView.rightAnchor),
+            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            stackView.leftAnchor.constraint(equalTo: contentView.leftAnchor),
             
-            cardKasUsaha.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 30),
+//            self.leftAnchor.constraint(equalTo: safeArea.leftAnchor),
+//            self.rightAnchor.constraint(equalTo: safeArea.rightAnchor),
+            
+//            titleLabel.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 20),
+//            titleLabel.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
+//            titleLabel.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
+//
+//            profileIcon.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 20),
+//            profileIcon.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
+//
+            cardKasUsaha.topAnchor.constraint(equalTo: stackView.topAnchor, constant: 20),
             cardKasUsaha.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
             cardKasUsaha.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
-            
-            carouselStatistik.topAnchor.constraint(equalTo: cardKasUsaha.bottomAnchor, constant: 10),
-            carouselStatistik.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
+//
+//            carouselStatistik.topAnchor.constraint(equalTo: cardKasUsaha.bottomAnchor, constant: 10),
+//            carouselStatistik.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
             carouselStatistik.heightAnchor.constraint(equalToConstant: 150),
-            carouselStatistik.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20)
+//            carouselStatistik.topAnchor.constraint(equalTo: cardKasUsaha.bottomAnchor, constant: 20),
+//            carouselStatistik.bottomAnchor.constraint(equalTo: sectionPrediksiPenjualan.topAnchor, constant: -20),
+//            carouselStatistik.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20)
         ])
         
         switch predictionAndMenuAvaiable {

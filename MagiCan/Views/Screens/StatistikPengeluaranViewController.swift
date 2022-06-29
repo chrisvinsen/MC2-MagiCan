@@ -16,7 +16,6 @@ class StatistikPengeluaranViewController: UIViewController {
         didSet {
             DispatchQueue.main.async{
                 self.statistikPengeluaranView.riwayatTable.reloadData()
-                print(self.transactionLists.count)
             }
         }
     }
@@ -24,7 +23,6 @@ class StatistikPengeluaranViewController: UIViewController {
     var totalExpense: Int64 = 0 {
         didSet {
             DispatchQueue.main.async {
-                print("SET SUMMARY")
 //                var summary = getTransactionSummaryFromList(transactionLists: self.transactionLists)
 //                self.statistikPengeluaranView.totalPengeluaranValue.text = summary.totalExpense.formattedToRupiah
                 self.statistikPengeluaranView.totalPengeluaranValue.text = self.totalExpense.formattedToRupiah
@@ -92,10 +90,8 @@ class StatistikPengeluaranViewController: UIViewController {
                     switch completion {
                     case .failure:
                         // Error can be handled here (e.g. alert)
-                        print("FAILURE")
                         return
                     case .finished:
-                        print("FINISHED")
                         return
                     }
                 } receiveValue: { [weak self] res in

@@ -18,13 +18,28 @@ struct CarouselData {
 
 class DashboardViewController: UIViewController {
     
+    var name: String = "" {
+        didSet {
+            var tempName = "Tamu"
+            if name != "" {
+                tempName = name;
+            }
+            
+            let label = UILabel()
+            label.font = Font.headingSix.getUIFont
+            label.textColor = UIColor.Neutral._90
+            label.text = "Selamat Datang, \(tempName)"
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
+        }
+    }
+    
     let dashboardView = DashboardView(status: false)
     
     var carouselData = [CarouselData]()
     
     var userDetail: User?
     
-    var kasAmount: Int64 = 3000 {
+    var kasAmount: Int64 = 0 {
         didSet {
             self.dashboardView.cardKasUsaha.kasValue.text = self.kasAmount.formattedToRupiah
         }
@@ -34,7 +49,6 @@ class DashboardViewController: UIViewController {
         didSet {
             DispatchQueue.main.async{
                 self.dashboardView.carouselStatistik.carouselCollectionView.reloadData()
-//                print(self.transactionLists.count)
             }
         }
     }
@@ -42,7 +56,6 @@ class DashboardViewController: UIViewController {
     var totalIncome: Int64 = 0 {
         didSet {
             DispatchQueue.main.async {
-//                print("SET SUMMARY")
                 
                 var keuntungan = self.totalIncome - self.totalExpense
                 
@@ -51,7 +64,7 @@ class DashboardViewController: UIViewController {
                 self.carouselData[2].cardAmount = self.totalExpense.formattedToRupiah
                 
                 if keuntungan < 0 {
-                    self.carouselData[0].cardColor = UIColor(red: 224, green: 172, blue: 81, alpha: 1)
+                    self.carouselData[0].cardColor = #colorLiteral(red: 0.9164255261, green: 0.6640771031, blue: 0.2302021682, alpha: 1)
                 }
                 
                 self.dashboardView.carouselStatistik.carouselCollectionView.reloadData()
@@ -105,6 +118,15 @@ class DashboardViewController: UIViewController {
         
         setupStyle()
         setupLayout()
+        
+        let icon = UIImage(systemName: "person.circle.fill")
+        let iconSize = CGRect(origin: CGPoint.zero, size: CGSize(width: 35, height: 35))
+        let iconButton = UIButton(frame: iconSize)
+        iconButton.setBackgroundImage(icon, for: .normal)
+        let barButton = UIBarButtonItem(customView: iconButton)
+        iconButton.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
+
+        self.navigationItem.rightBarButtonItem = barButton
     }
     
     private func setUpTargets() {
@@ -138,14 +160,12 @@ class DashboardViewController: UIViewController {
                     switch completion {
                     case .failure:
                         // Error can be handled here (e.g. alert)
-                        print("FAILURE user detail")
                         return
                     case .finished:
-                        print("FINISHED")
                         return
                     }
                 } receiveValue: { [weak self] res in
-//                    print(res)
+                    self?.name = res.name
                 }
                 .store(in: &bindings)
             
@@ -154,10 +174,8 @@ class DashboardViewController: UIViewController {
                     switch completion {
                     case .failure:
                         // Error can be handled here (e.g. alert)
-                        print("FAILURE trasanction")
                         return
                     case .finished:
-                        print("FINISHED")
                         return
                     }
                 } receiveValue: { [weak self] res in
@@ -236,10 +254,32 @@ extension DashboardViewController: UICollectionViewDelegate {
 
 extension DashboardViewController {
     @objc func cardKasUsahaButtonTapped(_ sender: UIButton) {
-        let VC = KasUsahaModalViewController()
-        let navController = UINavigationController(rootViewController: VC)
         
-        self.present(navController, animated: true, completion: nil)
+        let alert = UIAlertController(title: "Atur Kas", message: "Masukkan nilai nominal kas awal", preferredStyle: .alert)
+
+        alert.addTextField { (textField) in
+            textField.text = ""
+        }
+
+        alert.addAction(UIAlertAction(title: "Batal", style: .cancel, handler: { [weak alert] (_) in
+            
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Simpan", style: .default, handler: { [weak alert] (_) in
+            let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
+            
+            self.viewModel.kasAmountEdit = textField?.text ?? "0"
+            self.viewModel.saveKasAmount()
+        }))
+
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    @objc func profileButtonTapped() {
+        
+        let VC = ProfileViewController()
+        
+        navigationController?.pushViewController(VC, animated: true)
     }
 }
 

@@ -108,8 +108,6 @@ extension AddTransactionExpenseViewController {
     @objc func saveButtonTapped(_ sender: UIButton) {
         if viewModel.transactionType == -1 || viewModel.amountString == "" {
             // ALERT
-            print(viewModel.transactionType)
-            print(viewModel.amountString)
             let alert = UIAlertController(title: "Mohon lengkapi semua data", message: "Tipe transaksi dan total pengeluaran tidak boleh kosong", preferredStyle: .alert)
 
             alert.addAction(UIAlertAction(title: "Baik", style: .default, handler: nil))

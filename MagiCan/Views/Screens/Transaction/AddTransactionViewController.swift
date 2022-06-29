@@ -41,7 +41,6 @@ class AddTransactionViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        print("WILL DISAPPEAR")
         delegate.reloadDataTable()
     }
     
@@ -60,7 +59,6 @@ extension AddTransactionViewController {
     
     @objc func segmentedValueChanged(_ sender:UISegmentedControl!) {
         
-        print("Selected Segment Index is : \(sender.selectedSegmentIndex)")
         if sender.selectedSegmentIndex == 0 {
             remove(asChildViewController: expenseViewController)
             add(asChildViewController: incomeViewController)
@@ -75,7 +73,6 @@ extension AddTransactionViewController {
 // MARK: - Custom Functions
 extension AddTransactionViewController {
     private func add(asChildViewController viewController: UIViewController) {
-        print("WILL ADD")
         // Add Child View Controller
         addChild(viewController)
 
@@ -93,7 +90,6 @@ extension AddTransactionViewController {
     //----------------------------------------------------------------
 
     private func remove(asChildViewController viewController: UIViewController) {
-        print("WILL REMOVE")
         // Notify Child View Controller
         viewController.willMove(toParent: nil)
 
