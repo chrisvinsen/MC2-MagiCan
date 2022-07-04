@@ -168,7 +168,7 @@ extension TransactionListViewController {
         let VC = AddTransactionViewController()
         VC.delegate = self
         VC.title = "Transaksi Baru"
-//        VC.delegate = self
+
         let navController = UINavigationController(rootViewController: VC)
         
         self.present(navController, animated: true, completion: nil)

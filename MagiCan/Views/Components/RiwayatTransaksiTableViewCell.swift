@@ -23,8 +23,9 @@ class RiwayatTransaksiTableViewCell: UITableViewCell {
                 transaksiCategory.textColor = UIColor.Secondary._50
                 transaksiCategory.backgroundColor = UIColor(red: 250/255, green: 243/255, blue: 201/255, alpha: 0.5)
             default:
-                transaksiAmount.textColor = UIColor.Primary._30
-                transaksiCategory.backgroundColor = UIColor.Neutral._30
+                break
+//                transaksiAmount.textColor = UIColor.Primary._30
+//                transaksiCategory.backgroundColor = UIColor.Neutral._30
             }
         }
     }

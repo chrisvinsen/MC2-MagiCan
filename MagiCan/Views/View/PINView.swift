@@ -74,6 +74,8 @@ class PINView: UIView {
     }
     
     private func setUpViews() {
+        self.backgroundColor = .white
+        
         // Image View
         imageView.image = UIImage(named: "PIN.png")
         imageView.contentMode = .scaleAspectFit

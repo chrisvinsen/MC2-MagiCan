@@ -21,7 +21,6 @@ class ChangePINViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
         title = "Ubah PIN"
         
         setUpTargets()
@@ -53,6 +52,7 @@ class ChangePINViewController: UIViewController {
                 } receiveValue: { [weak self] isValidated in
                     if isValidated {
                         let VC = ChangeConfirmPINViewController()
+                        VC.oldPIN = self?.viewModel.oldPIN ?? ""
                         self?.navigationController?.pushViewController(VC, animated: true)
                         
                     } else {
@@ -75,5 +75,6 @@ extension ChangePINViewController {
     @objc func PINFieldEdited(_ sender: UITextField) {
         // Limit 6 PIN length
         sender.text = sender.text![0..<6]
+        contentView.pin = sender.text ?? ""
     }
 }

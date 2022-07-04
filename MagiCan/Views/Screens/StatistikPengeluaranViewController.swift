@@ -121,13 +121,12 @@ extension StatistikPengeluaranViewController: UITableViewDataSource {
         cell.transaksiDate.text = transaction.dateString
         
         switch transaction.type {
-        case TransactionExpenseType.UpdateBalance.rawValue:
-            cell.transaksiCategory.text = String(describing: TransactionExpenseType.UpdateBalance)
         case TransactionExpenseType.Pribadi.rawValue:
             cell.transaksiCategory.text = String(describing: TransactionExpenseType.Pribadi)
         case TransactionExpenseType.Usaha.rawValue:
             cell.transaksiCategory.text = String(describing: TransactionExpenseType.Usaha)
-        default: break
+        default:
+            cell.transaksiCategory.text = "Kas Usaha"
         }
 
         cell.transaksiAmount.text = "- " + transaction.amount.formattedToRupiah
