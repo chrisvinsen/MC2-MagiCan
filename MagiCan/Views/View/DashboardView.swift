@@ -15,8 +15,21 @@ class DashboardView: UIView {
     lazy var contentView = UIView()
     lazy var stackView = UIStackView()
     
-//    let titleLabel = UILabel()
+    let titleLabel = UILabel()
+    var name: String = "" {
+        didSet {
+            var tempName = "Tamu"
+            if name != "" {
+                tempName = name;
+            }
+            self.titleLabel.font = Font.headingSix.getUIFont
+            self.titleLabel.textColor = UIColor.Neutral._90
+            self.titleLabel.text = "Selamat Datang, \(tempName)"
+        }
+    }
 //    let profileIcon = UIImageView()
+    let profileButton = UIButton()
+    
     let cardKasUsaha = CardKasUsaha()
     let carouselStatistik = Carousel()
     
@@ -25,6 +38,7 @@ class DashboardView: UIView {
     
     let sectionPrediksiPenjualanFilled = CardPrediksiPenjualan()
     let sectionMenuAndalanFilled = CardMenuAndalan()
+    
     
     init(status: Bool = false) {
         predictionAndMenuAvaiable = status
@@ -40,11 +54,12 @@ class DashboardView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-//    func viewDidLoad() {
-//        self.isScrollEnabled = true
-//        self.contentSize = CGSize(width:400, height: 2300)
-//        self.translatesAutoresizingMaskIntoConstraints = false
-//    }
+    func viewDidLoad() {
+        let icon = UIImage(systemName: "person.circle.fill")
+        let iconSize = CGRect(origin: CGPoint.zero, size: CGSize(width: 35, height: 35))
+        profileButton.setBackgroundImage(icon, for: .normal)
+        profileButton.frame = iconSize
+    }
     
     private func addSubviews() {
         
@@ -55,14 +70,14 @@ class DashboardView: UIView {
         switch predictionAndMenuAvaiable {
         case true:
             // titleLabel, profileIcon,
-            [cardKasUsaha, carouselStatistik, sectionPrediksiPenjualanFilled, sectionMenuAndalanFilled]
+            [titleLabel, profileButton, cardKasUsaha, carouselStatistik, sectionPrediksiPenjualanFilled, sectionMenuAndalanFilled]
                 .forEach {
                     stackView.addArrangedSubview($0)
                     $0.translatesAutoresizingMaskIntoConstraints = false
                 }
         case false:
             // titleLabel, profileIcon
-            [cardKasUsaha, carouselStatistik, sectionPrediksiPenjualan, sectionMenuAndalan]
+            [titleLabel, profileButton, cardKasUsaha, carouselStatistik, sectionPrediksiPenjualan, sectionMenuAndalan]
                 .forEach {
                     stackView.addArrangedSubview($0)
                     $0.translatesAutoresizingMaskIntoConstraints = false
@@ -102,12 +117,6 @@ class DashboardView: UIView {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.spacing = 15
-        
-//        titleLabel.font = Font.headingSix.getUIFont
-//        titleLabel.text = "Selamat datang, XXX"
-//
-//        profileIcon.image = UIImage(named: "Profile Icon.png")
-//        profileIcon.contentMode = .scaleAspectFit
         
         // shadow for cardKasUsaha
         cardKasUsaha.layer.masksToBounds = false
@@ -178,7 +187,21 @@ class DashboardView: UIView {
 //            profileIcon.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 20),
 //            profileIcon.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
 //
-            cardKasUsaha.topAnchor.constraint(equalTo: stackView.topAnchor, constant: 20),
+            self.leftAnchor.constraint(equalTo: safeArea.leftAnchor),
+            self.rightAnchor.constraint(equalTo: safeArea.rightAnchor),
+                        
+            titleLabel.topAnchor.constraint(equalTo: stackView.topAnchor, constant: 100),
+            titleLabel.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
+//            titleLabel.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
+
+            profileButton.topAnchor.constraint(equalTo: stackView.topAnchor, constant: 100),
+            profileButton.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
+            
+//            cardKasUsaha.topAnchor.constraint(equalTo: stackView.topAnchor, constant: 20),
+//            cardKasUsaha.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
+//            cardKasUsaha.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
+            
+            cardKasUsaha.topAnchor.constraint(equalTo: titleLabel.topAnchor, constant: 20),
             cardKasUsaha.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
             cardKasUsaha.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
 //

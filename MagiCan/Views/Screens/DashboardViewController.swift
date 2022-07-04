@@ -29,7 +29,7 @@ class DashboardViewController: UIViewController {
             label.font = Font.headingSix.getUIFont
             label.textColor = UIColor.Neutral._90
             label.text = "Selamat Datang, \(tempName)"
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
+//            self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
         }
     }
     
@@ -126,7 +126,7 @@ class DashboardViewController: UIViewController {
         let barButton = UIBarButtonItem(customView: iconButton)
         iconButton.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
 
-        self.navigationItem.rightBarButtonItem = barButton
+//        self.navigationItem.rightBarButtonItem = barButton
     }
     
     private func setUpTargets() {
