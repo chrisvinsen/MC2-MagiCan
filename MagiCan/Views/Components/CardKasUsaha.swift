@@ -10,12 +10,17 @@ import UIKit
 
 class CardKasUsaha: UIView {
     
-    var kasIsSet = false
+    var kasIsSet: Bool = true {
+        didSet {
+            self.re
+        }
+    }
     
     lazy var kasLabel = RegularLabel()
     lazy var kasValue = UILabel()
     lazy var button = SecondaryButton()
-    lazy var editIcon = UIImageView()
+    lazy var editButton = UIButton()
+//    lazy var editIcon = UIImageView()
     
     init() {
         super.init(frame: .zero)
@@ -32,7 +37,7 @@ class CardKasUsaha: UIView {
     private func addSubviews() {
         switch kasIsSet {
         case true:
-            [kasLabel, kasValue, editIcon]
+            [kasLabel, kasValue, editButton]
                 .forEach {
                     addSubview($0)
                     $0.translatesAutoresizingMaskIntoConstraints = false
@@ -58,7 +63,12 @@ class CardKasUsaha: UIView {
         button.setTitle("Set Kas Usaha", for: .normal)
         button.contentEdgeInsets =  UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         
-        editIcon.image = UIImage(named: "Edit Kas.png")
+//        editIcon.image = UIImage(named: "Edit Kas.png")
+        
+        let icon = UIImage(named: "Edit Kas.png")
+        let iconSize = CGRect(origin: CGPoint.zero, size: CGSize(width: 35, height: 35))
+        editButton.setBackgroundImage(icon, for: .normal)
+        editButton.frame = iconSize
     }
     
     private func setUpConstraints() {
@@ -81,8 +91,10 @@ class CardKasUsaha: UIView {
         switch kasIsSet {
         case true:
             NSLayoutConstraint.activate([
-                editIcon.centerYAnchor.constraint(equalTo: safeArea.centerYAnchor),
-                editIcon.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -15)
+                editButton.centerYAnchor.constraint(equalTo: safeArea.centerYAnchor),
+                editButton.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -15)
+//                editIcon.centerYAnchor.constraint(equalTo: safeArea.centerYAnchor),
+//                editIcon.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -15)
             ])
         case false:
             NSLayoutConstraint.activate([

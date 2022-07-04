@@ -49,6 +49,7 @@ struct UserRegisterRequest: Equatable, Hashable, Encodable, Decodable {
 //MARK: - Request for API User Register
 struct UserUpdateBalanceRequest: Equatable, Hashable, Encodable, Decodable {
     var updated_balance: Int64
+    var is_create_transaction: Bool
 }
 
 struct UserUpdateDataRequest: Equatable, Hashable, Encodable, Decodable {

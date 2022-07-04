@@ -18,6 +18,8 @@ struct CarouselData {
 
 class DashboardViewController: UIViewController {
     
+    let dashboardView = DashboardView(statusPrediction: false, statusKas: false)
+    
     var name: String = "" {
         didSet {
             var tempName = "Tamu"
@@ -25,15 +27,15 @@ class DashboardViewController: UIViewController {
                 tempName = name;
             }
             
-            let label = UILabel()
-            label.font = Font.headingSix.getUIFont
-            label.textColor = UIColor.Neutral._90
-            label.text = "Selamat Datang, \(tempName)"
+            dashboardView.name = self.name
+            print("ini nama", name)
+//            let label = UILabel()
+//            label.font = Font.headingSix.getUIFont
+//            label.textColor = UIColor.Neutral._90
+//            label.text = "Selamat Datang, \(tempName)"
 //            self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
         }
     }
-    
-    let dashboardView = DashboardView(status: false)
     
     var carouselData = [CarouselData]()
     
@@ -41,7 +43,12 @@ class DashboardViewController: UIViewController {
     
     var kasAmount: Int64 = 0 {
         didSet {
-            self.dashboardView.cardKasUsaha.kasValue.text = self.kasAmount.formattedToRupiah
+            DispatchQueue.main.async{
+                self.dashboardView.cardKasUsaha.kasValue.text = self.kasAmount.formattedToRupiah
+                if self.kasAmount != 0 {
+                    self.dashboardView.kasIsSet = true
+                }
+            }
         }
     }
     
@@ -65,6 +72,7 @@ class DashboardViewController: UIViewController {
                 
                 if keuntungan < 0 {
                     self.carouselData[0].cardColor = #colorLiteral(red: 0.9164255261, green: 0.6640771031, blue: 0.2302021682, alpha: 1)
+                    self.carouselData[0].cardLabel = "Total Kerugian"
                 }
                 
                 self.dashboardView.carouselStatistik.carouselCollectionView.reloadData()
@@ -119,18 +127,19 @@ class DashboardViewController: UIViewController {
         setupStyle()
         setupLayout()
         
-        let icon = UIImage(systemName: "person.circle.fill")
-        let iconSize = CGRect(origin: CGPoint.zero, size: CGSize(width: 35, height: 35))
-        let iconButton = UIButton(frame: iconSize)
-        iconButton.setBackgroundImage(icon, for: .normal)
-        let barButton = UIBarButtonItem(customView: iconButton)
-        iconButton.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
+//        let icon = UIImage(systemName: "person.circle.fill")
+//        let iconSize = CGRect(origin: CGPoint.zero, size: CGSize(width: 35, height: 35))
+//        let iconButton = UIButton(frame: iconSize)
+//        iconButton.setBackgroundImage(icon, for: .normal)
+//        let barButton = UIBarButtonItem(customView: iconButton)
+//        iconButton.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
 
 //        self.navigationItem.rightBarButtonItem = barButton
     }
     
     private func setUpTargets() {
         dashboardView.cardKasUsaha.button.addTarget(self, action: #selector(cardKasUsahaButtonTapped(_ :)), for: .touchUpInside)
+        dashboardView.cardKasUsaha.editButton.addTarget(self, action: #selector(cardKasUsahaEditButtonTapped(_ :)), for: .touchUpInside)
     }
     
     private func setUpBindings() {
@@ -269,6 +278,30 @@ extension DashboardViewController {
             let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
             
             self.viewModel.kasAmountEdit = textField?.text ?? "0"
+            self.viewModel.kasCreateTransaction = false
+            self.viewModel.saveKasAmount()
+        }))
+
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    @objc func cardKasUsahaEditButtonTapped(_ sender: UIButton) {
+        
+        let alert = UIAlertController(title: "Atur Kas", message: "Masukkan nilai nominal kas awal", preferredStyle: .alert)
+
+        alert.addTextField { (textField) in
+            textField.text = ""
+        }
+
+        alert.addAction(UIAlertAction(title: "Batal", style: .cancel, handler: { [weak alert] (_) in
+            
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Simpan", style: .default, handler: { [weak alert] (_) in
+            let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
+            
+            self.viewModel.kasAmountEdit = textField?.text ?? "0"
+            self.viewModel.kasCreateTransaction = true
             self.viewModel.saveKasAmount()
         }))
 

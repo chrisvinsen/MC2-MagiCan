@@ -12,6 +12,7 @@ final class DashboardViewModel {
 //    @Published var userDetail: User?
     @Published var kasAmount: Int64 = 0
     @Published var kasAmountEdit: String = "0"
+    @Published var kasCreateTransaction: Bool = true
     
     @Published var transactionLists: [Transaction] = []
     @Published var totalIncome: Int64 = 0
@@ -72,7 +73,7 @@ final class DashboardViewModel {
             self?.kasAmount = userDetail.currentBalance
         }
         
-        let userReq = UserUpdateBalanceRequest(updated_balance: Int64(kasAmountEdit) ?? 0)
+        let userReq = UserUpdateBalanceRequest(updated_balance: Int64(kasAmountEdit) ?? 0, is_create_transaction: kasCreateTransaction)
         
         statisticsService
             .editKasAmount(userReq: userReq)
