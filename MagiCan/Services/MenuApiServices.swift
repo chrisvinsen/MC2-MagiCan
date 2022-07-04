@@ -179,8 +179,6 @@ final class MenuService: MenuServiceProtocol {
         
         guard let url = components.url else { return nil }
         let jsonData = try? JSONEncoder().encode(menuReq)
-        let jsonString = String(data: jsonData!, encoding: .utf8)!
-        print("REQUEST \(jsonString)")
         
         var urlRequest = URLRequest(url: url)
         urlRequest.timeoutInterval = APIDefaultTimeOut
