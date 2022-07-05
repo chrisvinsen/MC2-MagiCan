@@ -56,3 +56,9 @@ func stringToDateTime(_ dateTimeStr: String, _ dateFormat: String = "M/d/yyyy HH
      
     return dateFormatter.date(from: dateTimeStr)!
 }
+
+func predictSalesNextWeek(transactionList: [Transaction]) -> Int {
+    return 0
+}
+
+func getStartAndEndDateOfWeek() {}
