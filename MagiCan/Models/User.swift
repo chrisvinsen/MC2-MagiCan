@@ -32,7 +32,7 @@ extension User {
 //MARK: - User Session
 struct UserSession: Equatable, Hashable, Decodable {
 //    let expiration: Date
-    let token, username: String
+    let token, username, expiration: String
 }
 
 

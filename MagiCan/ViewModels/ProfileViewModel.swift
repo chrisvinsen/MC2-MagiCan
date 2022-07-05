@@ -68,6 +68,7 @@ final class ProfileViewModel {
     func logout() {
         setUsernameFromUserDefaults(newUsername: "")
         setUserTokenFromUserDefaults(newToken: "")
+        setTokenExpirationFromUserDefaults(expiration: "")
         
         let completionHandler: (Subscribers.Completion<Error>) -> Void = { [weak self] completion in
             switch completion {

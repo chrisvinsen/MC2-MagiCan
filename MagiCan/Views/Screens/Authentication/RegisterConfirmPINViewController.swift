@@ -10,7 +10,7 @@ import Combine
 
 class RegisterConfirmPINViewController: UIViewController {
 
-    private lazy var contentView = PINView(headingText: "Konfirmasi PIN Baru")
+    private lazy var contentView = PINView(headingText: "Konfirmasi PIN", descriptionText: "Masukkan PIN yang sama dengan sebelumnya.")
     private let viewModel: RegisterViewModel = RegisterViewModel()
     private var bindings = Set<AnyCancellable>()
     
@@ -53,31 +53,11 @@ class RegisterConfirmPINViewController: UIViewController {
                     viewModel.addMenu()
                 }
                 
-                let dashboardVC = UINavigationController(rootViewController: DashboardViewController())
-                let transaksiVC = UINavigationController(rootViewController: TransactionListViewController())
-                let listMenuVC = UINavigationController(rootViewController: ListMenuViewController())
-
-                dashboardVC.tabBarItem = UITabBarItem(
-                    title: "Dashboard",
-                    image: UIImage(named: "icDashboard"),
-                    selectedImage: UIImage(named: "icDashboardActive")
-                )
-                transaksiVC.tabBarItem = UITabBarItem(
-                    title: "Transaksi",
-                    image: UIImage(named: "icTransaction"),
-                    selectedImage: UIImage(named: "icTransactionActive")
-                )
-                listMenuVC.tabBarItem = UITabBarItem(
-                    title: "Menu",
-                    image: UIImage(named: "icMenu"),
-                    selectedImage: UIImage(named: "icMenuActive")
-                )
+                let vc = RegisterSuccessViewController()
+                let nav = UINavigationController(rootViewController: vc)
+                nav.modalPresentationStyle = .fullScreen
                 
-                let tabBarController = UITabBarController()
-                tabBarController.viewControllers = [dashboardVC, transaksiVC, listMenuVC]
-                tabBarController.modalPresentationStyle = .fullScreen
-                
-                self.present(tabBarController, animated: true)
+                self.present(nav, animated: true)
             }
             
             if !isRegisterSuccess && viewModel.pinConfirm.count == 6 {

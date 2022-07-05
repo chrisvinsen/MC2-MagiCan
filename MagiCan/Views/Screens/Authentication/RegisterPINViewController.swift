@@ -10,7 +10,7 @@ import Combine
 
 class RegisterPINViewController: UIViewController {
 
-    private lazy var contentView = PINView(headingText: "Masukkan PIN Baru")
+    private lazy var contentView = PINView(headingText: "Buat PIN", descriptionText: "PIN ini akan membantu akun kamu lebih aman dan terjaga.")
     
     var name, username: String
     var guestMenu = [Menu]()

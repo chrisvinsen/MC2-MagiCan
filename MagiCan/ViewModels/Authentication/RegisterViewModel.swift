@@ -92,6 +92,7 @@ final class RegisterViewModel {
         let valueHandler: (UserSession) -> Void = { [weak self] userSession in
             setUsernameFromUserDefaults(newUsername: userSession.username)
             setUserTokenFromUserDefaults(newToken: userSession.token)
+            setTokenExpirationFromUserDefaults(expiration: userSession.expiration)
             
             self?.isRegisterSuccess = true
         }

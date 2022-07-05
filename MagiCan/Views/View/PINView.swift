@@ -10,9 +10,11 @@ import UIKit
 
 class PINView: UIView {
     var headingText: String
+    var descriptionText: String
     
     lazy var imageView = UIImageView()
     lazy var headingLabel = HeadingFiveLabel()
+    lazy var descriptionLabel = RegularLabel()
     lazy var PINField = UITextField()
     lazy var viewPINContainer = UIView()
     lazy var viewPIN1 = UIView()
@@ -41,8 +43,9 @@ class PINView: UIView {
         }
     }
     
-    init(headingText: String = "Masukkan PIN") {
+    init(headingText: String = "Buat PIN", descriptionText: String = "") {
         self.headingText = headingText
+        self.descriptionText = descriptionText
         super.init(frame: .zero)
         
         addSubviews()
@@ -66,7 +69,7 @@ class PINView: UIView {
                 $0.translatesAutoresizingMaskIntoConstraints = false
             }
         
-        [imageView, headingLabel, viewPINContainer, PINField, warningLabel]
+        [imageView, headingLabel, descriptionLabel, viewPINContainer, PINField, warningLabel]
             .forEach {
                 addSubview($0)
                 $0.translatesAutoresizingMaskIntoConstraints = false
@@ -83,6 +86,9 @@ class PINView: UIView {
         // Heading Label
         headingLabel.text = headingText
         headingLabel.textAlignment = .center
+        
+        descriptionLabel.text = descriptionText
+        descriptionLabel.textAlignment = .center
         
         // PIN Text Field
         PINField.keyboardType = .numberPad
@@ -107,8 +113,13 @@ class PINView: UIView {
             headingLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
             headingLabel.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20),
             
+//            Description Label
+            descriptionLabel.topAnchor.constraint(equalTo: headingLabel.bottomAnchor, constant: 16),
+            descriptionLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
+            descriptionLabel.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20),
+            
 //            View PIN
-            viewPINContainer.topAnchor.constraint(equalTo: headingLabel.bottomAnchor, constant: 50),
+            viewPINContainer.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 40),
             viewPINContainer.heightAnchor.constraint(equalToConstant: 20),
             viewPINContainer.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
             
