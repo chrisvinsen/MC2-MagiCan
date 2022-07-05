@@ -29,6 +29,7 @@ class DashboardViewController: UIViewController {
             
             dashboardView.welcomingHeader.name = self.name
             print("ini nama", name)
+            
 //            let label = UILabel()
 //            label.font = Font.headingSix.getUIFont
 //            label.textColor = UIColor.Neutral._90
@@ -44,10 +45,20 @@ class DashboardViewController: UIViewController {
     var kasAmount: Int64 = 0 {
         didSet {
             DispatchQueue.main.async{
+                self.dashboardView.cardKasUsaha.kasIsSet = self.kasIsSet
                 self.dashboardView.cardKasUsaha.kasValue.text = self.kasAmount.formattedToRupiah
-                if self.kasAmount != 0 {
-                    self.dashboardView.cardKasUsaha.kasIsSet = true
-                }
+//                if self.kasAmount != 0 {
+//                    self.dashboardView.cardKasUsaha.kasIsSet = true
+//                }
+            }
+        }
+    }
+    
+    var kasIsSet: Bool = false {
+        didSet {
+            DispatchQueue.main.async {
+                self.dashboardView.cardKasUsaha.kasIsSet = self.kasIsSet
+                self.dashboardView.cardKasUsaha.kasValue.text = self.kasAmount.formattedToRupiah
             }
         }
     }
@@ -171,6 +182,10 @@ class DashboardViewController: UIViewController {
             viewModel.$kasAmount
                 .assign(to: \.kasAmount, on: self)
                 .store(in: &bindings)
+            
+            viewModel.$initialCashSet
+                .assign(to: \.kasIsSet, on: self)
+                .store(in: &bindings)
         }
         
         func bindViewModelToView() {
@@ -289,7 +304,7 @@ extension DashboardViewController {
             let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
             
             self.viewModel.kasAmountEdit = textField?.text ?? "0"
-            self.viewModel.kasCreateTransaction = false
+//            self.viewModel.kasCreateTransaction = false
             self.viewModel.saveKasAmount()
         }))
 
@@ -312,7 +327,7 @@ extension DashboardViewController {
             let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
             
             self.viewModel.kasAmountEdit = textField?.text ?? "0"
-            self.viewModel.kasCreateTransaction = true
+//            self.viewModel.kasCreateTransaction = true
             self.viewModel.saveKasAmount()
         }))
 

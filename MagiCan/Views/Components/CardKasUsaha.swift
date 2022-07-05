@@ -12,7 +12,7 @@ class CardKasUsaha: UIView {
     
     var kasIsSet: Bool = false {
         didSet {
-            print("disini kas is set", kasIsSet)
+//            print("disini kas is set", kasIsSet)
             for subview in self.subviews {
                 subview.removeFromSuperview()
             }

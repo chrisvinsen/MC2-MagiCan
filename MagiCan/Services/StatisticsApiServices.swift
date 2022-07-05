@@ -9,14 +9,14 @@ import Foundation
 import Combine
 
 protocol StaticticsServiceProtocol {
-    func getKasAmount() -> AnyPublisher<User, Error>
+    func getUserDetails() -> AnyPublisher<User, Error>
     func editKasAmount(userReq: UserUpdateBalanceRequest) -> AnyPublisher<User, Error>
     func getTransactionList(category: String) -> AnyPublisher<[Transaction], Error>
 }
 
 final class StatisticsService: StaticticsServiceProtocol {
     
-    func getKasAmount() -> AnyPublisher<User, Error> {
+    func getUserDetails() -> AnyPublisher<User, Error> {
         var dataTask: URLSessionDataTask?
         
         let onSubscription: (Subscription) -> Void = { _ in dataTask?.resume() }
@@ -24,7 +24,7 @@ final class StatisticsService: StaticticsServiceProtocol {
         
         // promise type is Result<[Transaction], Error>
         return Future<User, Error> { [weak self] promise in
-            guard let urlRequest = self?.getUrlForGetKasAmount() else {
+            guard let urlRequest = self?.getUrlForGetUserDetails() else {
                 promise(.failure(ServiceError.urlRequest))
                 return
             }
@@ -40,8 +40,10 @@ final class StatisticsService: StaticticsServiceProtocol {
                 do {
                     let user = try JSONDecoder().decode(User.self, from: data)
                     promise(.success(user))
+                    print("decode sukses", user)
                 } catch {
                     promise(.failure(ServiceError.decode))
+                    print("error saat decode")
                 }
             }
         }
@@ -50,7 +52,7 @@ final class StatisticsService: StaticticsServiceProtocol {
         .eraseToAnyPublisher()
     }
     
-    private func getUrlForGetKasAmount() -> URLRequest? {
+    private func getUrlForGetUserDetails() -> URLRequest? {
         var components = URLComponents()
         components.scheme = APIComponentScheme
         components.host = APIComponentHost

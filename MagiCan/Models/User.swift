@@ -12,6 +12,8 @@ import Foundation
 struct User: Equatable, Hashable, Decodable {
     var name, username: String
     var currentBalance: Int64
+    var isInitialCashSet: Bool
+    
 }
 
 extension User {
@@ -19,6 +21,7 @@ extension User {
         case name
         case username
         case currentBalance = "current_balance"
+        case isInitialCashSet = "is_initial_cash_set"
     }
     
     init(from decoder: Decoder) throws {
@@ -26,6 +29,7 @@ extension User {
         name = try container.decode(String.self, forKey: .name)
         username = try container.decode(String.self, forKey: .username)
         currentBalance = try container.decode(Int64.self, forKey: .currentBalance)
+        isInitialCashSet = try container.decode(Bool.self, forKey: .isInitialCashSet)
     }
 }
 
@@ -49,7 +53,7 @@ struct UserRegisterRequest: Equatable, Hashable, Encodable, Decodable {
 //MARK: - Request for API User Register
 struct UserUpdateBalanceRequest: Equatable, Hashable, Encodable, Decodable {
     var updated_balance: Int64
-    var is_create_transaction: Bool
+//    var is_create_transaction: Bool
 }
 
 struct UserUpdateDataRequest: Equatable, Hashable, Encodable, Decodable {
