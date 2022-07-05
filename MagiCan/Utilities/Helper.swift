@@ -21,6 +21,38 @@ func getUserTokenFromUserDefaults() -> String {
 func setUserTokenFromUserDefaults(newToken: String) {
     userDefaults.set(newToken, forKey: UserDefaultKeys.token.rawValue)
 }
+func getTokenExpirationFromUserDefaults() -> Date? {
+    let dateString = userDefaults.string(forKey: UserDefaultKeys.token_expiration.rawValue) ?? ""
+    
+    print("GOT DATE STRING", dateString)
+    
+    if dateString != "" {
+        return stringToDateTime(dateString, "yyyy-MM-dd'T'HH:mm:ssZ")
+    }
+    
+    return nil
+}
+func setTokenExpirationFromUserDefaults(expiration: String) {
+    print("SET DATE STRING", expiration)
+    userDefaults.set(expiration, forKey: UserDefaultKeys.token_expiration.rawValue)
+}
+func isTokenValid() -> Bool {
+    guard let expirationDate = getTokenExpirationFromUserDefaults() else {
+        setUsernameFromUserDefaults(newUsername: "")
+        setUserTokenFromUserDefaults(newToken: "")
+        setTokenExpirationFromUserDefaults(expiration: "")
+        return false
+    }
+    
+    if expirationDate >= Date.now {
+        return true
+    }
+    
+    setUsernameFromUserDefaults(newUsername: "")
+    setUserTokenFromUserDefaults(newToken: "")
+    setTokenExpirationFromUserDefaults(expiration: "")
+    return false
+}
 
 func getTransactionSummaryFromList(transactionLists: [Transaction]) -> (totalIncome: Int64, totalExpense: Int64) {
     
