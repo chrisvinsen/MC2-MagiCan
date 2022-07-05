@@ -12,7 +12,6 @@ class CardKasUsaha: UIView {
     
     var kasIsSet: Bool = true {
         didSet {
-            self.re
         }
     }
     

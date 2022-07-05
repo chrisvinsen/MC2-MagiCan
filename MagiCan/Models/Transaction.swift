@@ -16,8 +16,11 @@ struct Transaction: Equatable, Hashable, Encodable, Decodable {
     var discount: Int64
     var description: String
     var dateString: String
-    var imageUrl: String
+//    var imageUrl: String
     var iterator: Int
+    
+    var isActive: Bool
+    var username: String
     
     enum CodingKeys: String, CodingKey {
         case _id
@@ -27,8 +30,11 @@ struct Transaction: Equatable, Hashable, Encodable, Decodable {
         case discount
         case description
         case dateString = "date"
-        case imageUrl = "image_url"
+//        case imageUrl = "image_url"
         case iterator
+        
+        case isActive = "is_active"
+        case username
     }
 }
 
