@@ -27,7 +27,7 @@ class DashboardViewController: UIViewController {
                 tempName = name;
             }
             
-            dashboardView.name = self.name
+            dashboardView.welcomingHeader.name = self.name
             print("ini nama", name)
 //            let label = UILabel()
 //            label.font = Font.headingSix.getUIFont
@@ -46,7 +46,7 @@ class DashboardViewController: UIViewController {
             DispatchQueue.main.async{
                 self.dashboardView.cardKasUsaha.kasValue.text = self.kasAmount.formattedToRupiah
                 if self.kasAmount != 0 {
-                    self.dashboardView.kasIsSet = true
+                    self.dashboardView.cardKasUsaha.kasIsSet = true
                 }
             }
         }
@@ -56,6 +56,16 @@ class DashboardViewController: UIViewController {
         didSet {
             DispatchQueue.main.async{
                 self.dashboardView.carouselStatistik.carouselCollectionView.reloadData()
+            }
+        }
+    }
+    
+    var transactionListOneWeek = [Transaction]() {
+        didSet {
+            DispatchQueue.main.async{
+                if self.transactionListOneWeek.count > 0 {
+                    self.dashboardView.predictionAndMenuAvaiable = true
+                }
             }
         }
     }
@@ -138,6 +148,7 @@ class DashboardViewController: UIViewController {
     }
     
     private func setUpTargets() {
+        dashboardView.welcomingHeader.profileButton.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
         dashboardView.cardKasUsaha.button.addTarget(self, action: #selector(cardKasUsahaButtonTapped(_ :)), for: .touchUpInside)
         dashboardView.cardKasUsaha.editButton.addTarget(self, action: #selector(cardKasUsahaEditButtonTapped(_ :)), for: .touchUpInside)
     }

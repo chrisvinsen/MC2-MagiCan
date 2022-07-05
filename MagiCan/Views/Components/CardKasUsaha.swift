@@ -10,8 +10,15 @@ import UIKit
 
 class CardKasUsaha: UIView {
     
-    var kasIsSet: Bool = true {
+    var kasIsSet: Bool = false {
         didSet {
+            print("disini kas is set", kasIsSet)
+            for subview in self.subviews {
+                subview.removeFromSuperview()
+            }
+            addSubviews()
+            setUpViews()
+            setUpConstraints()
         }
     }
     
