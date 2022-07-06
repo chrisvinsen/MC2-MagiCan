@@ -9,14 +9,14 @@ import Foundation
 import Combine
 
 protocol StaticticsServiceProtocol {
-    func getKasAmount() -> AnyPublisher<User, Error>
+    func getUserDetails() -> AnyPublisher<User, Error>
     func editKasAmount(userReq: UserUpdateBalanceRequest) -> AnyPublisher<User, Error>
-    func getTransactionList(category: String) -> AnyPublisher<[Transaction], Error>
+    func getTransactionList(category: String, startDate: String, endDate: String) -> AnyPublisher<[Transaction], Error>
 }
 
 final class StatisticsService: StaticticsServiceProtocol {
     
-    func getKasAmount() -> AnyPublisher<User, Error> {
+    func getUserDetails() -> AnyPublisher<User, Error> {
         var dataTask: URLSessionDataTask?
         
         let onSubscription: (Subscription) -> Void = { _ in dataTask?.resume() }
@@ -24,7 +24,7 @@ final class StatisticsService: StaticticsServiceProtocol {
         
         // promise type is Result<[Transaction], Error>
         return Future<User, Error> { [weak self] promise in
-            guard let urlRequest = self?.getUrlForGetKasAmount() else {
+            guard let urlRequest = self?.getUrlForGetUserDetails() else {
                 promise(.failure(ServiceError.urlRequest))
                 return
             }
@@ -40,8 +40,10 @@ final class StatisticsService: StaticticsServiceProtocol {
                 do {
                     let user = try JSONDecoder().decode(User.self, from: data)
                     promise(.success(user))
+                    print("decode sukses", user)
                 } catch {
                     promise(.failure(ServiceError.decode))
+                    print("error saat decode")
                 }
             }
         }
@@ -50,7 +52,7 @@ final class StatisticsService: StaticticsServiceProtocol {
         .eraseToAnyPublisher()
     }
     
-    private func getUrlForGetKasAmount() -> URLRequest? {
+    private func getUrlForGetUserDetails() -> URLRequest? {
         var components = URLComponents()
         components.scheme = APIComponentScheme
         components.host = APIComponentHost
@@ -123,7 +125,7 @@ final class StatisticsService: StaticticsServiceProtocol {
         return urlRequest
     }
     
-    func getTransactionList(category: String) -> AnyPublisher<[Transaction], Error> {
+    func getTransactionList(category: String, startDate: String, endDate: String) -> AnyPublisher<[Transaction], Error> {
         var dataTask: URLSessionDataTask?
         
         let onSubscription: (Subscription) -> Void = { _ in dataTask?.resume() }
@@ -131,24 +133,32 @@ final class StatisticsService: StaticticsServiceProtocol {
         
         // promise type is Result<[Transaction], Error>
         return Future<[Transaction], Error> { [weak self] promise in
-            guard let urlRequest = self?.getUrlForGetTransactionList(category: category) else {
+            guard let urlRequest = self?.getUrlForGetTransactionList(category: category, startDate: startDate, endDate: endDate) else {
                 promise(.failure(ServiceError.urlRequest))
+//                print("error 1")
                 return
             }
+            
+//            print("halo 1")
             
             dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, _, error) in
                 guard let data = data else {
                     if let error = error {
                         promise(.failure(error))
                     }
+//                    print("error 2")
                     return
                 }
+                
+//                print("halo 2")
                 
                 do {
                     let lists = try JSONDecoder().decode([Transaction].self, from: data)
                     promise(.success(lists))
+//                    print("ini list transaksi di service", lists)
                 } catch {
                     promise(.failure(ServiceError.decode))
+//                    print("fail list transaksi di service")
                 }
             }
         }
@@ -157,14 +167,19 @@ final class StatisticsService: StaticticsServiceProtocol {
         .eraseToAnyPublisher()
     }
     
-    private func getUrlForGetTransactionList(category: String) -> URLRequest? {
+    private func getUrlForGetTransactionList(category: String, startDate: String, endDate: String) -> URLRequest? {
         var components = URLComponents()
         components.scheme = APIComponentScheme
         components.host = APIComponentHost
         components.path = Endpoint.Transaction.Lists.rawValue
         components.queryItems = [
-            URLQueryItem(name: "category", value: category)
+            URLQueryItem(name: "category", value: category),
+            URLQueryItem(name: "start_date", value: startDate),
+            URLQueryItem(name: "end_date", value: endDate)
         ]
+        
+//        print("di service start date:", startDate)
+//        print("di service end date:", endDate)
         
         guard let url = components.url else { return nil }
         

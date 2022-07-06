@@ -10,13 +10,30 @@ import UIKit
 class DashboardView: UIView {
     
     var predictionAndMenuAvaiable: Bool
+    var kasIsSet: Bool = false
     
     lazy var scrollView = UIScrollView()
     lazy var contentView = UIView()
     lazy var stackView = UIStackView()
     
 //    let titleLabel = UILabel()
+//    var name: String = "Tamu" {
+//        didSet {
+//            print("ini set nama jadi", name)
+//            var tempName = "Tamu"
+//            if name != "" {
+//                tempName = name;
+//            }
+//            self.titleLabel.font = Font.headingSix.getUIFont
+//            self.titleLabel.textColor = UIColor.Neutral._90
+//            self.titleLabel.text = "Selamat Datang, \(tempName)"
+//        }
+//    }
 //    let profileIcon = UIImageView()
+//    let profileButton = UIButton()
+    
+    let welcomingHeader = WelcomingHeader()
+    
     let cardKasUsaha = CardKasUsaha()
     let carouselStatistik = Carousel()
     
@@ -26,8 +43,10 @@ class DashboardView: UIView {
     let sectionPrediksiPenjualanFilled = CardPrediksiPenjualan()
     let sectionMenuAndalanFilled = CardMenuAndalan()
     
-    init(status: Bool = false) {
-        predictionAndMenuAvaiable = status
+    
+    init(statusPrediction: Bool = false, statusKas: Bool = false) {
+        predictionAndMenuAvaiable = statusPrediction
+        kasIsSet = statusKas
         super.init(frame: .zero)
         
         addSubviews()
@@ -40,11 +59,12 @@ class DashboardView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-//    func viewDidLoad() {
-//        self.isScrollEnabled = true
-//        self.contentSize = CGSize(width:400, height: 2300)
-//        self.translatesAutoresizingMaskIntoConstraints = false
-//    }
+    func viewDidLoad() {
+        let icon = UIImage(systemName: "person.circle.fill")
+        let iconSize = CGRect(origin: CGPoint.zero, size: CGSize(width: 35, height: 35))
+        welcomingHeader.profileButton.setBackgroundImage(icon, for: .normal)
+        welcomingHeader.profileButton.frame = iconSize
+    }
     
     private func addSubviews() {
         
@@ -55,14 +75,14 @@ class DashboardView: UIView {
         switch predictionAndMenuAvaiable {
         case true:
             // titleLabel, profileIcon,
-            [cardKasUsaha, carouselStatistik, sectionPrediksiPenjualanFilled, sectionMenuAndalanFilled]
+            [welcomingHeader, cardKasUsaha, carouselStatistik, sectionPrediksiPenjualanFilled, sectionMenuAndalanFilled]
                 .forEach {
                     stackView.addArrangedSubview($0)
                     $0.translatesAutoresizingMaskIntoConstraints = false
                 }
         case false:
             // titleLabel, profileIcon
-            [cardKasUsaha, carouselStatistik, sectionPrediksiPenjualan, sectionMenuAndalan]
+            [welcomingHeader, cardKasUsaha, carouselStatistik, sectionPrediksiPenjualan, sectionMenuAndalan]
                 .forEach {
                     stackView.addArrangedSubview($0)
                     $0.translatesAutoresizingMaskIntoConstraints = false
@@ -74,13 +94,13 @@ class DashboardView: UIView {
         // data for section - prediction
         sectionPrediksiPenjualan.sectionLabel.text = "Prediksi Penjualan"
         sectionPrediksiPenjualan.sectionDescription1.text = "Data Kamu Masih Belum Mencukupi"
-        sectionPrediksiPenjualan.sectionDescription2.text = "Hasil prediksi penjualan akan muncul disini setelah data tersedia minimal 1 bulan terakhir"
+        sectionPrediksiPenjualan.sectionDescription2.text = "Hasil prediksi penjualan akan muncul disini setelah data tersedia minimal 1 minggu terakhir"
         sectionPrediksiPenjualan.sectionImage.image = UIImage(named: "Prediksi Empty.png")
         
         // data for section - menu andalan
         sectionMenuAndalan.sectionLabel.text = "Menu Andalan"
         sectionMenuAndalan.sectionDescription1.text = "Menu Andalan Belum Tersedia"
-        sectionMenuAndalan.sectionDescription2.text = "Hasil menu andalan akan muncul disini setelah data tersedia minimal 1 bulan terakhir"
+        sectionMenuAndalan.sectionDescription2.text = "Hasil menu andalan akan muncul disini setelah data tersedia minimal 1 minggu terakhir"
         sectionMenuAndalan.sectionImage.image = UIImage(named: "Menu Andalan Empty.png")
     }
     
@@ -102,12 +122,6 @@ class DashboardView: UIView {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.spacing = 15
-        
-//        titleLabel.font = Font.headingSix.getUIFont
-//        titleLabel.text = "Selamat datang, XXX"
-//
-//        profileIcon.image = UIImage(named: "Profile Icon.png")
-//        profileIcon.contentMode = .scaleAspectFit
         
         // shadow for cardKasUsaha
         cardKasUsaha.layer.masksToBounds = false
@@ -143,6 +157,13 @@ class DashboardView: UIView {
         sectionMenuAndalanFilled.layer.shadowOpacity = 0.2
         sectionMenuAndalanFilled.layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
         sectionMenuAndalanFilled.layer.shadowRadius = 10
+        
+        //
+//        titleLabel.text = "HALOOO"
+//        titleLabel.font = Font.headingSix.getUIFont
+//        titleLabel.textColor = UIColor.Neutral._90
+//
+//        titleLabel.backgroundColor = .green
     }
     
     private func setUpConstraints() {
@@ -178,12 +199,33 @@ class DashboardView: UIView {
 //            profileIcon.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 20),
 //            profileIcon.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
 //
-            cardKasUsaha.topAnchor.constraint(equalTo: stackView.topAnchor, constant: 20),
+            self.leftAnchor.constraint(equalTo: safeArea.leftAnchor),
+            self.rightAnchor.constraint(equalTo: safeArea.rightAnchor),
+            
+//            welcomingHeader.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 10),
+//            welcomingHeader.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
+//            welcomingHeader.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
+                        
+//            titleLabel.topAnchor.constraint(equalTo: stackView.topAnchor, constant: 10),
+//            titleLabel.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
+//            titleLabel.bottomAnchor.constraint(equalTo: cardKasUsaha.topAnchor, constant: -10),
+//            titleLabel.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
+
+//            profileButton.topAnchor.constraint(equalTo: stackView.topAnchor, constant: 10),
+//            profileButton.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
+//            profileButton.bottomAnchor.constraint(equalTo: cardKasUsaha.topAnchor, constant: -10),
+//            profileButton.leftAnchor.constraint(equalTo: titleLabel.rightAnchor, constant: 20),
+            
+//            cardKasUsaha.topAnchor.constraint(equalTo: stackView.topAnchor, constant: 20),
+//            cardKasUsaha.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
+//            cardKasUsaha.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
+            
+            cardKasUsaha.topAnchor.constraint(equalTo: welcomingHeader.bottomAnchor, constant: 10),
             cardKasUsaha.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
             cardKasUsaha.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
 //
-//            carouselStatistik.topAnchor.constraint(equalTo: cardKasUsaha.bottomAnchor, constant: 10),
-//            carouselStatistik.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
+            carouselStatistik.topAnchor.constraint(equalTo: cardKasUsaha.bottomAnchor, constant: 10),
+            carouselStatistik.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
             carouselStatistik.heightAnchor.constraint(equalToConstant: 150),
 //            carouselStatistik.topAnchor.constraint(equalTo: cardKasUsaha.bottomAnchor, constant: 20),
 //            carouselStatistik.bottomAnchor.constraint(equalTo: sectionPrediksiPenjualan.topAnchor, constant: -20),

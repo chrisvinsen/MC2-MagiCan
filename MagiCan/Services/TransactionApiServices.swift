@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol TransactionServiceProtocol {
-    func getTransactionList() -> AnyPublisher<[Transaction], Error>
+    func getTransactionList(startDate: String, endDate: String) -> AnyPublisher<[Transaction], Error>
     func addTransaction(transactionReq: TransactionCRUDRequest) -> AnyPublisher<Transaction, Error>
     func deleteTransaction(transactionReq: TransactionCRUDRequest) -> AnyPublisher<Bool, Error>
 }
@@ -17,7 +17,7 @@ protocol TransactionServiceProtocol {
 final class TransactionService: TransactionServiceProtocol {
     
     //MARK: - Get Transaction List --> /transactions
-    func getTransactionList() -> AnyPublisher<[Transaction], Error> {
+    func getTransactionList(startDate: String, endDate: String) -> AnyPublisher<[Transaction], Error> {
         var dataTask: URLSessionDataTask?
         
         let onSubscription: (Subscription) -> Void = { _ in dataTask?.resume() }
@@ -25,7 +25,7 @@ final class TransactionService: TransactionServiceProtocol {
         
         // promise type is Result<[Transaction], Error>
         return Future<[Transaction], Error> { [weak self] promise in
-            guard let urlRequest = self?.getUrlForGetTransactionList() else {
+            guard let urlRequest = self?.getUrlForGetTransactionList(startDate: startDate, endDate: endDate) else {
                 promise(.failure(ServiceError.urlRequest))
                 return
             }
@@ -51,11 +51,15 @@ final class TransactionService: TransactionServiceProtocol {
         .eraseToAnyPublisher()
     }
     
-    private func getUrlForGetTransactionList() -> URLRequest? {
+    private func getUrlForGetTransactionList(startDate: String, endDate: String) -> URLRequest? {
         var components = URLComponents()
         components.scheme = APIComponentScheme
         components.host = APIComponentHost
         components.path = Endpoint.Transaction.Lists.rawValue
+        components.queryItems = [
+            URLQueryItem(name: "start_date", value: startDate),
+            URLQueryItem(name: "end_date", value: endDate)
+        ]
         
         guard let url = components.url else { return nil }
         

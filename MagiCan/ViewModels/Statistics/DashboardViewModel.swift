@@ -12,6 +12,8 @@ final class DashboardViewModel {
 //    @Published var userDetail: User?
     @Published var kasAmount: Int64 = 0
     @Published var kasAmountEdit: String = "0"
+//    @Published var kasCreateTransaction: Bool = true
+    @Published var initialCashSet: Bool = false
     
     @Published var transactionLists: [Transaction] = []
     @Published var totalIncome: Int64 = 0
@@ -38,7 +40,9 @@ final class DashboardViewModel {
             switch completion {
             case let .failure(error):
                 self?.resultUserDetail.send(completion: .failure(error))
+                print("failure resultUserDetail")
             case .finished:
+                print("return")
                 return
             }
         }
@@ -46,12 +50,14 @@ final class DashboardViewModel {
         let valueHandler: (User) -> Void = { [weak self] userDetail in
             DispatchQueue.main.async {
                 self?.kasAmount = userDetail.currentBalance
+                self?.initialCashSet = userDetail.isInitialCashSet
                 self?.resultUserDetail.send(userDetail)
+                print("ini user detail", userDetail, self?.kasAmount, self?.initialCashSet)
             }
         }
         
         statisticsService
-            .getKasAmount()
+            .getUserDetails()
             .sink(receiveCompletion: completionHandler, receiveValue: valueHandler)
             .store(in: &bindingsUserDetails)
     }
@@ -72,6 +78,7 @@ final class DashboardViewModel {
             self?.kasAmount = userDetail.currentBalance
         }
         
+//        let userReq = UserUpdateBalanceRequest(updated_balance: Int64(kasAmountEdit) ?? 0, is_create_transaction: kasCreateTransaction)
         let userReq = UserUpdateBalanceRequest(updated_balance: Int64(kasAmountEdit) ?? 0)
         
         statisticsService
@@ -81,7 +88,7 @@ final class DashboardViewModel {
     }
     
     //MARK: - Get Transaction List
-    func getTransactionList() {
+    func getTransactionList(startDate: String, endDate: String) {
         
         let completionHandler: (Subscribers.Completion<Error>) -> Void = { [weak self] completion in
             switch completion {
@@ -103,7 +110,7 @@ final class DashboardViewModel {
         }
         
         transactionService
-            .getTransactionList()
+            .getTransactionList(startDate: startDate, endDate: endDate)
             .sink(receiveCompletion: completionHandler, receiveValue: valueHandler)
             .store(in: &bindingsTransactions)
     }

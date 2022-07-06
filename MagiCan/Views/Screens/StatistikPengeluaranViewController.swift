@@ -50,7 +50,10 @@ class StatistikPengeluaranViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        viewModel.getTransactionList(category: "2")
+        let startDate = getDateString(date: getStartAndEndDateWithRange(range: 7).startDate)
+        let endDate = getDateString(date: getStartAndEndDateWithRange(range: 7).endDate)
+        viewModel.getTransactionList(category: "2", startDate: startDate, endDate: endDate)
+//        print("ini isi parameter:", startDate, endDate)
     }
     
     override func viewDidLoad() {
@@ -64,7 +67,9 @@ class StatistikPengeluaranViewController: UIViewController {
         setUpTargets()
         setUpBindings()
         
-        viewModel.getTransactionList(category: "2")
+        let startDate = getDateString(date: getStartAndEndDateWithRange(range: 7).startDate)
+        let endDate = getDateString(date: getStartAndEndDateWithRange(range: 7).endDate)
+        viewModel.getTransactionList(category: "2", startDate: startDate, endDate: endDate)
     }
     
     private func setUpTargets() {
@@ -115,10 +120,15 @@ extension StatistikPengeluaranViewController: UITableViewDataSource {
         
         let transaction = self.transactionLists[indexPath.row]
         
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YY/MM/dd"
+        
         cell.categoryTransaksi = "Expense"
         
         cell.transaksiId.text = "Pengeluaran #\(String(format: "%04d", transaction.iterator))"
-        cell.transaksiDate.text = transaction.dateString
+//        cell.transaksiDate.text = transaction.dateString
+        cell.transaksiDate.text = transaction.date
+//        cell.transaksiDate.text = dateFormatter.string(from: transaction.date)
         
         switch transaction.type {
         case TransactionExpenseType.Pribadi.rawValue:

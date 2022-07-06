@@ -48,7 +48,9 @@ class StatistikPemasukanViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        viewModel.getTransactionList(category: "1")
+        let startDate = getDateString(date: getStartAndEndDateWithRange(range: 7).startDate)
+        let endDate = getDateString(date: getStartAndEndDateWithRange(range: 7).endDate)
+        viewModel.getTransactionList(category: "1", startDate: startDate, endDate: endDate)
     }
     
     override func viewDidLoad() {
@@ -62,7 +64,9 @@ class StatistikPemasukanViewController: UIViewController {
         setUpTargets()
         setUpBindings()
         
-        viewModel.getTransactionList(category: "1")
+        let startDate = getDateString(date: getStartAndEndDateWithRange(range: 7).startDate)
+        let endDate = getDateString(date: getStartAndEndDateWithRange(range: 7).endDate)
+        viewModel.getTransactionList(category: "1", startDate: startDate, endDate: endDate)
     }
     
     private func setUpTargets() {
@@ -113,10 +117,15 @@ extension StatistikPemasukanViewController: UITableViewDataSource {
         
         let transaction = self.transactionLists[indexPath.row]
         
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YY/MM/dd"
+        
         cell.categoryTransaksi = "Income"
         
         cell.transaksiId.text = "Pemasukan #\(String(format: "%04d", transaction.iterator))"
-        cell.transaksiDate.text = transaction.dateString
+//        cell.transaksiDate.text = transaction.dateString
+        cell.transaksiDate.text = transaction.date
+//        cell.transaksiDate.text = dateFormatter.string(from: transaction.date)
         
         switch transaction.type {
         case TransactionIncomeType.Offline.rawValue:

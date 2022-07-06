@@ -23,19 +23,24 @@ final class ListRiwayatTransaksiViewModel {
     }
     
     //MARK: - Get Transaction List
-    func getTransactionList(category: String) {
+    func getTransactionList(category: String, startDate: String, endDate: String) {
         
         let completionHandler: (Subscribers.Completion<Error>) -> Void = { [weak self] completion in
             switch completion {
             case let .failure(error):
                 self?.result.send(completion: .failure(error))
+                print("error 123")
             case .finished:
                 self?.result.send(())
+                print("finished 456")
             }
         }
         
         let valueHandler: ([Transaction]) -> Void = { [weak self] transactionLists in
             self?.transactionLists = transactionLists
+            // filter out transactions with type UpdateBalance
+//            self?.transactionLists = transactionLists.filter({ $0.type != TransactionIncomeType.UpdateBalance.rawValue })
+            print("ini isi transaksi:", self?.transactionLists)
             
             DispatchQueue.main.async {
                 let summary = getTransactionSummaryFromList(transactionLists: transactionLists)
@@ -45,7 +50,7 @@ final class ListRiwayatTransaksiViewModel {
         }
         
         statisticsService
-            .getTransactionList(category: category)
+            .getTransactionList(category: category, startDate: startDate, endDate: endDate)
             .sink(receiveCompletion: completionHandler, receiveValue: valueHandler)
             .store(in: &bindings)
     }

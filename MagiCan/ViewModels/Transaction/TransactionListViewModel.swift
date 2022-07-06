@@ -26,7 +26,7 @@ final class TransactionListViewModel {
     }
     
     //MARK: - Get Transaction List
-    func getTransactionList() {
+    func getTransactionList(startDate: String, endDate: String) {
         
         let completionHandler: (Subscribers.Completion<Error>) -> Void = { [weak self] completion in
             switch completion {
@@ -39,6 +39,8 @@ final class TransactionListViewModel {
         
         let valueHandler: ([Transaction]) -> Void = { [weak self] transactionLists in
             self?.transactionLists = transactionLists
+//            self?.transactionLists = transactionLists.filter({ $0.type != TransactionIncomeType.UpdateBalance.rawValue })
+//            print("ini isi transaksi:", self?.transactionLists)
             
             DispatchQueue.main.async {
                 let summary = getTransactionSummaryFromList(transactionLists: transactionLists)
@@ -49,7 +51,7 @@ final class TransactionListViewModel {
         }
         
         transactionService
-            .getTransactionList()
+            .getTransactionList(startDate: startDate, endDate: endDate)
             .sink(receiveCompletion: completionHandler, receiveValue: valueHandler)
             .store(in: &bindings)
     }
