@@ -38,7 +38,7 @@ class CardMenuAndalanItem: UIView {
         
         menuName.text = "Bakso"
         menuQty.text = "2000x"
-        menuImage.image = UIImage(named: "SampleBakso.png")
+        menuImage.image = UIImage(named: "DefaultImage.png")
         
         menuName.font = Font.textSemiBold.getUIFont
         menuQty.font = Font.small.getUIFont

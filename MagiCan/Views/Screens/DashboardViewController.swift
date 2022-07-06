@@ -26,15 +26,7 @@ class DashboardViewController: UIViewController {
             if name != "" {
                 tempName = name;
             }
-            
             dashboardView.welcomingHeader.name = self.name
-            print("ini nama", name)
-            
-//            let label = UILabel()
-//            label.font = Font.headingSix.getUIFont
-//            label.textColor = UIColor.Neutral._90
-//            label.text = "Selamat Datang, \(tempName)"
-//            self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
         }
     }
     
@@ -47,9 +39,6 @@ class DashboardViewController: UIViewController {
             DispatchQueue.main.async{
                 self.dashboardView.cardKasUsaha.kasIsSet = self.kasIsSet
                 self.dashboardView.cardKasUsaha.kasValue.text = self.kasAmount.formattedToRupiah
-//                if self.kasAmount != 0 {
-//                    self.dashboardView.cardKasUsaha.kasIsSet = true
-//                }
             }
         }
     }
@@ -63,26 +52,32 @@ class DashboardViewController: UIViewController {
         }
     }
     
+    var salesPredictionAmount: Int64 = 0 {
+        didSet {
+            self.dashboardView.predictionAndMenuAvaiable = true
+            self.dashboardView.sectionPrediksiPenjualanFilled.predictedAmount.text = self.salesPredictionAmount.formattedToRupiah
+        }
+    }
+    
     var transactionLists = [Transaction]() {
         didSet {
             DispatchQueue.main.async{
                 self.dashboardView.carouselStatistik.carouselCollectionView.reloadData()
                 if self.transactionLists.count > 0 {
-                    print("hasil prediksi:", predictSalesNextWeek(transactionList: self.transactionLists))
-                }
+                    self.salesPredictionAmount = Int64( predictSalesNextWeek(transactionList: self.transactionLists))                }
             }
         }
     }
     
-    var transactionListLastWeek = [Transaction]() {
-        didSet {
-            DispatchQueue.main.async{
-                if self.transactionListLastWeek.count > 0 {
-                    self.dashboardView.predictionAndMenuAvaiable = true
-                }
-            }
-        }
-    }
+//    var transactionListLastWeek = [Transaction]() {
+//        didSet {
+//            DispatchQueue.main.async{
+//                if self.transactionListLastWeek.count > 0 {
+//                    self.dashboardView.predictionAndMenuAvaiable = true
+//                }
+//            }
+//        }
+//    }
     
     var totalIncome: Int64 = 0 {
         didSet {

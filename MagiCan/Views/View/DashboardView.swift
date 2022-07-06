@@ -9,28 +9,23 @@ import UIKit
 
 class DashboardView: UIView {
     
-    var predictionAndMenuAvaiable: Bool
+    var predictionAndMenuAvaiable: Bool = false {
+        didSet {
+//            print("disini kas is set", kasIsSet)
+            for subview in self.subviews {
+                subview.removeFromSuperview()
+            }
+            addSubviews()
+            setUpData()
+            setUpViews()
+            setUpConstraints()
+        }
+    }
     var kasIsSet: Bool = false
     
     lazy var scrollView = UIScrollView()
     lazy var contentView = UIView()
     lazy var stackView = UIStackView()
-    
-//    let titleLabel = UILabel()
-//    var name: String = "Tamu" {
-//        didSet {
-//            print("ini set nama jadi", name)
-//            var tempName = "Tamu"
-//            if name != "" {
-//                tempName = name;
-//            }
-//            self.titleLabel.font = Font.headingSix.getUIFont
-//            self.titleLabel.textColor = UIColor.Neutral._90
-//            self.titleLabel.text = "Selamat Datang, \(tempName)"
-//        }
-//    }
-//    let profileIcon = UIImageView()
-//    let profileButton = UIButton()
     
     let welcomingHeader = WelcomingHeader()
     
