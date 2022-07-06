@@ -12,4 +12,5 @@ let userDefaults = UserDefaults.standard
 enum UserDefaultKeys: String {
     case username = "UD_Username"
     case token = "UD_Token"
+    case token_expiration = "UD_TokenExpiration"
 }

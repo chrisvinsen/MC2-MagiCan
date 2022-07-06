@@ -58,6 +58,7 @@ class AddMenuView: UIView {
             string: "Nama Menu",
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.Neutral._70]
         )
+        nameField.updateStateDefault()
         
         // Price Field
         priceField.attributedPlaceholder = NSAttributedString(
@@ -65,12 +66,14 @@ class AddMenuView: UIView {
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.Neutral._70]
         )
         priceField.keyboardType = .numberPad
+        priceField.updateStateDefault()
         
         // Description Field
         descriptionField.attributedPlaceholder = NSAttributedString(
             string: "Deskripsi (Opsional)",
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.Neutral._70]
         )
+        descriptionField.updateStateDefault()
         
         // Add Button
         addButton.setTitle(" Tambah Foto (Opsional)", for: .normal)

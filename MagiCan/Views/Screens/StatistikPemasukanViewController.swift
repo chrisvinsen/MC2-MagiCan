@@ -128,13 +128,12 @@ extension StatistikPemasukanViewController: UITableViewDataSource {
 //        cell.transaksiDate.text = dateFormatter.string(from: transaction.date)
         
         switch transaction.type {
-        case TransactionIncomeType.UpdateBalance.rawValue:
-            cell.transaksiCategory.text = String(describing: TransactionIncomeType.UpdateBalance)
         case TransactionIncomeType.Offline.rawValue:
             cell.transaksiCategory.text = String(describing: TransactionIncomeType.Offline)
         case TransactionIncomeType.Online.rawValue:
             cell.transaksiCategory.text = String(describing: TransactionIncomeType.Online)
-        default: break
+        default:
+            cell.transaksiCategory.text = "Kas Usaha"
         }
 
         cell.transaksiAmount.text = "+ " + transaction.amount.formattedToRupiah

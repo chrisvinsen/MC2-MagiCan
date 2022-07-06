@@ -350,6 +350,7 @@ extension DashboardViewController {
     @objc func profileButtonTapped() {
         
         let VC = ProfileViewController()
+        VC.hidesBottomBarWhenPushed = true
         
         navigationController?.pushViewController(VC, animated: true)
     }

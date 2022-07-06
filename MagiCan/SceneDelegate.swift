@@ -25,19 +25,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         
         // Run synchronously
-        let userService = UserService()
-        userService.revalidateStoredTokenSynchronously()
-        
-        let sessionToken = getUserTokenFromUserDefaults()
-        
+//        let userService = UserService()
+//        userService.revalidateStoredTokenSynchronously()
+   
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: windowScene)
         
         
-        if sessionToken == "" {
-//            let vc = GuestListMenuViewController(name: "TEST", username: "ABC")
-//            let vc = TempScrollViewController()
+        if !isTokenValid() {
             let vc = OnboardingViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
             
             let nav = UINavigationController(rootViewController: vc)

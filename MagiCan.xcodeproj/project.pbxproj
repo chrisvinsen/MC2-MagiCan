@@ -38,6 +38,9 @@
 		6086AF572860442E0073B5BE /* SemiBoldLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6086AF562860442E0073B5BE /* SemiBoldLabel.swift */; };
 		609E1E32286561390018E325 /* RiwayatTransaksiTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609E1E31286561390018E325 /* RiwayatTransaksiTable.swift */; };
 		609E1E342865617B0018E325 /* RiwayatTransaksiTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609E1E332865617B0018E325 /* RiwayatTransaksiTableViewCell.swift */; };
+		A64D94A72874348D009BCF8D /* RegisterSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64D94A62874348D009BCF8D /* RegisterSuccessView.swift */; };
+		A64D94A9287437C0009BCF8D /* CheckmarkAnimation.gif in Resources */ = {isa = PBXBuildFile; fileRef = A64D94A8287437C0009BCF8D /* CheckmarkAnimation.gif */; };
+		A64D94AD287438F6009BCF8D /* RegisterSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64D94AC287438F6009BCF8D /* RegisterSuccessViewController.swift */; };
 		A656F1EA285C59710052EFB6 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A656F1E9285C59710052EFB6 /* UIImageViewExtension.swift */; };
 		A656F212285D87290052EFB6 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A656F211285D87290052EFB6 /* PrimaryButton.swift */; };
 		A656F216285D8BE30052EFB6 /* HeadingFiveLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A656F215285D8BE30052EFB6 /* HeadingFiveLabel.swift */; };
@@ -193,6 +196,9 @@
 		6086AF562860442E0073B5BE /* SemiBoldLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemiBoldLabel.swift; sourceTree = "<group>"; };
 		609E1E31286561390018E325 /* RiwayatTransaksiTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiwayatTransaksiTable.swift; sourceTree = "<group>"; };
 		609E1E332865617B0018E325 /* RiwayatTransaksiTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiwayatTransaksiTableViewCell.swift; sourceTree = "<group>"; };
+		A64D94A62874348D009BCF8D /* RegisterSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterSuccessView.swift; sourceTree = "<group>"; };
+		A64D94A8287437C0009BCF8D /* CheckmarkAnimation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = CheckmarkAnimation.gif; sourceTree = "<group>"; };
+		A64D94AC287438F6009BCF8D /* RegisterSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterSuccessViewController.swift; sourceTree = "<group>"; };
 		A656F1E9285C59710052EFB6 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		A656F211285D87290052EFB6 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		A656F215285D8BE30052EFB6 /* HeadingFiveLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadingFiveLabel.swift; sourceTree = "<group>"; };
@@ -365,6 +371,7 @@
 				A656F227285D9F9F0052EFB6 /* LoginView.swift */,
 				A656F22F285E2B270052EFB6 /* PINView.swift */,
 				A656F239285F2C930052EFB6 /* RegisterView.swift */,
+				A64D94A62874348D009BCF8D /* RegisterSuccessView.swift */,
 				A656F23B285F4C9D0052EFB6 /* WelcomingAddMenuView.swift */,
 				A656F245286520EE0052EFB6 /* ListMenuView.swift */,
 				A6C8AAE9286681F000C507A3 /* AddMenuView.swift */,
@@ -500,6 +507,7 @@
 				A6651126285B98AB00297031 /* RegisterViewController.swift */,
 				A656F23D285F4F340052EFB6 /* RegisterPINViewController.swift */,
 				A656F23F285F4F440052EFB6 /* RegisterConfirmPINViewController.swift */,
+				A64D94AC287438F6009BCF8D /* RegisterSuccessViewController.swift */,
 				A6C8AB4E286BE6C100C507A3 /* ChangePINViewController.swift */,
 				A6C8AB50286BE6CE00C507A3 /* ChangeConfirmPINViewController.swift */,
 			);
@@ -604,6 +612,7 @@
 				A6E2724B2857708E00B5CF59 /* LaunchScreen.storyboard */,
 				A6E2724E2857708E00B5CF59 /* Info.plist */,
 				A6E272462857708C00B5CF59 /* MagiCan.xcdatamodeld */,
+				A64D94A8287437C0009BCF8D /* CheckmarkAnimation.gif */,
 			);
 			path = MagiCan;
 			sourceTree = "<group>";
@@ -764,6 +773,7 @@
 				A6651111285B678600297031 /* Inter-ExtraBold.ttf in Resources */,
 				A6651112285B678600297031 /* Inter-ExtraLight.ttf in Resources */,
 				A6651115285B678600297031 /* Inter-Thin.ttf in Resources */,
+				A64D94A9287437C0009BCF8D /* CheckmarkAnimation.gif in Resources */,
 				A6651114285B678600297031 /* Inter-Bold.ttf in Resources */,
 				A6651110285B678600297031 /* Inter-Medium.ttf in Resources */,
 				A6E2724D2857708E00B5CF59 /* LaunchScreen.storyboard in Resources */,
@@ -890,6 +900,7 @@
 				A6C8AAF22866F87100C507A3 /* MenuCellViewModel.swift in Sources */,
 				A6C8AAEA286681F000C507A3 /* AddMenuView.swift in Sources */,
 				6086AF4D286010B60073B5BE /* CardKasUsaha.swift in Sources */,
+				A64D94AD287438F6009BCF8D /* RegisterSuccessViewController.swift in Sources */,
 				A656F218285D8EFC0052EFB6 /* RegularLabel.swift in Sources */,
 				A6C8AAEE2866B2AC00C507A3 /* EditMenuViewController.swift in Sources */,
 				60682FA82868C0960011716A /* PrediksiPenjualanViewController.swift in Sources */,
@@ -919,6 +930,7 @@
 				A656F21C285D972B0052EFB6 /* RegisterViewModel.swift in Sources */,
 				A6C8AB1428680CF200C507A3 /* RowButton.swift in Sources */,
 				A6C8AAE628667F9F00C507A3 /* AddMenuViewModel.swift in Sources */,
+				A64D94A72874348D009BCF8D /* RegisterSuccessView.swift in Sources */,
 				A6C8AB10286808B200C507A3 /* AddTransactionIncomeView.swift in Sources */,
 				A6C8AAEC2866AB5A00C507A3 /* UIImageExtension.swift in Sources */,
 			);
@@ -1088,8 +1100,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = CX7FZRKX24;
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = STRZD6QZ7M;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MagiCan/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1116,8 +1128,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = CX7FZRKX24;
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = STRZD6QZ7M;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MagiCan/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

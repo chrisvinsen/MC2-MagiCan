@@ -73,6 +73,7 @@ class RegisterView: UIView {
             string: "Nama Usaha",
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.Neutral._70]
         )
+//        nameField.clearButtonMode = .whileEditing
         nameField.updateStateDefault()
         
         // Username Field
@@ -80,6 +81,7 @@ class RegisterView: UIView {
             string: "Username",
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.Neutral._70]
         )
+//        usernameField.clearButtonMode = .whileEditing
         usernameField.updateStateDefault()
         
         // Continue Button

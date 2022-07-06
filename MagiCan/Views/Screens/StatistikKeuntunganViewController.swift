@@ -153,13 +153,12 @@ extension StatistikKeuntunganViewController: UITableViewDataSource {
             cell.transaksiAmount.text = "+ " + transaction.amount.formattedToRupiah
             
             switch transaction.type {
-            case TransactionIncomeType.UpdateBalance.rawValue:
-                cell.transaksiCategory.text = String(describing: TransactionIncomeType.UpdateBalance)
             case TransactionIncomeType.Offline.rawValue:
                 cell.transaksiCategory.text = String(describing: TransactionIncomeType.Offline)
             case TransactionIncomeType.Online.rawValue:
                 cell.transaksiCategory.text = String(describing: TransactionIncomeType.Online)
-            default: break
+            default:
+                cell.transaksiCategory.text = "Kas Usaha"
             }
             
         case TransactionCategory.Expense.rawValue:
@@ -167,13 +166,12 @@ extension StatistikKeuntunganViewController: UITableViewDataSource {
             cell.transaksiAmount.text = "- " + transaction.amount.formattedToRupiah
             
             switch transaction.type {
-            case TransactionExpenseType.UpdateBalance.rawValue:
-                cell.transaksiCategory.text = String(describing: TransactionExpenseType.UpdateBalance)
             case TransactionExpenseType.Pribadi.rawValue:
                 cell.transaksiCategory.text = String(describing: TransactionExpenseType.Pribadi)
             case TransactionExpenseType.Usaha.rawValue:
                 cell.transaksiCategory.text = String(describing: TransactionExpenseType.Usaha)
-            default: break
+            default:
+                cell.transaksiCategory.text = "Kas Usaha"
             }
             
         default: break

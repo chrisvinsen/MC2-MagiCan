@@ -17,8 +17,6 @@ class OnboardingViewController: UIPageViewController {
     let pageControl = UIPageControl()
     let initialPage = 0
     
-    var timer: Timer?
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
@@ -29,14 +27,6 @@ class OnboardingViewController: UIPageViewController {
         setup()
         setupStyle()
         setupLayout()
-        
-        timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { _ in
-            DispatchQueue.main.async {
-                
-                self.pageControl.currentPage += 1 
-                self.goToNextPage()
-            }
-        }
     }
 }
 
@@ -91,6 +81,7 @@ extension OnboardingViewController {
         registerButton.translatesAutoresizingMaskIntoConstraints = false
         registerButton.setTitle("Daftar", for: .normal)
         registerButton.addTarget(self, action: #selector(registerButtonTapped(_ :)), for: .touchUpInside)
+        registerButton.isEnabled = false
         
         // Skip Button
 //        skipButton.setTitle("Lihat lihat dulu", for: .normal)
@@ -170,6 +161,12 @@ extension OnboardingViewController: UIPageViewControllerDelegate {
         
         guard let viewControllers = pageViewController.viewControllers else { return }
         guard let currentIndex = sliderViews.firstIndex(of: viewControllers[0]) else { return }
+        
+        if currentIndex == 2 {
+            registerButton.isEnabled = true
+        } else {
+            registerButton.isEnabled = false
+        }
         
         pageControl.currentPage = currentIndex
     }

@@ -122,14 +122,14 @@ extension ProfileViewController {
 
     @objc func changePINButtonTapped(_ sender: UIButton) {
         
-        let alert = UIAlertController(title: "Fitur sedang dalam pengembangan", message: "Maaf atas ketidaknyamanannya", preferredStyle: .alert)
+//        let alert = UIAlertController(title: "Fitur sedang dalam pengembangan", message: "Maaf atas ketidaknyamanannya", preferredStyle: .alert)
 
-        alert.addAction(UIAlertAction(title: "Oke, Gapapa", style: .default, handler: nil))
+//        alert.addAction(UIAlertAction(title: "Oke, Gapapa", style: .default, handler: nil))
 
-        self.present(alert, animated: true)
+//        self.present(alert, animated: true)
         
-//        let VC = ChangePINViewController()
-//        self.navigationController?.pushViewController(VC, animated: true)
+        let VC = ChangePINViewController()
+        self.navigationController?.pushViewController(VC, animated: true)
     }
 
     @objc func logoutButtonTapped(_ sender: UIButton) {

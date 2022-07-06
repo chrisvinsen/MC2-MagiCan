@@ -358,6 +358,7 @@ final class UserService: UserServiceProtocol {
                 if !tokenStatus {
                     setUsernameFromUserDefaults(newUsername: "")
                     setUserTokenFromUserDefaults(newToken: "")
+                    setTokenExpirationFromUserDefaults(expiration: "")
                 }
             } catch {
                 print(error.localizedDescription)

@@ -11,6 +11,7 @@ import Combine
 class ChangePINViewModel {
     @Published var oldPIN: String = "" {
         didSet {
+            print(oldPIN)
             if oldPIN.count == 6 {
                 validatePIN()
             }
@@ -18,12 +19,15 @@ class ChangePINViewModel {
     }
     @Published var newPIN: String = "" {
         didSet {
-            
+            print(newPIN)
+            if newPIN.count == 6 {
+                changePIN()
+            }
         }
     }
     
     let validationResult = PassthroughSubject<Bool, Error>()
-    let changePINResult = PassthroughSubject<Void, Error>()
+    let changePINResult = PassthroughSubject<Bool, Error>()
     let menuResult = PassthroughSubject<Void, Error>()
     
     private let userService: UserServiceProtocol
@@ -64,15 +68,19 @@ class ChangePINViewModel {
         let completionHandler: (Subscribers.Completion<Error>) -> Void = { [weak self] completion in
             switch completion {
             case let .failure(error):
+                print(error)
+                print(error.localizedDescription)
                 self?.changePINResult.send(completion: .failure(error))
             case .finished:
-                self?.changePINResult.send(())
+                return
             }
         }
         
-        let valueHandler: (User) -> Void = { [weak self] user in
-
+        let valueHandler: (User) -> Void = { [weak self] newUser in
+            self?.changePINResult.send(newUser != nil)
         }
+        
+        print("CHANGE PIN \(self.oldPIN) to \(self.newPIN)")
         
         userService
             .changePIN(req: UserChangePINRequest(old_pin: self.oldPIN, new_pin: self.newPIN))
