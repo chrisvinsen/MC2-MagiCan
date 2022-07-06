@@ -1,13 +1,6 @@
-//
-//  RowButton.swift
-//  MagiCan
-//
-//  Created by Christianto Vinsen on 26/06/22.
-//
-
 import UIKit
 
-class RowButton: UIButton {
+class Discount: UIButton {
     
     lazy var labelValue = UILabel()
     lazy var iconImage = UIImageView()
@@ -15,7 +8,7 @@ class RowButton: UIButton {
     
     var label: String
     var value: String
-    init(label: String = "Default Label", value: String = "") {
+    init(label: String = "Tambah Diskon", value: String = "Rp 0") {
     
         
         self.label = label
@@ -49,10 +42,10 @@ class RowButton: UIButton {
         self.setTitleColor(UIColor.Neutral._90, for: .normal)
         
         labelValue.text = value
-        labelValue.font = Font.text.getUIFont
+        labelValue.font = UIFont(name: "Inter-Bold", size: 14)
         labelValue.textColor = UIColor.Neutral._70
         
-        let image = UIImage(systemName: "chevron.right")
+        let image = UIImage(systemName: "chevron.up")
         iconImage.image = image
         iconImage.tintColor = UIColor.Neutral._70
         
@@ -69,7 +62,7 @@ class RowButton: UIButton {
             iconImage.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -5),
             iconImage.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             
-            labelValue.rightAnchor.constraint(equalTo: iconImage.rightAnchor, constant: -20),
+            labelValue.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 122),
             labelValue.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             
             divider.heightAnchor.constraint(equalToConstant: 1),
@@ -85,11 +78,11 @@ class RowButton: UIButton {
 import SwiftUI
 
 @available(iOS 13, *)
-struct RowButton_Preview: PreviewProvider {
+struct Discount_Preview: PreviewProvider {
     static var previews: some View {
         // view controller using programmatic UI
         Group {
-            RowButton().showPreview().previewInterfaceOrientation(.portrait)
+            Discount().showPreview().previewInterfaceOrientation(.portrait)
         }
     }
 }

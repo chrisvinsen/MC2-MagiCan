@@ -35,7 +35,7 @@ class AddTransactionIncomeViewController: UIViewController {
             if transactionTypeDetails.count > 0 {
                 transactionTypeName = transactionTypeDetails[0].shortValue as! String
             } else {
-                transactionTypeName = "Pilih Menu"
+                transactionTypeName = "Pilih Sistem"
             }
             
             self.contentView.trxTypeButton.labelValue.text = transactionTypeName
