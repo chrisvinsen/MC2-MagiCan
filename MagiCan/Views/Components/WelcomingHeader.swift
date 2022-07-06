@@ -52,8 +52,9 @@ class WelcomingHeader: UIView {
         titleLabel.font = Font.textSemiBold.getUIFont
         titleLabel.textColor = UIColor.Neutral._70
         
-        let icon = UIImage(systemName: "person.circle.fill")
-        let iconSize = CGRect(origin: CGPoint.zero, size: CGSize(width: 35, height: 35))
+        let iconConfig = UIImage.SymbolConfiguration(pointSize: 30, weight: .medium, scale: .default)
+        let icon = UIImage(systemName: "person.circle.fill", withConfiguration: iconConfig)
+        let iconSize = CGRect(origin: CGPoint.zero, size: CGSize(width: 30, height: 30))
         profileButton.setBackgroundImage(icon, for: .normal)
         profileButton.frame = iconSize
         profileButton.tintColor = UIColor.Primary._30

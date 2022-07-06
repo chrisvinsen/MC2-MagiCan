@@ -317,6 +317,7 @@ extension DashboardViewController {
             let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
             
             self.viewModel.kasAmountEdit = textField?.text ?? "0"
+            self.kasIsSet = true
 //            self.viewModel.kasCreateTransaction = false
             self.viewModel.saveKasAmount()
         }))
