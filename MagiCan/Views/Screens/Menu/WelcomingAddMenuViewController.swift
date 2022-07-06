@@ -53,7 +53,7 @@ extension WelcomingAddMenuViewController {
     }
     
     @objc func skipButtonTapped(_ sender: UIButton) {
-        let vc = RegisterPINViewController(name: name, username: username)
+        let vc = DashboardViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
 }
