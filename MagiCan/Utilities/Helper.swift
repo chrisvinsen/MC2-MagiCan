@@ -90,7 +90,49 @@ func stringToDateTime(_ dateTimeStr: String, _ dateFormat: String = "M/d/yyyy HH
 }
 
 func predictSalesNextWeek(transactionList: [Transaction]) -> Int {
-    return 0
+//    print("di dalam prediksi -- transactionList mula-mula:", transactionList.count)
+    
+    var transactionListFiltered = transactionList.filter({ $0.category == TransactionCategory.Income.rawValue })
+    
+//    print("di dalam prediksi -- transactionList filtered:", transactionListFiltered.count)
+    
+    transactionListFiltered.indices.forEach {
+        let date = transactionListFiltered[$0].date.components(separatedBy: "T")[0]
+        transactionListFiltered[$0].date = date
+    }
+    
+//    print("di dalam prediksi -- transactionList final:", transactionListFiltered)
+    
+    var dailySales = [Date: Double]()
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "YYYY-MM-dd"
+    for transaction in transactionListFiltered {
+        let date = dateFormatter.date(from: transaction.date)
+        if let currentValue = dailySales[date!] {
+            dailySales[date!] = currentValue + Double(transaction.amount)
+        } else {
+            dailySales[date!] = Double(transaction.amount)
+        }
+    }
+    
+//    print("di dalam prediksi -- daily sales:", dailySales)
+    
+    let sortedSales = dailySales.sorted { $0.key < $1.key }
+    let dateArraySorted = Array(sortedSales.map({ $0.key }))
+    let salesArraySorted = Array(sortedSales.map({ $0.value }))
+    
+//    print("di dalam prediksi -- date sorted:", dateArraySorted)
+//    print("di dalam prediksi -- sales sorted:", salesArraySorted)
+    
+    let dayNumber = Array(stride(from: 0.0, through: 5.0, by: 1.0))
+    
+    let (slope, intercept) = getLinearRegressionCoefficient(x: dayNumber, y: salesArraySorted)
+    
+//    print("di dalam prediksi -- slope & intercept:", slope, intercept)
+    
+    let prediksi = Int(exactly: ((1+2+3+4+5+6+7) * slope + 7 * intercept).rounded())
+    
+    return prediksi!
 }
 
 // source: https://www.geeksforgeeks.org/linear-regression-python-implementation/

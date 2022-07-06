@@ -67,14 +67,17 @@ class DashboardViewController: UIViewController {
         didSet {
             DispatchQueue.main.async{
                 self.dashboardView.carouselStatistik.carouselCollectionView.reloadData()
+                if self.transactionLists.count > 0 {
+                    print("hasil prediksi:", predictSalesNextWeek(transactionList: self.transactionLists))
+                }
             }
         }
     }
     
-    var transactionListOneWeek = [Transaction]() {
+    var transactionListLastWeek = [Transaction]() {
         didSet {
             DispatchQueue.main.async{
-                if self.transactionListOneWeek.count > 0 {
+                if self.transactionListLastWeek.count > 0 {
                     self.dashboardView.predictionAndMenuAvaiable = true
                 }
             }
@@ -134,14 +137,14 @@ class DashboardViewController: UIViewController {
         
         dashboardView.carouselStatistik.configureView(with: carouselData)
         
-        let x: [Double] = [1,2,3,4,5,6,7]
-        let y: [Double] = [10,12,14,16,18,20,22]
-        print("test helper linear regression:", getLinearRegressionCoefficient(x: x, y: y))
-        
-        print("test helper start & end date this week:", getStartAndEndDateOfWeek())
-        print("test helper start & end date last week:", getStartAndEndDateOfLastWeek())
-        print("test helper start & end date with range", getStartAndEndDateWithRange(range: 10))
-        print("test helper func getDateString:", getDateString(date: getStartAndEndDateOfWeek().startDate))
+//        let x: [Double] = [1,2,3,4,5,6,7]
+//        let y: [Double] = [10,12,14,16,18,20,22]
+//        print("test helper linear regression:", getLinearRegressionCoefficient(x: x, y: y))
+//
+//        print("test helper start & end date this week:", getStartAndEndDateOfWeek())
+//        print("test helper start & end date last week:", getStartAndEndDateOfLastWeek())
+//        print("test helper start & end date with range", getStartAndEndDateWithRange(range: 7))
+//        print("test helper func getDateString:", getDateString(date: getStartAndEndDateOfWeek().startDate))
     }
     
     override func viewDidLoad() {
