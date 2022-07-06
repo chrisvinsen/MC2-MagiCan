@@ -94,13 +94,13 @@ class DashboardView: UIView {
         // data for section - prediction
         sectionPrediksiPenjualan.sectionLabel.text = "Prediksi Penjualan"
         sectionPrediksiPenjualan.sectionDescription1.text = "Data Kamu Masih Belum Mencukupi"
-        sectionPrediksiPenjualan.sectionDescription2.text = "Hasil prediksi penjualan akan muncul disini setelah data tersedia minimal 1 bulan terakhir"
+        sectionPrediksiPenjualan.sectionDescription2.text = "Hasil prediksi penjualan akan muncul disini setelah data tersedia minimal 1 minggu terakhir"
         sectionPrediksiPenjualan.sectionImage.image = UIImage(named: "Prediksi Empty.png")
         
         // data for section - menu andalan
         sectionMenuAndalan.sectionLabel.text = "Menu Andalan"
         sectionMenuAndalan.sectionDescription1.text = "Menu Andalan Belum Tersedia"
-        sectionMenuAndalan.sectionDescription2.text = "Hasil menu andalan akan muncul disini setelah data tersedia minimal 1 bulan terakhir"
+        sectionMenuAndalan.sectionDescription2.text = "Hasil menu andalan akan muncul disini setelah data tersedia minimal 1 minggu terakhir"
         sectionMenuAndalan.sectionImage.image = UIImage(named: "Menu Andalan Empty.png")
     }
     
