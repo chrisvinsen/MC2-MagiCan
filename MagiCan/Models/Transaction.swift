@@ -15,7 +15,8 @@ struct Transaction: Equatable, Hashable, Encodable, Decodable {
     var amount: Int64
     var discount: Int64
     var description: String
-    var dateString: String
+//    var dateString: String
+    var date: String
 //    var imageUrl: String
     var iterator: Int
     
@@ -29,7 +30,8 @@ struct Transaction: Equatable, Hashable, Encodable, Decodable {
         case amount
         case discount
         case description
-        case dateString = "date"
+//        case dateString = "date"
+        case date
 //        case imageUrl = "image_url"
         case iterator
         

@@ -88,7 +88,7 @@ final class DashboardViewModel {
     }
     
     //MARK: - Get Transaction List
-    func getTransactionList() {
+    func getTransactionList(startDate: String, endDate: String) {
         
         let completionHandler: (Subscribers.Completion<Error>) -> Void = { [weak self] completion in
             switch completion {
@@ -110,7 +110,7 @@ final class DashboardViewModel {
         }
         
         transactionService
-            .getTransactionList()
+            .getTransactionList(startDate: startDate, endDate: endDate)
             .sink(receiveCompletion: completionHandler, receiveValue: valueHandler)
             .store(in: &bindingsTransactions)
     }

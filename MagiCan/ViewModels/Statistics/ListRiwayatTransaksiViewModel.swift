@@ -23,14 +23,16 @@ final class ListRiwayatTransaksiViewModel {
     }
     
     //MARK: - Get Transaction List
-    func getTransactionList(category: String) {
+    func getTransactionList(category: String, startDate: String, endDate: String) {
         
         let completionHandler: (Subscribers.Completion<Error>) -> Void = { [weak self] completion in
             switch completion {
             case let .failure(error):
                 self?.result.send(completion: .failure(error))
+                print("error 123")
             case .finished:
                 self?.result.send(())
+                print("finished 456")
             }
         }
         
@@ -48,7 +50,7 @@ final class ListRiwayatTransaksiViewModel {
         }
         
         statisticsService
-            .getTransactionList(category: category)
+            .getTransactionList(category: category, startDate: startDate, endDate: endDate)
             .sink(receiveCompletion: completionHandler, receiveValue: valueHandler)
             .store(in: &bindings)
     }

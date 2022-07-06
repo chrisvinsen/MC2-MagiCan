@@ -121,7 +121,9 @@ class DashboardViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        viewModel.getTransactionList()
+        let startDate = getDateString(date: getStartAndEndDateWithRange(range: 7).startDate)
+        let endDate = getDateString(date: getStartAndEndDateWithRange(range: 7).endDate)
+        viewModel.getTransactionList(startDate: startDate, endDate: endDate)
         viewModel.getUserDetail()
         
         carouselData = [CarouselData]()
@@ -131,6 +133,15 @@ class DashboardViewController: UIViewController {
         carouselData.append(.init(cardLabel: "Total Pengeluaran", cardAmount: "Rp 0", cardTime: "Minggu Ini", cardIcon:"CarouselIcon.png", cardColor: UIColor(red: 235/250, green: 81/255, blue: 96/255, alpha: 1)))
         
         dashboardView.carouselStatistik.configureView(with: carouselData)
+        
+        let x: [Double] = [1,2,3,4,5,6,7]
+        let y: [Double] = [10,12,14,16,18,20,22]
+        print("test helper linear regression:", getLinearRegressionCoefficient(x: x, y: y))
+        
+        print("test helper start & end date this week:", getStartAndEndDateOfWeek())
+        print("test helper start & end date last week:", getStartAndEndDateOfLastWeek())
+        print("test helper start & end date with range", getStartAndEndDateWithRange(range: 10))
+        print("test helper func getDateString:", getDateString(date: getStartAndEndDateOfWeek().startDate))
     }
     
     override func viewDidLoad() {
@@ -142,7 +153,9 @@ class DashboardViewController: UIViewController {
         setUpTargets()
         setUpBindings()
         
-        viewModel.getTransactionList()
+        let startDate = getDateString(date: getStartAndEndDateWithRange(range: 7).startDate)
+        let endDate = getDateString(date: getStartAndEndDateWithRange(range: 7).endDate)
+        viewModel.getTransactionList(startDate: startDate, endDate: endDate)
         viewModel.getUserDetail()
         
         setupStyle()

@@ -26,7 +26,7 @@ final class TransactionListViewModel {
     }
     
     //MARK: - Get Transaction List
-    func getTransactionList() {
+    func getTransactionList(startDate: String, endDate: String) {
         
         let completionHandler: (Subscribers.Completion<Error>) -> Void = { [weak self] completion in
             switch completion {
@@ -51,7 +51,7 @@ final class TransactionListViewModel {
         }
         
         transactionService
-            .getTransactionList()
+            .getTransactionList(startDate: startDate, endDate: endDate)
             .sink(receiveCompletion: completionHandler, receiveValue: valueHandler)
             .store(in: &bindings)
     }

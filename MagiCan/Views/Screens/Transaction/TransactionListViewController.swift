@@ -71,7 +71,9 @@ class TransactionListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        viewModel.getTransactionList()
+        let startDate = getDateString(date: getStartAndEndDateWithRange(range: 7).startDate)
+        let endDate = getDateString(date: getStartAndEndDateWithRange(range: 7).endDate)
+        viewModel.getTransactionList(startDate: startDate, endDate: endDate)
     }
     
     override func viewDidLoad() {
@@ -95,7 +97,9 @@ class TransactionListViewController: UIViewController {
         setUpTargets()
         setUpBindings()
         
-        viewModel.getTransactionList()
+        let startDate = getDateString(date: getStartAndEndDateWithRange(range: 7).startDate)
+        let endDate = getDateString(date: getStartAndEndDateWithRange(range: 7).endDate)
+        viewModel.getTransactionList(startDate: startDate, endDate: endDate)
     }
     
     private func setUpTargets() {
@@ -221,7 +225,12 @@ extension TransactionListViewController: UITableViewDataSource, UITableViewDeleg
         default: break
         }
         
-        cell.dateLabel.text = transaction.dateString
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YY/MM/dd"
+        
+//        cell.dateLabel.text = transaction.dateString
+        cell.dateLabel.text = transaction.date
+//        cell.dateLabel.text = dateFormatter.string(from: transaction.date)
         
         return cell
     }
@@ -269,6 +278,8 @@ extension TransactionListViewController: UITableViewDataSource, UITableViewDeleg
 extension TransactionListViewController: TransactionListViewDelegate {
     
     func reloadDataTable() {
-        viewModel.getTransactionList()
+        let startDate = getDateString(date: getStartAndEndDateWithRange(range: 7).startDate)
+        let endDate = getDateString(date: getStartAndEndDateWithRange(range: 7).endDate)
+        viewModel.getTransactionList(startDate: startDate, endDate: endDate)
     }
 }
