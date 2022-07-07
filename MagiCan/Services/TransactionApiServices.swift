@@ -12,6 +12,8 @@ protocol TransactionServiceProtocol {
     func getTransactionList(startDate: String, endDate: String) -> AnyPublisher<[Transaction], Error>
     func addTransaction(transactionReq: TransactionCRUDRequest) -> AnyPublisher<Transaction, Error>
     func deleteTransaction(transactionReq: TransactionCRUDRequest) -> AnyPublisher<Bool, Error>
+    
+    func getTransactionMenus(startDate: String, endDate: String) -> AnyPublisher<[TransactionMenu], Error>
 }
 
 final class TransactionService: TransactionServiceProtocol {
@@ -179,6 +181,61 @@ final class TransactionService: TransactionServiceProtocol {
         urlRequest.httpMethod = "POST"
         urlRequest.httpBody = jsonData
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.addValue(getUserTokenFromUserDefaults(), forHTTPHeaderField: "token")
+        
+        return urlRequest
+    }
+    
+    //MARK: - Get Transaction Menus --> /transactions/menus
+    func getTransactionMenus(startDate: String, endDate: String) -> AnyPublisher<[TransactionMenu], Error> {
+        var dataTask: URLSessionDataTask?
+        
+        let onSubscription: (Subscription) -> Void = { _ in dataTask?.resume() }
+        let onCancel: () -> Void = { dataTask?.cancel() }
+        
+        // promise type is Result<[Transaction], Error>
+        return Future<[TransactionMenu], Error> { [weak self] promise in
+            guard let urlRequest = self?.getUrlForGetTransactionMenus(startDate: startDate, endDate: endDate) else {
+                promise(.failure(ServiceError.urlRequest))
+                return
+            }
+            
+            dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, _, error) in
+                guard let data = data else {
+                    if let error = error {
+                        promise(.failure(error))
+                    }
+                    return
+                }
+                
+                do {
+                    let lists = try JSONDecoder().decode([TransactionMenu].self, from: data)
+                    promise(.success(lists))
+                } catch {
+                    promise(.failure(ServiceError.decode))
+                }
+            }
+        }
+        .handleEvents(receiveSubscription: onSubscription, receiveCancel: onCancel)
+        .receive(on: DispatchQueue.main)
+        .eraseToAnyPublisher()
+    }
+    
+    private func getUrlForGetTransactionMenus(startDate: String, endDate: String) -> URLRequest? {
+        var components = URLComponents()
+        components.scheme = APIComponentScheme
+        components.host = APIComponentHost
+        components.path = Endpoint.Transaction.Menu.Lists.rawValue
+        components.queryItems = [
+            URLQueryItem(name: "start_date", value: startDate),
+            URLQueryItem(name: "end_date", value: endDate)
+        ]
+        
+        guard let url = components.url else { return nil }
+        
+        var urlRequest = URLRequest(url: url)
+        urlRequest.timeoutInterval = APIDefaultTimeOut
+        urlRequest.httpMethod = "GET"
         urlRequest.addValue(getUserTokenFromUserDefaults(), forHTTPHeaderField: "token")
         
         return urlRequest

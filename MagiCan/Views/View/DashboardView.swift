@@ -9,28 +9,67 @@ import UIKit
 
 class DashboardView: UIView {
     
-    var predictionAndMenuAvaiable: Bool
+    var isPredictionExists: Bool = false
+    var isTopMenuExists: Bool = false {
+        didSet {
+            if isTopMenuExists {
+                sectionMenuAndalan.isHidden = true
+                sectionMenuAndalanFilled.isHidden = false
+                
+                if menuAndalan.count >= 1  {
+                    sectionMenuAndalanFilled.menu1.menuName.text = menuAndalan[0].name
+                    sectionMenuAndalanFilled.menu1.menuQty.text = "\(menuAndalan[0].qty)x"
+                    
+                    var image = menuAndalan[0].imageUrl.imageFromBase64
+                    if image == nil {
+                        image = ImageMenuDefault!
+                    }
+                    
+                    sectionMenuAndalanFilled.menu1.menuImage.image = image
+                }
+                
+                if menuAndalan.count >= 2 {
+                    sectionMenuAndalanFilled.menu2.menuName.text = menuAndalan[1].name
+                    sectionMenuAndalanFilled.menu2.menuQty.text = "\(menuAndalan[1].qty)x"
+                    
+
+                    var image = menuAndalan[1].imageUrl.imageFromBase64
+                    if image == nil {
+                        image = ImageMenuDefault!
+                    }
+                    
+                    sectionMenuAndalanFilled.menu2.menuImage.image = image
+                }
+                
+                if menuAndalan.count >= 3 {
+                    sectionMenuAndalanFilled.menu3.menuName.text = menuAndalan[2].name
+                    sectionMenuAndalanFilled.menu3.menuQty.text = "\(menuAndalan[2].qty)x"
+                    
+                    var image = menuAndalan[2].imageUrl.imageFromBase64
+                    if image == nil {
+                        image = ImageMenuDefault!
+                    }
+                    
+                    sectionMenuAndalanFilled.menu3.menuImage.image = image
+                }
+                
+                
+            } else {
+                sectionMenuAndalan.isHidden = false
+                sectionMenuAndalanFilled.isHidden = true
+            }
+        }
+    }
     var kasIsSet: Bool = false
+    var menuAndalan: [MenuAndalan] = [] {
+        didSet {
+            isTopMenuExists = menuAndalan.count > 0
+        }
+    }
     
     lazy var scrollView = UIScrollView()
     lazy var contentView = UIView()
     lazy var stackView = UIStackView()
-    
-//    let titleLabel = UILabel()
-//    var name: String = "Tamu" {
-//        didSet {
-//            print("ini set nama jadi", name)
-//            var tempName = "Tamu"
-//            if name != "" {
-//                tempName = name;
-//            }
-//            self.titleLabel.font = Font.headingSix.getUIFont
-//            self.titleLabel.textColor = UIColor.Neutral._90
-//            self.titleLabel.text = "Selamat Datang, \(tempName)"
-//        }
-//    }
-//    let profileIcon = UIImageView()
-//    let profileButton = UIButton()
     
     let welcomingHeader = WelcomingHeader()
     
@@ -45,14 +84,24 @@ class DashboardView: UIView {
     
     
     init(statusPrediction: Bool = false, statusKas: Bool = false) {
-        predictionAndMenuAvaiable = statusPrediction
-        kasIsSet = statusKas
+         
         super.init(frame: .zero)
+        
+        ({
+            self.isPredictionExists = statusPrediction
+            self.kasIsSet = statusKas
+            self.menuAndalan = []
+        })()
         
         addSubviews()
         setUpData()
         setUpViews()
         setUpConstraints()
+    }
+    
+    func setInitValue(statusPrediction: Bool, isTopMenuExists: Bool) {
+        self.isPredictionExists = statusPrediction
+        self.isTopMenuExists = isTopMenuExists
     }
     
     required init?(coder: NSCoder) {
@@ -72,17 +121,17 @@ class DashboardView: UIView {
         scrollView.addSubview(contentView)
         contentView.addSubview(stackView)
         
-        switch predictionAndMenuAvaiable {
+        switch isPredictionExists {
         case true:
             // titleLabel, profileIcon,
-            [welcomingHeader, cardKasUsaha, carouselStatistik, sectionPrediksiPenjualanFilled, sectionMenuAndalanFilled]
+            [welcomingHeader, cardKasUsaha, carouselStatistik, sectionPrediksiPenjualanFilled, sectionMenuAndalan, sectionMenuAndalanFilled]
                 .forEach {
                     stackView.addArrangedSubview($0)
                     $0.translatesAutoresizingMaskIntoConstraints = false
                 }
         case false:
             // titleLabel, profileIcon
-            [welcomingHeader, cardKasUsaha, carouselStatistik, sectionPrediksiPenjualan, sectionMenuAndalan]
+            [welcomingHeader, cardKasUsaha, carouselStatistik, sectionPrediksiPenjualan, sectionMenuAndalan, sectionMenuAndalanFilled]
                 .forEach {
                     stackView.addArrangedSubview($0)
                     $0.translatesAutoresizingMaskIntoConstraints = false
@@ -179,7 +228,7 @@ class DashboardView: UIView {
             // Content View
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.rightAnchor.constraint(equalTo: scrollView.rightAnchor),
-            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -30),
             contentView.leftAnchor.constraint(equalTo: scrollView.leftAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
@@ -188,72 +237,44 @@ class DashboardView: UIView {
             stackView.rightAnchor.constraint(equalTo: contentView.rightAnchor),
             stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             stackView.leftAnchor.constraint(equalTo: contentView.leftAnchor),
-            
-//            self.leftAnchor.constraint(equalTo: safeArea.leftAnchor),
-//            self.rightAnchor.constraint(equalTo: safeArea.rightAnchor),
-            
-//            titleLabel.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 20),
-//            titleLabel.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
-//            titleLabel.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
-//
-//            profileIcon.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 20),
-//            profileIcon.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
-//
+    
             self.leftAnchor.constraint(equalTo: safeArea.leftAnchor),
             self.rightAnchor.constraint(equalTo: safeArea.rightAnchor),
-            
-//            welcomingHeader.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 10),
-//            welcomingHeader.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
-//            welcomingHeader.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
-                        
-//            titleLabel.topAnchor.constraint(equalTo: stackView.topAnchor, constant: 10),
-//            titleLabel.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
-//            titleLabel.bottomAnchor.constraint(equalTo: cardKasUsaha.topAnchor, constant: -10),
-//            titleLabel.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
-
-//            profileButton.topAnchor.constraint(equalTo: stackView.topAnchor, constant: 10),
-//            profileButton.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
-//            profileButton.bottomAnchor.constraint(equalTo: cardKasUsaha.topAnchor, constant: -10),
-//            profileButton.leftAnchor.constraint(equalTo: titleLabel.rightAnchor, constant: 20),
-            
-//            cardKasUsaha.topAnchor.constraint(equalTo: stackView.topAnchor, constant: 20),
-//            cardKasUsaha.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
-//            cardKasUsaha.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
             
             cardKasUsaha.topAnchor.constraint(equalTo: welcomingHeader.bottomAnchor, constant: 10),
             cardKasUsaha.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
             cardKasUsaha.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
-//
+            
             carouselStatistik.topAnchor.constraint(equalTo: cardKasUsaha.bottomAnchor, constant: 10),
             carouselStatistik.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
+            carouselStatistik.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
             carouselStatistik.heightAnchor.constraint(equalToConstant: 150),
-//            carouselStatistik.topAnchor.constraint(equalTo: cardKasUsaha.bottomAnchor, constant: 20),
-//            carouselStatistik.bottomAnchor.constraint(equalTo: sectionPrediksiPenjualan.topAnchor, constant: -20),
-//            carouselStatistik.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20)
         ])
         
-        switch predictionAndMenuAvaiable {
+        switch isPredictionExists {
         case true:
             NSLayoutConstraint.activate([
-                sectionPrediksiPenjualanFilled.topAnchor.constraint(equalTo: carouselStatistik.bottomAnchor, constant: 30),
+                sectionPrediksiPenjualanFilled.topAnchor.constraint(equalTo: carouselStatistik.bottomAnchor, constant: 10),
                 sectionPrediksiPenjualanFilled.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
                 sectionPrediksiPenjualanFilled.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
-                
-                sectionMenuAndalanFilled.topAnchor.constraint(equalTo: sectionPrediksiPenjualanFilled.bottomAnchor, constant: 30),
-                sectionMenuAndalanFilled.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
-                sectionMenuAndalanFilled.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20)
             ])
         case false:
             NSLayoutConstraint.activate([
-                sectionPrediksiPenjualan.topAnchor.constraint(equalTo: carouselStatistik.bottomAnchor, constant: 30),
+                sectionPrediksiPenjualan.topAnchor.constraint(equalTo: carouselStatistik.bottomAnchor, constant: 10),
                 sectionPrediksiPenjualan.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
                 sectionPrediksiPenjualan.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
-                
-                sectionMenuAndalan.topAnchor.constraint(equalTo: sectionPrediksiPenjualan.bottomAnchor, constant: 30),
-                sectionMenuAndalan.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
-                sectionMenuAndalan.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20)
             ])
         }
+        
+        NSLayoutConstraint.activate([
+//            Menu Andalan not Exists
+            sectionMenuAndalan.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
+            sectionMenuAndalan.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20),
+            
+//            Menu Andalan Exists
+            sectionMenuAndalanFilled.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 20),
+            sectionMenuAndalanFilled.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -20)
+        ])
     }
 }
 

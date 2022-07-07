@@ -36,40 +36,42 @@ class CardMenuAndalanItem: UIView {
     private func setUpViews() {
         self.layer.cornerRadius = 10
         
-        menuName.text = "Bakso"
-        menuQty.text = "2000x"
-        menuImage.image = UIImage(named: "SampleBakso.png")
-        
         menuName.font = Font.textSemiBold.getUIFont
         menuQty.font = Font.small.getUIFont
 
         menuName.textColor = UIColor.Primary._90
         menuQty.textColor = UIColor.Neutral._70
         
+        menuName.numberOfLines = 1
+        menuQty.numberOfLines = 1
+        
         menuImage.layer.cornerRadius = 10
         menuImage.clipsToBounds = true
-        menuImage.contentMode = UIView.ContentMode.scaleAspectFill
+        menuImage.contentMode = .scaleAspectFill
     }
     
     private func setUpConstraints() {
         let safeArea = safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
-            self.widthAnchor.constraint(equalToConstant: 110),
-            self.heightAnchor.constraint(equalToConstant: 180),
             self.leftAnchor.constraint(equalTo: safeArea.leftAnchor),
             self.rightAnchor.constraint(equalTo: safeArea.rightAnchor),
             
+            menuImage.topAnchor.constraint(equalTo: safeArea.topAnchor),
             menuImage.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 0),
             menuImage.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: 0),
-            menuImage.widthAnchor.constraint(equalToConstant: 100),
-            menuImage.heightAnchor.constraint(equalToConstant: 125),
+            menuImage.heightAnchor.constraint(equalTo: menuImage.widthAnchor),
             
             menuName.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 0),
             menuQty.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 0),
             
+            menuName.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: 0),
+            menuQty.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: 0),
+            
             menuName.topAnchor.constraint(equalTo: menuImage.bottomAnchor, constant: 10),
             menuQty.topAnchor.constraint(equalTo: menuName.bottomAnchor, constant: 5),
+            
+            menuQty.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
             
         ])
     }

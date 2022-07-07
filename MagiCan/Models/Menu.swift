@@ -49,6 +49,35 @@ struct MenuChosen: Equatable, Hashable, Encodable, Decodable {
     }
 }
 
+//MARK: - Transaction Menu
+struct TransactionMenu: Equatable, Hashable, Encodable, Decodable {
+    var trxId, name, description, menuId: String
+    var price: Int64
+    var qty: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case trxId = "trx_id"
+        case name
+        case description
+        case menuId = "menu_id"
+        case price
+        case qty
+    }
+}
+
+//MARK: - Menu Andalan
+struct MenuAndalan: Equatable, Hashable, Encodable, Decodable {
+    var name, imageUrl, menuId: String
+    var qty: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case name
+        case imageUrl = "image_url"
+        case menuId = "menu_id"
+        case qty
+    }
+}
+
 //MARK: - Menu Image
 struct MenuImage: Equatable, Hashable, Encodable, Decodable {
     var _id, menu_id: String

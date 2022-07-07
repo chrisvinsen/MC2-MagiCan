@@ -75,7 +75,7 @@ class DashboardViewController: UIViewController {
         didSet {
             DispatchQueue.main.async{
                 if self.transactionListOneWeek.count > 0 {
-                    self.dashboardView.predictionAndMenuAvaiable = true
+                    self.dashboardView.isPredictionExists = true
                 }
             }
         }
@@ -142,6 +142,8 @@ class DashboardViewController: UIViewController {
         print("test helper start & end date last week:", getStartAndEndDateOfLastWeek())
         print("test helper start & end date with range", getStartAndEndDateWithRange(range: 10))
         print("test helper func getDateString:", getDateString(date: getStartAndEndDateOfWeek().startDate))
+        
+        viewModel.getTopThreeMenu()
     }
     
     override func viewDidLoad() {
@@ -169,6 +171,8 @@ class DashboardViewController: UIViewController {
 //        iconButton.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
 
 //        self.navigationItem.rightBarButtonItem = barButton
+        
+        
     }
     
     private func setUpTargets() {
@@ -230,6 +234,53 @@ class DashboardViewController: UIViewController {
 //                    print(res)
                 }
                 .store(in: &bindings)
+            
+            viewModel.resultTopMenu
+                .sink { completion in
+                    switch completion {
+                    case .failure:
+                        // Error can be handled here (e.g. alert)
+                        return
+                    case .finished:
+                        return
+                    }
+                } receiveValue: { [weak self] datas in
+                    
+                    var sortedDatas = datas
+                    
+                    sortedDatas.sort {
+                        $0.qty > $1.qty
+                    }
+                    
+                    sortedDatas = Array(sortedDatas[1...3]) // Only get top 3
+                    
+                    self?.dashboardView.menuAndalan = sortedDatas
+                    
+                    for data in sortedDatas {
+                        self?.viewModel.getMenuImage(menu_id: data.menuId)
+                    }
+                    
+                }
+                .store(in: &bindings)
+            
+            viewModel.resultTopMenuImage
+                .sink { completion in
+                    switch completion {
+                    case .failure:
+                        // Error can be handled here (e.g. alert)
+                        return
+                    case .finished:
+                        return
+                    }
+                } receiveValue: { [weak self] res in
+                    if let idx = self?.dashboardView.menuAndalan.firstIndex(where: { $0.menuId == res.menu_id }) {
+                        
+                        self?.dashboardView.menuAndalan[idx].imageUrl = res.imageUrl ?? ""
+                    }
+                }
+                .store(in: &bindings)
+            
+            
         }
         
         bindViewModelToView()
