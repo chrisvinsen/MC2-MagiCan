@@ -252,7 +252,9 @@ class DashboardViewController: UIViewController {
                         $0.qty > $1.qty
                     }
                     
-                    sortedDatas = Array(sortedDatas[1...3]) // Only get top 3
+                    if sortedDatas.count > 3 {
+                        sortedDatas = Array(sortedDatas[1...3]) // Only get top 3
+                    }
                     
                     self?.dashboardView.menuAndalan = sortedDatas
                     
