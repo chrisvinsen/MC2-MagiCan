@@ -67,7 +67,7 @@ class CardKasUsaha: UIView {
         kasLabel.text = "Kas Usaha"
         kasValue.text = "Rp 0"
         button.setTitle("Set Kas Usaha", for: .normal)
-        button.contentEdgeInsets =  UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        button.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         
 //        editIcon.image = UIImage(named: "Edit Kas.png")
         
