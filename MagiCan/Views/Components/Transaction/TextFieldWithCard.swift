@@ -81,6 +81,7 @@ class TextFieldWithCard: UIView {
         )
         textField.font = Font.headingSix.getUIFont
         textField.textColor = UIColor.Neutral._90
+        textField.keyboardType = .numberPad
         
         // Divider
         divider.backgroundColor = UIColor.Neutral._50

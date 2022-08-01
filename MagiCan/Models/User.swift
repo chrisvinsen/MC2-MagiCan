@@ -10,7 +10,7 @@ import Foundation
 
 //MARK: - User
 struct User: Equatable, Hashable, Decodable {
-    var name, username: String
+    var name, username: String!
     var currentBalance: Int64
     var isInitialCashSet: Bool
     

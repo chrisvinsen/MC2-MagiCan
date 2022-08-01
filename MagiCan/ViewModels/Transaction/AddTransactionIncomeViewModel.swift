@@ -45,7 +45,7 @@ final class AddTransactionIncomeViewModel {
         let trxRequest = TransactionCRUDRequest(
             _id: "",
             description: self.description,
-            date: dateTimeToString(self.transactionDate),
+            date: dateTimeToString(self.transactionDate, "yyyy-MM-dd'T'HH:mm:ssZ"),
             category: TransactionCategory.Income.rawValue,
             type: self.transactionType,
             amount: Int64(amountString) ?? 0,

@@ -149,6 +149,8 @@ class DashboardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.navigationBar.isHidden = true
+        
         dashboardView.carouselStatistik.carouselCollectionView.dataSource = self
         dashboardView.carouselStatistik.carouselCollectionView.delegate = self
         

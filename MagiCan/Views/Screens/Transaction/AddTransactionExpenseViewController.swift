@@ -48,6 +48,8 @@ class AddTransactionExpenseViewController: UIViewController {
 
         setUpTargets()
         setUpBindings()
+        
+//        initializeHideKeyboard()
     }
     
     func setUpTargets() {
@@ -132,6 +134,8 @@ extension AddTransactionExpenseViewController {
         
         viewModel.transactionDate = sender.date
     }
+    
+    @objc func dismissKeyboard(_ sender: UITextField) { }
 }
 
 //MARK: - Custom Protocols
@@ -140,4 +144,20 @@ extension AddTransactionExpenseViewController: AddTransactionExpenseProtocol {
     func updateTransactionType(data: KeyValue) {
         viewModel.transactionType = data.key as! Int
     }
+}
+
+extension AddTransactionExpenseViewController {
+    func initializeHideKeyboard() {
+        //Declare a Tap Gesture Recognizer which will trigger our dismissMyKeyboard() function
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(dismissMyKeyboard)
+        )
+        //Add this tap gesture recognizer to the parent view
+        self.contentView.addGestureRecognizer(tap)
+     }
+
+     @objc func dismissMyKeyboard(){
+         self.contentView.endEditing(true)
+     }
 }
