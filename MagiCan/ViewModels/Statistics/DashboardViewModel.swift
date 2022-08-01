@@ -44,9 +44,7 @@ final class DashboardViewModel {
             switch completion {
             case let .failure(error):
                 self?.resultUserDetail.send(completion: .failure(error))
-                print("failure resultUserDetail")
             case .finished:
-                print("return")
                 return
             }
         }
@@ -56,7 +54,6 @@ final class DashboardViewModel {
                 self?.kasAmount = userDetail.currentBalance
                 self?.initialCashSet = userDetail.isInitialCashSet
                 self?.resultUserDetail.send(userDetail)
-                print("ini user detail", userDetail, self?.kasAmount, self?.initialCashSet)
             }
         }
         
@@ -121,6 +118,8 @@ final class DashboardViewModel {
     
     //MARK: - Get Menu Andalan
     func getTopThreeMenu() {
+        
+        print("GET TOP THREE MENU")
         
         let completionHandler: (Subscribers.Completion<Error>) -> Void = { [weak self] completion in
             switch completion {

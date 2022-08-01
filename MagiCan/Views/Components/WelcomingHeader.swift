@@ -13,7 +13,6 @@ class WelcomingHeader: UIView {
     let titleName = UILabel()
     var name: String = "Tamu" {
         didSet {
-            print("ini set nama jadi", name)
             var tempName = "Tamu"
             if name != "" {
                 tempName = name;

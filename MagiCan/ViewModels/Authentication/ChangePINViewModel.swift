@@ -11,7 +11,6 @@ import Combine
 class ChangePINViewModel {
     @Published var oldPIN: String = "" {
         didSet {
-            print(oldPIN)
             if oldPIN.count == 6 {
                 validatePIN()
             }
@@ -19,7 +18,6 @@ class ChangePINViewModel {
     }
     @Published var newPIN: String = "" {
         didSet {
-            print(newPIN)
             if newPIN.count == 6 {
                 changePIN()
             }
@@ -54,8 +52,6 @@ class ChangePINViewModel {
             self?.validationResult.send(isUsernameValid)
         }
         
-        print("VALIDATE TOKEN \(self.oldPIN)")
-        
         userService
             .validatePIN(req: UserValidatePINRequest(pin: self.oldPIN))
             .sink(receiveCompletion: completionHandler, receiveValue: valueHandler)
@@ -79,8 +75,6 @@ class ChangePINViewModel {
         let valueHandler: (User) -> Void = { [weak self] newUser in
             self?.changePINResult.send(newUser != nil)
         }
-        
-        print("CHANGE PIN \(self.oldPIN) to \(self.newPIN)")
         
         userService
             .changePIN(req: UserChangePINRequest(old_pin: self.oldPIN, new_pin: self.newPIN))
