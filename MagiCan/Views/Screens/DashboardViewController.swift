@@ -28,7 +28,6 @@ class DashboardViewController: UIViewController {
             }
             
             dashboardView.welcomingHeader.name = self.name
-            print("ini nama", name)
             
 //            let label = UILabel()
 //            label.font = Font.headingSix.getUIFont
@@ -136,18 +135,14 @@ class DashboardViewController: UIViewController {
         
         let x: [Double] = [1,2,3,4,5,6,7]
         let y: [Double] = [10,12,14,16,18,20,22]
-        print("test helper linear regression:", getLinearRegressionCoefficient(x: x, y: y))
-        
-        print("test helper start & end date this week:", getStartAndEndDateOfWeek())
-        print("test helper start & end date last week:", getStartAndEndDateOfLastWeek())
-        print("test helper start & end date with range", getStartAndEndDateWithRange(range: 10))
-        print("test helper func getDateString:", getDateString(date: getStartAndEndDateOfWeek().startDate))
         
         viewModel.getTopThreeMenu()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.navigationBar.isHidden = true
         
         dashboardView.carouselStatistik.carouselCollectionView.dataSource = self
         dashboardView.carouselStatistik.carouselCollectionView.delegate = self

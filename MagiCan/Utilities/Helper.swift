@@ -24,8 +24,6 @@ func setUserTokenFromUserDefaults(newToken: String) {
 func getTokenExpirationFromUserDefaults() -> Date? {
     let dateString = userDefaults.string(forKey: UserDefaultKeys.token_expiration.rawValue) ?? ""
     
-    print("GOT DATE STRING", dateString)
-    
     if dateString != "" {
         return stringToDateTime(dateString, "yyyy-MM-dd'T'HH:mm:ssZ")
     }
@@ -33,7 +31,6 @@ func getTokenExpirationFromUserDefaults() -> Date? {
     return nil
 }
 func setTokenExpirationFromUserDefaults(expiration: String) {
-    print("SET DATE STRING", expiration)
     userDefaults.set(expiration, forKey: UserDefaultKeys.token_expiration.rawValue)
 }
 func isTokenValid() -> Bool {

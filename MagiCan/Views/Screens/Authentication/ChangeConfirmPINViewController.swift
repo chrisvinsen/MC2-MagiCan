@@ -55,7 +55,6 @@ class ChangeConfirmPINViewController: UIViewController {
                     }
                 } receiveValue: { [weak self] isSuccess in
                     if isSuccess {
-                        print("SUCCESS")
 //                        self?.navigationController?.popToViewController(VC, animated: true)
                         
                         let viewControllers: [UIViewController] = self?.navigationController!.viewControllers ?? []

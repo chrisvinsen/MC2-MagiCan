@@ -40,7 +40,6 @@ final class ListRiwayatTransaksiViewModel {
             self?.transactionLists = transactionLists
             // filter out transactions with type UpdateBalance
 //            self?.transactionLists = transactionLists.filter({ $0.type != TransactionIncomeType.UpdateBalance.rawValue })
-            print("ini isi transaksi:", self?.transactionLists)
             
             DispatchQueue.main.async {
                 let summary = getTransactionSummaryFromList(transactionLists: transactionLists)

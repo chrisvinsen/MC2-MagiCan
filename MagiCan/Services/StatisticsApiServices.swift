@@ -40,10 +40,8 @@ final class StatisticsService: StaticticsServiceProtocol {
                 do {
                     let user = try JSONDecoder().decode(User.self, from: data)
                     promise(.success(user))
-                    print("decode sukses", user)
                 } catch {
                     promise(.failure(ServiceError.decode))
-                    print("error saat decode")
                 }
             }
         }
@@ -90,9 +88,6 @@ final class StatisticsService: StaticticsServiceProtocol {
                     return
                 }
                 
-                let jsonString = String(data: data, encoding: .utf8)!
-                print("DATA : \(jsonString)")
-                
                 do {
                     let userUpdated = try JSONDecoder().decode(User.self, from: data)
                     promise(.success(userUpdated))
@@ -135,30 +130,22 @@ final class StatisticsService: StaticticsServiceProtocol {
         return Future<[Transaction], Error> { [weak self] promise in
             guard let urlRequest = self?.getUrlForGetTransactionList(category: category, startDate: startDate, endDate: endDate) else {
                 promise(.failure(ServiceError.urlRequest))
-//                print("error 1")
                 return
             }
-            
-//            print("halo 1")
             
             dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, _, error) in
                 guard let data = data else {
                     if let error = error {
                         promise(.failure(error))
                     }
-//                    print("error 2")
                     return
                 }
-                
-//                print("halo 2")
                 
                 do {
                     let lists = try JSONDecoder().decode([Transaction].self, from: data)
                     promise(.success(lists))
-//                    print("ini list transaksi di service", lists)
                 } catch {
                     promise(.failure(ServiceError.decode))
-//                    print("fail list transaksi di service")
                 }
             }
         }
@@ -177,9 +164,6 @@ final class StatisticsService: StaticticsServiceProtocol {
             URLQueryItem(name: "start_date", value: startDate),
             URLQueryItem(name: "end_date", value: endDate)
         ]
-        
-//        print("di service start date:", startDate)
-//        print("di service end date:", endDate)
         
         guard let url = components.url else { return nil }
         

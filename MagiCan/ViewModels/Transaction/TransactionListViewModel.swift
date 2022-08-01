@@ -40,7 +40,6 @@ final class TransactionListViewModel {
         let valueHandler: ([Transaction]) -> Void = { [weak self] transactionLists in
             self?.transactionLists = transactionLists
 //            self?.transactionLists = transactionLists.filter({ $0.type != TransactionIncomeType.UpdateBalance.rawValue })
-//            print("ini isi transaksi:", self?.transactionLists)
             
             DispatchQueue.main.async {
                 let summary = getTransactionSummaryFromList(transactionLists: transactionLists)

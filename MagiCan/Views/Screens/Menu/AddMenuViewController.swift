@@ -48,6 +48,10 @@ class AddMenuViewController: UIViewController {
     private func setUpTargets() {
         contentView.addButton.addTarget(self, action: #selector(addButtonTapped(_ :)), for: .touchUpInside)
         contentView.saveButton.addTarget(self, action: #selector(saveButtonTapped(_ :)), for: .touchUpInside)
+        
+        contentView.nameField.addTarget(self, action: #selector(dismissKeyboard(_ :)), for: .editingDidEndOnExit)
+        contentView.priceField.addTarget(self, action: #selector(dismissKeyboard(_ :)), for: .editingDidEndOnExit)
+        contentView.descriptionField.addTarget(self, action: #selector(dismissKeyboard(_ :)), for: .editingDidEndOnExit)
     }
     
     private func setUpBindings() {
@@ -154,6 +158,8 @@ extension AddMenuViewController {
     @objc func cancelButtonTapped() {
         self.dismiss(animated: true)
     }
+    
+    @objc func dismissKeyboard(_ sender: UITextField) { }
     
 }
 

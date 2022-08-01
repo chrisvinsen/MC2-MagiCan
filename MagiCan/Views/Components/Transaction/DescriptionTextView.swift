@@ -20,6 +20,8 @@ class DescriptionTextView: UIView {
         }
     }
     
+    var placeHolder = "Opsional (maks. 200 karakter)"
+    
     lazy var descriptionLabel = UILabel()
     lazy var wordsCounterLabel = UILabel()
     lazy var wordsMaxLabel = UILabel()
@@ -53,7 +55,7 @@ class DescriptionTextView: UIView {
         wordsMaxLabel.text = "/\(maxCharacter)"
         
         textBox.autocorrectionType = .no
-        textBox.text = "Opsional (maks. \(maxCharacter) karakter)"
+        textBox.text = placeHolder
         textBox.backgroundColor = UIColor.Neutral._30
         textBox.textColor = .secondaryLabel
         textBox.font = UIFont.preferredFont(forTextStyle: .body)
@@ -89,7 +91,9 @@ extension DescriptionTextView: UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         // Remove the placeholder
-        textView.text = ""
+        if textView.text == placeHolder {
+            textView.text = ""
+        }
     }
     
     func textViewDidChange(_ textView: UITextView) {
@@ -101,6 +105,14 @@ extension DescriptionTextView: UITextViewDelegate {
             
             textView.text = "\(textView.text.prefix(maxCharacter))"
         }
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
     }
 }
 
