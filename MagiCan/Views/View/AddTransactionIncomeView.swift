@@ -15,7 +15,7 @@ class AddTransactionIncomeView: UIView {
     lazy var stackView = UIStackView()
     
     lazy var titleLabel = UILabel()
-    lazy var trxTypeButton = RowButton(label: "Jenis Pemasukan", value: "Pilih Jenis")
+    lazy var trxTypeButton = RowButton(label: "Sistem Pembelian", value: "Pilih Sistem")
     lazy var tableView = TableViewAdjustedHeight()
     lazy var dateField = DateFieldView()
     lazy var descriptionField = DescriptionTextView()
@@ -48,8 +48,8 @@ class AddTransactionIncomeView: UIView {
         self.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(stackView)
+        [titleLabel, tableView, trxTypeButton, dateField, descriptionField, saveButton]
         
-        [titleLabel, trxTypeButton, tableView, dateField, descriptionField, saveButton]
             .forEach {
                 stackView.addArrangedSubview($0)
                 $0.translatesAutoresizingMaskIntoConstraints = false
@@ -112,8 +112,8 @@ class AddTransactionIncomeView: UIView {
             
             // Table View
 //            tableView.heightAnchor.constraint(equalToConstant: 500),
-            tableView.topAnchor.constraint(equalTo: trxTypeButton.bottomAnchor, constant: 20),
-            tableView.bottomAnchor.constraint(equalTo: dateField.topAnchor, constant: -20),
+            tableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            tableView.bottomAnchor.constraint(equalTo: trxTypeButton.topAnchor, constant: -20),
             
             // Save Button
             saveButton.heightAnchor.constraint(equalToConstant: 48),

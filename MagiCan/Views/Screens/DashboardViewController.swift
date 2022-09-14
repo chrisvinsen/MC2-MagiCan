@@ -354,7 +354,7 @@ extension DashboardViewController {
         let alert = UIAlertController(title: "Atur Kas", message: "Masukkan nilai nominal kas awal", preferredStyle: .alert)
 
         alert.addTextField { (textField) in
-            textField.text = ""
+            textField.text = "Rp "
         }
 
         alert.addAction(UIAlertAction(title: "Batal", style: .cancel, handler: { [weak alert] (_) in

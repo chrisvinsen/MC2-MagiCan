@@ -10,8 +10,8 @@ import UIKit
 
 class AddTransactionExpenseView: UIView {
     
-    lazy var titleLabel = UILabel()
     lazy var trxTypeButton = RowButton(label: "Jenis Pengeluaran", value: "Pilih Jenis")
+    lazy var titleLabel = UILabel()
     lazy var totalAmountField = TextFieldWithCard(title: "Total Pengeluaran", prefixValue: "Rp", valuePlaceholder: "0", isEnabled: true)
     lazy var dateField = DateFieldView()
     lazy var descriptionField = DescriptionTextView()
@@ -31,7 +31,7 @@ class AddTransactionExpenseView: UIView {
     
     func addSubviews() {
         
-        [titleLabel, trxTypeButton, totalAmountField, dateField, descriptionField, saveButton]
+        [titleLabel, totalAmountField, trxTypeButton, dateField, descriptionField, saveButton]
             .forEach {
                 addSubview($0)
                 $0.translatesAutoresizingMaskIntoConstraints = false
@@ -62,17 +62,17 @@ class AddTransactionExpenseView: UIView {
             titleLabel.rightAnchor.constraint(equalTo: self.rightAnchor),
             
             // Transaction Type Button
-            trxTypeButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15),
+            trxTypeButton.topAnchor.constraint(equalTo: totalAmountField.bottomAnchor, constant: 15),
             trxTypeButton.leftAnchor.constraint(equalTo: self.leftAnchor),
             trxTypeButton.rightAnchor.constraint(equalTo: self.rightAnchor),
             
             // Table View
-            totalAmountField.topAnchor.constraint(equalTo: trxTypeButton.bottomAnchor, constant: 15),
+            totalAmountField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15),
             totalAmountField.leftAnchor.constraint(equalTo: self.leftAnchor),
             totalAmountField.rightAnchor.constraint(equalTo: self.rightAnchor),
             
             // Date Field
-            dateField.topAnchor.constraint(equalTo: totalAmountField.bottomAnchor, constant: 15),
+            dateField.topAnchor.constraint(equalTo: trxTypeButton.bottomAnchor, constant: 15),
             dateField.leftAnchor.constraint(equalTo: self.leftAnchor),
             dateField.rightAnchor.constraint(equalTo: self.rightAnchor),
             
